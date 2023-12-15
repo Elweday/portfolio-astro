@@ -1,1 +1,0 @@
-import"./hoisted.5507a29f.js";addEventListener("submit",t=>{t.preventDefault(),console.log(t.target);const r=t.target;let e=new URL(window.location.href).origin+"/posts?";r.querySelectorAll("input[type=checkbox]").forEach(o=>{o.checked&&(e+="tag="+o.name+"&")}),window.location.href=e});
