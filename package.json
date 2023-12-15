@@ -1,5 +1,5 @@
 {
-  "name": "astro-paper",
+  "name": "nassers-portfolio",
   "version": "3.0.0",
   "private": false,
   "scripts": {
@@ -12,6 +12,7 @@
     "format:check": "prettier --plugin-search-dir=. --check .",
     "format": "prettier --plugin-search-dir=. --write .",
     "cz": "cz",
+    "prepare": "husky install",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -20,7 +21,6 @@
     "@astrojs/vercel": "^6.1.0",
     "@resvg/resvg-js": "^2.6.0",
     "astro": "^3.6.4",
-    "astro-icon": "^0.8.2",
     "fuse.js": "^6.6.2",
     "github-slugger": "^2.0.0",
     "nodemailer": "^6.9.7",
@@ -41,6 +41,7 @@
     "@types/react": "^18.2.45",
     "@typescript-eslint/parser": "^6.14.0",
     "astro-eslint-parser": "^0.15.0",
+    "astro-icon": "^0.8.2",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.55.0",
