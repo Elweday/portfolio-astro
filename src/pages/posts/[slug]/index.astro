@@ -1,5 +1,4 @@
 ---
-export const prerender = true;
 import { type CollectionEntry, getCollection } from "astro:content";
 import Posts from "@layouts/Posts.astro";
 import PostDetails from "@layouts/PostDetails.astro";
@@ -14,10 +13,10 @@ export interface Props {
 }
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  const posts = await getCollection("blog");
 
   const postResult = posts.map(post => ({
-    params: { slug: slugify(post.data) },
+    params: { slug: slugify(post?.data) },
     props: { post },
   }));
 
