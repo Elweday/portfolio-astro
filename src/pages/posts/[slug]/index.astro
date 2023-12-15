@@ -29,7 +29,10 @@ export async function getStaticPaths() {
 }
 
 
+const { slug } = Astro.params;
 const { post } = Astro.props;
 ---
-<PostDetails post={post} />
+
+
+  <PostDetails post={post} />
   
