@@ -4,7 +4,7 @@ endDate: 2022-10-23T15:22:00Z
 title: College Tracking System
 description: College website with intuitive dashboard, control center, and detailed grade statistics for students and educators.
 
-postSlug: adding-new-posts-in-astropaper-theme
+postSlug: post0
 draft: false
 tags:
   - docs
