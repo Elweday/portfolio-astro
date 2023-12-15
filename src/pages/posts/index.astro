@@ -1,18 +1,20 @@
 ---
-import { SITE } from "@config";
+import { type CollectionEntry } from "astro:content";
 import Posts from "@layouts/Posts.astro";
-import getSortedPosts from "@utils/getSortedPosts";
-import getPageNumbers from "@utils/getPageNumbers";
 
-import { getCollection } from "astro:content";
 
-const posts = await getCollection("blog");
+export interface Props {
+  post: CollectionEntry<"blog">;
+}
 
-const sortedPosts = getSortedPosts(posts);
 
-const totalPages = getPageNumbers(sortedPosts.length);
+const tags = Astro.url.searchParams.getAll('tag');
+const currentPage =  Astro.url.searchParams.get('page') || 1
 
-const paginatedPosts = sortedPosts.slice(0, SITE.postPerPage);
+
 ---
 
-<Posts posts={paginatedPosts} pageNum={1} totalPages={totalPages.length} />
+ <Posts
+      pageNum={currentPage}
+      tags={tags}
+  />

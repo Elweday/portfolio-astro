@@ -7,18 +7,26 @@ import Main from "@layouts/Main.astro";
 import Tag from "@components/Tag.astro";
 import getUniqueTags from "@utils/getUniqueTags";
 import { SITE } from "@config";
+import Tags from "@components/Tags.astro";
+const allPosts = await getCollection("blog");
+const allTags = getUniqueTags(allPosts);
 
-const posts = await getCollection("blog");
 
-let tags = getUniqueTags(posts);
 ---
 
 <Layout title={`Tags | ${SITE.title}`}>
   <Header activeNav="tags" />
   <Main pageTitle="Tags" pageDesc="All the tags used in posts.">
-    <ul>
-      {tags.map(tag => <Tag name={tag} size="lg" />)}
-    </ul>
+    <Tags isTags={true} tags={allTags} allTags={allTags} />
   </Main>
   <Footer />
 </Layout>
+
+<style>
+  ul {
+    display: grid;
+    gap: 1rem;
+  grid-template-columns: auto auto auto auto;
+
+  }
+</style>

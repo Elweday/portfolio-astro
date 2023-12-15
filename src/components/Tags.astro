@@ -1,0 +1,52 @@
+---
+import Tag from "./Tag.astro"
+
+export interface Props {
+    tags: string[]
+    allTags: string[]
+    isTags?: boolean
+}
+const {tags, allTags, isTags} = Astro.props
+import { Icon } from 'astro-icon';
+import { StackIcons } from '../types'
+
+
+
+
+---
+<form method="post" class="grid">
+
+    <ul class="grid gap-3 grid-cols-3 overflow-auto p-3 ">
+        {(isTags ? tags : allTags).map(tag => 
+        <label for={tag} class="relative ">
+            <input name={tag} id={tag} type="checkbox" hidden  class="peer absolute top-[10px] right-5 rounded-full h-6 w-6  accent-[rgb(var(--color-accent))]"/>
+            <Tag name={tag} size="lg" otherClasses="pr-8  peer-checked:ring-2 peer-checked:ring-skin-accent  peer-checked:text-skin-accent peer-checked:[&>*:nth-child(1)]:[&>*:nth-child(1)]:fill-skin-accent  " />
+        </label>
+        
+        )}
+    </ul>
+    <button type="submit" class=" bg-[rgb(var(--color-accent))] rounded p-5 place-self-center text-lg font-bold "> 
+        Search
+    </button >
+    <Icon name={StackIcons.tailwind}/>
+    <Icon name={StackIcons.astro}/>
+
+</form>
+
+<script>
+    addEventListener("submit", (e) => {
+      e.preventDefault()
+      console.log(e.target)
+      const form = e.target as HTMLFormElement
+      
+      const url = new URL(window.location.href)
+      let path = url.origin + "/posts?"
+      form.querySelectorAll("input[type=checkbox]").forEach((input: HTMLInputElement) => {
+          if (input.checked) {
+              path += ("tag="+ input.name+"&")
+            }
+        })
+    window.location.href = path
+    
+    })
+  </script>

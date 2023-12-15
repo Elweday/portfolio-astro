@@ -1,0 +1,83 @@
+---
+import { slugifyStr } from "@utils/slugify";
+import Datetime from "./Datetime";
+import type { CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon";
+import { StackIcons } from "../types";
+
+interface Props {
+  href?: string;
+  frontmatter: CollectionEntry<"projects">["data"];
+  secHeading?: boolean;
+}
+const formatDate = (d) => d.toLocaleDateString("en-us", { year: "numeric", month: "short" }) 
+
+const {
+  frontmatter: { title, startDate, endDate, description, cover, stack, projectURL},
+  href,
+  secHeading,
+} = Astro.props;
+const flagColor = projectURL ? "project-available" : "under-construction"
+const headerProps = {
+  style: { viewTransitionName: slugifyStr(title) },
+  className: "text-lg font-medium decoration-dashed hover:underline",
+};
+---
+
+<li class="my-6 text-white">
+  <div class="group relative h-full w-full">
+    <img src={cover?.toString()} class="my-5 rounded-xl" alt="" />
+    <div
+      class="absolute right-0 top-0 hidden h-full w-full rounded-xl bg-gradient-to-b from-[rgba(0,0,0,0)] from-60% to-skin-accent opacity-100 duration-500 hover:transition-[opacity] group-hover:block"
+    >
+  </div>
+  <span
+  class=" absolute bottom-0 left-0 hidden w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 hover:transition-all group-hover:flex"
+  >
+  <a href={projectURL ?? "#"} class={"h-10 w-10 triangle absolute right-0 top-0 cursor-pointer rounded-tr-xl border-t-transparent border-b-transparent border-l-transparent " + flagColor} >
+    <Icon class="h-10 w-10 text-white rotate-45  float-right translate-x-24 translate-y-[24px]" name={projectURL?"teenyicons:github-solid":"ic:twotone-construction"}>
+  </a>
+      <span class="">
+        
+        <a href={href}>
+          <div class=" inline-block text-xs font-extralight transform   origin-bottom-left scale-75">
+            {formatDate(startDate)}--{formatDate(endDate)}
+          </div>
+          <h2 class="text-2xl font-bold">{title}</h2>
+        </a>
+        <h3 class="text-sm font-thin">{description.split("").slice(0,80).join("") + "..."}</h3>
+        
+      </span>
+      <div class="flex gap-5">
+        {stack.map(stack =>
+        
+        <Icon class="h-8 w-8 " name={StackIcons[stack]} />)}
+
+      </div>
+      
+    </span>
+  </div>
+
+</li>
+
+
+<style>
+  .center-abs {
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+  }
+
+
+  .triangle{
+	width: 0;
+	height: 0;
+	border-width: 0 125px 125px 0;
+	border-style: solid;
+}
+.under-construction {
+  border-right-color:  #FAD02C ;
+}
+.project-available {
+  border-right-color: #101010 ;
+}
+
+</style>

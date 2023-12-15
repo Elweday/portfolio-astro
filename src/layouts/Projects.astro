@@ -1,0 +1,42 @@
+---
+import { SITE } from "@config";
+import Layout from "@layouts/Layout.astro";
+import Main from "@layouts/Main.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Card from "@components/ProjectCard.astro";
+import LinkButton from "@components/LinkButton.astro";
+import slugify from "@utils/slugify";
+
+import  {type CollectionEntry , getCollection} from "astro:content";
+
+export interface Props {
+  pageNum: number;
+  tags?: string[];
+}
+const allPosts = await getCollection("projects");
+
+---
+
+<Layout title={`Posts | ${SITE.title}`}>
+  <Header activeNav="projects" />
+  <Main pageTitle="Projects" pageDesc="All the articles I've posted.">
+
+    <ul>
+      {
+        allPosts.map(({ data }) => (
+          <Card href={`/posts/${slugify(data)}`} frontmatter={data} />
+        ))
+      }
+    </ul>
+  </Main>
+
+  <Footer />
+</Layout>
+
+<style>
+ 
+</style>
+
+
+@components/PostCard

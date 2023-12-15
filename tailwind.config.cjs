@@ -25,6 +25,18 @@ module.exports = {
           inverted: withOpacity("--color-fill"),
         },
       },
+      stroke: {
+        skin: {
+          base: withOpacity("--color-text-base"),
+          accent: withOpacity("--color-accent"),
+        }
+      },
+      gradientColorStops: {
+        skin: {
+          base: withOpacity("--color-text-base"),
+          accent: withOpacity("--color-accent"),
+        }
+      },
       backgroundColor: {
         skin: {
           fill: withOpacity("--color-fill"),
@@ -52,6 +64,12 @@ module.exports = {
           accent: withOpacity("--color-accent"),
         },
         transparent: "transparent",
+      },
+      ringColor: {
+        skin: {
+          base: withOpacity("--color-text-base"),
+          accent: withOpacity("--color-accent"),
+        },
       },
       fontFamily: {
         mono: ["IBM Plex Mono", "monospace"],

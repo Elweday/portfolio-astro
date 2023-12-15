@@ -1,3 +1,5 @@
+import { object } from "astro/zod";
+
 export type Site = {
   website: string;
   author: string;
@@ -17,6 +19,33 @@ export type SocialObjects = {
 
 export type SocialIcons = {
   [social in SocialMedia]: string;
+};
+
+export const StackIcons = {
+  astro: "simple-icons:astro",
+  react: "mdi:react",
+  tailwind: "mdi:tailwind",
+  postgres: "cib:postgresql",
+  svelte: "cib:svelte",
+  nextjs: "simple-icons:nextdotjs",
+  nodejs: "fa-brands:node-js",
+  python: "akar-icons:python-fill",
+  jinja: "simple-icons:jinja",
+  bootstrap: "akar-icons:bootstrap-fill",
+  flask: "simple-icons:flask",
+  plotly: "simple-icons:plotly",
+  javascript: "simple-icons:javascript",
+  typescript: "simple-icons:typescript",
+  docker: "logos:docker-icon",
+  git: "logos:git-icon",
+  npm: "logos:npm-icon",
+  firebase: "logos:firebase",
+  prisma: "simple-icons:prisma",
+  chartjs: "file-icons:chartjs",
+  pandas: "simple-icons:pandas",
+  jupyter: "simple-icons:jupyter",
+  numpy: "simple-icons:numpy",
+  matplotlib: "logos:seaborn-icon",
 };
 
 export type SocialMedia =

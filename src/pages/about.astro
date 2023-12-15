@@ -1,0 +1,108 @@
+---
+import AboutLayout from "@layouts/AboutLayout.astro";
+/* import nodemailer from "nodemailer" ;
+const transporter  = nodemailer.createTransport({
+  host: "sandbox.smtp.mailtrap.io",
+  port: 2525,
+  auth: {
+    user: "4f070bd49b0d93",
+    pass: "362872e17f4e92"
+  } 
+});
+const info = await transporter.sendMail({
+    from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    to: "mohammednh2864@gmail.com", // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>", // html body
+  });
+  console.log(info) */
+
+
+const shows = [
+  "silicon_valley",
+  "bojack_horseman",
+  "jujutsu_kaisen",
+  "the_big_bang_theory",
+  "daredevil",
+  "the_boys",
+  "invincible",
+  "rick_and_morty",
+];
+
+type Show = {
+    "Title": string,
+    "Year": string,
+    "Rated": string,
+    "Released": string,
+    "Runtime": string,
+    "Genre": string,
+    "Director": string,
+    "Writer": string,
+    "Actors": string,
+    "Plot": string,
+    "Language": string,
+    "Country": string,
+    "Awards": string,
+    "Poster": string,
+    "Ratings": {Source:string, Value:string}[],
+    "Metascore": string,
+    "imdbRating": string,
+    "imdbVotes": string,
+    "imdbID": string,
+    "Type": string,
+    "DVD": string,
+    "BoxOffice": string,
+    "Production": string,
+    "Website": string,
+    "Response": string
+}
+
+---
+
+<AboutLayout frontmatter={{ title: "About" }}>
+  <section class="prose mb-28 max-w-3xl prose-img:border-0">
+    <h1 >About</h1>
+    <section>
+        <h2>My Contacts</h2>
+
+    </section>
+    <section>
+        <h2>About</h2>
+        <div class="grid grid-cols-4 place-content-stretch justify-stretch gap-5">
+        {
+          shows.map(async filmId => {
+            const res = await fetch(
+              `https://www.omdbapi.com/?t=${filmId}&apikey=50788f34`,  { cache: 'force-cache' }
+            );
+            const data = await res.json() as Show;
+            const { Poster, Title, Year, imdbID } = data;
+
+            return (
+              <a href={`https://www.imdb.com/title/${imdbID}`}>
+                <div class="group relative h-full w-full">
+                  <img src={Poster} class=" h-full w-full rounded-xl" alt="" />
+                  <div class="absolute left-0 top-0  hidden h-full w-full translate-y-2 rounded-xl bg-gradient-to-b from-[rgba(0,0,0,0)] from-70% to-skin-accent opacity-80 duration-500 group-hover:block" />
+                  <span class="absolute bottom-0 left-0  hidden p-3 text-lg font-bold text-white duration-300 group-hover:flex">
+                    {Title}
+                  </span>
+                </div>
+              </a>
+            );
+          })
+        }
+      </div>
+    </section>
+
+  </section>
+</AboutLayout>
+
+<style>
+
+  h1 {
+    @apply text-2xl tracking-wider sm:text-3xl text-start;
+  }
+  h2 {
+    @apply text-xl tracking-wider sm:text-2xl  text-start ;
+  }
+</style>

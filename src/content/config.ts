@@ -1,5 +1,7 @@
 import { SITE } from "@config";
+import { Schema } from "astro/zod";
 import { defineCollection, z } from "astro:content";
+import { StackIcons } from "../types";
 
 const blog = defineCollection({
   type: "content",
@@ -23,4 +25,44 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { blog };
+const Stacks = [...Object.keys(StackIcons)];
+
+const projects = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z
+      .object({
+        author: z.string().default(SITE.author),
+        startDate: z.date(),
+        endDate: z
+          .date()
+          .or(z.enum(["Present"]))
+          .optional()
+          .default("Present"),
+        title: z.string(),
+        description: z.string(),
+        draft: z.boolean().optional(),
+        tags: z.array(z.string()).default(["others"]),
+        stack: z.array(z.enum(Stacks)).default([]),
+        cover: image()
+          .refine(img => img.width / img.height != 16 / 9, {
+            message: "The Image must have aspect ratio of 16:9!!",
+          })
+          .or(z.string()),
+        projectURL: z.string().url().optional(),
+      })
+      .refine(data => data.startDate <= data.endDate, {
+        message: "Start date cannot be after end date!",
+        path: ["endDate"],
+      })
+      .refine(data => data.startDate <= new Date(), {
+        message: "Start date cannot be in the future!",
+        path: ["startDate"],
+      })
+      .refine(data => data.endDate <= new Date(), {
+        message: "End date cannot be in the future!",
+        path: ["endDate"],
+      }),
+});
+
+export const collections = { blog, projects };
