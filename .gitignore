@@ -1,6 +1,7 @@
 # build output
 dist/
 .output/
+.vercel
 
 # dependencies
 node_modules/
@@ -33,3 +34,6 @@ pnpm-debug.log*
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+# editor
+.vscode/
