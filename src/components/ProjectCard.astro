@@ -7,12 +7,19 @@ import { StackIcons } from "../types";
 import { Image } from 'astro:assets';
  
 
+
+type StackIcon = keyof typeof StackIcons;
+
 interface Props {
   href?: string;
   frontmatter: CollectionEntry<"projects">["data"];
   secHeading?: boolean;
 }
-const formatDate = (d) => d.toLocaleDateString("en-us", { year: "numeric", month: "short" }) 
+const formatDate = (d:Date | "Present") => {
+  if (d === "Present") return "Present"
+  return d.toLocaleDateString("en-us", { year: "numeric", month: "short" })
+} 
+
 
 const {
   frontmatter: { title, startDate, endDate, description, cover, stack, projectURL},
@@ -51,9 +58,9 @@ const headerProps = {
         
       </span>
       <div class="flex gap-5">
-        {stack.map(stack =>
-        
-        <Icon class="h-8 w-8 " name={StackIcons[stack]} />)}
+        {(stack as StackIcon[]).map((stack:StackIcon) =>
+          <Icon class="h-8 w-8 " name={StackIcons[stack]} />
+        )}
 
       </div>
       

@@ -21,6 +21,11 @@ export type SocialIcons = {
   [social in SocialMedia]: string;
 };
 
+interface StackIcons {
+  [key: string]: string;
+}
+
+
 export const StackIcons = {
   astro: "simple-icons:astro",
   react: "mdi:react",

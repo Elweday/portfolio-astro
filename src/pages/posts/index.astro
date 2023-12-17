@@ -9,7 +9,7 @@ export interface Props {
 
 
 const tags = Astro.url.searchParams.getAll('tag');
-const currentPage =  Astro.url.searchParams.get('page') || 1
+const currentPage =  parseInt(Astro.url.searchParams.get('page')|| "1" )
 
 
 ---

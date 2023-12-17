@@ -39,11 +39,13 @@ import { StackIcons } from '../types'
       
       const url = new URL(window.location.href)
       let path = url.origin + "/posts?"
-      form.querySelectorAll("input[type=checkbox]").forEach((input: HTMLInputElement) => {
-          if (input.checked) {
-              path += ("tag="+ input.name+"&")
-            }
-        })
+      const inputs = form.querySelectorAll("input[type=checkbox]") as NodeListOf<HTMLInputElement>
+    inputs.forEach((input) => {
+        
+      if (input.checked) {
+        path += ("tag="+ input.name+"&")
+      }
+})
     window.location.href = path
     
     })

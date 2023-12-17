@@ -1,7 +1,8 @@
 import { SITE } from "@config";
-import { Schema } from "astro/zod";
+import { Schema, ZodTuple } from "astro/zod";
 import { defineCollection, z } from "astro:content";
 import { StackIcons } from "../types";
+import type { TupleType } from "typescript";
 
 const blog = defineCollection({
   type: "content",
@@ -25,7 +26,9 @@ const blog = defineCollection({
     }),
 });
 
-const Stacks = [...Object.keys(StackIcons)];
+const Stacks = [...Object.keys(StackIcons)] as [string, ...string[]];
+
+
 
 const projects = defineCollection({
   type: "content",
@@ -41,6 +44,7 @@ const projects = defineCollection({
           .default("Present"),
         title: z.string(),
         description: z.string(),
+        postSlug: z.string().optional(),
         draft: z.boolean().optional(),
         tags: z.array(z.string()).default(["others"]),
         stack: z.array(z.enum(Stacks)).default([]),
