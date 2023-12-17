@@ -1,25 +1,51 @@
 ---
-import { SITE } from "@config";
+import { SITE, type NAV_LINKS } from "@config";
 import "@styles/base.css";
 import { ViewTransitions } from "astro:transitions";
+import Batman from "./batman.astro";
+import Main from "./Main.astro";
+import Header from "@components/Header.astro";
+import Hr from "@components/Hr.astro";
+import Footer from "@components/Footer.astro";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
-export interface Props {
-  title?: string;
+
+
+type MainProps = {
+  pageTitle: string;
+  pageDesc?: string;
+  titleTransition: string;
+}
+
+
+
+
+export  interface Props {
+  title: string;
   author?: string;
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
 }
 
+
+
 const {
-  title = SITE.title,
+  title,
   author = SITE.author,
-  description = SITE.desc,
+  description,
   ogImage = SITE.ogImage,
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 } = Astro.props;
+
+const {title:siteTitle, desc:siteDesc} = SITE
+
+const mainProps:MainProps = {
+  pageTitle: title,
+  pageDesc: description,
+  titleTransition: title
+}
 
 const socialImageURL = new URL(
   ogImage ?? SITE.ogImage ?? "og.png",
@@ -30,6 +56,7 @@ const socialImageURL = new URL(
 <!doctype html>
 <html lang="en">
   <head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -37,7 +64,7 @@ const socialImageURL = new URL(
     <meta name="generator" content={Astro.generator} />
 
     <!-- General Meta Tags -->
-    <title>{title}</title>
+    <title>{siteTitle} | {title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
@@ -67,9 +94,12 @@ const socialImageURL = new URL(
     <meta name="theme-color" content="" />
 
     {
-      // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
-      // include google-site-verification tag in the heading
-      // Learn more: https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag
+      /*  If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
+    include google-site-verification tag in the heading
+     Learn more: https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag
+    */
+    }
+    {
       googleSiteVerification && (
         <meta
           name="google-site-verification"
@@ -77,13 +107,22 @@ const socialImageURL = new URL(
         />
       )
     }
-
     <ViewTransitions />
 
     <script is:inline src="/toggle-theme.js"></script>
+    <script src="./BATMAN.js"></script>
   </head>
-  <body>
- 
-    <slot />
+  <body class="w-full h-full sm:py-7" >  
+    <div style="background-color: rgba(var(--color-fill-ligher), 0.6);" class=" sm:max-w-4xl  place-self-center sm:rounded-3xl border-[1px] border-black/10   drop-shadow-2xl h-full w-full  px-4 ">
+      <Header path={title}/>
+      <Batman />
+      <Hr />
+      <Main {...mainProps}> 
+        <slot />
+      </Main>
+      <Footer />
+  </div> 
   </body>
 </html>
+
+

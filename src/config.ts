@@ -1,7 +1,7 @@
 import type { Site, SocialObjects } from "./types";
 
 export const SITE: Site = {
-  website: "https://astro-paper.pages.dev/", // replace this with your deployed domain
+  website: "https://mmasser.vercel.app", // replace this with your deployed domain
   author: "Mohammed Nasser",
   desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
   title: "Mohammed Nasser",
@@ -10,7 +10,17 @@ export const SITE: Site = {
   postPerPage: 5,
 };
 
-export const LOCALE = ["en-EN"]; // set to [] to use the environment default
+export const PATHS = [
+  { name: "Home", path: "/" },
+  { name: "Posts", path: "/posts" },
+  { name: "Projects", path: "/projects" },
+  { name: "About", path: "/about" },
+]
+
+
+export type NAV_LINKS = "posts" | "projects" | "about" | "search" | "tags" | "home" | "search"
+
+export const LOCALE = ["en-EN"]; // set to [] to  use the environment default
 
 export const LOGO_IMAGE = {
   enable: false,

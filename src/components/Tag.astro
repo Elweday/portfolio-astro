@@ -4,23 +4,23 @@ export interface Props {
   size?: "sm" | "lg";
   all?: boolean;
   otherClasses?: string;
+  noTransition?: boolean;
 }
 
-let {all, name, size = "sm", otherClasses} =  Astro.props;
+let {all, name, size = "sm", otherClasses, noTransition} =  Astro.props;
 all = all ?? false;
-
 
 
 ---
 
 <li
-  class={`flex bg-skin-card rounded-full p-1 mb-1 group  hover:-top-0.5 hover:text-skin-accent focus-visible:p-1$ ${otherClasses ? otherClasses : ""}`}
+  class={`flex bg-skin-card  rounded-full p-3 mb-1 group  hover:-top-0.5 hover:text-skin-accent focus-visible:p-1$ ${otherClasses ? otherClasses : ""}`}
   
 >
   <a
     href={all ? `/tags` : `/posts?tag=${name.toLowerCase()}`}
-    transition:name={name.toLowerCase()}
-    class={`   gap-1 p-1 flex justify-center `}
+    transition:name={!noTransition?name.toLowerCase():""}
+    class={`   gap-1  flex justify-center `}
   >
    { (!all) ? (<svg class="h-6 w-6 scale-95 text-skin-base opacity-80 group-hover:fill-skin-accent"
       xmlns="http://www.w3.org/2000/svg"

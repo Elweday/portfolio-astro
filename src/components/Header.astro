@@ -1,35 +1,37 @@
 ---
-import { LOGO_IMAGE, SITE } from "@config";
+import { SITE, PATHS } from "@config";
 import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
 
-
 export interface Props {
-  activeNav?: "posts" | "projects" | "about" | "search" | "tags";
+  path?: string;
 }
 
-const { activeNav } = Astro.props;
+const { path } = Astro.props;
+
 ---
 
-<header>
-  <a id="skip-to-content" href="#main-content">Skip to content</a>
-  <div class="nav-container">
-    <div class="top-nav-wrap">
-      <a href="/" class="logo whitespace-nowrap">
-        {
-          LOGO_IMAGE.enable ? (
-            <img
-              src={`/assets/${LOGO_IMAGE.svg ? "logo.svg" : "logo.png"}`}
-              alt={SITE.title}
-              width={LOGO_IMAGE.width}
-              height={LOGO_IMAGE.height}
-            />
-          ) : (
-            SITE.title
-          )
-        }
-      </a>
-      <nav id="nav-menu">
+<header >
+  <nav class="flex h-fit"> 
+<div class="flex w-full  justify-between place-content-center ">
+
+  <button class="" id="crimeInGotham">
+    <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-14 w-14 "
+          viewBox="0 0 680 295"
+          >
+          <a id="skip-to-content" href="#main-content">Skip to content</a>
+          <path
+                id="glowingBat"
+                stroke-width="0"
+                fill="rgb(var(--color-skin-accent))"
+                d="M257.841 206.478C266.3 206.478 275.54 209.075 285.301 214.205C309.08 226.695 329.477 269.516 339.768 294.664C350.062 269.516 370.451 226.695 394.234 214.205C403.995 209.075 413.235 206.478 421.69 206.478C438.773 206.478 448.418 216.626 453.605 222.075L454.686 223.205C458.686 227.303 464.38 234.359 468.519 239.65C480.679 227.941 508.683 204.425 537.716 204.163H538.365C553.241 204.163 564.643 208.798 572.254 217.936C584.034 232.084 582.026 251.423 580.619 259.083C579.197 266.81 576.134 275.115 572.944 282.344C572.944 282.344 667.612 227.412 677.726 167.373C689.375 98.2326 621.755 51.4936 562.977 24.4576C544.212 15.8258 516.519 6.96516 497.694 1.34328C511.126 24.8366 519.461 59.2509 493.146 87.9158C479.962 102.278 463.295 109.87 444.947 109.87C412.101 109.87 379.466 84.9022 375.109 56.44C372.283 37.9981 370.752 16.7415 369.93 0.386292L362.146 14.0694C360.784 16.4601 358.206 18.0138 355.474 17.8599L339.617 17.5447L324.062 17.8599C321.232 17.9838 318.747 16.4601 317.389 14.0694L309.605 0.386292C308.783 16.7378 307.252 37.9981 304.426 56.44C300.065 84.9022 267.434 109.87 234.588 109.87C216.24 109.87 199.577 102.278 186.393 87.9158C160.077 59.2472 168.413 24.8366 181.848 1.34328C163.023 6.96141 135.327 15.8221 116.562 24.4576C57.7839 51.4936 -9.83629 98.2363 1.81279 167.373C11.9307 227.412 74.3981 266.123 106.594 282.344C103.408 275.115 100.346 266.806 98.9235 259.083C97.5124 251.423 95.5008 232.084 107.281 217.94C114.892 208.798 126.297 204.163 141.178 204.163H141.827C170.86 204.425 198.864 227.941 211.023 239.65C215.163 234.359 220.852 227.303 224.857 223.201L225.945 222.068C231.12 216.622 240.769 206.478 257.841 206.478Z"
+                fill="none">
+          </path>
+              </svg>
+        </button>
+      
         <button
           class="hamburger-menu focus-outline"
           aria-label="Open Menu"
@@ -55,50 +57,17 @@ const { activeNav } = Astro.props;
             <line x1="6" y1="6" x2="18" y2="18" class="close"></line>
           </svg>
         </button>
-        <ul id="menu-items" class="display-none sm:flex">
-          <li>
-            <a href="/posts" class={activeNav === "posts" ? "active" : ""}>
-              Posts
-            </a>
-          </li>
-          <li>
-            <a href="/projects" class={activeNav === "projects" ? "active" : ""}>
-              Projects
-            </a>
-          </li>
-          <li>
-            <a href="/about" class={activeNav === "about" ? "active" : ""}>
-              About
-            </a>
-          </li>
-          <li>
-            <LinkButton
-              href="/search"
-              className={`focus-outline p-3 sm:p-1 ${
-                activeNav === "search" ? "active" : ""
-              } flex`}
-              ariaLabel="search"
-              title="Search"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="scale-125 sm:scale-100"
-                ><path
-                  d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"
-                ></path>
-              </svg>
-            </LinkButton>
+      </div>
+        <ul id="menu-items" class="display-none sm:flex sm:p-4 w-full justify-end ">
+          {PATHS.map(({name, path}) => (<li><a href={path} class={Astro.url.pathname === path ? "active" : ""} >{name}</a></li>))}
+          <LinkButton href="/search" className={`focus-outline p-3 sm:p-1 ${path === "/search" ? "active" : ""} flex place-self-center`} ariaLabel="search" title="Search">
+            <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100" ><path   d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" ></path></svg>
+          </LinkButton>
           </li>
           <li>
             {
               SITE.lightAndDarkMode && (
-                <button
-                  id="theme-btn"
-                  class="focus-outline"
-                  title="Toggles light & dark"
-                  aria-label="auto"
-                  aria-live="polite"
-                >
+                <button id="theme-btn" class="focus-outline place-self-center" title="Toggles light & dark" aria-label="auto" aria-live="polite">
                   <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg">
                     <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" />
                   </svg>
@@ -111,8 +80,6 @@ const { activeNav } = Astro.props;
           </li>
         </ul>
       </nav>
-    </div>
-  </div>
   <Hr />
 </header>
 
@@ -120,9 +87,7 @@ const { activeNav } = Astro.props;
   #skip-to-content {
     @apply absolute -top-full left-16 z-50 bg-skin-accent px-3 py-2 text-skin-inverted transition-all focus:top-4;
   }
-  .nav-container {
-    @apply mx-auto flex max-w-3xl flex-col items-center justify-between sm:flex-row;
-  }
+
   .top-nav-wrap {
     @apply relative flex w-full items-start justify-between p-4 sm:items-center sm:py-8;
   }
@@ -130,10 +95,10 @@ const { activeNav } = Astro.props;
     @apply absolute py-1 text-xl font-semibold sm:static sm:text-2xl;
   }
   .hamburger-menu {
-    @apply self-end p-2 sm:hidden;
+    @apply  sm:hidden place-self-center justify-self-center h-full;
   }
   .hamburger-menu svg {
-    @apply h-6 w-6 scale-125 fill-skin-base;
+    @apply h-8 w-8 scale-125 fill-skin-base;
   }
 
   nav {
@@ -156,10 +121,10 @@ const { activeNav } = Astro.props;
     @apply col-span-1;
   }
   nav a.active {
-    @apply underline decoration-[0.3em] font-bold underline-offset-[10px];
+    @apply font-bold text-skin-accent border-skin-accent bg-black/10 border-2 rounded-xl mx-5 sm:mx-0;
   }
   nav a.active svg {
-    @apply fill-skin-accent;
+    @apply fill-skin-accent font-extrabold;
   }
 
   nav button {
@@ -187,6 +152,9 @@ const { activeNav } = Astro.props;
   .menu-icon.is-active .close {
     @apply opacity-100;
   }
+  #siteTitle {
+    letter-spacing:18px;
+  }
 </style>
 
 <script>
@@ -213,3 +181,5 @@ const { activeNav } = Astro.props;
   // Runs on view transitions navigation
   document.addEventListener("astro:after-swap", toggleNav);
 </script>
+
+

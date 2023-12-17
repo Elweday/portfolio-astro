@@ -14,12 +14,8 @@ const allTags = getUniqueTags(allPosts);
 
 ---
 
-<Layout title={`Tags | ${SITE.title}`}>
-  <Header activeNav="tags" />
-  <Main pageTitle="Tags" pageDesc="All the tags used in posts.">
-    <Tags isTags={true} tags={allTags} allTags={allTags} />
-  </Main>
-  <Footer />
+<Layout title="tags">
+  <Tags isTags={true} tags={allTags} allTags={allTags} />
 </Layout>
 
 <style>

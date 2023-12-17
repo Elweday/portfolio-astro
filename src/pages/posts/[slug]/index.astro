@@ -1,4 +1,5 @@
 ---
+export const prerender = true;
 import { type CollectionEntry, getCollection } from "astro:content";
 import Posts from "@layouts/Posts.astro";
 import PostDetails from "@layouts/PostDetails.astro";
@@ -33,5 +34,5 @@ const { post } = Astro.props;
 ---
 
 
-  <PostDetails post={post} />
+<PostDetails post={post} />
   

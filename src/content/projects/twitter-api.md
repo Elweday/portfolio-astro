@@ -3,8 +3,7 @@ startDate: 2022-09-23T15:22:00Z
 endDate: 2022-10-23T15:22:00Z
 title: Twitter API dashboard
 description: Visualization And Data analystics using Twitter api
-
-postSlug: adding-new-posts-in-astropaper-theme
+postSlug: post2
 draft: false
 tags:
   - docs

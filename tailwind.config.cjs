@@ -11,65 +11,23 @@ function withOpacity(variableName) {
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
-    // Remove the following screen breakpoint or add other breakpoints
-    // if one breakpoint is not enough for you
     screens: {
       sm: "640px",
+      md: "768px",
+      lg: "1024px",
     },
 
     extend: {
-      textColor: {
+      colors: {
         skin: {
-          base: withOpacity("--color-text-base"),
-          accent: withOpacity("--color-accent"),
-          inverted: withOpacity("--color-fill"),
-        },
-      },
-      stroke: {
-        skin: {
-          base: withOpacity("--color-text-base"),
-          accent: withOpacity("--color-accent"),
-        }
-      },
-      gradientColorStops: {
-        skin: {
-          base: withOpacity("--color-text-base"),
-          accent: withOpacity("--color-accent"),
-        }
-      },
-      backgroundColor: {
-        skin: {
-          fill: withOpacity("--color-fill"),
-          accent: withOpacity("--color-accent"),
-          inverted: withOpacity("--color-text-base"),
-          card: withOpacity("--color-card"),
+          "base": withOpacity("--color-text-base"),
+          "accent": withOpacity("--color-accent"),
+          "inverted": withOpacity("--color-text-base"),
+          "card": withOpacity("--color-card"),
           "card-muted": withOpacity("--color-card-muted"),
-        },
-      },
-      outlineColor: {
-        skin: {
-          fill: withOpacity("--color-accent"),
-        },
-      },
-      borderColor: {
-        skin: {
-          line: withOpacity("--color-border"),
-          fill: withOpacity("--color-text-base"),
-          accent: withOpacity("--color-accent"),
-        },
-      },
-      fill: {
-        skin: {
-          base: withOpacity("--color-text-base"),
-          accent: withOpacity("--color-accent"),
-        },
-        transparent: "transparent",
-      },
-      ringColor: {
-        skin: {
-          base: withOpacity("--color-text-base"),
-          accent: withOpacity("--color-accent"),
-        },
+          "fill": withOpacity("--color-fill"),
+          "line": withOpacity("--color-border"),
+        }
       },
       fontFamily: {
         mono: ["IBM Plex Mono", "monospace"],
@@ -82,7 +40,7 @@ module.exports = {
               color: false,
             },
             code: {
-              color: false,
+              color: true,
             },
           },
         },

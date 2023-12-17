@@ -4,6 +4,8 @@ import Datetime from "./Datetime";
 import type { CollectionEntry } from "astro:content";
 import { Icon } from "astro-icon";
 import { StackIcons } from "../types";
+import { Image } from 'astro:assets';
+ 
 
 interface Props {
   href?: string;
@@ -20,13 +22,13 @@ const {
 const flagColor = projectURL ? "project-available" : "under-construction"
 const headerProps = {
   style: { viewTransitionName: slugifyStr(title) },
-  className: "text-lg font-medium decoration-dashed hover:underline",
+  className: "text-lg font-medium ",
 };
 ---
 
 <li class="my-6 text-white">
   <div class="group relative h-full w-full">
-    <img src={cover?.toString()} class="my-5 rounded-xl" alt="" />
+    <img  src={cover?.toString()}  class="my-5 rounded-xl" alt="" />
     <div
       class="absolute right-0 top-0 hidden h-full w-full rounded-xl bg-gradient-to-b from-[rgba(0,0,0,0)] from-60% to-skin-accent opacity-100 duration-500 hover:transition-[opacity] group-hover:block"
     >

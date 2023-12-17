@@ -17,28 +17,21 @@ const posts = await getCollection("blog");
 const projects = await getCollection("projects"); 
 
 const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
 
-<Layout>
-
-  <Header />
-  <main id="main-content">
+<Layout title="home">
     <section id="hero">
-      <h1 class="mr-2">whoami</h1>
+      <h1 class="mr-2">Mohammed Nasser</h1>
       <p>
         I'm a computer engineering Student, Tech Enthusiast, freelancer, 
       </p>
       {
         // only display if at least one social link is enabled
         socialCount > 0 && (
-          <div class="social-wrapper">
-            <div class="social-links">Social Links:</div>
-            <Socials />
-          </div>
+            <div class="social-links font-bold">Follow Me on: <Socials /></div> 
         )
       }
     </section>
@@ -96,9 +89,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     </section>
 
 
-  </main>
 
-  <Footer />
 </Layout>
 
 <style>
@@ -136,4 +127,3 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     @apply my-8 text-center;
   }
 </style>
-@components/PostCard

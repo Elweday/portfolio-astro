@@ -18,10 +18,7 @@ const allPosts = await getCollection("projects");
 
 ---
 
-<Layout title={`Posts | ${SITE.title}`}>
-  <Header activeNav="projects" />
-  <Main pageTitle="Projects" pageDesc="All the articles I've posted.">
-
+<Layout title={`posts`}>
     <ul>
       {
         allPosts.map(({ data }) => (
@@ -29,14 +26,8 @@ const allPosts = await getCollection("projects");
         ))
       }
     </ul>
-  </Main>
-
-  <Footer />
 </Layout>
 
 <style>
  
 </style>
-
-
-@components/PostCard

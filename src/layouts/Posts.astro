@@ -3,7 +3,6 @@ import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
 import Main from "@layouts/Main.astro";
 import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
 import Card from "@components/PostCard";
 import LinkButton from "@components/LinkButton.astro";
 import slugify from "@utils/slugify";
@@ -13,12 +12,14 @@ import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
 import getPostsByTags from "@utils/getPostsByTags";
 import Tags from "@components/Tags.astro";
+import Hr from "@components/Hr.astro";
+
 
 import  {type CollectionEntry , getCollection} from "astro:content";
 
 export interface Props {
   pageNum: number;
-  tags?: string[];
+  tags: string[];
 }
 
 const {pageNum} = Astro.props
@@ -44,15 +45,17 @@ const next = pageNum < numPages ? "" : "disabled";
 
 const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : ''; 
 
+const props = {
+
+}
+
 
 ---
 
-<Layout title={`Posts | ${SITE.title}`}>
-  <Header activeNav="posts" />
-  <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
+<Layout title="posts", description="All the articles I've posted." >
     <ul class="flex gap-2 overflow-auto p-3 ">
-      {(isTags ? tags : allTags).map(tag => 
-          <Tag name={tag} size="lg" otherClasses="pr-8" />
+      {(isTags ? tags : allTags).map((tag, idx) => 
+          <Tag name={tag} noTransition={true} size="lg" otherClasses="pr-8 " />
       
       )}
       <Tag name="+more" all={true} size="lg" >
@@ -64,8 +67,6 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
         ))
       }
     </ul>
-  </Main>
-
   {
     numPages > 1 && (
       <nav class="pagination-wrapper" aria-label="Pagination">
@@ -94,7 +95,6 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
       </nav>
     )
   }
-  <Footer noMarginTop={numPages > 1} />
 </Layout>
 
 <style>
@@ -110,4 +110,3 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
 </style>
 
 
-@components/PostCard
