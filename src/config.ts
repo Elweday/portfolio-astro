@@ -5,7 +5,7 @@ export const SITE: Site = {
   author: "Mohammed Nasser",
   desc: "A personal portfolio and blog.",
   title: "Mohammed Nasser",
-  ogImage: "images/Fallback.jpg",
+  ogImage: "assets/images/fallback",
   lightAndDarkMode: true,
   postPerPage: 5,
 };
