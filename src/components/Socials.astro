@@ -10,7 +10,7 @@ export interface Props {
 const { centered = false } = Astro.props;
 ---
 
-<div class={`flex-wrap inline-flex justify-center gap-1  `}>
+<div class={`inline-flex justify-center gap-4  sm:scale-100 scale-75`}>
   {
     SOCIALS.filter(social => social.active).map(social => (
       <LinkButton
@@ -26,6 +26,6 @@ const { centered = false } = Astro.props;
 
 <style>
   .link-button {
-    @apply p-2 hover:rotate-6 sm:p-1;
+    @apply p-1 hover:rotate-6 sm:p-2;
   }
 </style>
