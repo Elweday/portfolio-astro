@@ -3,30 +3,82 @@ export const prerender = true;
 import { type CollectionEntry, getCollection } from "astro:content";
 import ProjectDetails from "@layouts/PostDetails.astro";
 import slugify from "@utils/slugify";
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Tag from "@components/Tag.astro";
+import Datetime from "@components/Datetime";
+import type { CollectionEntry } from "astro:content";
+import { slugifyStr } from "@utils/slugify";
 
-export interface Props {
-  post: CollectionEntry<"projects">;
 
-
-}
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
-
-  const projectResults = projects.map(post => ({
-    params: { slug: slugify(post?.data) },
-    props: { post },
-  }));
+  const projectResults = projects.map(project => ({
+    params: { slug: slugify(project?.data) },
+    props: { project },
+})
+);
 
 
   return [...projectResults];
 }
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const { title, author, description, cover, stack, tags, startDate, endDate, } = project.data;
+
+
+const ogImageUrl = typeof cover === "string" ? cover : cover?.src;
+const ogUrl = new URL(ogImageUrl ?? `/my-projects/${slugifyStr(title)}.png`,Astro.url.origin).href;
+
+
 
 
 const { slug } = Astro.params;
 const { post } = Astro.props;
 ---
 
+<Layout
+  title={title}
+  author={author}
+  description={description}
+>
+  <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
+    <button
+      class="focus-outline mb-2 mt-8 flex hover:opacity-75"
+      onclick="history.back()"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg"
+        ><path
+          d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
+        ></path>
+      </svg><span>Go back</span>
+    </button>
+  </div>
+  <main id="main-content">
+    <h1 transition:name={slugifyStr(title)} class="post-title">{title}</h1>
+    <Datetime datetime={startDate} size="lg" className="my-2" />
+    <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
+      <Content />
+    </article>
 
-<ProjectDetails post={post} />
-  
+    <ul class="tags-container">
+      {tags.map(tag => <Tag name={slugifyStr(tag)} />)}
+    </ul>
+  </main>
+</Layout>
+
+<style>
+  main {
+    @apply mx-auto w-full  px-4 pb-12;
+  }
+  .post-title {
+    @apply text-2xl font-semibold text-skin-accent;
+  }
+  .tags-container {
+    @apply my-8;
+  }
+</style>

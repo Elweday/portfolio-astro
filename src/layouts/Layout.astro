@@ -2,34 +2,22 @@
 import { SITE, type NAV_LINKS } from "@config";
 import "@styles/base.css";
 import { ViewTransitions } from "astro:transitions";
-import Batman from "./batman.astro";
+import Batman from "@components/batman.astro";
 import Main from "./Main.astro";
 import Header from "@components/Header.astro";
 import Hr from "@components/Hr.astro";
 import Footer from "@components/Footer.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
-
-
-type MainProps = {
-  pageTitle: string;
-  pageDesc?: string;
-  titleTransition: string;
-}
-
-
-
-
-export  interface Props {
+export interface Props {
   title: string;
   author?: string;
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
 }
-
-
 
 const {
   title,
@@ -39,17 +27,10 @@ const {
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 } = Astro.props;
 
-const {title:siteTitle, desc:siteDesc} = SITE
+const { title: siteTitle, desc: siteDesc } = SITE;
 
-const path = title
-const pageTitle = siteTitle +  " | " + title.toUpperCase()
-
-
-const mainProps:MainProps = {
-  pageTitle: title,
-  pageDesc: description,
-  titleTransition: title
-}
+const path = title;
+const pageTitle = siteTitle + " | " + title.toUpperCase();
 
 const socialImageURL = new URL(
   ogImage ?? SITE.ogImage ?? "og.png",
@@ -60,7 +41,6 @@ const socialImageURL = new URL(
 <!doctype html>
 <html lang="en">
   <head>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -113,20 +93,23 @@ const socialImageURL = new URL(
     }
     <ViewTransitions />
 
-    <script is:inline src="/toggle-theme.js"></script>
-    <script src="./BATMAN.js"></script>
+    <script is:inline src="/assets/js/toggle-theme.js"></script>
   </head>
-  <body class="w-full h-full sm:py-7" >  
-    <div style="background-color: rgba(var(--color-fill-ligher), 0.6);" class=" sm:max-w-4xl  place-self-center sm:rounded-3xl border-[1px] border-black/10   drop-shadow-2xl h-full w-full  px-4 ">
-      <Header path={path}/>
+  <body class="h-full w-full sm:py-7">
+    <div
+      style="background-color: rgba(var(--color-fill-ligher), 0.6);"
+      class="h-full w-full place-self-center border-[1px] border-black/10 px-4 drop-shadow-2xl sm:max-w-4xl sm:rounded-3xl"
+    >
+      <Header path={path} />
       <Batman />
       <Hr />
-      <Main {...mainProps}> 
+      <main class="h-full overflow-y-auto">
+        <Breadcrumbs />
+
         <slot />
-      </Main>
+      </main>
+
       <Footer />
-  </div> 
+    </div>
   </body>
 </html>
-
-

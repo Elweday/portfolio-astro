@@ -1,20 +1,103 @@
 ---
-import { type CollectionEntry } from "astro:content";
-import Posts from "@layouts/Posts.astro";
+import  {type CollectionEntry , getCollection} from "astro:content";
+import { SITE } from "@config";
+import Layout from "@layouts/Layout.astro";
+import Card from "@components/PostCard";
+import LinkButton from "@components/LinkButton.astro";
+import slugify from "@utils/slugify";
+import Tag from "@components/Tag.astro";
+import getUniqueTags from "@utils/getUniqueTags";
+import getSortedPosts from "@utils/getSortedPosts";
+import getPageNumbers from "@utils/getPageNumbers";
+import getPostsByTags from "@utils/getPostsByTags";
 
 
-export interface Props {
-  post: CollectionEntry<"blog">;
-}
 
 
+const allPosts = await getCollection("blog");
+const allTags = getUniqueTags(allPosts);
 const tags = Astro.url.searchParams.getAll('tag');
-const currentPage =  parseInt(Astro.url.searchParams.get('page')|| "1" )
+const pageNum =  parseInt(Astro.url.searchParams.get('page')|| "1" )
+
+const isTags = tags.length > 0
+const posts = isTags ? getPostsByTags(allPosts, tags) : allPosts;
+
+const sortedPosts = getSortedPosts(posts);
+
+const totalPages = getPageNumbers(sortedPosts.length);
+const numPages = totalPages.length; 
+const lastPost = pageNum * SITE.postPerPage;
+const startPost = lastPost - SITE.postPerPage;
+
+const paginatedPosts = sortedPosts.slice(startPost, lastPost);
+
+const prev = pageNum > 1 ? "" : "disabled";
+const next = pageNum < numPages ? "" : "disabled";
+
+const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : ''; 
+
+
+
+
 
 
 ---
 
- <Posts
-      pageNum={currentPage}
-      tags={tags}
-  />
+<Layout title="posts", description="All the articles I've posted." >
+  <ul class="flex gap-2 overflow-auto p-3 ">
+    {(isTags ? tags : allTags).map((tag, idx) => 
+        <Tag name={tag} noTransition={true} size="lg" otherClasses="pr-8 " />
+    
+    )}
+    <Tag name="+more" all={true} size="lg" >
+</ul>
+  <ul>
+    {
+      paginatedPosts.map(({ data }) => (
+        <Card href={`/posts/${slugify(data)}`} frontmatter={data} />
+      ))
+    }
+  </ul>
+{
+  numPages > 1 && (
+    <nav class="pagination-wrapper" aria-label="Pagination">
+      <LinkButton
+        disabled={prev === "disabled"}
+        href={`/posts?${tagSearchParams}${pageNum - 1 !== 1 ? "page=" + (pageNum - 1) : ""}`}
+        className={`mr-4 select-none ${prev}`}
+        ariaLabel="Previous"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class={`${prev}-svg`}>
+          <path d="M12.707 17.293 8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z" />
+        </svg>
+        Prev
+      </LinkButton>
+      <LinkButton
+        disabled={next === "disabled"}
+        href={`/posts?${tagSearchParams}&page=${+pageNum + 1}`}
+        className={`ml-4 select-none ${next}`}
+        ariaLabel="Next"
+      >
+        Next
+        <svg xmlns="http://www.w3.org/2000/svg" class={`${next}-svg`}>
+          <path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z" />
+        </svg>
+      </LinkButton>
+    </nav>
+  )
+}
+</Layout>
+
+<style>
+.pagination-wrapper {
+  @apply mb-8 mt-auto flex justify-center;
+}
+.disabled {
+  @apply pointer-events-none select-none opacity-50 hover:text-skin-base group-hover:fill-skin-base;
+}
+.disabled-svg {
+  @apply group-hover:!fill-skin-base;
+}
+</style>
+
+

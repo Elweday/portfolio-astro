@@ -21,21 +21,40 @@
 
 
 <style>
-@property --width {
-  syntax: '<number>'; 
-  initial-value: 0;
-  inherits: false;
-}
+  @property --width {
+    syntax: '<number>'; 
+    initial-value: 0;
+    inherits: false;
+  }
 
-@keyframes batGlow {
-    10%{--width: 6}
-    80%{--width: 5}
-    70%{--width: 6}
-    100%{--width: 0}
-}
+  @keyframes batGlow {
+      10%{--width: 6}
+      70%{--width: 2}
+      80%{--width: 5}
+      100%{--width: 0}
+  }
 
-#glowingBat.showAnimation, #thicken.showAnimation {
-  animation: 3s batGlow ease-out;
-}
+  #glowingBat.showAnimation, #thicken.showAnimation {
+    animation: 3s batGlow ease-out;
+  }
 
 </style>
+
+
+<script >
+  const trigger = document.getElementById("crimeInGotham") as HTMLButtonElement
+  const items = ["thicken", "glowingBat"].map(item => document.getElementById(item) as HTMLElement)
+  trigger.onclick = (e) => {
+    items.forEach((item) => {
+      item.classList.add('showAnimation')
+      console.log(item)
+    });
+    const animationDuration = parseFloat(getComputedStyle(items[0]).animationDuration) * 1000
+    setTimeout(() => {
+      items.forEach((item) => item.classList.remove('showAnimation'));
+    }, animationDuration);
+    console.log("Ended Animation")
+
+  }
+  
+</script>
