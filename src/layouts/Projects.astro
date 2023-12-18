@@ -22,7 +22,7 @@ const allPosts = await getCollection("projects");
     <ul>
       {
         allPosts.map(({ data }) => (
-          <Card href={`/posts/${slugify(data)}`} frontmatter={data} />
+          <Card href={`/my-projects/${slugify(data)}`} frontmatter={data} />
         ))
       }
     </ul>

@@ -46,7 +46,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
             <ul>
               {projects.map(({ data }) => (
                 <ProjectCard
-                  href={`/projects/${slugify(data)}`}
+                  href={`/my-projects/${slugify(data)}`}
                   frontmatter={data}
                   secHeading={false}
                 />

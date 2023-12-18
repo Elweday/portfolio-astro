@@ -1,4 +1,9 @@
 import { object } from "astro/zod";
+import { type CollectionEntry } from "astro:content";
+
+export type Projects = CollectionEntry<"projects">;
+export type Posts = CollectionEntry<"blog">;
+export type Collection = Projects | Posts;
 
 export type Site = {
   website: string;

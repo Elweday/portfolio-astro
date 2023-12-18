@@ -11,6 +11,8 @@ import { SITE } from "@config";
 
 export interface Props {
   post: CollectionEntry<"blog">;
+
+
 }
 
 export async function getStaticPaths() {
@@ -21,11 +23,8 @@ export async function getStaticPaths() {
     props: { post },
   }));
 
-  const pagePaths = getPageNumbers(posts.length).map(pageNum => ({
-    params: { slug: String(pageNum) },
-  }));
 
-  return [...postResult, ...pagePaths];
+  return [...postResult];
 }
 
 
