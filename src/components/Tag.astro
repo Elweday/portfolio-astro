@@ -20,7 +20,7 @@ all = all ?? false;
   <a
     href={all ? `/tags` : `/posts?tag=${name.toLowerCase()}`}
     transition:name={!noTransition?name.toLowerCase():""}
-    class={`   gap-1  flex justify-center `}
+    class={`   gap-1 flex justify-center `}
   >
    { (!all) ? (<svg class="h-6 w-6 scale-95 text-skin-base opacity-80 group-hover:fill-skin-accent"
       xmlns="http://www.w3.org/2000/svg"

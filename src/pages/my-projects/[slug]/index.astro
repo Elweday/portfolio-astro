@@ -8,7 +8,9 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
-import type { CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon";
+import { type Technology,Technologies } from "../../../types";
+
 import { slugifyStr } from "@utils/slugify";
 
 
@@ -35,10 +37,8 @@ const ogImageUrl = typeof cover === "string" ? cover : cover?.src;
 const ogUrl = new URL(ogImageUrl ?? `/my-projects/${slugifyStr(title)}.png`,Astro.url.origin).href;
 
 
+const slug = slugifyStr(title);
 
-
-const { slug } = Astro.params;
-const { post } = Astro.props;
 ---
 
 <Layout
@@ -59,8 +59,29 @@ const { post } = Astro.props;
     </button>
   </div>
   <main id="main-content">
-    <h1 transition:name={slugifyStr(title)} class="post-title">{title}</h1>
-    <Datetime datetime={startDate} size="lg" className="my-2" />
+    <Datetime datetime={startDate} endDate={endDate} size="lg" className="my-2" />
+    <img transition:name={slug+":cover"} src={cover}  class="my-5 rounded-xl" alt="" />
+
+    <h1 transition:name={slug} class="post-title">{title}</h1>
+    <p transition:name={slug+":desc"}>{description}</p>
+    <h2 class="mt-5 mb-3 text-xl font-bold">My Tech Stack</h2>
+    <ul class="flex flex-col gap-7">
+      {(stack).map(( t ) =>
+      {
+       const { name, icon, url, description } = Technologies[t];
+       return (
+        <li>
+          <a href={url}>
+            <Icon transition:name={slug+":stack:"+name} class="h-8 w-8 " name={icon} />
+            <span class="underline font-bold">{name}</span>:
+            <span class="font-thin">{description}</span>
+            </a>
+        </li>
+        )
+      }
+      )}
+
+    </div>
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
       <Content />
     </article>

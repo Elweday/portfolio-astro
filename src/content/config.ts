@@ -1,7 +1,7 @@
 import { SITE } from "@config";
 import { Schema, ZodTuple } from "astro/zod";
 import { defineCollection, z } from "astro:content";
-import { StackIcons } from "../types";
+import { Technologies } from "../types";
 import type { TupleType } from "typescript";
 
 const blog = defineCollection({
@@ -26,7 +26,7 @@ const blog = defineCollection({
     }),
 });
 
-const Stacks = [...Object.keys(StackIcons)] as [string, ...string[]];
+const Stacks = [...Object.keys(Technologies)] as [string, ...string[]];
 
 
 

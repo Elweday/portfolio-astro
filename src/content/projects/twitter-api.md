@@ -3,12 +3,12 @@ startDate: 2022-09-23T15:22:00Z
 endDate: 2022-10-23T15:22:00Z
 title: Twitter API dashboard
 description: Visualization And Data analystics using Twitter api
-postSlug: post2
+postSlug: p3
 draft: false
 tags:
   - docs
   - tag2
-cover: /assets/twitter.jpg
+cover: /assets/images/projects/twitter.jpg
 projectURL: https://github.com/elweday/CollegeSite
 stack:
   - python

@@ -3,12 +3,12 @@ import { slugifyStr } from "@utils/slugify";
 import Datetime from "./Datetime";
 import type { CollectionEntry } from "astro:content";
 import { Icon } from "astro-icon";
-import { StackIcons } from "../types";
+import { Technologies } from "../types";
 import { Image } from 'astro:assets';
  
 
 
-type StackIcon = keyof typeof StackIcons;
+type Technologies = keyof typeof Technologies;
 
 interface Props {
   href?: string;
@@ -27,15 +27,13 @@ const {
   secHeading,
 } = Astro.props;
 const flagColor = projectURL ? "project-available" : "under-construction"
-const headerProps = {
-  style: { viewTransitionName: slugifyStr(title) },
-  className: "text-lg font-medium ",
-};
+
+const slug = slugifyStr(title);
 ---
 
 <li class="my-6 text-white">
   <div class="group relative h-full w-full">
-    <img  src={cover?.toString()}  class="my-5 rounded-xl" alt="" />
+    <img transition:name={slug+":cover"} src={cover?.toString()}  class="my-5 rounded-xl" alt="" />
     <div
       class="absolute right-0 top-0 hidden h-full w-full rounded-xl bg-gradient-to-b from-[rgba(0,0,0,0)] from-60% to-skin-accent opacity-100 duration-500 hover:transition-[opacity] group-hover:block"
     >
@@ -52,14 +50,14 @@ const headerProps = {
           <div class=" inline-block text-xs font-extralight transform   origin-bottom-left scale-75">
             {formatDate(startDate)}--{formatDate(endDate)}
           </div>
-          <h2 class="text-2xl font-bold">{title}</h2>
+          <h2 class="text-2xl font-bold" transition:name={slug}>{title}</h2>
         </a>
-        <h3 class="text-sm font-thin">{description.split("").slice(0,80).join("") + "..."}</h3>
+        <h3 class="text-sm font-thin" transition:name={slug+":desc"}>{description.split("").slice(0,80).join("") + "..."}</h3>
         
       </span>
       <div class="flex gap-5">
-        {(stack as StackIcon[]).map((stack:StackIcon) =>
-          <Icon class="h-8 w-8 " name={StackIcons[stack]} />
+        {(stack as Technologies[]).map(( technology ) =>
+          <Icon transition:name={slug+":stack:"+Technologies[technology].name} class="h-8 w-8 " name={Technologies[technology].icon} />
         )}
 
       </div>
