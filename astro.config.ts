@@ -8,39 +8,29 @@ import { SITE } from "./src/config";
 // import vercel
 import vercel from "@astrojs/vercel/serverless";
 
+import compress from "astro-compress";
 
 // https://astro.build/config
 export default defineConfig({
   output: "server",
   adapter: vercel(),
-
   site: SITE.website,
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    react(),
-    sitemap(),
-  ],
+  integrations: [tailwind({
+    applyBaseStyles: false
+  }), react(), sitemap(), compress()],
   markdown: {
-    remarkPlugins: [
-      remarkToc,
-      [
-        remarkCollapse,
-        {
-          test: "Table of contents",
-        },
-      ],
-    ],
+    remarkPlugins: [remarkToc, [remarkCollapse, {
+      test: "Table of contents"
+    }]],
     shikiConfig: {
       theme: "one-dark-pro",
-      wrap: true,
-    },
+      wrap: true
+    }
   },
   vite: {
     optimizeDeps: {
-      exclude: ["@resvg/resvg-js"],
-    },
+      exclude: ["@resvg/resvg-js"]
+    }
   },
-  scopedStyleStrategy: "where",
+  scopedStyleStrategy: "where"
 });
