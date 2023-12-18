@@ -26,14 +26,8 @@ export type SocialIcons = {
   [social in SocialMedia]: string;
 };
 
-export type Technology  = {
-  [key: string]: {
-    name: string;
-    icon: string;
-    url: string;
-  };
-}
 
+export type TechnologyKey = keyof typeof Technologies;
 
 export const Technologies = {
   astro: {

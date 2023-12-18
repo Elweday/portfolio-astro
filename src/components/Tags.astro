@@ -8,7 +8,7 @@ export interface Props {
 }
 const {tags, allTags, isTags} = Astro.props
 import { Icon } from 'astro-icon';
-import { StackIcons } from '../types'
+import { type TechnologyKey, Technologies } from '../types'
 
 
 
@@ -17,15 +17,15 @@ import { StackIcons } from '../types'
 <form method="post" class="grid">
 
     <ul class="grid gap-3 grid-cols-2 sm:grid-cols-3 overflow-auto p-3 ">
-        {(isTags ? tags : allTags).map(tag => 
+        {(isTags ? tags : allTags).map((tag, idx) => 
         <label for={tag} class="relative ">
             <input name={tag} id={tag} type="checkbox" hidden  class="peer absolute top-[10px] right-5 rounded-full h-6 w-6  accent-[rgb(var(--color-accent))]"/>
-            <Tag name={tag} size="lg" otherClasses="pr-10  peer-checked:ring-2 peer-checked:ring-skin-accent   peer-checked:text-skin-accent peer-checked:[&>*:nth-child(1)]:[&>*:nth-child(1)]:fill-skin-accent  " />
+            <Tag name={tag} noTransition={idx>5} size="lg" otherClasses="pr-10  peer-checked:ring-2 peer-checked:ring-skin-accent   peer-checked:text-skin-accent peer-checked:[&>*:nth-child(1)]:[&>*:nth-child(1)]:fill-skin-accent  " />
         </label>
         
         )}
     </ul>
-    <button type="submit" class=" bg-skin-accent/50 rounded-2xl py-3 px-5 place-self-center text-lg font-bold "> 
+    <button type="submit" class=" bg-skin-accent/50 rounded-2xl py-3 px-5 place-self-center text-lg font-bold m-3"> 
         Search
     </button >
 

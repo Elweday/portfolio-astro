@@ -1,56 +1,55 @@
 ---
 const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
 const breadcrumbList = currentUrlPath.split("/").slice(1);
-const currentPage = Astro.url.searchParams.get("page") || 1;
+const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
 const currentPageStr = currentPage === 1 ? "" : `(page ${currentPage})`; ;
+import Icon from "astro-icon";
 
 // if breadcrumb is Home > Posts > 1 <etc>
 // replace Posts with Posts (page number)
-breadcrumbList[0] === "posts" &&
-  breadcrumbList.splice(0, 2, `Posts ${currentPageStr}`);
+if (breadcrumbList[0] === "posts" && currentPage != 1) {
+  breadcrumbList.splice(0, 2, `posts ${currentPageStr}`)
+  
+}
 ---
 
-<nav class="breadcrumb" aria-label="breadcrumb">
-  <ul>
-    <li>
-      <a href="/">Home</a>
-      <span aria-hidden="true">&nbsp;&gt;&nbsp;</span>
-    </li>
-    {
-      breadcrumbList.map((breadcrumb, index) =>
+{ breadcrumbList[0] !== "search" ? 
+
+  (<nav transition:name="fade" class="flex-auto mb-1 mx-3 mt-3 justify-self-center bg-skin-card/30 rounded-lg px-2 py-1 text-lg  " aria-label="breadcrumb">
+    <ul class="flex gap-2 ">
+    <a class=" text-skin-accent/50 font-bold " href="/"> 
+      <Icon name={"majesticons:home"} />
+      </a>
+    
+      <span class=" slash" aria-hidden="true">/</span>
+      {
+        breadcrumbList.map((breadcrumb, index) =>
         index + 1 === breadcrumbList.length ? (
-          <li>
-            <span
-              class={`${index > 0 ? "lowercase" : "capitalize"}`}
-              aria-current="page"
-            >
-              {/* make the last part lowercase in Home > Tags > some-tag */}
-              {decodeURIComponent(breadcrumb)}
-            </span>
-          </li>
+            <span aria-current="page" class="text-skin-base/50 truncate" >{decodeURIComponent(breadcrumb)}</span>
         ) : (
-          <li>
-            <a href={`/${breadcrumb}`}>{breadcrumb}</a>
-            <span aria-hidden="true">&nbsp;&gt;&nbsp;</span>
-          </li>
+          <a class="text-skin-accent/50 font-bold " href={`/${breadcrumb}`}>{breadcrumb}</a>
+              <span class="slash" aria-hidden="true">/</span>
+            
         )
       )
     }
-  </ul>
-</nav>
+    </ul>
+    </nav> ):(
+      <div></div>
+    ) 
+  }
 
 <style>
-  .breadcrumb {
-    @apply mx-auto mb-1 mt-8 w-full max-w-3xl ;
-  }
-  .breadcrumb ul li {
-    @apply inline;
-  }
-  .breadcrumb ul li a {
-    @apply capitalize opacity-70;
+
+
+.slash {
+  @apply font-extralight text-skin-base/50 text-xl;
+}
+.breadcrumb ul li a {
+    @apply opacity-70 ; 
   }
   .breadcrumb ul li span {
-    @apply opacity-70;
+    @apply opacity-70 truncate;
   }
   .breadcrumb ul li:not(:last-child) a {
     @apply hover:opacity-100;

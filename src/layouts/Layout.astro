@@ -39,7 +39,7 @@ const socialImageURL = new URL(
 ---
 
 <!doctype html>
-<html lang="en">
+<html class="h-full w-full motion-safe:scroll-smooth overscroll-none overflow-hidden" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -94,16 +94,16 @@ const socialImageURL = new URL(
     <ViewTransitions />
 
     <script is:inline src="/assets/js/toggle-theme.js"></script>
-  </head>
-  <body class="h-full w-full sm:py-7">
+  </head> 
+  <body class="h-full ">
     <div
       style="background-color: rgba(var(--color-fill-ligher), 0.6);"
-      class="h-full w-full place-self-center border-[1px] border-black/10 px-4 drop-shadow-2xl sm:max-w-4xl sm:rounded-3xl"
+      class="flex flex-col place-self-center border-[1px] border-black/10 px-4 drop-shadow-3xl sm:max-w-4xl sm:rounded-3xl overflow-hidden my-7  w-full h-full"
     >
       <Header path={path} />
       <Batman />
       <Hr />
-      <main class="h-full overflow-y-auto">
+      <main class="flex-1 overflow-y-auto place-self-center w-full">
         <Breadcrumbs />
 
         <slot />

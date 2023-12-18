@@ -15,10 +15,7 @@ interface Props {
   frontmatter: CollectionEntry<"projects">["data"];
   secHeading?: boolean;
 }
-const formatDate = (d:Date | "Present") => {
-  if (d === "Present") return "Present"
-  return d.toLocaleDateString("en-us", { year: "numeric", month: "short" })
-} 
+
 
 
 const {
@@ -48,7 +45,7 @@ const slug = slugifyStr(title);
         
         <a href={href}>
           <div class=" inline-block text-xs font-extralight transform   origin-bottom-left scale-75">
-            {formatDate(startDate)}--{formatDate(endDate)}
+            <Datetime datetime={startDate} endDate={endDate} size="sm" className="my-2" />
           </div>
           <h2 class="text-2xl font-bold" transition:name={slug}>{title}</h2>
         </a>
