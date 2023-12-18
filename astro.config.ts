@@ -7,15 +7,16 @@ import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
 // import vercel
 import vercel from "@astrojs/vercel/serverless";
-
 import compress from "astro-compress";
+
+import preload from "astro-preload";
 
 // https://astro.build/config
 export default defineConfig({
   output: "server",
   adapter: vercel(),
   site: SITE.website,
-  integrations: [tailwind({
+  integrations: [preload(), tailwind({
     applyBaseStyles: false
   }), react(), sitemap(), compress()],
   markdown: {

@@ -48,11 +48,7 @@ const projects = defineCollection({
         draft: z.boolean().optional(),
         tags: z.array(z.string()).default(["others"]),
         stack: z.array(z.enum(Stacks)).default([]),
-        cover: image()
-          .refine(img => img.width / img.height != 16 / 9, {
-            message: "The Image must have aspect ratio of 16:9!!",
-          })
-          .or(z.string()),
+        cover: z.string(),
         projectURL: z.string().url().optional(),
       })
       .refine(data => data.startDate <= data.endDate, {

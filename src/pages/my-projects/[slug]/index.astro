@@ -3,14 +3,13 @@ export const prerender = true;
 import { type CollectionEntry, getCollection } from "astro:content";
 import slugify from "@utils/slugify";
 import Layout from "@layouts/Layout.astro";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
 import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
-import { Icon } from "astro-icon";
+import { Icon } from "astro-preload/components";
 import { Technologies, type TechnologyKey } from "../../../types";
-
 import { slugifyStr } from "@utils/slugify";
+import { Image } from "astro-preload/components";
+
 
 
 
@@ -48,7 +47,7 @@ const slug = slugifyStr(title);
 
   <main id="main-content">
     <Datetime datetime={startDate} endDate={endDate} size="lg" className="my-2" />
-    <img transition:name={slug+":cover"} src={cover.toString()}  class="my-5 rounded-xl" alt="" />
+    <img transition:name={slug+":cover"} src={cover}  class="my-5 rounded-xl" alt="" />
 
     <h1 transition:name={slug} class="post-title">{title}</h1>
     <p transition:name={slug+":desc"}>{description}</p>
