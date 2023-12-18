@@ -1,7 +1,7 @@
 ---
-title: Example Draft Post
+title: Some Post
 pubDatetime: 2022-06-06T04:06:31Z
-postSlug: example-draft-post
+postSlug: example-post
 featured: false
 tags:
   - TypeScript
