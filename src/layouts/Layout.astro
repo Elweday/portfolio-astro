@@ -34,12 +34,16 @@ export  interface Props {
 const {
   title,
   author = SITE.author,
-  description,
+  description = SITE.desc,
   ogImage = SITE.ogImage,
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 } = Astro.props;
 
 const {title:siteTitle, desc:siteDesc} = SITE
+
+const path = title
+const pageTitle = siteTitle +  " | " + title.toUpperCase()
+
 
 const mainProps:MainProps = {
   pageTitle: title,
@@ -65,13 +69,13 @@ const socialImageURL = new URL(
 
     <!-- General Meta Tags -->
     <title>{siteTitle} | {title}</title>
-    <meta name="title" content={title} />
+    <meta name="title" content={pageTitle} />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={socialImageURL} />
@@ -79,7 +83,7 @@ const socialImageURL = new URL(
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
+    <meta property="twitter:title" content={pageTitle} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={socialImageURL} />
 
@@ -114,7 +118,7 @@ const socialImageURL = new URL(
   </head>
   <body class="w-full h-full sm:py-7" >  
     <div style="background-color: rgba(var(--color-fill-ligher), 0.6);" class=" sm:max-w-4xl  place-self-center sm:rounded-3xl border-[1px] border-black/10   drop-shadow-2xl h-full w-full  px-4 ">
-      <Header path={title}/>
+      <Header path={path}/>
       <Batman />
       <Hr />
       <Main {...mainProps}> 
