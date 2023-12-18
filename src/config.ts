@@ -1,11 +1,11 @@
 import type { Site, SocialObjects } from "./types";
 
 export const SITE: Site = {
-  website: "https://mmasser.vercel.app", // replace this with your deployed domain
+  website: "https://mnasser.vercel.app", // replace this with your deployed domain
   author: "Mohammed Nasser",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
+  desc: "A personal portfolio and blog.",
   title: "Mohammed Nasser",
-  ogImage: "astropaper-og.jpg",
+  ogImage: "images/Fallback.jpg",
   lightAndDarkMode: true,
   postPerPage: 5,
 };
