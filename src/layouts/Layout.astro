@@ -11,6 +11,10 @@ import Breadcrumbs from "@components/Breadcrumbs.astro";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
+String.prototype.toTitleCase = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};
+
 export interface Props {
   title: string;
   author?: string;
@@ -30,7 +34,7 @@ const {
 const { title: siteTitle, desc: siteDesc } = SITE;
 
 const path = title;
-const pageTitle = siteTitle + " | " + title.toUpperCase();
+const pageTitle = siteTitle + " | " + title.toTitleCase();
 
 const socialImageURL = new URL(
   ogImage ?? SITE.ogImage ?? "og.png",
@@ -48,7 +52,7 @@ const socialImageURL = new URL(
     <meta name="generator" content={Astro.generator} />
 
     <!-- General Meta Tags -->
-    <title>{siteTitle} | {title}</title>
+    <title>{pageTitle}</title>
     <meta name="title" content={pageTitle} />
     <meta name="description" content={description} />
     <meta name="author" content={author} />

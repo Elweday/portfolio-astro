@@ -4,7 +4,7 @@ export const SITE: Site = {
   website: "https://mnasser.vercel.app", // replace this with your deployed domain
   author: "Mohammed Nasser",
   desc: "A personal portfolio and blog.",
-  title: "Mohammed Nasser",
+  title: "Nasser's Blog",
   ogImage: "assets/images/fallback.png",
   lightAndDarkMode: true,
   postPerPage: 5,
