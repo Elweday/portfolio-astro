@@ -1,8 +1,8 @@
 diff --git a/components/Image.astro b/components/Image.astro
-index b84bcacf7a41cb7842016c789e3a75132b1348f0..76bca0f57f53a1930f57775c805a45417ce06908 100644
+index b84bcacf7a41cb7842016c789e3a75132b1348f0..9539ef7e8051f9fe18cb7d600bc51589a4732e61 100644
 --- a/components/Image.astro
 +++ b/components/Image.astro
-@@ -56,12 +56,14 @@ if (!name) {
+@@ -56,12 +56,17 @@ if (!name) {
  if (!props.width && !props.height) {
      props.width = props.height = size;
  }
@@ -15,17 +15,20 @@ index b84bcacf7a41cb7842016c789e3a75132b1348f0..76bca0f57f53a1930f57775c805a4541
          const response = await fetch(url);
          const blob = await response.blob();
 +        svgHtml = await response.text();
++        console.log(
++            "got some response as svg: ", svgHtml
++        )
          fs.mkdirSync("public/assets/preloaded", { recursive: true });
          fs.writeFileSync(
              `public/assets/preloaded/${name}`,
-@@ -79,4 +81,13 @@ if (process.env.NODE_ENV === "production" && !url.startsWith("/")) {
+@@ -79,4 +84,13 @@ if (process.env.NODE_ENV === "production" && !url.startsWith("/")) {
  }
  ---
  
 -<img {...props} src={url} alt={alt} />
 +{isSvg? 
 +(
-+    <Fragment set:html={svgHtml}/>
++    <div set:html={svgHtml}/>
 +)
 +:
 +(

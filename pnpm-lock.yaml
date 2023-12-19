@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   astro-preload@1.1.2:
-    hash: puf2rnx7q22x7mnoflcs4keule
+    hash: berfjobfrlldidl62einnueane
     path: patches/astro-preload@1.1.2.patch
 
 dependencies:
@@ -33,7 +33,7 @@ dependencies:
     version: 0.8.2
   astro-preload:
     specifier: ^1.1.2
-    version: 1.1.2(patch_hash=puf2rnx7q22x7mnoflcs4keule)
+    version: 1.1.2(patch_hash=berfjobfrlldidl62einnueane)
   fuse.js:
     specifier: ^6.6.2
     version: 6.6.2
@@ -2220,7 +2220,7 @@ packages:
       svgo: 2.8.0
     dev: false
 
-  /astro-preload@1.1.2(patch_hash=puf2rnx7q22x7mnoflcs4keule):
+  /astro-preload@1.1.2(patch_hash=berfjobfrlldidl62einnueane):
     resolution: {integrity: sha512-96UHdATRp/K8iVysylYu0V5QMD3FXBqqj2+cUwHOmc0/+lstY5Xnb+A5UgmecbrfHpwMws5SQaOYZ1c63cQu/A==}
     dev: false
     patched: true
