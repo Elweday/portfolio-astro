@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  astro-preload@1.1.2:
+    hash: puf2rnx7q22x7mnoflcs4keule
+    path: patches/astro-preload@1.1.2.patch
+
 dependencies:
   '@astrojs/check':
     specifier: ^0.2.1
@@ -28,7 +33,7 @@ dependencies:
     version: 0.8.2
   astro-preload:
     specifier: ^1.1.2
-    version: 1.1.2
+    version: 1.1.2(patch_hash=puf2rnx7q22x7mnoflcs4keule)
   fuse.js:
     specifier: ^6.6.2
     version: 6.6.2
@@ -2215,9 +2220,10 @@ packages:
       svgo: 2.8.0
     dev: false
 
-  /astro-preload@1.1.2:
+  /astro-preload@1.1.2(patch_hash=puf2rnx7q22x7mnoflcs4keule):
     resolution: {integrity: sha512-96UHdATRp/K8iVysylYu0V5QMD3FXBqqj2+cUwHOmc0/+lstY5Xnb+A5UgmecbrfHpwMws5SQaOYZ1c63cQu/A==}
     dev: false
+    patched: true
 
   /astro@4.0.6(@types/node@18.19.3)(typescript@5.3.3):
     resolution: {integrity: sha512-P7CfFqWKzkJozzF6IoOC6qoI2ONndV8P3ULhGDgMiXPL7xVkWI5haTBSpyrcjBx643tVXspIRsSV/v+Cx+CjGw==}

@@ -71,6 +71,7 @@
   },
   "pnpm": {
     "patchedDependencies": {
+      "astro-preload@1.1.2": "patches/astro-preload@1.1.2.patch"
     }
   }
 }
