@@ -8,7 +8,6 @@ import Datetime from "@components/Datetime";
 import { Icon } from "astro-preload/components";
 import { Technologies, type TechnologyKey } from "../../../types";
 import { slugifyStr } from "@utils/slugify";
-import { Image } from "astro-preload/components";
 
 
 
@@ -59,7 +58,7 @@ const slug = slugifyStr(title);
        return (
         <li>
           <a href={url}>
-            <Icon transition:name={slug+":stack:"+name} class="h-8 w-8" name={icon} />
+            <Icon transition:name={slug+":stack:"+name}  class="h-8 w-8  invert" name={icon} />
             <span class="underline font-bold">{name}</span>:
             <span class="font-thin">{description}</span>
             </a>
