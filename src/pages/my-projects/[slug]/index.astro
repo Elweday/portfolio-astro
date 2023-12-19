@@ -30,8 +30,7 @@ const { Content } = await project.render();
 const { title, author, description, cover, stack, tags, startDate, endDate, } = project.data;
 
 
-const ogImageUrl = typeof cover === "string" ? cover : cover?.src;
-const ogUrl = new URL(ogImageUrl ?? `/my-projects/${slugifyStr(title)}.png`,Astro.url.origin).href;
+const ogUrl = new URL(cover ?? `/my-projects/${slugifyStr(title)}.png`,Astro.url.origin).href;
 
 
 const slug = slugifyStr(title);
@@ -42,6 +41,7 @@ const slug = slugifyStr(title);
   title={title}
   author={author}
   description={description}
+  ogImage={ogUrl}
 >
 
   <main id="main-content">
@@ -57,9 +57,9 @@ const slug = slugifyStr(title);
        const { name, icon, url, description } = Technologies[t];
        return (
         <li>
-          <a href={url}>
+          <a class="inline-flex gap-2" href={url}>
             <Icon transition:name={slug+":stack:"+name}  class="h-8 w-8  invert" name={icon} />
-            <span class="underline font-bold">{name}</span>:
+            <h3 class="underline font-bold">{name}</h3>:
             <span class="font-thin">{description}</span>
             </a>
         </li>

@@ -3,7 +3,7 @@ const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
 const breadcrumbList = currentUrlPath.split("/").slice(1);
 const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
 const currentPageStr = currentPage === 1 ? "" : `(page ${currentPage})`; ;
-import Icon from "astro-icon";
+import { Icon } from "astro-preload/components";
 
 // if breadcrumb is Home > Posts > 1 <etc>
 // replace Posts with Posts (page number)
@@ -13,13 +13,13 @@ if (breadcrumbList[0] === "posts" && currentPage != 1) {
 }
 ---
 
-{ breadcrumbList[0] !== "search" ? 
-
-  (<nav transition:name="fade" class="flex-auto mb-1 mx-3 mt-3 justify-self-center bg-skin-card/30 rounded-lg px-2 py-1 text-lg  " aria-label="breadcrumb">
+<nav transition:name="fade" class="  mx-3 mt-3 justify-self-center bg-skin-card/30 rounded-lg px-2 py-1 text-lg  " aria-label="breadcrumb">
     <ul class="flex gap-2 ">
-    <a class=" text-skin-accent/50 font-bold " href="/"> 
-      <Icon name={"majesticons:home"} />
-      </a>
+    <a class=" text-skin-accent/50 font-bold  " href="/"> 
+      
+      <Icon class="invert" name={"majesticons:home"}  />
+
+    </a>
     
       <span class=" slash" aria-hidden="true">/</span>
       {
@@ -34,12 +34,9 @@ if (breadcrumbList[0] === "posts" && currentPage != 1) {
       )
     }
     </ul>
-    </nav> ):(
-      <div></div>
-    ) 
-  }
+    </nav> 
 
-<style>
+<style >
 
 
 .slash {
@@ -54,4 +51,6 @@ if (breadcrumbList[0] === "posts" && currentPage != 1) {
   .breadcrumb ul li:not(:last-child) a {
     @apply hover:opacity-100;
   }
+ 
+
 </style>

@@ -24,6 +24,7 @@ const getShow = async (showName:string) => {
 }
 import { Image } from "astro-preload/components";
 import Layout from "@layouts/Layout.astro";
+import Socials from "@components/Socials.astro";
 
 
 
@@ -76,14 +77,19 @@ type Show = {
 ---
 
 <Layout title="about">
-  <section class="prose mb-28 max-w-3xl prose-img:border-0">
+  <section class=" ">
     <h1 >About</h1>
     <section>
-        <h2>My Contacts</h2>
+        <h2>Education</h2>
+        Helwan Univeristy, duh
     </section>
     <section>
-        <h2>About</h2>
-        <div class="grid grid-cols-4 place-content-stretch justify-stretch gap-5">
+        <h2>My Contacts</h2>
+        <Socials class="scale-100 "  />
+    </section>
+    <section>
+        <h2>Shows I like</h2>
+        <div class="grid sm:grid-cols-4 grid-cols-2 place-content-stretch justify-stretch gap-5">
         {
         showsData.map( async (data) => {
           const {imdbID, Poster, Title} = await data;

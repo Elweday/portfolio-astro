@@ -1,0 +1,22 @@
+---
+const someState = "state-value"
+const someCondition = someState === "state-value"
+---
+<div id="element-to-style" >
+    Some content
+</div>
+
+<style define:vars={{someCondition}}>
+    /* 
+     - define is an astro feature that allows you to define CSS from your markup  
+     - The fallback has to be before the because of the order of the CSS definitions
+    */
+    .element-to-style {
+        background-color: blue;
+    }
+    @container  style(--someCondition: true) {
+      .element-to-style {background-color: red;}
+    }
+  </style>
+  
+  

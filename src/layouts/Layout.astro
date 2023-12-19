@@ -79,6 +79,7 @@ const socialImageURL = new URL(
     />
 
     <meta name="theme-color" content="" />
+    
 
     {
       /*  If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
@@ -105,9 +106,10 @@ const socialImageURL = new URL(
     >
       <Header path={path} />
       <Hr />
-      <main class="flex-1 overflow-y-auto place-self-center w-full">
+      
+      <main class="flex-1 overflow-y-auto place-self-center w-full pb-8 ">
+        {path != "/search"? <Breadcrumbs />:null}
         <Batman />
-        <Breadcrumbs />
 
         <slot />
       </main>

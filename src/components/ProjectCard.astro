@@ -14,9 +14,7 @@ interface Props {
 }
 
 
-const hslaToFilter = (h, s, l, a)=>{
-  `hue-rotate-[${h}] saturate-[${s}%] brightness-[${l}%] opacity-[${a}%]`
-}
+
 
 
 const {
@@ -39,8 +37,8 @@ console.log(cover)
   <span
   class=" absolute bottom-0 left-0 opacity-0 w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 transition-opacity pointer-events-none   group-hover:pointer-events-auto  group-hover:opacity-100  flex"
   >
-  <a href={projectURL ?? "#"} class={"h-10 w-10 triangle absolute right-0 top-0 cursor-pointer rounded-tr-xl border-t-transparent border-b-transparent border-l-transparent " + flagColor} >
-    <Icon class="h-10 w-10  filter invert rotate-45  float-right translate-x-24 translate-y-[24px]" name={projectURL?"teenyicons:github-solid":"ic:twotone-construction"}>
+  <a href={projectURL} class={`h-10 w-10 triangle absolute right-0 top-0 cursor-pointer rounded-tr-xl border-t-transparent border-b-transparent border-l-transparent ${flagColor} ${projectURL?"":"pointer-events-none"} `} >
+    <Icon class="h-10 w-10 bg-red-500  rotate-45  float-right translate-x-24 translate-y-[24px]" name={projectURL?"teenyicons:github-solid":"ic:twotone-construction"}>
   </a>
       <span class=" flex flex-col  gap-2">
         

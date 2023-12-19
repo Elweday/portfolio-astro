@@ -9,7 +9,6 @@ tags:
   - docs
   - tag2
 cover: /assets/images/projects/eda.jpg
-projectURL: https://github.com/elweday/grades-eda
 stack:
   - python
   - jupyter

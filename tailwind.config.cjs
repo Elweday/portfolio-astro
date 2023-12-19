@@ -1,3 +1,6 @@
+
+const plugin = require('tailwindcss/plugin')
+
 function withOpacity(variableName) {
   return ({ opacityValue }) => {
     if (opacityValue !== undefined) {
@@ -47,5 +50,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography"),   plugin(({ addVariant }) => {
+    addVariant('dark', '&[data-theme="dark"]')
+  })],
 };

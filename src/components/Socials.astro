@@ -2,15 +2,19 @@
 import { SOCIALS } from "@config";
 import LinkButton from "./LinkButton.astro";
 import socialIcons from "@assets/socialIcons";
+import { twMerge } from 'tailwind-merge'
+
+
 
 export interface Props {
   centered?: boolean;
+  class?: string;
 }
 
-const { centered = false } = Astro.props;
+const { centered = false, class: className } = Astro.props;
 ---
 
-<div class={`inline-flex justify-center gap-4  sm:scale-100 scale-75`}>
+<div class={twMerge('inline-flex justify-center gap-4  sm:scale-100 scale-75 ', className)}>
   {
     SOCIALS.filter(social => social.active).map(social => (
       <LinkButton

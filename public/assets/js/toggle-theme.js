@@ -24,8 +24,9 @@ function setPreference() {
 }
 
 function reflectPreference() {
-  document.firstElementChild.setAttribute("data-theme", themeValue);
-
+  const html = document.firstElementChild;
+  html.setAttribute("data-theme", themeValue);
+  document.documentElement.style.setProperty('--theme', themeValue);
   document.querySelector("#theme-btn")?.setAttribute("aria-label", themeValue);
 
   // Get a reference to the body element
