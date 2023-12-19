@@ -39,7 +39,7 @@ console.log(cover)
   class=" absolute bottom-0 left-0 opacity-0 w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 transition-opacity pointer-events-none   group-hover:pointer-events-auto  group-hover:opacity-100  flex"
   >
   <a href={projectURL} class={`h-10 w-10 triangle absolute right-0 top-0 cursor-pointer rounded-tr-xl border-t-transparent border-b-transparent border-l-transparent ${flagColor} ${projectURL?"":"pointer-events-none"} `} >
-    <Icon class="h-10 w-10 bg-red-500  rotate-45  float-right translate-x-24 translate-y-[24px]" name={projectURL?"teenyicons:github-solid":"ic:twotone-construction"}>
+    <Icon class="h-10 w-10   rotate-45  float-right translate-x-24 translate-y-[24px]" name={projectURL?"teenyicons:github-solid":"ic:twotone-construction"}>
   </a>
       <span class=" flex flex-col  gap-2">
         
@@ -51,7 +51,7 @@ console.log(cover)
         
         <div class="flex justify-stretch gap-2 w-full place-content-center place-items-center ">
           {(stack as Technologies[]).map(( technology ) =>
-            <Icon transition:name={slug+":stack:"+Technologies[technology].name} class={"sm:h-8 sm:w-8 invert  "} name={Technologies[technology].icon} />
+            <Icon transition:name={slug+":stack:"+Technologies[technology].name} class={"sm:h-8 sm:w-8  "} name={Technologies[technology].icon} />
           )}
         </div>
       </span>
