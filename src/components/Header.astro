@@ -197,15 +197,21 @@ export interface Props {
   document.addEventListener("astro:page-load", ()=>{
 
     const trigger = document.querySelector(".crimeInGotham") as HTMLButtonElement
-    const items = ["thicken", "glowingBat"].map(item => document.getElementById(item) as HTMLElement)
+    const items = ["thicken", "glowingBat", "gotham"].map(item => document.getElementById(item) as HTMLElement)
+    const isLong = (window.location.pathname === '/')  
+    const animationDuration = isLong? 1000: 500;
     trigger.onclick = (e) => {
     items.forEach((item) => {
       item.classList.add('showAnimation')
+      item.attributeStyleMap.set('animation-duration', `${animationDuration}ms`);
     });
-    const animationDuration = parseFloat(getComputedStyle(items[0]).animationDuration) * 1000
-    if (window.location.pathname !== '/') navigate('/');
     setTimeout(() => {
-      items.forEach((item) => item.classList.remove('showAnimation'));
+      items.forEach((item) =>{ 
+        item.classList.remove('showAnimation')
+      });
+      if (window.location.pathname !== '/') {
+        navigate('/');
+      }
     }, animationDuration); 
   }
 });
