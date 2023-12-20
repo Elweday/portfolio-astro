@@ -31,8 +31,8 @@ console.log(cover)
 
 ---
 
-<li class="my-6 text-white">
-  <div class="group relative h-full w-full">
+<li class="my-6 text-white group">
+  <div class=" relative h-full w-full">
     <img transition:name={slug+":cover"} src={cover}  class="rounded-xl" alt="" />
     <div class="absolute bottom-0  hidden h-full w-full rounded-xl bg-gradient-to-b from-[rgba(0,0,0,0)] from-30% to-skin-accent opacity-100 duration-1000 hover:transition-[opacity] group-hover:block" />
   <span
@@ -43,17 +43,21 @@ console.log(cover)
   </a>
       <span class=" flex flex-col  gap-2">
         
-        <a href={href}>
+        <div class="" >
           <Datetime datetime={startDate} endDate={endDate} size="sm" className="my-2 inline-block text-xs font-extralight transform origin-bottom-left translate-y-2 scale-75" />
           <h2 class="text-lg sm:text-2xl font-bold " transition:name={slug}>{title}</h2>
-          <h3 class="sm:text-sm text-xs font-thin " transition:name={slug+":desc"}>{description}</h3>
-        </a>
-        
-        <div class="flex justify-stretch gap-2 w-full place-content-center place-items-center ">
-          {(stack as Technologies[]).map(( technology ) =>
+          <h3 class="sm:text-sm text-xs font-thin truncate text-wrap " transition:name={slug+":desc"}>{description}</h3>
+          </div>
+        <div class="flex justify-between  w-full place-content-center place-items-center ">
+
+          <div class="flex justify-stretch gap-2 ">
+            
+            {(stack as Technologies[]).map(( technology ) =>
             <Icon transition:name={slug+":stack:"+Technologies[technology].name} class={"sm:h-8 sm:w-8  "} name={Technologies[technology].icon} />
-          )}
+            )}
         </div>
+        <a class="underline " href={href}> read more</a>
+      </div>
       </span>
       
     </span>
@@ -75,10 +79,13 @@ console.log(cover)
 	border-style: solid;
 }
 .under-construction {
-  border-right-color:  #FAD02C ;
+  border-right-color:  #FAD02C;
+  opacity: 0.8;
+
 }
 .project-available {
-  border-right-color: #101010 ;
+  border-right-color: #101010;
+  opacity: 0.8;
 }
 
 </style>
