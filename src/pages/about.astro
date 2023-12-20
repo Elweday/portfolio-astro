@@ -25,6 +25,7 @@ const getShow = async (showName:string) => {
 import { Image } from "astro-preload/components";
 import Layout from "@layouts/Layout.astro";
 import Socials from "@components/Socials.astro";
+import Icon from "astro-icon";
 
 
 
@@ -38,6 +39,15 @@ const showsList = [
   "invincible",
   "rick_and_morty",
 ];
+
+const hobbies = [
+  { name: "coding personal projects", icon: "ph:code-bold"},
+  { name: "playing video games", icon: "cil:gamepad"},
+  { name: "3d modeling with blender", icon: "carbon:chart-3d"},
+  { name: "watching tv shows", icon: "ic:round-tv"},
+  { name: "cooking food", icon: "ph:cooking-pot-bold"},
+
+]
 
 const showsData = showsList.map( async showName => {
   const value = await getShow(showName)
@@ -85,7 +95,7 @@ type Show = {
     }
 
 </style>
-  <section class=" ">
+  <div class=" flex flex-col gap-8 ">
     <h1 >About</h1>
     <section>
         <h2>Education</h2>
@@ -93,7 +103,18 @@ type Show = {
     </section>
     <section>
         <h2>My Contacts</h2>
-        <Socials class="scale-100 "  />
+        <Socials class="scale-100 place-self-start"  />
+    </section>
+    <section>
+        <h2>Intersest And Activities</h2>
+        <div class="flex flex-col  justify-center gap-3 ">
+
+          {hobbies.map(hobby => 
+        <div class="px-5">
+          <Icon name={hobby.icon}
+          class="h-5 w-5" />
+          {hobby.name}</div>)}
+          </div>
     </section>
     <section>
         <h2>Shows I like</h2>
@@ -114,14 +135,20 @@ type Show = {
          }
       </div>
     </section>
+  </div>
 
 </Layout>
 
 
 <style>
 
+section{
+  @apply justify-self-start  w-full flex flex-col gap-2  
+}
+
+
   h1 {
-    @apply text-2xl tracking-wider sm:text-3xl text-start;
+    @apply text-2xl tracking-wider sm:text-3xl text-start py-6;
   }
   h2 {
     @apply text-xl tracking-wider sm:text-2xl  text-start ;

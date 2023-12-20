@@ -108,7 +108,7 @@ const socialImageURL = new URL(
       <Hr />
       
       <main class="flex-1 overflow-y-auto place-self-center w-full pb-8 ">
-        {path != "/search"? <Breadcrumbs />:null}
+        {path != "search"? <Breadcrumbs transition:name="action-bar" />:null}
         <Batman />
 
         <slot />

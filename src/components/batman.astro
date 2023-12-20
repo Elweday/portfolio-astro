@@ -1,6 +1,6 @@
 
 
-<svg id="batman" class="z-[100] absolute pointer-events-none w-full h-full top-0 left-0" xmlns="http://www.w3.org/2000/svg">
+<svg id="batman" class="z-[100] fixed pointer-events-none w-full h-full place-self-center " xmlns="http://www.w3.org/2000/svg">
     <defs>
       <filter id="sofGlow" height="300%" width="300%" x="-75%" y="-75%">
         <feMorphology operator="dilate" id="thicken" radius="var(--width)" in="SourceAlpha" result="thicken" />
@@ -47,20 +47,3 @@
 </style>
 
 
-<script >
-  const trigger = document.getElementById("crimeInGotham") as HTMLButtonElement
-  const items = ["thicken", "glowingBat"].map(item => document.getElementById(item) as HTMLElement)
-  trigger.onclick = (e) => {
-    items.forEach((item) => {
-      item.classList.add('showAnimation')
-      console.log(item)
-    });
-    const animationDuration = parseFloat(getComputedStyle(items[0]).animationDuration) * 1000
-    setTimeout(() => {
-      items.forEach((item) => item.classList.remove('showAnimation'));
-    }, animationDuration);
-    console.log("Ended Animation")
-
-  }
-  
-</script>
