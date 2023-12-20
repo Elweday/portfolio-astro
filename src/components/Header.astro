@@ -199,7 +199,7 @@ export interface Props {
     const trigger = document.querySelector(".crimeInGotham") as HTMLButtonElement
     const items = ["thicken", "glowingBat", "gotham"].map(item => document.getElementById(item) as HTMLElement)
     const isLong = (window.location.pathname === '/')  
-    const animationDuration = isLong? 1000: 500;
+    const animationDuration = isLong? 3000: 500;
     trigger.onclick = (e) => {
     items.forEach((item) => {
       item.classList.add('showAnimation')
