@@ -17,7 +17,7 @@ export interface Props {
   <button class="crimeInGotham  " id="">
     <svg
           xmlns="http://www.w3.org/2000/svg"
-          class={"h-14 w-14 " + (Astro.url.pathname == "/"? "fill-skin-accent":"fill-skin-base") }
+          class={"h-14 w-14 hover:scale-[110%] transition-scale duration-150 " + (Astro.url.pathname == "/"? "fill-skin-accent":"fill-skin-base") }
           viewBox="0 0 680 295"
           >
           <a id="skip-to-content" href="#main-content">Skip to content</a>
@@ -144,7 +144,7 @@ export interface Props {
     @apply p-1;
   }
   nav button svg {
-    @apply h-6 w-6 hover:fill-skin-accent;
+    @apply h-6 w-6 ;
   }
   #theme-btn {
     @apply p-3 sm:p-1;
@@ -203,9 +203,9 @@ export interface Props {
       item.classList.add('showAnimation')
     });
     const animationDuration = parseFloat(getComputedStyle(items[0]).animationDuration) * 1000
+    if (window.location.pathname !== '/') navigate('/');
     setTimeout(() => {
       items.forEach((item) => item.classList.remove('showAnimation'));
-        navigate('/');
     }, animationDuration); 
   }
 });

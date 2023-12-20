@@ -42,8 +42,10 @@ const socialImageURL = new URL(
 ---
 
 <!doctype html>
-<html class="h-full w-full motion-safe:scroll-smooth overscroll-none overflow-hidden" lang="en">
+<html class="h-full w-full motion-safe:scroll-smooth overflow-y-clip"  lang="en">
+
   <head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -100,6 +102,8 @@ const socialImageURL = new URL(
     <script is:inline src="/assets/js/toggle-theme.js"></script>
   </head> 
   <body class="h-full ">
+    <Batman />
+
     <div
       style="background-color: rgba(var(--color-fill-ligher), 0.6);"
       class="flex flex-col place-self-center border-[1px] border-black/10 px-4 drop-shadow-3xl md:max-w-4xl md:rounded-3xl overflow-hidden md:my-7  w-full h-full"
@@ -109,7 +113,6 @@ const socialImageURL = new URL(
       
       <main class="flex-1 overflow-y-auto place-self-center w-full pb-8 ">
         {path != "search"? <Breadcrumbs transition:name="action-bar" />:null}
-        <Batman />
 
         <slot />
       </main>
