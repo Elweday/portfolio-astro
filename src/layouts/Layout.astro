@@ -7,6 +7,7 @@ import Header from "@components/Header.astro";
 import Hr from "@components/Hr.astro";
 import Footer from "@components/Footer.astro";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
+import Scroller from "@components/Scroller.astro";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
@@ -100,6 +101,14 @@ const socialImageURL = new URL(
     <ViewTransitions />
 
     <script is:inline src="/assets/js/toggle-theme.js"></script>
+    <style>
+      #main-body:nth-child(3){
+        container-name: main-body;
+        container-type: size;
+      }
+  
+    </style>
+
   </head> 
   <body class="h-full ">
     <Batman />
@@ -108,17 +117,15 @@ const socialImageURL = new URL(
       style="background-color: rgba(var(--color-fill-ligher), 0.6);"
       class="flex flex-col place-self-center border-[1px] border-black/10 px-4 drop-shadow-3xl md:max-w-4xl md:rounded-3xl overflow-hidden md:my-7  w-full h-full"
     >
-      <Header path={path} />
-      <Hr />
-      
-      <main  class="flex-1 overflow-y-auto place-self-center w-full pb-8 " id="main-body" >
-        <Hr scroller={true} />
+    <Header path={path} />
+    <main  class="flex-1 overflow-y-auto place-self-center w-full pb-8 " id="main-body" >
+        <Scroller />
         {path != "search"? <Breadcrumbs transition:name="action-bar" />:null}
-
         <slot />
       </main>
-
       <Footer />
     </div>
   </body>
 </html>
+
+
