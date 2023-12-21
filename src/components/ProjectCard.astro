@@ -38,15 +38,15 @@ console.log(cover)
   <span
   class=" absolute bottom-0 left-0 opacity-0 w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 transition-opacity pointer-events-none   group-hover:pointer-events-auto  group-hover:opacity-100  flex"
   >
-  <a href={projectURL} class={`h-10 w-10 triangle absolute right-0 top-0 cursor-pointer rounded-tr-xl border-t-transparent border-b-transparent border-l-transparent ${flagColor} ${projectURL?"":"pointer-events-none"} `} >
+  <a href={projectURL} class={`h-10 w-10 triangle absolute right-0 top-0 cursor-pointer rounded-tr-xl border-t-transparent border-b-transparent border-l-transparent sm:scale-100 scale-75 origin-top-right ${flagColor} ${projectURL?"":"pointer-events-none"} `} >
     <Icon class="h-10 w-10   rotate-45  float-right translate-x-24 translate-y-[24px]" name={projectURL?"teenyicons:github-solid":"ic:twotone-construction"}>
   </a>
-      <span class=" flex flex-col  gap-2">
+      <span class="h-full justify-end pointer-events-none w-full  flex flex-col  gap-2">
         
-        <div class="" >
+        <div class="origin-bottom-left" >
           <Datetime datetime={startDate} endDate={endDate} size="sm" className="my-2 inline-block text-xs font-extralight transform origin-bottom-left translate-y-2 scale-75" />
           <h2 class="text-lg sm:text-2xl font-bold " transition:name={slug}>{title}</h2>
-          <h3 class="sm:text-sm text-xs font-thin truncate text-wrap " transition:name={slug+":desc"}>{description}</h3>
+          <h3 class="sm:text-sm text-[10pt]  font-thin  " transition:name={slug+":desc"}>{description}</h3>
           </div>
         <div class="flex justify-between  w-full place-content-center place-items-center ">
 
@@ -56,9 +56,9 @@ console.log(cover)
             <Icon transition:name={slug+":stack:"+Technologies[technology].name} class={"sm:h-8 sm:w-8  "} name={Technologies[technology].icon} />
             )}
         </div>
-        <a class="underline " href={href}> read more</a>
       </div>
-      </span>
+    </span>
+    <a class="underline " href={href}> <Icon class=" p-1 rounded-lg  size-10" name="uiw:more"/></a>
       
     </span>
   </div>
@@ -67,7 +67,10 @@ console.log(cover)
 
 
 <style>
-  .center-abs {
+.text-smol {
+  font-size: 0.1rem;
+}
+.center-abs {
     @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
   }
 

@@ -32,25 +32,25 @@ export const SOCIALS: SocialObjects = [
   {
     name: "Github",
     href: "https://github.com/elweday",
-    linkTitle: ` ${SITE.title} on Github`,
+    linkTitle: ` ${SITE.author} on Github`,
     active: true,
   },
   {
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/mohamed-nasser-38b045234/",
-    linkTitle: `${SITE.title} on LinkedIn`,
+    linkTitle: `${SITE.author} on LinkedIn`,
     active: true,
   },
   {
     name: "Mail",
     href: "mailto:mohammednh2864@gmail.com",
-    linkTitle: `Send an email to ${SITE.title}`,
+    linkTitle: `Send an email to ${SITE.author}`,
     active: true,
   },
   {
     name: "Discord",
     href: "https://discord.com/users/elweday",
-    linkTitle: `Send an email to ${SITE.title}`,
+    linkTitle: `${SITE.author} on Discord`,
     active: true,
   },
 ];

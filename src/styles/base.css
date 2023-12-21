@@ -116,6 +116,7 @@
 
   /* ===== scrollbar ===== */
   html {
+    font-size: 10pt;
     overflow-y: scroll;
     @apply overscroll-none 
 

@@ -21,6 +21,11 @@ module.exports = {
     },
 
     extend: {
+      theme: {
+        fontSize: {
+          tiny: "0.2rem",
+        }
+      },
       colors: {
         skin: {
           "base": withOpacity("--color-text-base"),
