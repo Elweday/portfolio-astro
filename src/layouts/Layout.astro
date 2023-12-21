@@ -111,7 +111,8 @@ const socialImageURL = new URL(
       <Header path={path} />
       <Hr />
       
-      <main class="flex-1 overflow-y-auto place-self-center w-full pb-8 ">
+      <main  class="flex-1 overflow-y-auto place-self-center w-full pb-8 " id="main-body" >
+        <Hr scroller={true} />
         {path != "search"? <Breadcrumbs transition:name="action-bar" />:null}
 
         <slot />
