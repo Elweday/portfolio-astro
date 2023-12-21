@@ -14,7 +14,7 @@ export interface Props {
   <nav class="flex h-fit"> 
 <div class="flex w-full  justify-between place-content-center ">
 
-  <button class="crimeInGotham  " id="">
+  <button class="crimeInGotham" id="">
     <svg
           xmlns="http://www.w3.org/2000/svg"
           class={"h-14 w-14 hover:scale-[110%] transition-scale duration-150 " + (Astro.url.pathname == "/"? "fill-skin-accent":"fill-skin-base") }
@@ -31,50 +31,34 @@ export interface Props {
   </button>
       
         <button
-          class="hamburger-menu focus-outline"
+          class="menu-trigger sm:opened"
           aria-label="Open Menu"
           aria-expanded="false"
           aria-controls="menu-items"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="menu-icon"
-          >
-            <line x1="7" y1="12" x2="21" y2="12" class="line"></line>
-            <line x1="3" y1="6" x2="21" y2="6" class="line"></line>
-            <line x1="12" y1="18" x2="21" y2="18" class="line"></line>
-            <line x1="18" y1="6" x2="6" y2="18" class="close"></line>
-            <line x1="6" y1="6" x2="18" y2="18" class="close"></line>
-          </svg>
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <path class="line top" d="M 20,30 H 80"/>
+          <path class="line middle" d="M 20,50 H 80" />
+          <path class="line bottom" d="M 20,70 H 80"/>
+        </svg>
+      
         </button>
       </div>
-        <ul id="menu-items" class="display-none  sm:flex flex-row gap-4  sm:p-4 w-full relative">
+        <ul id="menu-items">
 
-          <div class="sm:contents flex flex-col w-full place-content-center place-items-center p-2 ">
-
-            
-            {PATHS.map(({name, path}, idx) => {
-              const isActive = Astro.url.pathname === path
+          <div id="menu" class="sm:contents flex flex-col w-full place-content-center place-items-center p-2">
+            {
+              PATHS.map(({name, path}) => {
+                const isActive = Astro.url.pathname === path
                 return (
                   <li class="relative w-40  sm:w-24">
                     <a href={path} class={isActive?"active w-full":""}>{name}</a>
-                    {
-                      isActive ? (<span transition:name="active-nav" class="absolute top-0 left-0 h-full  w-full  border-skin-accent bg-black/10 border-2 rounded-xl"></span>) : ("")
-                    }
-                  </li>
-            )
-                
-              })}
+                    { isActive ? (<span transition:name="active-nav" class="absolute top-0 left-0 h-full  w-full  border-skin-accent bg-black/10 border-2 rounded-xl"></span>) : null }
+                  </li>)
+              })
+          }
           <LinkButton href="/search" className={`focus-outline p-3 sm:p-1 ${Astro.url.pathname === "/search" ? "active" : ""} flex place-self-center`}  ariaLabel="search" title="Search">
-            <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100" ><path   d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" ></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100" ><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" ></path></svg>
           </LinkButton>
           <li>
             {
@@ -97,8 +81,51 @@ export interface Props {
 </header>
 
 <style>
+
+
+.menu-trigger {
+
+  @apply scale-125 block sm:hidden;
+  cursor: pointer;
+}
+
+.line {
+  @apply stroke-skin-accent;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: all 500ms;
+}
+
+.top {transform-origin: 26px 40px;}
+
+.middle {stroke-dasharray: 60 60;}
+.bottom {transform-origin: 26px 60px;}
+
+.menu-trigger.active .line {stroke: #ff7c7c;}
+
+.menu-trigger.active .top {transform: rotate(45deg);}
+
+.menu-trigger.active .middle { stroke-dasharray: 1 60; stroke-dashoffset: -30;}
+
+.menu-trigger.active .bottom {
+  transform: rotate(-45deg);
+}
+
+#menu-items{
+  transition: max-height 0.7s ease-out;
+  max-height: 0;
+  @apply sm:max-h-[1000px] ease-in-out overflow-hidden sm:flex flex-row gap-4   sm:p-4 w-full relative
+
+}
+#menu-items.opened  {
+    max-height: 1000px;
+  }
+
   #skip-to-content {
     @apply absolute -top-full left-16 z-50 bg-skin-accent px-3 py-2 text-skin-inverted transition-all focus:top-4;
+  }
+  .focus-outline {
+    @apply outline-2 outline-offset-1 outline-skin-fill focus-visible:no-underline ;
   }
 
   .top-nav-wrap {
@@ -153,49 +180,46 @@ export interface Props {
     @apply scale-125 hover:rotate-12 sm:scale-100;
   }
 
-  .menu-icon line {
+  .menu-trigger-icon line {
     @apply transition-opacity duration-75 ease-in-out;
   }
-  .menu-icon .close {
+  .menu-trigger-icon .close {
     opacity: 0;
   }
-  .menu-icon.is-active .line {
+  .menu-trigger-icon.is-active .line {
     @apply opacity-0;
   }
-  .menu-icon.is-active .close {
+  .menu-trigger-icon.is-active .close {
     @apply opacity-100;
   }
   #siteTitle {
     letter-spacing:18px;
   }
+  
+
+
 </style>
 
 <script>
-    import { navigate } from 'astro:transitions/client';
-  function toggleNav() {
+  import { navigate } from 'astro:transitions/client';
+
+  document.addEventListener("astro:page-load", ()=>{
+    function toggleNav() {
     // Toggle menu
-    const menuBtn = document.querySelector(".hamburger-menu");
-    const menuIcon = document.querySelector(".menu-icon");
+    const menuBtn = document.querySelector(".menu-trigger");
     const menuItems = document.querySelector("#menu-items");
 
     menuBtn?.addEventListener("click", () => {
       const menuExpanded = menuBtn.getAttribute("aria-expanded") === "true";
-      menuIcon?.classList.toggle("is-active");
       menuBtn.setAttribute("aria-expanded", menuExpanded ? "false" : "true");
-      menuBtn.setAttribute(
-        "aria-label",
-        menuExpanded ? "Open Menu" : "Close Menu"
-      );
-      menuItems?.classList.toggle("display-none");
+      menuBtn.setAttribute("aria-label",menuExpanded ? "Open Menu" : "Close Menu");
+      menuBtn?.classList.toggle("active");
+      menuItems?.classList.toggle("opened");
     });
   }
 
-  toggleNav();
 
-  // Runs on view transitions navigation
-  document.addEventListener("astro:after-swap", toggleNav);
-  document.addEventListener("astro:page-load", ()=>{
-
+    toggleNav()
     const trigger = document.querySelector(".crimeInGotham") as HTMLButtonElement
     const items = ["thicken", "glowingBat", "gotham"].map(item => document.getElementById(item) as HTMLElement)
     const isLong = (window.location.pathname === '/')  
@@ -215,9 +239,6 @@ export interface Props {
     }, animationDuration); 
   }
 });
-
-
-
 </script>
 
 
