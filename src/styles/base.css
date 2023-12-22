@@ -118,6 +118,7 @@
   html {
     font-size: 10pt;
     overflow-y: scroll;
+    animation-duration: 0s !important;
     @apply overscroll-none 
 
   }

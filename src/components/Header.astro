@@ -10,7 +10,7 @@ export interface Props {
 
 ---
 
-<header class="h-fit sticky top-0 " >
+<header  class="h-fit sticky top-0 " >
   <nav class="flex h-fit"> 
 <div class="flex w-full  justify-between place-content-center ">
 
@@ -44,7 +44,7 @@ export interface Props {
       
         </button>
       </div>
-        <ul id="menu-items">
+        <ul id="menu-items" transition:name="header" transition:animate="fade" class="max-h-0">
 
           <div id="menu" class="sm:contents flex flex-col w-full place-content-center place-items-center p-2">
             {
@@ -53,13 +53,17 @@ export interface Props {
                 return (
                   <li class="relative w-40  sm:w-28 p-1">
                     <a href={path}  class={isActive?"active w-full":""}>{name}</a>
-                    { isActive ? (<span transition:name="active-nav" class="absolute top-0 left-0 h-full  w-full  border-skin-accent bg-black/10 border-2 rounded-xl"></span>) : null }
+                    { isActive ? (<span  transition:name="active-nav" class="absolute top-0 left-0 h-full  w-full  border-skin-accent bg-black/10 border-2 rounded-xl"></span>) : null }
                   </li>)
               })
           }
-          <LinkButton href="/search" className={`focus-outline p-3 sm:p-1 ${Astro.url.pathname === "/search" ? "active" : ""} flex place-self-center`}  ariaLabel="search" title="Search">
-            <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100" ><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" ></path></svg>
-          </LinkButton>
+                  <li class="relative w-40  sm:w-28 p-1">
+                    <a href={"/search"}  class={Astro.url.pathname === '/search'?"active w-full":""}>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="sm:scale-100" ><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" ></path></svg>
+                    
+                    </a>
+                    { Astro.url.pathname === '/search' ? (<span  transition:name="active-nav" class="absolute top-0 left-0 h-full  w-full  border-skin-accent bg-black/10 border-2 rounded-xl"></span>) : null }
+                  </li>
           <li>
             {
               SITE.lightAndDarkMode && (
@@ -81,6 +85,7 @@ export interface Props {
 </header>
 
 <style>
+
 
 
 .menu-trigger {
@@ -116,37 +121,6 @@ export interface Props {
   @apply sm:max-h-[1000px] ease-in-out overflow-hidden sm:flex flex-row gap-4 sm:p-4 w-full relative;
 }
 
-@media (max-width: 768px) {
-  @keyframes menu-expand {
-  from {
-    max-height: 0;
-  }
-  to {
-    max-height: 1000px;
-  }
-}
-
-@keyframes menu-collapse {
-  from {
-    max-height: 1000px;
-  }
-  to {
-    max-height: 0;
-  }
-}
-
-#menu-items {
-  max-height: 0;
-  animation: menu-collapse 0.7s ease-out  normal; /* Initial animation */
-  @apply sm:max-h-[1000px] ease-in-out overflow-hidden sm:flex flex-row gap-4 sm:p-4 w-full relative;
-}
-
-#menu-items.opened {
-  animation: menu-expand 0.7s ease-out  normal; /* Initial animation */
-  max-height: 1000px;
-}
-
-}
 
   #skip-to-content {
     @apply absolute -top-full left-16 z-50 bg-skin-accent px-3 py-2 text-skin-inverted transition-all focus:top-4;
@@ -230,23 +204,38 @@ export interface Props {
 <script>
   import { navigate } from 'astro:transitions/client';
 
+
   document.addEventListener("astro:page-load", ()=>{
-    function toggleNav() {
-    // Toggle menu
     const menuBtn = document.querySelector(".menu-trigger");
     const menuItems = document.querySelector("#menu-items");
+    const menuExpanded = menuBtn?.getAttribute("aria-expanded") === "true";
+    menuItems?.classList.remove("opened"); // Remove "opened" class if present
 
-    menuBtn?.addEventListener("click", () => {
-      const menuExpanded = menuBtn.getAttribute("aria-expanded") === "true";
-      menuBtn.setAttribute("aria-expanded", menuExpanded ? "false" : "true");
-      menuBtn.setAttribute("aria-label",menuExpanded ? "Open Menu" : "Close Menu");
-      menuBtn?.classList.toggle("active");
-      menuItems?.classList.toggle("opened");
-    });
-  }
+    function toggleMenu() {
+    if (menuItems?.classList.contains("opened")) {
+      menuItems.animate({ maxHeight: "0px", opacity: "0%" }, {
+        duration: 700, 
+        easing: "ease-in-out",
+        fill: "forwards", 
+      });
+      menuItems.classList.remove("opened");
+      menuBtn?.classList.remove("active");
+    } else {
+      console.log("open");
 
+      menuItems?.animate({ maxHeight: "1000px", opacity: "100%" }, {
+        duration: 700,
+        easing: "ease-in-out",
+        fill: "forwards",
+      });
+      menuItems?.classList.add("opened");
+      menuBtn?.classList.add("active");
 
-    toggleNav()
+      
+    }
+}
+
+    menuBtn?.addEventListener("click", toggleMenu); 
     const trigger = document.querySelector(".crimeInGotham") as HTMLButtonElement
     const items = ["thicken", "glowingBat", "gotham"].map(item => document.getElementById(item) as HTMLElement)
     const isLong = (window.location.pathname === '/')  
