@@ -14,7 +14,7 @@ export interface Props {
 const { centered = false, class: className } = Astro.props;
 ---
 
-<div class={twMerge('inline-flex justify-center gap-4  sm:scale-100 scale-75 ', className)}>
+<div class={twMerge('inline-flex justify-center gap-4 sm:scale-100 scale-75 p-2 origin-center', className)}>
   {
     SOCIALS.filter(social => social.active).map(social => (
       <LinkButton
@@ -30,6 +30,6 @@ const { centered = false, class: className } = Astro.props;
 
 <style>
   .link-button {
-    @apply p-1 hover:rotate-6 sm:p-2;
+    @apply hover:rotate-6 overflow-visible;
   }
 </style>

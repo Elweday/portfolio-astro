@@ -46,7 +46,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           <section id="projects">
             <h2>Projects</h2>
             <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
-              {projects.map(({ data }) => (
+              {projects.slice(0, 2).map(({ data }) => (
                 <ProjectCard
                   class="size-[25rem]"
                   href={`/my-projects/${slugify(data)}`}
@@ -55,7 +55,18 @@ const socialCount = SOCIALS.filter(social => social.active).length;
                 />
               ))}
             </ul>
+                  <div class="all-posts-btn-wrapper">
+        <LinkButton href="/my-projects">
+          See All Projects...
+          <svg xmlns="http://www.w3.org/2000/svg"
+            ><path
+              d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
+            ></path>
+          </svg>
+        </LinkButton>
+      </div>
           </section>
+          
           <Hr />
         </>
       )
@@ -65,23 +76,21 @@ const socialCount = SOCIALS.filter(social => social.active).length;
       <h2>Recent Posts</h2>
       <ul>
         {
-          sortedPosts
+          sortedPosts.slice(0, 3)
             .filter(({ data }) => !data.featured)
             .map(
-              ({ data }, index) =>
-                index < 4 && (
+              ({ data }) =>
                   <Card
                     href={`/posts/${slugify(data)}`}
                     frontmatter={data}
                     secHeading={false}
                   />
-                )
             )
         }
       </ul>
       <div class="all-posts-btn-wrapper">
         <LinkButton href="/posts">
-          read more...
+          Read More Posts...
           <svg xmlns="http://www.w3.org/2000/svg"
             ><path
               d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"

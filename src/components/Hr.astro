@@ -3,9 +3,9 @@ export interface Props {
   noPadding?: boolean;
 }
 
-const { noPadding = false} = Astro.props;
+const { noPadding = true} = Astro.props;
 ---
 
 
-<hr class={`z-[999] origin-left w-full  border-skin-line mx-auto  ${noPadding ? "px-0" : "px-4"}  `} aria-hidden="true" />
+<hr class={`z-[9999] origin-left w-full  border-skin-line mx-auto   ${noPadding ? "px-0" : "px-4"}   `} aria-hidden="true" />
 

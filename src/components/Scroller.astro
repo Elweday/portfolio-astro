@@ -8,7 +8,7 @@
   
   document.addEventListener("astro:page-load", ()=>{
     const THRESHOLD = 1200; 
-    const height = (document?.querySelector("main")?.children[2 ].getBoundingClientRect()?.height || 0) 
+    const height = (document?.querySelector("main")?.children[2].getBoundingClientRect()?.height || 0) 
     const scroller = document?.getElementById("scroller")
     if (height >= THRESHOLD ){
       scroller?.classList.add("scroll-watcher")
@@ -27,7 +27,7 @@
     }
   
     .scroll-watcher {
-        @apply h-1 bg-skin-accent top-0 left-0 sticky z-[999] origin-left w-full  border-skin-line mx-auto ;
+        @apply h-1 rounded-full bg-skin-accent top-0  sticky z-[999] origin-left w-full  border-skin-line mx-auto ;
         animation: scroll-watcher linear;
         animation-timeline:  scroll();
         scale: 0 1;

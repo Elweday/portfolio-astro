@@ -65,7 +65,7 @@
   }
   
   svg {
-    @apply inline-block h-6 w-6 fill-skin-base group-hover:fill-skin-accent;
+    @apply inline-block size-8 overflow-visible fill-skin-base group-hover:fill-skin-accent;
   }
   svg.icon-tabler {
     @apply inline-block h-6 w-6 scale-125 fill-transparent 

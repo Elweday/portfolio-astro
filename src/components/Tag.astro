@@ -1,4 +1,6 @@
 ---
+// import tailwind merge 
+import { twMerge } from "tailwind-merge"; 
 export interface Props {
   name: string;
   size?: "sm" | "lg";
@@ -7,7 +9,7 @@ export interface Props {
   noTransition?: boolean;
 }
 
-let {name, class: otherClasses, noTransition, type} =  Astro.props;
+let {name, class: otherClasses, noTransition = false, type} =  Astro.props;
 
 const transitionProps = {
   ...(noTransition?{"transition:name":name.toLowerCase()}:{}), 
@@ -29,7 +31,7 @@ switch (type) {
 ---
 
 <li
-  class={`flex  bg-skin-card  rounded-full p-3 mb-1 group  hover:-top-0.5 hover:text-skin-accent focus-visible:p-1$ ${otherClasses ? otherClasses : ""}`}
+  class={twMerge(`flex  bg-skin-card  rounded-full p-3 mb-1 group  hover:-top-0.5 hover:text-skin-accent focus-visible:p-1`, otherClasses)}
   
 >
   
