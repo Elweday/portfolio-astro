@@ -29,7 +29,7 @@ switch (type) {
 ---
 
 <li
-  class={`flex bg-skin-card  rounded-full p-3 mb-1 group  hover:-top-0.5 hover:text-skin-accent focus-visible:p-1$ ${otherClasses ? otherClasses : ""}`}
+  class={`flex  bg-skin-card  rounded-full p-3 mb-1 group  hover:-top-0.5 hover:text-skin-accent focus-visible:p-1$ ${otherClasses ? otherClasses : ""}`}
   
 >
   
@@ -38,13 +38,13 @@ switch (type) {
     {...transitionProps}
     class={`   gap-1 flex justify-center ${type === "category" ? "pointer-events-none" : ""} `}
   >
-   { (type !== "all") ? (<svg class="h-5 w-5 scale-95 text-skin-base opacity-80 group-hover:fill-skin-accent data-[theme=dark]:outline-2"
+   { (type !== "all") ? (<svg class="size-8 scale-95 text-skin-base opacity-80 group-hover:fill-skin-accent data-[theme=dark]:outline-2"
       xmlns="http://www.w3.org/2000/svg"
       ><path
         d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z"
       ></path>
     </svg>) : ""}
-    <span class="whitespace-nowrap text-sm element-to-style" >{name.toLowerCase()}</span>
+    <span class="whitespace-nowrap text-sm element-to-style place-self-center" >{name.toLowerCase()}</span>
     </a>
 </li>
 

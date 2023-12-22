@@ -1,12 +1,9 @@
 ---
+export const prerender = true;
+
 import { getCollection } from "astro:content";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
 import Layout from "@layouts/Layout.astro";
-import Main from "@layouts/Main.astro";
-import Tag from "@components/Tag.astro";
 import getUniqueTags from "@utils/getUniqueTags";
-import { SITE } from "@config";
 import Tags from "@components/Tags.astro";
 const allPosts = await getCollection("blog");
 const allTags = getUniqueTags(allPosts);
@@ -22,7 +19,7 @@ const allTags = getUniqueTags(allPosts);
   ul {
     display: grid;
     gap: 1rem;
-  grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto auto;
 
   }
 </style>
