@@ -5,6 +5,7 @@ import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
+
 // import vercel
 import vercel from "@astrojs/vercel/serverless";
 import compress from "astro-compress";
@@ -20,9 +21,11 @@ export default defineConfig({
     applyBaseStyles: false
   }), react(), sitemap(), compress()],
   markdown: {
-    remarkPlugins: [remarkToc, [remarkCollapse, {
-      test: "Table of contents"
-    }]],
+    remarkPlugins: [
+      [remarkToc,{
+      
+      }],
+  ],
     shikiConfig: {
       theme: "one-dark-pro",
       wrap: true

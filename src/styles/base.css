@@ -114,8 +114,11 @@
     @apply hidden;
   }
 
+
+  
   /* ===== scrollbar ===== */
   html {
+    scroll-behavior:smooth;
     font-size: 10pt;
     overflow-y: scroll;
     animation-duration: 0s !important;

@@ -28,6 +28,7 @@ const { title, author, description, ogImage, canonicalURL, pubDatetime, tags } =
 
 const { Content } = await post.render();
 
+
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
 const ogUrl = new URL(ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,Astro.url.origin).href;
 
@@ -80,3 +81,21 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,Astro.url.
     @apply my-8;
   }
 </style>
+
+
+<script>
+  let anchorlinks = document.querySelectorAll('a[href^="#"]')
+ 
+ for (let item of anchorlinks) { // relitere 
+     item.addEventListener('click', (e)=> {
+         let hashval = item.getAttribute('href') as string
+         let target = document.querySelector(hashval) as HTMLElement
+         target.scrollIntoView({
+             behavior: 'smooth',
+             block: 'start'
+         })
+         history.pushState(null, "", hashval)
+         e.preventDefault()
+     })
+ }
+</script>
