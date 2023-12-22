@@ -51,8 +51,8 @@ export interface Props {
               PATHS.map(({name, path}) => {
                 const isActive = Astro.url.pathname === path
                 return (
-                  <li class="relative w-40  sm:w-24">
-                    <a href={path} class={isActive?"active w-full":""}>{name}</a>
+                  <li class="relative w-40  sm:w-28 p-1">
+                    <a href={path}  class={isActive?"active w-full":""}>{name}</a>
                     { isActive ? (<span transition:name="active-nav" class="absolute top-0 left-0 h-full  w-full  border-skin-accent bg-black/10 border-2 rounded-xl"></span>) : null }
                   </li>)
               })
@@ -85,7 +85,7 @@ export interface Props {
 
 .menu-trigger {
 
-  @apply scale-125 block sm:hidden;
+  @apply scale-150 block sm:hidden;
   cursor: pointer;
 }
 
@@ -111,15 +111,42 @@ export interface Props {
   transform: rotate(-45deg);
 }
 
-#menu-items{
-  transition: max-height 0.7s ease-out;
-  max-height: 0;
-  @apply sm:max-h-[1000px] ease-in-out overflow-hidden sm:flex flex-row gap-4   sm:p-4 w-full relative
 
+#menu-items {
+  @apply sm:max-h-[1000px] ease-in-out overflow-hidden sm:flex flex-row gap-4 sm:p-4 w-full relative;
 }
-#menu-items.opened  {
+
+@media (max-width: 768px) {
+  @keyframes menu-expand {
+  from {
+    max-height: 0;
+  }
+  to {
     max-height: 1000px;
   }
+}
+
+@keyframes menu-collapse {
+  from {
+    max-height: 1000px;
+  }
+  to {
+    max-height: 0;
+  }
+}
+
+#menu-items {
+  max-height: 0;
+  animation: menu-collapse 0.7s ease-out  normal; /* Initial animation */
+  @apply sm:max-h-[1000px] ease-in-out overflow-hidden sm:flex flex-row gap-4 sm:p-4 w-full relative;
+}
+
+#menu-items.opened {
+  animation: menu-expand 0.7s ease-out  normal; /* Initial animation */
+  max-height: 1000px;
+}
+
+}
 
   #skip-to-content {
     @apply absolute -top-full left-16 z-50 bg-skin-accent px-3 py-2 text-skin-inverted transition-all focus:top-4;
