@@ -45,9 +45,10 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         <>
           <section id="projects">
             <h2>Projects</h2>
-            <ul>
+            <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
               {projects.map(({ data }) => (
                 <ProjectCard
+                  class="size-[25rem]"
                   href={`/my-projects/${slugify(data)}`}
                   frontmatter={data}
                   secHeading={false}
