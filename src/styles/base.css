@@ -73,9 +73,10 @@
     sm:scale-110;
   }
   .prose {
-    @apply prose-headings:!mb-3 prose-headings:!text-skin-base 
+    @apply 
+    prose-headings:!mb-3 prose-headings:!text-skin-base 
     prose-h3:italic prose-p:!text-skin-base 
-    prose-a:!text-skin-base prose-a:!decoration-dashed prose-a:underline-offset-8
+    prose-a:!text-skin-base prose-a:underline-offset-8
     hover:prose-a:text-skin-accent prose-blockquote:!border-l-skin-accent
     prose-blockquote:border-opacity-50 prose-blockquote:opacity-80
     prose-figcaption:!text-skin-base prose-figcaption:opacity-70
@@ -90,7 +91,7 @@
     prose-table:text-skin-base prose-th:border
     prose-th:border-skin-line prose-td:border 
     prose-td:border-skin-line prose-img:mx-auto 
-    prose-img:!mt-2 prose-img:border-2 
+    prose-img:!mt-2 prose-img:rounded-xl   
     prose-img:border-skin-line prose-hr:!border-skin-line;
   }
   .prose a {
@@ -128,7 +129,7 @@
 
   /* width */
   ::-webkit-scrollbar {
-    @apply w-2;
+    @apply  w-2 ;
   }
 
   /* Track */
@@ -138,12 +139,12 @@
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    @apply bg-skin-card rounded-2xl;
+    @apply bg-skin-accent/30 rounded-2xl ;
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-skin-card-muted;
+    @apply bg-skin-accent/50 w-5;
   }
 
   code,

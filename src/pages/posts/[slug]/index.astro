@@ -65,7 +65,7 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,Astro.url.
     </article>
     
     <ul class="tags-container">
-      {tags.map(tag => <Tag name={slugifyStr(tag)} />)}
+      {tags.map(tag => <Tag type="tag" name={slugifyStr(tag)} />)}
     </ul>
   </main>
 </Layout>

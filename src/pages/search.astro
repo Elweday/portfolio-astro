@@ -17,5 +17,5 @@ const searchList = posts.map(({ data }) => ({
 ---
 
 <Layout title="search">
-    <SearchBar client:load transition:name="action-bar" searchList={searchList} />
+    <SearchBar client:load searchList={searchList} />
 </Layout>

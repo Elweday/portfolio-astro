@@ -22,10 +22,14 @@ export default defineConfig({
   }), react(), sitemap(), compress()],
   markdown: {
     remarkPlugins: [
-      [remarkToc,{
-      
-      }],
-  ],
+    [remarkToc,{
+
+    }],
+    [remarkCollapse, {
+      test: "Table of contents",
+      summary: "show table of contents",
+
+    }]],
     shikiConfig: {
       theme: "one-dark-pro",
       wrap: true
