@@ -1,5 +1,4 @@
 ---
-export const prerender = true;
 
 const getShow = async (showName:string) => {
   const res = await fetch(`https://www.omdbapi.com/?t=${showName}&apikey=50788f34`,  {cache: 'force-cache'});

@@ -15,10 +15,10 @@ const allProjects: CollectionEntry<"projects">[] = await getCollection("projects
 ---
 
 <Layout title="projects" description="List of some of technical projects I did.">
-    <ul class="grid  gap-4">
+    <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
       {
         allProjects.map(({ data }) => (
-          <Card href={`/my-projects/${slugify(data)}`} frontmatter={data} />
+          <Card class="size-[25rem]" href={`/my-projects/${slugify(data)}`} frontmatter={data} />
         ))
       }
     </ul>

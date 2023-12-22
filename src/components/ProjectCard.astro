@@ -3,6 +3,8 @@ import { slugifyStr } from "@utils/slugify";
 import Datetime from "./Datetime";
 import type { CollectionEntry } from "astro:content";
 import Icon from "astro-icon";
+// import tw-merge
+import { twMerge } from "tailwind-merge";
 
 import { Technologies } from "../types";
 
@@ -12,6 +14,7 @@ interface Props {
   href?: string;
   frontmatter: CollectionEntry<"projects">["data"];
   secHeading?: boolean;
+  class?: string;
 }
 
 
@@ -22,6 +25,7 @@ const {
   frontmatter: { title, startDate, endDate, description, cover, stack, projectURL},
   href,
   secHeading,
+  class:className
 } = Astro.props;
 const flagColor = projectURL ? "project-available" : "under-construction"
 
@@ -31,9 +35,9 @@ console.log(cover)
 
 ---
 
-<li class="my-6 text-white group">
-  <div class=" relative h-full w-full">
-    <img transition:name={slug+":cover"} src={cover}  class="rounded-xl" alt="" />
+<li class={twMerge("my-6 text-white group ", className)}>
+  <div class=" relative  size-full">
+    <img transition:name={slug+":cover"} src={cover}  class="rounded-xl object-cover size-full" alt="" />
     <div class="absolute bottom-0  hidden h-full w-full rounded-xl bg-gradient-to-b from-[rgba(0,0,0,0)] from-30% to-skin-accent opacity-100 duration-1000 hover:transition-[opacity] group-hover:block" />
   <span
   class=" absolute bottom-0 left-0 opacity-0 w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 transition-opacity pointer-events-none   group-hover:pointer-events-auto  group-hover:opacity-100  flex"
