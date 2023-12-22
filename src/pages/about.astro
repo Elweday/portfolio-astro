@@ -1,24 +1,6 @@
 ---
 export const prerender = true;
 
-/* import nodemailer from "nodemailer" ;
-const transporter  = nodemailer.createTransport({
-  host: "sandbox.smtp.mailtrap.io",
-  port: 2525,
-  auth: {
-    user: "4f070bd49b0d93",
-    pass: "362872e17f4e92"
-  } 
-});
-const info = await transporter.sendMail({
-    from: '"Fred Foo 👻" <foo@example.com>', // sender address
-    to: "mohammednh2864@gmail.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
-  });
-  console.log(info) */
-
 const getShow = async (showName:string) => {
   const res = await fetch(`https://www.omdbapi.com/?t=${showName}&apikey=50788f34`,  {cache: 'force-cache'});
   const data = await res.json();

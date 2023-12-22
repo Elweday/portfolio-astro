@@ -1,18 +1,18 @@
 ---
 export const prerender = true;
-
 import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import getUniqueTags from "@utils/getUniqueTags";
-import Tags from "@components/Tags.astro";
 const allPosts = await getCollection("blog");
 const allTags = getUniqueTags(allPosts);
+import TagsElement from "@components/Tags.astro";
+
 
 
 ---
 
 <Layout title="tags">
-  <Tags isTags={true} tags={allTags} allTags={allTags} />
+  <TagsElement isTags={true} tags={allTags} allTags={allTags} />
 </Layout>
 
 <style>
