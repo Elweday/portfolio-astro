@@ -84,18 +84,21 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,Astro.url.
 
 
 <script>
-  let anchorlinks = document.querySelectorAll('a[href^="#"]')
- 
- for (let item of anchorlinks) { // relitere 
-     item.addEventListener('click', (e)=> {
-         let hashval = item.getAttribute('href') as string
-         let target = document.querySelector(hashval) as HTMLElement
-         target.scrollIntoView({
-             behavior: 'smooth',
-             block: 'start'
-         })
-         history.pushState(null, "", hashval)
-         e.preventDefault()
-     })
- }
+  document.addEventListener("astro:page-load", ()=> {
+    
+    let anchorlinks = document.querySelectorAll('a[href^="#"]')
+   
+   for (let item of anchorlinks) { // relitere 
+       item.addEventListener('click', (e)=> {
+           let hashval = item.getAttribute('href') as string
+           let target = document.querySelector(hashval) as HTMLElement
+           target.scrollIntoView({
+               behavior: 'smooth',
+               block: 'start'
+           })
+           history.pushState(null, "", hashval)
+           e.preventDefault()
+       })
+   }
+  })
 </script>
