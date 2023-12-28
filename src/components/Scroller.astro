@@ -11,7 +11,7 @@ export interface Props {
   
   document.addEventListener("astro:page-load", ()=>{
     const THRESHOLD = 1200; 
-    const height = (document?.querySelector("main")?.children[2].getBoundingClientRect()?.height || 0) 
+    const height = (document?.querySelector("main")?.children[1].getBoundingClientRect()?.height || 0) 
     const scroller = document?.getElementById("scroller")
     if (height >= THRESHOLD ){
       scroller?.classList.add("scroll-watcher")
