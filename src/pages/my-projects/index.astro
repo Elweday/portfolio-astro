@@ -14,6 +14,7 @@ const allProjects: CollectionEntry<"projects">[] = await getCollection("projects
 ---
 
 <Layout title="projects" description="List of some of technical projects I did.">
+  <h1 class="text-2xl tracking-wider sm:text-3xl text-start py-6">Projects</h1>
     <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
       {
         allProjects.map(({ data }) => (
@@ -22,3 +23,16 @@ const allProjects: CollectionEntry<"projects">[] = await getCollection("projects
       }
     </ul>
 </Layout>
+
+
+<style>
+
+  section{
+    @apply justify-self-start  w-full flex flex-col gap-2  
+  }
+  
+    h2 {
+      @apply text-xl tracking-wider sm:text-2xl  text-start ;
+    }
+  </style>
+  
