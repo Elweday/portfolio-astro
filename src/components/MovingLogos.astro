@@ -1,20 +1,10 @@
 ---
-import {Technologies} from "../types";
 import {Icon} from "astro-icon"
-const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
-  arr.reduce((groups, item) => {
-    (groups[key(item)] ||= []).push(item);
-    return groups;
-  }, {} as Record<K, T[]>);
-
-
-// 
-const techStackByType = groupBy(Object.values(Technologies), (tech) => tech.type);
-
+import {techStackByType} from "@utils/getTechStack";
 ---
 
 
-<ul id="tech-stack" class="w-full flex justify-between gap-10  p-5" style={{animation: `scroll 20s linear infinite forwards`}}>
+<ul id="tech-stack" class="w-full flex justify-between gap-10  p-5" style={{animation: `scroll 30s linear infinite forwards`}}>
   {
       
       Object.entries(techStackByType).map(([type, stack])=>{
@@ -26,8 +16,10 @@ const techStackByType = groupBy(Object.values(Technologies), (tech) => tech.type
                 
                 (
                   <li class="stack group/tech flex flex-col justify-center gap-2">
-                      <Icon class="size-14 grid place-self-center cursor-pointer hover:scale-125 transition-all" name={icon} />
-                      <h3 class="absolute -bottom-5 text-xl font-bold place-self-center opacity-0 group-hover/tech:opacity-100 transition-opacity">{name}</h3>
+                      <Icon class="size-14 grid place-self-center cursor-pointer hover:scale-125 transition-all " name={icon} />
+                      <a href={url}>
+                        <h3 class="absolute -bottom-5 text-xl font-bold place-self-center opacity-0 group-hover/tech:opacity-100 transition-opacity">{name}</h3>
+                        </a>
                   </li>
 
                 
@@ -52,7 +44,7 @@ const techStackByType = groupBy(Object.values(Technologies), (tech) => tech.type
     transform: translateX(0px);
   }
   100% {
-    transform: translateX(-200%);
+    transform: translateX(-300%);
   }
 }
 

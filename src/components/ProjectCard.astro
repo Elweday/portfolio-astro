@@ -38,12 +38,12 @@ console.log(cover)
 <li class={twMerge("my-6 text-white group ", className)}>
   <div class=" relative  size-full">
     <img transition:name={slug+":cover"} src={cover}  class="rounded-xl object-cover size-full" alt="" />
-    <div class="absolute bottom-0  hidden h-full w-full rounded-xl bg-gradient-to-b from-[rgba(0,0,0,0)] from-30% to-skin-accent opacity-100 duration-1000 hover:transition-[opacity] group-hover:block" />
+    <div class="absolute bottom-0  transition-all h-full w-full rounded-xl bg-gradient-to-b from-transparent to-skin-accent  from-100% group-hover:from-30%  opacity-100 duration-1000" />
   <span
-  class=" absolute bottom-0 left-0 opacity-0 w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 transition-opacity pointer-events-none   group-hover:pointer-events-auto  group-hover:opacity-100  flex"
+  class=" absolute bottom-0 left-0 opacity-0 w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 transition-opacity pointer-events-none  group-hover:pointer-events-auto group-hover:opacity-100  flex"
   >
   <a href={projectURL} class={`h-10 w-10 triangle absolute right-0 top-0 cursor-pointer rounded-tr-xl border-t-transparent border-b-transparent border-l-transparent sm:scale-100 scale-75 origin-top-right ${flagColor} ${projectURL?"":"pointer-events-none"} `} >
-    <Icon class="h-10 w-10   rotate-45  float-right translate-x-24 translate-y-[24px]" name={projectURL?"teenyicons:github-solid":"ic:twotone-construction"}>
+    <Icon class="size-14  rotate-45   top-1/2 left-1/2 translate-x-[70%] translate-y-[70%]  origin-bottom-right" name={projectURL?"teenyicons:github-solid":"ic:twotone-construction"}>
   </a>
       <span class="h-full justify-end pointer-events-none w-full  flex flex-col  gap-2">
         
