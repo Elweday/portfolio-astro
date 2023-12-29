@@ -129,7 +129,7 @@
 
   /* width */
   ::-webkit-scrollbar {
-    @apply  w-0 ;
+    @apply  w-0 h-1 ;
   }
 
   /* Track */
@@ -144,7 +144,7 @@
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-skin-accent/50 w-5;
+    @apply bg-skin-accent/50 w-0;
   }
 
   code,

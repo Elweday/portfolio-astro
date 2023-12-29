@@ -54,3 +54,27 @@ export const SOCIALS: SocialObjects = [
     active: true,
   },
 ];
+
+
+
+
+
+export const MY_SHOWS = [
+  "silicon_valley",
+  "bojack_horseman",
+  "brooklyn_nine_nine",
+  "the_big_bang_theory",
+  "daredevil",
+  "the_boys",
+  "invincible",
+  "rick_and_morty",
+];
+
+export const HOBBIES = [
+  { name: "coding personal projects", icon: "ph:code-bold"},
+  { name: "playing video games", icon: "cil:gamepad"},
+  { name: "3d modeling with blender", icon: "carbon:chart-3d"},
+  { name: "watching tv shows", icon: "ic:round-tv"},
+  { name: "cooking food", icon: "ph:cooking-pot-bold"},
+
+]

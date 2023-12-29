@@ -1,136 +1,154 @@
 ---
+import { MY_SHOWS as showsList, HOBBIES as hobbies } from "@config";
 
-const getShow = async (showName:string) => {
-  const res = await fetch(`https://www.omdbapi.com/?t=${showName}&apikey=50788f34`,  {cache: 'force-cache'});
+const getShow = async (showName: string) => {
+  const res = await fetch(
+    `https://www.omdbapi.com/?t=${showName}&apikey=50788f34`,
+    { cache: "force-cache" }
+  );
   const data = await res.json();
   return data as Show;
-}
+};
+
+import { techStackByType } from "@utils/getTechStack";
+
 import { Image } from "astro-preload/components";
 import Layout from "@layouts/Layout.astro";
 import Socials from "@components/Socials.astro";
 import Icon from "astro-icon";
 
-
-
-const showsList = [
-  "silicon_valley",
-  "bojack_horseman",
-  "brooklyn_nine_nine",
-  "the_big_bang_theory",
-  "daredevil",
-  "the_boys",
-  "invincible",
-  "rick_and_morty",
-];
-
-const hobbies = [
-  { name: "coding personal projects", icon: "ph:code-bold"},
-  { name: "playing video games", icon: "cil:gamepad"},
-  { name: "3d modeling with blender", icon: "carbon:chart-3d"},
-  { name: "watching tv shows", icon: "ic:round-tv"},
-  { name: "cooking food", icon: "ph:cooking-pot-bold"},
-
-]
-
-const showsData = showsList.map( async showName => {
-  const value = await getShow(showName)
-  return value
+const showsData = showsList.map(async showName => {
+  const value = await getShow(showName);
+  return value;
 });
 
-
-
 type Show = {
-    "Title": string,
-    "Year": string,
-    "Rated": string,
-    "Released": string,
-    "Runtime": string,
-    "Genre": string,
-    "Director": string,
-    "Writer": string,
-    "Actors": string,
-    "Plot": string,
-    "Language": string,
-    "Country": string,
-    "Awards": string,
-    "Poster": string,
-    "Ratings": {Source:string, Value:string}[],
-    "Metascore": string,
-    "imdbRating": string,
-    "imdbVotes": string,
-    "imdbID": string,
-    "Type": string,
-    "DVD": string,
-    "BoxOffice": string,
-    "Production": string,
-    "Website": string,
-    "Response": string
-}
-
+  Title: string;
+  Year: string;
+  Rated: string;
+  Released: string;
+  Runtime: string;
+  Genre: string;
+  Director: string;
+  Writer: string;
+  Actors: string;
+  Plot: string;
+  Language: string;
+  Country: string;
+  Awards: string;
+  Poster: string;
+  Ratings: { Source: string; Value: string }[];
+  Metascore: string;
+  imdbRating: string;
+  imdbVotes: string;
+  imdbID: string;
+  Type: string;
+  DVD: string;
+  BoxOffice: string;
+  Production: string;
+  Website: string;
+  Response: string;
+};
 ---
 
 <Layout title="about">
-
-
-<style>
+  <style>
     path {
-        fill: red;
+      fill: red;
     }
+  </style>
+  <h1 class="py-6 text-start text-2xl tracking-wider sm:text-3xl">About</h1>
+  <div class="flex flex-col gap-12">
+    <section>
+      <h2>Education</h2>
+      <div class="flex flex-col">
+        <a class="text-lg font-bold" href="http://engh.helwan.edu.eg/">
+          Faculty of Engineering, Helwan University
+        </a>
+        <span class="font-extralight"
+          >Computer and Communication Department 2021-2016</span
+        >
+      </div>
+    </section>
+    <section>
+      <h2>Tech Stack</h2>
 
-</style>
-<h1 class="text-2xl tracking-wider sm:text-3xl text-start py-6">About</h1>
-  <div class=" flex flex-col gap-12">
-    <section>
-        <h2>Education</h2>
-        Helwan Univeristy, duh
-    </section>
-    <section>
-        <h2>My Contacts</h2>
-        <Socials class="scale-100 place-self-start"  />
-    </section>
-    <section>
-        <h2>Intersest And Activities</h2>
-        <div class="flex flex-col  justify-center gap-3 ">
-
-          {hobbies.map(hobby => 
-        <div class="px-5">
-          <Icon name={hobby.icon}
-          class="h-5 w-5" />
-          {hobby.name}</div>)}
-          </div>
-    </section>
-    <section>
-        <h2>Shows I like</h2>
-        <div class="grid sm:grid-cols-4 grid-cols-2 place-content-stretch justify-stretch gap-5">
+      <ul class="flex flex-col gap-6">
         {
-        showsData.map( async (data) => {
-          const {imdbID, Poster, Title} = await data;
+          Object.entries(techStackByType).map(([type, stack]) => {
+            return (
+              <h3>{type}</h3>
+              <div class="flex flex-col gap-1 bg-skin-fill  p-5">
+                <div class="flex gap-20 overflow-visible  overflow-x-auto rounded-lg p-4">
+                  {stack.map(({ name, icon, url }) => (
+                    
+                    <li class="stack group/tech relative   flex flex-col justify-center  overflow-visible ">
+                      <a class="absolute -top-6 scale-75 place-self-center font-bold  transition-opacity opacity-0 group-hover/tech:opacity-100 z-[1000]   whitespace-nowrap" href={url}> {name}</a>
+                      <Icon class="grid size-10 cursor-pointer place-self-center transition-all hover:scale-125 " name={icon} />
+                    </li>
+                  ))}
+                </div>
+              </div>
+            );
+          })
+        }
+      </ul>
+    </section>
+    <section>
+      <h2>My Contacts</h2>
+      <Socials class="scale-100 place-self-start" />
+    </section>
+    <section>
+      <h2>Intersest And Activities</h2>
+      <div class="flex flex-col justify-center gap-3">
+        {
+          hobbies.map(hobby => (
+            <div class="px-5">
+              <Icon name={hobby.icon} class="h-5 w-5" />
+              {hobby.name}
+            </div>
+          ))
+        }
+      </div>
+    </section>
+    <section>
+      <h2>Shows I like</h2>
+      <div
+        class="grid grid-cols-2 place-content-stretch justify-stretch gap-5 sm:grid-cols-4"
+      >
+        {
+          showsData.map(async data => {
+            const { imdbID, Poster, Title } = await data;
             return (
               <a href={`https://www.imdb.com/title/${imdbID}`}>
                 <div class="group relative h-full w-full">
-                  <Image  width={300} height={300} url={Poster} class=" h-full w-full rounded-xl" alt="" />
+                  <Image
+                    width={300}
+                    height={300}
+                    url={Poster}
+                    class=" h-full w-full rounded-xl"
+                    alt=""
+                  />
                   <div class="absolute left-0 top-0  hidden h-full w-full  rounded-xl bg-gradient-to-b from-[rgba(0,0,0,0)] from-70% to-skin-accent opacity-80 duration-500 group-hover:block" />
-                  <span class="absolute bottom-0 left-0  hidden p-3 text-lg font-bold text-white duration-300 group-hover:flex">{Title}</span>
+                  <span class="absolute bottom-0 left-0  hidden p-3 text-lg font-bold text-white duration-300 group-hover:flex">
+                    {Title}
+                  </span>
                 </div>
               </a>
             );
           })
-         }
+        }
       </div>
     </section>
   </div>
-
 </Layout>
 
-
 <style>
-
-section{
-  @apply justify-self-start  w-full flex flex-col gap-2  
-}
-
+  section {
+    @apply flex  w-full flex-col gap-2 justify-self-start;
+  }
 
   h2 {
-    @apply text-xl tracking-wider sm:text-2xl  text-start ;
+    @apply text-start text-xl tracking-wider  sm:text-2xl;
   }
 </style>
