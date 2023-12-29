@@ -52,13 +52,10 @@ type Show = {
 ---
 
 <Layout title="about">
-  <style>
-    path {
-      fill: red;
-    }
-  </style>
-  <h1 class="py-6 text-start text-2xl tracking-wider sm:text-3xl">About</h1>
-  <div class="flex flex-col gap-12">
+  <article>
+
+    <h1 class="py-6 text-start text-2xl tracking-wider sm:text-3xl">About</h1>
+    <div class="flex flex-col gap-12">
     <section>
       <h2>Education</h2>
       <div class="flex flex-col">
@@ -88,8 +85,8 @@ type Show = {
                     </li>
                   ))}
                 </div>
-              </div>
-            );
+                </div>
+                );
           })
         }
       </ul>
@@ -141,6 +138,7 @@ type Show = {
       </div>
     </section>
   </div>
+</article>
 </Layout>
 
 <style>
