@@ -118,7 +118,7 @@ const socialImageURL = new URL(
       class="flex flex-col place-self-center border-[1px] border-black/10 px-4 drop-shadow-3xl md:max-w-4xl md:rounded-3xl overflow-hidden md:my-7  w-full h-full"
     >
     <Header path={path} />
-    <main  class="flex-1 overflow-y-auto place-self-center w-full pb-8 " id="main-body" >
+    <main  class="flex-1 overflow-y-auto overflow-x-clip place-self-center w-full pb-8 " id="main-body" >
         <Scroller />
         <slot />
       </main>

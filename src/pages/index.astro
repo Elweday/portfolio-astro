@@ -10,10 +10,23 @@ import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import slugify from "@utils/slugify";
 import { SOCIALS } from "@config";
+import {Technologies} from "../types";
+import {Icon} from "astro-icon"
+import MovingLogos from "@components/MovingLogos.astro";
+
+
+const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
+  arr.reduce((groups, item) => {
+    (groups[key(item)] ||= []).push(item);
+    return groups;
+  }, {} as Record<K, T[]>);
 
 
 const posts = await getCollection("blog");
 const projects = await getCollection("projects"); 
+
+// 
+const techStackByType = groupBy(Object.values(Technologies), (tech) => tech.type);
 
 const sortedPosts = getSortedPosts(posts);
 
@@ -23,7 +36,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 
 <Layout title="home" description="Mohammed Nasser's personal blog">
     <section id="hero">
-      <h1 class="mr-">whoami</h1>
+      <h1>whoami</h1>
       <p>
         Hi my name is <strong class="text-skin-accent">Mohammed Nasser</strong>,
         I'm a computer engineering Student at Helwan Univeristy.
@@ -36,8 +49,14 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         )
       }
     </section>
-
     <Hr />
+
+    <section>
+      <h2>Tech Stack <span class="font-thin text-lg" id="suffix"></span></h2>
+      <MovingLogos/>
+    </section>
+      <Hr />
+
 
     {
       projects.length > 0 && (
@@ -128,13 +147,16 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   }
 
   /* ===== Featured & Recent Posts Sections ===== */
-  #projects, #recent-posts {
+  section {
     @apply pb-6 pt-12;
   }
-  #projects h2, #recent-posts h2 {
+  h2 {
     @apply text-2xl font-semibold tracking-wide;
   }
   .all-posts-btn-wrapper {
     @apply my-8 text-center;
   }
+
+
 </style>
+
