@@ -172,7 +172,7 @@ export const Technologies = {
   },
   git: {
     name: "Git",
-    icon: "bi:git ",
+    icon: "bxl:git",
     url: "https://git-scm.com/",
     description: "A distributed version control system for tracking changes in source code.",
     type: "technology",
