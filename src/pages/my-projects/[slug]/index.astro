@@ -58,7 +58,7 @@ const slug = slugifyStr(title);
        return (
         <li>
           <a class="inline-flex gap-2" href={url}>
-            <Icon transition:name={slug+":stack:"+name}  class="h-8 w-8" name={icon} />
+            <Icon transition:name={slug+":stack:"+name}  class="h-8 w-8" icon={icon} />
             <h3 class="underline font-bold">{name}</h3>:
             <span class="font-thin">{description}</span>
             </a>
