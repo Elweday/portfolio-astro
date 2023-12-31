@@ -3,7 +3,7 @@ const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
 const breadcrumbList = currentUrlPath.split("/").slice(1);
 const currentPage = parseInt(Astro.url.searchParams.get("page") || "1");
 const currentPageStr = currentPage === 1 ? "" : `(page ${currentPage})`; ;
-import { Icon } from "astro-iconify";
+import { Icon } from "astro-icon";
 
 
 // if breadcrumb is Home > Posts > 1 <etc>

@@ -15,7 +15,7 @@ import { techStackByType } from "@utils/getTechStack";
 import { Image } from "astro-preload/components";
 import Layout from "@layouts/Layout.astro";
 import Socials from "@components/Socials.astro";
-import { Icon } from "astro-iconify";
+import { Icon } from "astro-icon";
 const showsData = showsList.map(async showName => {
   const value = await getShow(showName);
   return value;
