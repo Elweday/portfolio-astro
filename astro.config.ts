@@ -9,8 +9,8 @@ import { SITE } from "./src/config";
 // import vercel
 import vercel from "@astrojs/vercel/serverless";
 import compress from "astro-compress";
-
 import preload from "astro-preload";
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,14 +21,9 @@ export default defineConfig({
     applyBaseStyles: false
   }), react(), sitemap(), compress()],
   markdown: {
-    remarkPlugins: [
-    [remarkToc,{
-
-    }],
-    [remarkCollapse, {
+    remarkPlugins: [[remarkToc, {}], [remarkCollapse, {
       test: "Table of contents",
-      summary: "show table of contents",
-
+      summary: "show table of contents"
     }]],
     shikiConfig: {
       theme: "one-dark-pro",

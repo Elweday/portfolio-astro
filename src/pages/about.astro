@@ -15,8 +15,7 @@ import { techStackByType } from "@utils/getTechStack";
 import { Image } from "astro-preload/components";
 import Layout from "@layouts/Layout.astro";
 import Socials from "@components/Socials.astro";
-import Icon from "astro-cached-icon";
-
+import { Icon } from "astro-icon";
 const showsData = showsList.map(async showName => {
   const value = await getShow(showName);
   return value;
@@ -81,7 +80,7 @@ type Show = {
                     
                     <li class="stack group/tech relative   flex flex-col justify-center  overflow-visible ">
                       <a class="absolute -top-6 scale-75 place-self-center font-bold  transition-opacity opacity-0 group-hover/tech:opacity-100 z-[1000]   whitespace-nowrap" href={url}> {name}</a>
-                      <Icon class="grid size-10 cursor-pointer place-self-center transition-all hover:scale-125 " icon={icon} />
+                      <Icon class="grid size-10 cursor-pointer place-self-center transition-all hover:scale-125 " name={icon} />
                     </li>
                     ))}
                     </div>
@@ -102,7 +101,7 @@ type Show = {
         {
           hobbies.map(hobby => (
             <div class="px-5">
-              <Icon icon={hobby.icon} class="h-5 w-5" />
+              <Icon name={hobby.icon} class="h-5 w-5" />
               {hobby.name}
             </div>
           ))

@@ -1,6 +1,5 @@
 ---
-import Icon from "astro-cached-icon";
-import {techStackByType} from "@utils/getTechStack";
+import { Icon } from "astro-icon";import {techStackByType} from "@utils/getTechStack";
 ---
 
 
@@ -16,7 +15,7 @@ import {techStackByType} from "@utils/getTechStack";
                 
                 (
                   <li class="stack group/tech flex flex-col justify-center gap-2">
-                      <Icon class="size-14 grid place-self-center cursor-pointer hover:scale-125 transition-all " icon={icon} />
+                      <Icon class="size-14 grid place-self-center cursor-pointer hover:scale-125 transition-all " name={icon} />
                       <a href={url}>
                         <h3 class="absolute -bottom-5 text-xl font-bold place-self-center opacity-0 group-hover/tech:opacity-100 transition-opacity">{name}</h3>
                         </a>

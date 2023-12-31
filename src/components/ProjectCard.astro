@@ -2,8 +2,7 @@
 import { slugifyStr } from "@utils/slugify";
 import Datetime from "./Datetime";
 import type { CollectionEntry } from "astro:content";
-import Icon from "astro-cached-icon";
-// import tw-merge
+import { Icon } from "astro-icon";
 import { twMerge } from "tailwind-merge";
 
 import { Technologies } from "../types";
@@ -43,7 +42,7 @@ console.log(cover)
   class=" absolute bottom-0 left-0 opacity-0 w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 transition-opacity pointer-events-none  group-hover:pointer-events-auto group-hover:opacity-100  flex"
   >
   <a href={projectURL} class={`h-10 w-10 triangle absolute right-0 top-0 cursor-pointer rounded-tr-xl border-t-transparent border-b-transparent border-l-transparent sm:scale-100 scale-75 origin-top-right ${flagColor} ${projectURL?"":"pointer-events-none"} `} >
-    <Icon class="size-14  rotate-45   top-1/2 left-1/2 translate-x-[70%] translate-y-[70%]  origin-bottom-right" icon={projectURL?"teenyicons:github-solid":"ic:twotone-construction"}>
+    <Icon class="size-14  rotate-45   top-1/2 left-1/2 translate-x-[70%] translate-y-[70%]  origin-bottom-right" name={projectURL?"teenyicons:github-solid":"ic:twotone-construction"}>
   </a>
       <span class="h-full justify-end pointer-events-none w-full  flex flex-col  gap-2">
         
@@ -57,12 +56,12 @@ console.log(cover)
           <div class="flex justify-stretch gap-2 ">
             
             {(stack as Technologies[]).map(( technology ) =>
-            <Icon transition:name={slug+":stack:"+Technologies[technology].name} class={"sm:size-8"} icon={Technologies[technology].icon} />
+            <Icon transition:name={slug+":stack:"+Technologies[technology].name} class={"sm:size-8"} name={Technologies[technology].icon} />
             )}
         </div>
       </div>
     </span>
-    <a class="underline " href={href}> <Icon class=" p-1 rounded-lg  size-10" icon="uiw:more"/></a>
+    <a class="underline " href={href}> <Icon class=" p-1 rounded-lg  size-10" name="uiw:more"/></a>
       
     </span>
   </div>
