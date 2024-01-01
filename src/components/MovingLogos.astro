@@ -61,10 +61,10 @@ import {techStackByType} from "@utils/getTechStack";
     [...document.querySelectorAll(".stackType") as NodeListOf<HTMLDataElement>].map((el) => {
       el.addEventListener("mouseover", () => {
         techStack.style.setProperty("animation-play-state", "paused" );
-        suffix.innerText = " - " + el.dataset.type 
+        suffix.innerText =  String(el.dataset.type) 
       }),
       el.addEventListener("mouseout", () => {
-        suffix.innerText = ""
+        suffix.innerText = "\n"
         techStack.style.setProperty("animation-play-state", "running" );
       })
       
