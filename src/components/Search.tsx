@@ -1,6 +1,6 @@
 import Fuse from "fuse.js";
 import { useEffect, useRef, useState, useMemo } from "react";
-import Card from "@components/PostCard";
+import Card from "@components/PostCard.astro";
 import slugify from "@utils/slugify";
 import type { CollectionEntry } from "astro:content";
 

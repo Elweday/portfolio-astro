@@ -2,7 +2,7 @@
 import  {type CollectionEntry , getCollection} from "astro:content";
 import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
-import Card from "@components/PostCard";
+import Card from "@components/PostCard.astro";
 import LinkButton from "@components/LinkButton.astro";
 import slugify from "@utils/slugify";
 import Tag from "@components/Tag.astro";
@@ -47,19 +47,25 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
   <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6">Tags</h1>
 
   <ul class="flex flex-wrap gap-2 p-4">
-    {(isTags ? tags : allTags).slice(0, 6).map((tag, idx) => 
+    {(isTags ? tags : allTags).slice(0, 6).sort((a,b) => a.length - b.length).map((tag, idx) => 
         <Tag name={tag} type="tag" class="pr-8 " />
     )}
     <Tag class="bg-skin-card/20 text-xl rounded-full px-6 *:scale-[1.6] " name="+" type="all" size="lg" >
     </ul>
     <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6">Posts</h1>
-    <ul>
-    {
-      paginatedPosts.map(({ data }) => (
-        <Card href={`/posts/${slugify(data)}`} frontmatter={data} />
-      ))
-    }
-  </ul>
+    <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
+      {
+        paginatedPosts
+          .map(
+            ({ data }) =>
+                <Card
+                  href={`/posts/${slugify(data)}`}
+                  frontmatter={data}
+                />
+          )
+      }
+    </ul>
+
 {
   numPages > 1 && (
     <nav class="pagination-wrapper" aria-label="Pagination">

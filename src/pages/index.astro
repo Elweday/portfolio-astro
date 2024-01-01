@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import LinkButton from "@components/LinkButton.astro";
 import Hr from "@components/Hr.astro";
-import Card from "@components/PostCard";
+import Card from "@components/PostCard.astro";
 import ProjectCard from "@components/ProjectCard.astro";
 import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
@@ -110,10 +110,9 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           </span>
   </LinkButton>
         </h2>
-      <ul>
+      <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
         {
-          sortedPosts.slice(0, 3)
-            .filter(({ data }) => !data.featured)
+          sortedPosts.slice(0, 2)
             .map(
               ({ data }) =>
                   <Card

@@ -24,13 +24,12 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const { post } = Astro.props;
-const { title, author, description, ogImage, canonicalURL, pubDatetime, tags } = post.data;
+const { title, author, description, canonicalURL, pubDatetime, tags, cover } = post.data;
+const slugged = slugifyStr(title);
+import { Image } from "astro-preload/components";
+const isCoverRelative = cover.startsWith("/");
 
 const { Content } = await post.render();
-
-
-const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
-const ogUrl = new URL(ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,Astro.url.origin).href;
 
 
 
@@ -40,7 +39,6 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,Astro.url.
   title={title}
   author={author}
   description={description}
-  ogImage={ogUrl}
   canonicalURL={canonicalURL}
 >
 
@@ -59,14 +57,34 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,Astro.url.
   </button>
     </div>
 
-    <h1 transition:name={slugifyStr(title)} class="post-title">{title}</h1>
+    <h1 transition:name={slugged} class="post-title">{title}</h1>
     <Datetime datetime={pubDatetime} size="lg" className="my-2" />
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
+      <figure>
+        {isCoverRelative? 
+    
+          <img 
+            style={{ viewTransitionName: slugifyStr(title)+":image" }}
+            class=" rounded-2xl w-full p-2 aspect-video  object-cover" src={cover}  alt="" />
+          :
+          <Image
+              transition:name={slugifyStr(title)+":image"}
+              width={300}
+              height={300}
+              url={cover}
+              class=" rounded-2xl w-full p-2 aspect-video  object-cover"
+              alt=""
+            />
+      
+          }
+
+      </figure>
+      
       <Content />
     </article>
     
-    <ul class="tags-container">
-      {tags.map(tag => <Tag type="tag" name={slugifyStr(tag)} />)}
+    <ul class="my-8 flex gap-2 flex-wrap">
+      {tags.sort((a, b) => a.length - b.length).map(tag => <Tag type="tag" name={slugifyStr(tag)} />)}
     </ul>
   </main>
 </Layout>
@@ -78,9 +96,7 @@ const ogUrl = new URL(ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,Astro.url.
   .post-title {
     @apply text-2xl font-semibold text-skin-accent;
   }
-  .tags-container {
-    @apply my-8;
-  }
+
 </style>
 
 

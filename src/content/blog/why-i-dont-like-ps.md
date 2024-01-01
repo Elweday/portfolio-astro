@@ -1,9 +1,9 @@
 ---
 pubDatetime: 2022-09-25T15:20:35Z
 title: Why I don't like the leet-code-like problem solving.
-postSlug: ""
-featured: false
+postSlug: "leet-code"
 draft: false
+cover: "https://assets.leetcode.com/users/images/65e42236-d80d-41cc-9435-611d2bd09aef_1653139481.8304794.png"
 tags:
   - problem solving
   - advent of code
@@ -12,15 +12,9 @@ tags:
 description:
   a descussion about leet code and advent of code type of problem solving.
 ---
-<figure>
-  <img
-    src="https://i.stack.imgur.com/6Q17f.png"
-    alt="An Image shows a typical leet code problem"
-  />
-  <figcaption>
-    <b>Disclaimer</b> : problem solving is important and you always should do it, this is my personal take on it. and leetcode is just an example for the whole genre of problem solving sites. 
-  </figcaption>
-</figure>
+
+
+> <b>Disclaimer</b> : problem solving is important and you always should do it, this is my personal take on it. and leetcode is just an example for the whole genre of problem solving sites. 
 
 
 
@@ -59,13 +53,6 @@ This deliberate lack of transparency adds an extra layer of challenge. which doe
   * Makes you want immideate, peaceful death.
 
 - **Debugging Challenges**: Debugging becomes more complex when participants can't see which test case(s) failed. Yeah this mirrors real-world scenarios where identifying the root cause of an issue can be challenging. but you can't reach the root of the issue if you don't know what even went wrong. However, it builds resilience and problem-solving skills even in scenarios with limited information.
-
-
-
-
-
-
-
 
 ### Metrics
 

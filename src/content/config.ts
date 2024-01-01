@@ -12,15 +12,9 @@ const blog = defineCollection({
       pubDatetime: z.date().default(new Date()),
       title: z.string(),
       postSlug: z.string().optional(),
-      featured: z.boolean().optional(),
+      cover: z.string().optional().default("https://th.bing.com/th/id/R.99bf1e22856725b68d5fddfcd283677b?rik=TutQhaQL70DRQA&pid=ImgRaw&r=0"),
       draft: z.boolean().optional(),
-      tags: z.array(z.string()).default(["others"]),
-      ogImage: image()
-        .refine(img => img.width >= 1200 && img.height >= 630, {
-          message: "OpenGraph image must be at least 1200 X 630 pixels!",
-        })
-        .or(z.string())
-        .optional(),
+      tags: z.array(z.string()).default([]),
       description: z.string(),
       canonicalURL: z.string().optional(),
     }),
