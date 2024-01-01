@@ -4,24 +4,26 @@ import {techStackByType} from "@utils/getTechStack";
 ---
 
 
-<ul id="tech-stack" class="w-full flex justify-between gap-10  p-5" style={{animation: `scroll 30s linear infinite forwards`}}>
-  {
+<div class="scroller overflow-visible w-full h-full">
+
+  <ul id="tech-stack" class="w-full flex justify-between gap-10  p-5 " style={{animation: `scroll 30s linear infinite forwards`}}>
+    {
       
       Object.entries(techStackByType).map(([type, stack])=>{
         return (
-          <div class="stackType  flex flex-col group" data-type={type}>
-            <div class=" flex bg-skin-accent bg-opacity-0 transition-all hover:bg-opacity-10 p-3 rounded-lg gap-10">
+          <div class="stackType  flex flex-col group " data-type={type}>
+            <div class="flex bg-skin-accent bg-opacity-0 transition-all hover:bg-opacity-10 p-3 rounded-lg gap-10">
               {
                 stack.map(({name, icon, url})=> 
                 (
-                  <li class="stack group/tech flex flex-col justify-center gap-2">
-                      <Icon class="size-14 grid place-self-center cursor-pointer hover:scale-125 transition-all " name={icon} />
-                      <a href={url}>
-                        <h3 class="absolute -bottom-5 text-xl font-bold place-self-center opacity-0 group-hover/tech:opacity-100 transition-opacity">{name}</h3>
-                        </a>
-                  </li>
-                ) )
-              }
+                  <li class="stack group/tech flex flex-col justify-center  gap-5 ">
+                    <Icon class="size-14 grid place-self-center cursor-pointer hover:scale-125 transition-all " name={icon} />
+                    <a href={url}>
+                      <h3 class="h-0  z-[1000] text-xl font-bold place-self-center scale-y-0 group-hover/tech:opacity-100 group-hover/tech:scale-y-100 transition-all text-center">{name}</h3>
+                      </a>
+                      </li>
+                      ) )
+                    }
               </div>
               </div>
             )
@@ -30,6 +32,7 @@ import {techStackByType} from "@utils/getTechStack";
         }
         </ul>
 
+      </div>
 
 
 
@@ -43,6 +46,10 @@ import {techStackByType} from "@utils/getTechStack";
   100% {
     transform: translateX(-300%);
   }
+}
+
+.scroller {
+  mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
 }
 
 </style>
