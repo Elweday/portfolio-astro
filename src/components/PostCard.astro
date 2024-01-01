@@ -14,31 +14,16 @@ export interface Props {
 
 const { frontmatter: {title, pubDatetime, description, cover}, href } = Astro.props;
 
-const isCoverRelative = cover.startsWith("/");
-
-
-
-
 ---
 <li class="flex flex-row p-3 bg-skin-fill rounded-lg  h-full ">
     <div class=" flex flex-col justify-between text-wrap w-full">
 
-    {isCoverRelative? 
-    
     <img 
-      style={{ viewTransitionName: slugifyStr(title)+":image" }}
-      class="" src={cover}  alt="" />
-    :
-    <Image
-        transition:name={slugifyStr(title)+":image"}
-        width={300}
-        height={300}
-        url={cover}
-        class=" rounded-2xl w-full p-2 aspect-video  object-cover"
-        alt=""
-      />
+    transition:name={slugifyStr(title)+":image"}
+      class=""
+      class=" rounded-2xl w-full p-2 aspect-video  object-cover"
+       src={cover}  alt="" />
 
-    }
 
 
       <a transition:name={slugifyStr(title)}   href={href}   class="py-1 text-wrap text-xl origin-top-left font-medium text-skin-accent underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0   hover:underline" >{title}</a>

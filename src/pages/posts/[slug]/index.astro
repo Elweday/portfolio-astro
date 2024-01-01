@@ -7,6 +7,7 @@ import Layout from "@layouts/Layout.astro";
 import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
 import { slugifyStr } from "@utils/slugify";
+import { Image } from "astro-preload/components";
 
 
 export async function getStaticPaths() {
@@ -26,7 +27,6 @@ const { slug } = Astro.params;
 const { post } = Astro.props;
 const { title, author, description, canonicalURL, pubDatetime, tags, cover } = post.data;
 const slugged = slugifyStr(title);
-import { Image } from "astro-preload/components";
 const isCoverRelative = cover.startsWith("/");
 
 const { Content } = await post.render();
@@ -61,23 +61,9 @@ const { Content } = await post.render();
     <Datetime datetime={pubDatetime} size="lg" className="my-2" />
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
       <figure>
-        {isCoverRelative? 
-    
-          <img 
-            style={{ viewTransitionName: slugifyStr(title)+":image" }}
+         <img 
+            transition:name={slugged+":image"}
             class=" rounded-2xl w-full p-2 aspect-video  object-cover" src={cover}  alt="" />
-          :
-          <Image
-              transition:name={slugifyStr(title)+":image"}
-              width={300}
-              height={300}
-              url={cover}
-              class=" rounded-2xl w-full p-2 aspect-video  object-cover"
-              alt=""
-            />
-      
-          }
-
       </figure>
       
       <Content />
