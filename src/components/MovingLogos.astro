@@ -13,7 +13,6 @@ import {techStackByType} from "@utils/getTechStack";
             <div class=" flex bg-skin-accent bg-opacity-0 transition-all hover:bg-opacity-10 p-3 rounded-lg gap-10">
               {
                 stack.map(({name, icon, url})=> 
-                
                 (
                   <li class="stack group/tech flex flex-col justify-center gap-2">
                       <Icon class="size-14 grid place-self-center cursor-pointer hover:scale-125 transition-all " name={icon} />
@@ -21,8 +20,6 @@ import {techStackByType} from "@utils/getTechStack";
                         <h3 class="absolute -bottom-5 text-xl font-bold place-self-center opacity-0 group-hover/tech:opacity-100 transition-opacity">{name}</h3>
                         </a>
                   </li>
-
-                
                 ) )
               }
               </div>

@@ -17,7 +17,7 @@ export default function Card({ href, frontmatter }: Props) {
   return (
     <li className="my-6 flex flex-row p-3 bg-skin-fill rounded-lg  h-full min-h-44">
       <div className=" flex flex-col justify-between text-wrap w-full">
-        <a {...headerProps}   href={href}   className="py-1 inline-block text-wrap text-xl scale-105 origin-top-left font-medium text-skin-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0   hover:underline" >{title}</a>
+        <a {...headerProps}   href={href}   className="py-1 text-wrap text-xl origin-top-left font-medium text-skin-accent underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0   hover:underline" >{title}</a>
         <p className="">{description}</p>
         <Datetime className="scale-90 origin-bottom-left mt-auto  " datetime={pubDatetime} />
       </div>
