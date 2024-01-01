@@ -1,29 +1,26 @@
 ---
 import { Icon } from "astro-icon";
 import {techStackByType} from "@utils/getTechStack";
+import { type TechnologyKey, Technologies } from "../types";
+
 ---
 
 
 <div class="scroller overflow-visible w-full h-full">
 
-  <ul id="tech-stack" class="w-full flex justify-between gap-10  p-5 " style={{animation: `scroll 30s linear infinite forwards`}}>
+  <ul id="tech-stack" class="w-full flex justify-between gap-10  p-5  overflow-scroll" style={{animation: `scroll 140s linear forwards infinite`}}>
     {
       
-      Object.entries(techStackByType).map(([type, stack])=>{
+      Object.values(Technologies).map(({type, name, icon, url})=>{
         return (
           <div class="stackType  flex flex-col group " data-type={type}>
-            <div class="flex bg-skin-accent bg-opacity-0 transition-all hover:bg-opacity-10 p-3 rounded-lg gap-10">
-              {
-                stack.map(({name, icon, url})=> 
-                (
+            <div class="contents">
                   <li class="stack group/tech flex flex-col justify-center  gap-5 ">
                     <Icon class="size-14 grid place-self-center cursor-pointer hover:scale-125 transition-all " name={icon} />
                     <a href={url}>
                       <h3 class="h-0  z-[1000] text-xl font-bold place-self-center scale-y-0 group-hover/tech:opacity-100 group-hover/tech:scale-y-100 transition-all text-center">{name}</h3>
                       </a>
                       </li>
-                      ) )
-                    }
               </div>
               </div>
             )
@@ -39,35 +36,55 @@ import {techStackByType} from "@utils/getTechStack";
 <style>
 
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(-300%);
-  }
-}
 
 .scroller {
   mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
 }
 
+
+
 </style>
 
 <script>
   document.addEventListener("astro:page-load", ()=> {
-    const suffix = document.querySelector("#suffix") as HTMLElement;
     const techStack = document.querySelector("#tech-stack") as HTMLElement;
-    [...document.querySelectorAll(".stackType") as NodeListOf<HTMLDataElement>].map((el) => {
-      el.addEventListener("mouseover", () => {
-        techStack.style.setProperty("animation-play-state", "paused" );
-        suffix.innerText =  String(el.dataset.type) 
-      }),
-      el.addEventListener("mouseout", () => {
-        suffix.innerText = "\n"
-        techStack.style.setProperty("animation-play-state", "running" );
+    let paused = false;
+    // add a callback to the animation
+    techStack.addEventListener("mouseover", ()=>paused = true)
+    techStack.addEventListener("mouseout", ()=>paused = false)
+    setInterval(()=> {
+      if (paused) return;
+      techStack.scrollLeft += 2;
+    }, 30)
+
+
+
+    const callback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const newNode = entry.target.cloneNode(true) as HTMLElement;
+          techStack.appendChild(newNode);
+          myObserver.observe(newNode);
+        }
+        
       })
+    }
+  
+
+    const myObserver = new IntersectionObserver(callback, {
+      root: techStack,
+      rootMargin: '200px',
+      threshold: 0.5
+    });
+    
+    [...techStack.children].forEach((el) => {
       
+      el.addEventListener("mouseover", () => techStack.style.setProperty("animation-play-state", "paused" )),
+      el.addEventListener("mouseout", ()=>techStack.style.setProperty("animation-play-state", "running" ))
+      myObserver.observe(el)
     })
+    
+    techStack.animate({scrollLeft: '500px'}, {duration: 5000, fill: "forwards"})
+
   })
 </script>
