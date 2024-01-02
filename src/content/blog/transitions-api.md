@@ -7,7 +7,7 @@ cover: "https://michalkuncio.com/how-to-create-beautiful-page-transitons-in-nuxt
 tags:
   - Astro
   - Vuejs
-description:
+description:tag
   Exploring View Transitions API using astro.
 ---
 
