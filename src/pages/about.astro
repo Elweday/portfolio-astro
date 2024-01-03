@@ -3,7 +3,7 @@ import { MY_SHOWS as showsList, HOBBIES as hobbies } from "@config";
 
 const getShow = async (showName: string) => {
   const res = await fetch(
-    `https://www.omdbapi.com/?t=${showName}&apikey=50788f34`,
+    `https://www.omdbapi.com/?t=${showName}&apikey=50788f34`, // Free API key no worries
     { cache: "force-cache" }
   );
   const data = await res.json();
@@ -12,10 +12,12 @@ const getShow = async (showName: string) => {
 
 import { techStackByType } from "@utils/getTechStack";
 
+/** @ts-ignore */
 import { Image } from "astro-preload/components";
+/** @ts-ignore */
+import { Icon } from "astro-icon";
 import Layout from "@layouts/Layout.astro";
 import Socials from "@components/Socials.astro";
-import { Icon } from "astro-icon";
 const showsData = showsList.map(async showName => {
   const value = await getShow(showName);
   return value;

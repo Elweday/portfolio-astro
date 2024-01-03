@@ -22,14 +22,14 @@ export interface Props {
 }
 
 let {
-  title,
+  title = SITE.title,
   author = SITE.author,
   description = SITE.desc,
   ogImage = SITE.ogImage,
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 } = Astro.props;
 
-const { title: siteTitle, desc: siteDesc } = SITE;
+const { title: siteTitle } = SITE;
 
 const path = title;
 const pageTitle = siteTitle + " | " + toTitleCase(title);
@@ -39,7 +39,6 @@ const socialImageURL = new URL(
   Astro.url.origin
 ).href;
 
-description = description ?? siteDesc;
 ---
 
 <!doctype html>
