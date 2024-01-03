@@ -10,7 +10,7 @@ const {tags, allTags, isTags} = Astro.props
 
 
 ---
-<form method="post" class="grid">
+<form method="get" class="grid">
 
     <ul class="grid gap-3 justify-stretch  grid-cols-2 sm:grid-cols-3 overflow-auto p-3 ">
         {(isTags ? tags : allTags).map((tag) => 
