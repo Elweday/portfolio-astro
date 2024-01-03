@@ -10,22 +10,21 @@ import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import slugify from "@utils/slugify";
 import { SOCIALS } from "@config";
-import {Technologies} from "../types";
 import MovingLogos from "@components/MovingLogos.astro";
 
 
-const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
+/* const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
   arr.reduce((groups, item) => {
     (groups[key(item)] ||= []).push(item);
     return groups;
   }, {} as Record<K, T[]>);
+  
+  // 
+  const techStackByType = groupBy(Object.values(Technologies), (tech) => tech.type);
 
-
+ */
 const posts = await getCollection("blog");
 const projects = await getCollection("projects"); 
-
-// 
-const techStackByType = groupBy(Object.values(Technologies), (tech) => tech.type);
 
 const sortedPosts = getSortedPosts(posts);
 

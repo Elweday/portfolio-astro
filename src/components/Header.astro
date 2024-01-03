@@ -1,7 +1,6 @@
 ---
 import { SITE, PATHS } from "@config";
 import Hr from "./Hr.astro";
-import LinkButton from "./LinkButton.astro";
 
 export interface Props {
   path?: string;
@@ -209,7 +208,7 @@ export interface Props {
   document.addEventListener("astro:page-load", ()=>{
     const menuBtn = document.querySelector(".menu-trigger");
     const menuItems = document.querySelector("#menu-items");
-    const menuExpanded = menuBtn?.getAttribute("aria-expanded") === "true";
+    // const menuExpanded = menuBtn?.getAttribute("aria-expanded") === "true";
     menuItems?.classList.remove("opened"); // Remove "opened" class if present
 
     function toggleMenu() {
@@ -240,7 +239,7 @@ export interface Props {
     const items = ["thicken", "glowingBat", "gotham"].map(item => document.getElementById(item) as HTMLElement)
     const isLong = (window.location.pathname === '/')  
     const animationDuration = isLong? 3000: 500;
-    trigger.onclick = (e) => {
+    trigger.onclick = (e: MouseEvent) => {
     items.forEach((item) => {
       item.classList.add('showAnimation')
       item.attributeStyleMap.set('animation-duration', `${animationDuration}ms`);

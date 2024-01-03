@@ -4,9 +4,7 @@ import "@styles/base.css";
 import { ViewTransitions } from "astro:transitions";
 import Batman from "@components/batman.astro";
 import Header from "@components/Header.astro";
-import Hr from "@components/Hr.astro";
 import Footer from "@components/Footer.astro";
-import Breadcrumbs from "@components/Breadcrumbs.astro";
 import Scroller from "@components/Scroller.astro";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -23,7 +21,7 @@ export interface Props {
   canonicalURL?: string;
 }
 
-const {
+let {
   title,
   author = SITE.author,
   description = SITE.desc,
@@ -40,6 +38,8 @@ const socialImageURL = new URL(
   ogImage ?? SITE.ogImage ?? "og.png",
   Astro.url.origin
 ).href;
+
+description = description ?? siteDesc;
 ---
 
 <!doctype html>

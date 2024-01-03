@@ -1,4 +1,3 @@
-import { slugifyStr } from "./slugify";
 import type { CollectionEntry } from "astro:content";
 import { type TechnologyKey, Technologies } from "../types";
 const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>

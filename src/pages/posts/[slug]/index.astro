@@ -1,13 +1,11 @@
 ---
 export const prerender = true 
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getCollection } from "astro:content";
 import slugify from "@utils/slugify";
-import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
 import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
 import { slugifyStr } from "@utils/slugify";
-import { Image } from "astro-preload/components";
 
 
 export async function getStaticPaths() {
@@ -23,12 +21,9 @@ export async function getStaticPaths() {
 }
 
 
-const { slug } = Astro.params;
 const { post } = Astro.props;
 const { title, author, description, canonicalURL, pubDatetime, tags, cover } = post.data;
 const slugged = slugifyStr(title);
-const isCoverRelative = cover.startsWith("/");
-
 const { Content } = await post.render();
 
 

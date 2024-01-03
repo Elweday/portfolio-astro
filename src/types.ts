@@ -1,4 +1,3 @@
-import { object } from "astro/zod";
 import { type CollectionEntry } from "astro:content";
 
 export type Projects = CollectionEntry<"projects">;

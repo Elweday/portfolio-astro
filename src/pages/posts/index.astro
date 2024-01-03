@@ -1,5 +1,5 @@
 ---
-import  {type CollectionEntry , getCollection} from "astro:content";
+import  { getCollection} from "astro:content";
 import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
 import Card from "@components/PostCard.astro";
@@ -10,7 +10,6 @@ import getUniqueTags from "@utils/getUniqueTags";
 import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
 import getPostsByTags from "@utils/getPostsByTags";
-import { $items } from "@utils/checksStore"
 
 
 
@@ -51,7 +50,7 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
 <Layout title="posts", description="All the articles I've posted." >
   <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6">Tags</h1>
   <ul class="flex flex-wrap gap-2 p-4">
-    {(isTags ? tags : allTags).slice(0, 6).sort((a,b) => a.length - b.length).map((tag, idx) => 
+    {(isTags ? tags : allTags).slice(0, 6).sort((a,b) => a.length - b.length).map((tag) => 
         <Tag name={tag} type="tag" class="pr-8 " />
     )}
     <Tag class="bg-skin-card/20 text-xl rounded-full px-6 *:scale-[1.6] " name="+" type="all" size="lg" >

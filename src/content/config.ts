@@ -1,8 +1,6 @@
 import { SITE } from "@config";
-import { Schema, ZodTuple } from "astro/zod";
 import { defineCollection, z } from "astro:content";
 import { Technologies } from "../types";
-import type { TupleType } from "typescript";
 
 const blog = defineCollection({
   type: "content",
