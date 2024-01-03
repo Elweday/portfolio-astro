@@ -1,6 +1,6 @@
 {
-  "name": "astro-paper",
-  "version": "3.0.0",
+  "name": "nasser-blog",
+  "version": "1.0.0",
   "private": false,
   "scripts": {
     "dev": "astro dev",
