@@ -1,4 +1,4 @@
-import { SITE } from "@config";
+import { SITE } from "../config";
 import { Schema, ZodTuple } from "astro/zod";
 import { defineCollection, z } from "astro:content";
 import { Technologies } from "../types";
