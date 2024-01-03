@@ -1,5 +1,4 @@
 ---
-pubDatetime: 2022-09-25T15:20:35Z
 title: Advent of code.
 postSlug: "aoc"
 draft: false
