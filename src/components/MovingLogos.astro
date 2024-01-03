@@ -48,6 +48,7 @@ import { type TechnologyKey, Technologies } from "../types";
 <script>
   document.addEventListener("astro:page-load", ()=> {
     const techStack = document.querySelector("#tech-stack") as HTMLElement;
+    if (!techStack) return;
     let paused = false;
     // add a callback to the animation
     techStack.addEventListener("mouseover", ()=>paused = true)

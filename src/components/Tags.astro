@@ -34,7 +34,6 @@ const {tags, allTags, isTags} = Astro.props
         input.addEventListener("change", (e)=>{
           const name = (e.target as HTMLInputElement).name
           $items.toggle(name)
-          console.log($items.get())
         })
     })
     addEventListener("submit", (e) => {
