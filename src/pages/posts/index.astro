@@ -10,15 +10,19 @@ import getUniqueTags from "@utils/getUniqueTags";
 import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
 import getPostsByTags from "@utils/getPostsByTags";
-
+import { $items } from "@utils/checksStore"
+import ReactComponent from "@components/f.tsx";
 
 
 
 const allPosts = await getCollection("blog");
 const allTags = getUniqueTags(allPosts);
+
+
+
+
 const tags = Astro.url.searchParams.getAll('tag');
 const pageNum =  parseInt(Astro.url.searchParams.get('page')|| "1" )
-
 const isTags = tags.length > 0
 const posts = isTags ? getPostsByTags(allPosts, tags) : allPosts;
 
@@ -41,10 +45,16 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
 
 
 
+
 ---
 
+<data id="tag-search-params" value={tagSearchParams}></data>
 <Layout title="posts", description="All the articles I've posted." >
   <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6">Tags</h1>
+  <ReactComponent />
+
+
+
 
   <ul class="flex flex-wrap gap-2 p-4">
     {(isTags ? tags : allTags).slice(0, 6).sort((a,b) => a.length - b.length).map((tag, idx) => 
@@ -53,7 +63,7 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
     <Tag class="bg-skin-card/20 text-xl rounded-full px-6 *:scale-[1.6] " name="+" type="all" size="lg" >
     </ul>
     <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6">Posts</h1>
-    <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
+    <ul id="posts"  class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
       {
         paginatedPosts
           .map(
@@ -117,3 +127,9 @@ section{
 </style>
 
 
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  document.cookie = "tags=" +  [...urlParams.getAll("tag").values()].join(",");
+
+</script>

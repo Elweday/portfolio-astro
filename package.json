@@ -28,6 +28,7 @@
     "core-js": "^3.35.0",
     "fuse.js": "^6.6.2",
     "github-slugger": "^2.0.0",
+    "nanostores": "^0.9.5",
     "nodemailer": "^6.9.7",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",

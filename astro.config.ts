@@ -11,12 +11,14 @@ import vercel from "@astrojs/vercel/serverless";
 import compress from "astro-compress";
 import preload from "astro-preload";
 
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
+  output : "hybrid",
   integrations: [preload(), tailwind({
     applyBaseStyles: false
-  }), react(), sitemap(), compress()],
+  }), react(), sitemap(), compress(), ],
   markdown: {
     remarkPlugins: [[remarkToc, {}], [remarkCollapse, {
       test: "Table of contents",

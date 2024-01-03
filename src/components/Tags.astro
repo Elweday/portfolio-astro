@@ -1,6 +1,5 @@
 ---
 import Tag from "./Tag.astro"
-
 export interface Props {
     tags: string[]
     allTags: string[]
@@ -16,7 +15,7 @@ const {tags, allTags, isTags} = Astro.props
     <ul class="grid gap-3 justify-stretch  grid-cols-2 sm:grid-cols-3 overflow-auto p-3 ">
         {(isTags ? tags : allTags).map((tag, idx) => 
         <label for={tag} class="relative ">
-            <input name={tag} id={tag} type="checkbox" hidden  class="peer absolute top-[10px] right-5 rounded-full h-6 w-6  accent-[rgb(var(--color-accent))]"/>
+            <input name={tag} id={tag} type="checkbox" hidden class="peer absolute top-[10px] right-5 rounded-full h-6 w-6  accent-[rgb(var(--color-accent))]"/>
             <Tag name={tag} size="lg" type="category" class="pr-10 w-full peer-checked:ring-2 peer-checked:ring-skin-accent   peer-checked:text-skin-accent peer-checked:[&>*:nth-child(1)]:[&>*:nth-child(1)]:fill-skin-accent  " />
         </label>
         
@@ -29,21 +28,24 @@ const {tags, allTags, isTags} = Astro.props
 </form>
 
 <script>
+    import { navigate } from 'astro:transitions/client';
+    import {$items} from "@utils/checksStore"
+    document.querySelectorAll("input[type=checkbox]").forEach((input)=>{
+        input.addEventListener("change", (e)=>{
+          const name = (e.target as HTMLInputElement).name
+          $items.toggle(name)
+          console.log($items.get())
+        })
+    })
     addEventListener("submit", (e) => {
       e.preventDefault()
-      console.log(e.target)
       const form = e.target as HTMLFormElement
-      
       const url = new URL(window.location.href)
-      let path = url.origin + "/posts?"
       const inputs = form.querySelectorAll("input[type=checkbox]") as NodeListOf<HTMLInputElement>
-    inputs.forEach((input) => {
-        
-      if (input.checked) {
-        path += ("tag="+ input.name+"&")
-      }
-})
-    window.location.href = path
-    
+      const tags = [...inputs].filter((input)=>input.checked)
+      const path = url.origin + "/posts?" + tags.map((input)=>'tag='+input.name).join("&")
+      navigate(path, {
+
+      })
     })
   </script>
