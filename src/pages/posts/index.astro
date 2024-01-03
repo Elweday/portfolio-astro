@@ -11,7 +11,6 @@ import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
 import getPostsByTags from "@utils/getPostsByTags";
 import { $items } from "@utils/checksStore"
-import ReactComponent from "@components/f.tsx";
 
 
 
@@ -51,11 +50,6 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
 <data id="tag-search-params" value={tagSearchParams}></data>
 <Layout title="posts", description="All the articles I've posted." >
   <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6">Tags</h1>
-  <ReactComponent />
-
-
-
-
   <ul class="flex flex-wrap gap-2 p-4">
     {(isTags ? tags : allTags).slice(0, 6).sort((a,b) => a.length - b.length).map((tag, idx) => 
         <Tag name={tag} type="tag" class="pr-8 " />
@@ -129,7 +123,33 @@ section{
 
 
 <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  document.cookie = "tags=" +  [...urlParams.getAll("tag").values()].join(",");
+  document.addEventListener("astro:page-load", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tags = [...urlParams.getAll("tag").values()];
+    if (tags.length === 0) {
+      return 
+    }
 
+    const tagsElements = document.querySelectorAll('[aria-type="post-tag"]') as NodeListOf<HTMLElement>;
+    tagsElements.forEach(tag => {
+      if (tags.includes(tag.dataset.tag as string)) return;
+      tag.classList.add("hidden");
+    })
+    const postsElements = document.querySelectorAll('[aria-type="blog-post"]') as NodeListOf<HTMLElement>;
+    type Post = {postTitle:string,postTags:string[], element:HTMLElement}
+    const posts: Post[] = [...postsElements].map(post => ({
+      postTitle:post.dataset.title as string,
+      postTags : (post.dataset.tags as string).split("/"),
+      element:post
+    }));
+  
+    function matching(tags:string[], postTags:string[]) {
+      return postTags.some(postTag => tags.includes(postTag));
+    }
+    posts.filter(({postTags}) => !matching(tags, postTags)).forEach(({element}) => {
+      element.classList.add("hidden");
+    })
+    
+  })
+  // get the difference between the posts and the postsByTags
 </script>

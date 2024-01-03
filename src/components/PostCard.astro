@@ -16,7 +16,7 @@ const { frontmatter: {title, pubDatetime, description, tags, cover}, href } = As
 const strTags = tags.map(tag => slugifyStr(tag)).join("/");
 
 ---
-<li data-tags={strTags} class="flex flex-row p-3 bg-skin-fill rounded-lg  h-full ">
+<li aria-type="blog-post" data-title={slugifyStr(title)} data-tags={strTags}  class="flex flex-row p-3 bg-skin-fill rounded-lg  h-full ">
     <div class=" flex flex-col justify-between text-wrap w-full">
 
     <img transition:name={slugifyStr(title)+":image"} class=" rounded-2xl w-full p-2 aspect-video  object-cover"  src={cover}  alt="" />
