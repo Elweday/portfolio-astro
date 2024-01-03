@@ -2,7 +2,7 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "verbatimModuleSyntax": true,
-    "baseUrl": "D:/backend/portfolio/src",
+    "baseUrl": "./src",
     "jsx": "preserve",
     "paths": {
       "@assets/*": [
