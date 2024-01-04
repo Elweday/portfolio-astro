@@ -2,17 +2,30 @@ import { SITE } from "@config";
 import { defineCollection, z } from "astro:content";
 import { Technologies } from "../types";
 
+
+
+const baseItem = z.object({
+  title: z.string(),
+  postSlug: z.string().optional(),
+  cover: z.string(),
+  draft: z.boolean().optional(),
+  tags: z.array(z.string()).default([]),
+  description: z.string(),
+})
+
+type FlexibleType<T> = {
+  [K in keyof T]: T[K];
+} & {
+  [key: string]: any;
+};
+
+
+type Entry = FlexibleType<z.infer<typeof baseItem> >;
+
 const blog = defineCollection({
   type: "content",
-  schema: z.object({
-    author: z.string().default(SITE.author),
+  schema: baseItem.extend({
     pubDatetime: z.date().default(new Date()),
-    title: z.string(),
-    postSlug: z.string().optional(),
-    cover: z.string(),
-    draft: z.boolean().optional(),
-    tags: z.array(z.string()).default([]),
-    description: z.string(),
     canonicalURL: z.string().optional(),
     }),
 });
@@ -23,22 +36,16 @@ const Stacks = [...Object.keys(Technologies)] as [string, ...string[]];
 
 const projects = defineCollection({
   type: "content",
-  schema: z.object({
-    author: z.string().default(SITE.author),
+  schema: baseItem.extend({
     startDate: z.date(),
     endDate: z
       .date()
       .or(z.enum(["Present"]))
       .default("Present"),
-    title: z.string(),
-    description: z.string(),
-    postSlug: z.string().optional(),
-    draft: z.boolean().optional(),
-    tags: z.array(z.string()).default(["others"]),
     stack: z.array(z.enum(Stacks)).default([]),
-    cover: z.string(),
     projectURL: z.string().url().optional(),
   })
 });
 
 export const collections = { blog, projects };
+export type {Entry};
