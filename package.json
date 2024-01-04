@@ -16,10 +16,13 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@astrojs/alpinejs": "^0.3.2",
     "@astrojs/check": "^0.2.1",
     "@astrojs/rss": "^3.0.0",
     "@astrojs/vercel": "^6.1.0",
     "@resvg/resvg-js": "^2.6.0",
+    "@types/alpinejs": "^3.13.6",
+    "alpinejs": "^3.13.3",
     "astro": "^4.0.8",
     "astro-compress": "^2.2.5",
     "astro-icon": "^0.8.2",

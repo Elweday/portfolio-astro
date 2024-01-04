@@ -7,6 +7,10 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Scroller from "@components/Scroller.astro";
 
+
+
+
+
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 const toTitleCase = function (str: string) {
@@ -15,7 +19,6 @@ const toTitleCase = function (str: string) {
 
 export interface Props {
   title: string;
-  author?: string;
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
@@ -23,7 +26,6 @@ export interface Props {
 
 let {
   title = SITE.title,
-  author = SITE.author,
   description = SITE.desc,
   ogImage = SITE.ogImage,
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
@@ -54,7 +56,7 @@ const socialImageURL = new URL(
     <title>{pageTitle}</title>
     <meta name="title" content={pageTitle} />
     <meta name="description" content={description} />
-    <meta name="author" content={author} />
+    <meta name="author" content={SITE.author} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={pageTitle} />
@@ -69,6 +71,7 @@ const socialImageURL = new URL(
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={socialImageURL} />
 
+
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -78,6 +81,7 @@ const socialImageURL = new URL(
     />
 
     <meta name="theme-color" content="" />
+
     
 
     {
@@ -102,7 +106,7 @@ const socialImageURL = new URL(
         container-name: main-body;
         container-type: size;
       }
-  
+
     </style>
 
   </head> 
@@ -122,5 +126,3 @@ const socialImageURL = new URL(
     </div>
   </body>
 </html>
-
-

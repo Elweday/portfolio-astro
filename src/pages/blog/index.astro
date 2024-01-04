@@ -2,7 +2,7 @@
 import  { getCollection} from "astro:content";
 import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
-import Card from "@components/PostCard.astro";
+import PostCard from "@components/PostCard.astro";
 import LinkButton from "@components/LinkButton.astro";
 import slugify from "@utils/slugify";
 import Tag from "@components/Tag.astro";
@@ -14,7 +14,7 @@ import getPostsByTags from "@utils/getPostsByTags";
 
 
 const allPosts = await getCollection("blog");
-const allTags = getUniqueTags(allPosts);
+const allTags = await getUniqueTags("blog");
 
 
 
@@ -46,9 +46,16 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
 
 ---
 
-<data id="tag-search-params" value={tagSearchParams}></data>
+<data  id="tag-search-params" value={tagSearchParams}></data>
 <Layout title="posts", description="All the articles I've posted." >
-  <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6">Tags</h1>
+  <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6" >Tags</h1>
+  <ul>
+      <template x-for="item in filteredItems" :key="item">
+          <li x-text="item"></li>
+      </template>
+  </ul>
+</div>
+
   <ul class="flex flex-wrap gap-2 p-4">
     {(isTags ? tags : allTags).slice(0, 6).sort((a,b) => a.length - b.length).map((tag) => 
         <Tag name={tag} type="tag" class="pr-8 " />
@@ -60,10 +67,9 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
       {
         paginatedPosts
           .map(
-            ({ data }) =>
-                <Card
-                  href={`/posts/${slugify(data)}`}
-                  frontmatter={data}
+            (post) =>
+                <PostCard
+                post = {post}
                 />
           )
       }
@@ -74,7 +80,7 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
     <nav class="pagination-wrapper" aria-label="Pagination">
       <LinkButton
         disabled={prev === "disabled"}
-        href={`/posts?${tagSearchParams}${pageNum - 1 !== 1 ? "page=" + (pageNum - 1) : ""}`}
+        href={`/blog?${tagSearchParams}${pageNum - 1 !== 1 ? "page=" + (pageNum - 1) : ""}`}
         className={`mr-4 select-none ${prev}`}
         ariaLabel="Previous"
       >
@@ -85,7 +91,7 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
       </LinkButton>
       <LinkButton
         disabled={next === "disabled"}
-        href={`/posts?${tagSearchParams}&page=${+pageNum + 1}`}
+        href={`/blog?${tagSearchParams}&page=${+pageNum + 1}`}
         className={`ml-4 select-none ${next}`}
         ariaLabel="Next"
       >
@@ -123,8 +129,7 @@ section{
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const tags = [...urlParams.getAll("tag").values()];
+    const tags = [...new URLSearchParams(window.location.search).getAll("tag").values()];
     if (tags.length === 0) {
       return 
     }

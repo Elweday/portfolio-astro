@@ -11,8 +11,8 @@ export const SITE: Site = {
 };
 
 export const PATHS = [
-  { name: "Posts", path: "/posts" },
-  { name: "Projects", path: "/my-projects" },
+  { name: "Blog", path: "/blog" },
+  { name: "Projects", path: "/projects" },
   { name: "About", path: "/about" },
 ]
 

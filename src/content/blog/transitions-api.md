@@ -1,6 +1,6 @@
 ---
 title: Probably the easiest way for web fancy transitions.
-postSlug: transitions-api
+slug: transitions-api
 featured: false
 cover: "https://michalkuncio.com/how-to-create-beautiful-page-transitons-in-nuxt-with-view-transitions-api/support.png"
 tags:

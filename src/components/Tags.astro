@@ -2,10 +2,13 @@
 import Tag from "./Tag.astro"
 export interface Props {
     tags: string[]
-    allTags: string[]
-    isTags?: boolean
 }
-const {tags, allTags, isTags} = Astro.props
+const {tags} = Astro.props;
+import getUniqueTags from "@utils/getUniqueTags";
+const allTags = await getUniqueTags("blog");
+
+const isTags = tags.length > 0
+
 
 
 
@@ -42,7 +45,7 @@ const {tags, allTags, isTags} = Astro.props
       const url = new URL(window.location.href)
       const inputs = form.querySelectorAll("input[type=checkbox]") as NodeListOf<HTMLInputElement>
       const tags = [...inputs].filter((input)=>input.checked)
-      const path = url.origin + "/posts?" + tags.map((input)=>'tag='+input.name).join("&")
+      const path = url.origin + "/blog?" + tags.map((input)=>'tag='+input.name).join("&")
       navigate(path, {
 
       })

@@ -1,5 +1,4 @@
 ---
-import { slugifyStr } from "@utils/slugify";
 import Datetime from "./Datetime";
 import type { CollectionEntry } from "astro:content";
 /** @ts-ignore */
@@ -12,25 +11,20 @@ import { Technologies } from "../types";
 type Technologies = keyof typeof Technologies;
 
 interface Props {
-  href?: string;
-  frontmatter: CollectionEntry<"projects">["data"];
-  secHeading?: boolean;
+  project: CollectionEntry<"projects">;
   class?: string;
 }
 
-const {
-  frontmatter: { title, startDate, endDate, description, cover, stack, projectURL},
-  href,
-  secHeading,
-  class:className
-} = Astro.props;
-const flagColor = projectURL ? "project-available" : "under-construction"
+const { project, class:className} = Astro.props;
+const { data, slug } = project;
+const { title, description, cover, stack, tags, startDate, endDate, projectURL } = data;
+const href = projectURL ? projectURL : `/projects/${slug}`
 
-const slug = slugifyStr(title);
+const flagColor = projectURL ? "project-available" : "under-construction"
 
 ---
 
-<li class={twMerge("text-white group ", className)} transition:name={slug+":cover"}>
+<li class={twMerge("text-white group ", className)} data-title={slug} transition:name={slug+":cover"}>
   <div class=" relative  size-full">
     <img  src={cover}  class="rounded-xl object-cover size-full" alt="" />
     <div class="absolute bottom-0  left-0 h-full w-full rounded-xl bg-gradient-to-b from-transparent to-skin-accent from-30%  opacity-100 duration-1000" />
@@ -60,7 +54,7 @@ const slug = slugifyStr(title);
         </div>
       </div>
     </span>
-    <a class="underline " href={href}> <Icon class=" p-1 rounded-lg  size-10" name="uiw:more"/></a>
+    <a class="underline " href={`/projects/${slug}`}> <Icon class=" p-1 rounded-lg  size-10" name="uiw:more"/></a>
       
     </span>
   </div>

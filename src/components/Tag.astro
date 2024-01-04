@@ -19,7 +19,7 @@ let {name, class: otherClasses, type} =  Astro.props;
 let href;
 switch (type) {
   case "tag":
-    href = `/posts?tag=${name.toLowerCase()}`
+    href = `/blog?tag=${name.toLowerCase()}`
     break
   case "category":
     href = `#`

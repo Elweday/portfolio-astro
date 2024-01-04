@@ -8,13 +8,14 @@ import { SITE } from "./src/config";
 import compress from "astro-compress";
 import preload from "astro-preload";
 
+import alpinejs from "@astrojs/alpinejs";
 
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
   integrations: [preload(), tailwind({
     applyBaseStyles: false
-  }), react(), sitemap(), compress(), ],
+  }), react(), sitemap(), compress(), alpinejs()],
   markdown: {
     remarkPlugins: [[remarkToc, {}], [remarkCollapse, {
       test: "Table of contents",

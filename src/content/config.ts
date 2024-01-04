@@ -6,7 +6,6 @@ import { Technologies } from "../types";
 
 const baseItem = z.object({
   title: z.string(),
-  postSlug: z.string().optional(),
   cover: z.string(),
   draft: z.boolean().optional(),
   tags: z.array(z.string()).default([]),

@@ -16,7 +16,7 @@ import { slugifyStr } from "@utils/slugify";
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
   const projectResults = projects.map(project => ({
-    params: { slug: slugify(project?.data) },
+    params: { slug: project.slug },
     props: { project },
 })
 );
@@ -28,19 +28,18 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await project.render();
 
-const { title, author, description, cover, stack, tags, startDate, endDate, } = project.data;
+
+const { slug, data: {title, description, cover, stack, tags, startDate, endDate}} = project;
 
 
-const ogUrl = new URL(cover ?? `/my-projects/${slugifyStr(title)}.png`, Astro.url.origin).href;
+const ogUrl = new URL(cover ?? `/projects/${slug}.png`, Astro.url.origin).href;
 
 
-const slug = slugifyStr(title);
 
 ---
 
 <Layout
   title={title}
-  author={author}
   description={description}
   ogImage={ogUrl}
 >

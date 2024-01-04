@@ -1,10 +1,9 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
-import getUniqueTags from "@utils/getUniqueTags";
-const allPosts = await getCollection("blog");
-const allTags = getUniqueTags(allPosts);
 import TagsElement from "@components/Tags.astro";
+
+import getUniqueTags from "@utils/getUniqueTags";
+const allTags = await getUniqueTags("blog");
 
 
 
@@ -14,7 +13,7 @@ import TagsElement from "@components/Tags.astro";
   <h1 class="text-2xl tracking-wider sm:text-3xl text-start py-6">Tags</h1>
   Select tags to filter posts
 
-  <TagsElement isTags={true} tags={allTags} allTags={allTags} />
+  <TagsElement tags={allTags} />
 </Layout>
 
 <style>

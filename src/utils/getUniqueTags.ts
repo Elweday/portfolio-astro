@@ -1,10 +1,14 @@
 import { slugifyStr } from "./slugify";
-import type { CollectionEntry } from "astro:content";
+import  { type CollectionEntry, getCollection } from "astro:content";
 
-const getUniqueTags = (posts: CollectionEntry<"blog">[]) => {
-  const filteredPosts = posts.filter(({ data }) => !data.draft);
-  const tags: string[] = filteredPosts
-    .flatMap(post => post.data.tags)
+const  getUniqueTags = async (...collections: ("blog" | "projects")[]) => {
+  const entries = await Promise.all(
+    collections.map(collection => getCollection(collection))
+  ).then(entries => entries.flat());
+
+  const filteredEntries = entries.filter(({ data }) => !data.draft);
+  const tags: string[] = filteredEntries
+    .flatMap(entry => entry.data.tags)
     .map(tag => slugifyStr(tag))
     .filter(
       (value: string, index: number, self: string[]) =>

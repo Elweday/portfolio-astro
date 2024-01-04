@@ -1,6 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import Card from "@components/ProjectCard.astro";
+import ProjectCard from "@components/ProjectCard.astro";
 import slugify from "@utils/slugify";
 
 import  {type CollectionEntry , getCollection} from "astro:content";
@@ -19,8 +19,8 @@ const allProjects: CollectionEntry<"projects">[] = await getCollection("projects
     <h1 class="text-2xl tracking-wider sm:text-3xl text-start py-6">Projects</h1>
     <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
       {
-        allProjects.map(({ data }) => (
-          <Card class="size-[25rem]" href={`/my-projects/${slugify(data)}`} frontmatter={data} />
+        allProjects.map((project) => (
+          <ProjectCard class="size-[25rem]" project={project} />
           ))
         }
     </ul>

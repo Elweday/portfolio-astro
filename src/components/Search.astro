@@ -1,0 +1,109 @@
+---
+
+import { slugifyStr } from "@utils/slugify";
+import { getCollection } from "astro:content";
+
+
+const posts = await getCollection("blog");
+const projects = await getCollection("projects"); 
+const entries = [...posts, ...projects];
+---
+
+
+
+<section  class="mt-3 flex-grow">
+    <label class="relative block">
+      <span class="absolute inset-y-0 left-0 flex items-center pl-2 opacity-75">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path>
+        </svg>
+      </span>
+      <input
+        id="search-input"
+        class=" px-[0.75rem] py-[0.32rem] indent-8 w-full justify-self-center bg-skin-card/30 rounded-lg text-md  block border border-skin-fill 
+      border-opacity-40 bg-skin-fill 
+       placeholder:italic placeholder:text-opacity-75 
+      focus:border-skin-accent focus:outline-none"
+        placeholder="Search for anything..."
+        type="text"
+        name="search"
+        onchange=""
+        autocomplete="on"
+        autofocus
+      />
+    </label>
+
+    <ul id="search-results" class="grid grid-cols-1 gap-4 p-4">
+      {
+        
+        entries.map(({slug, data}) => {
+            const isPost = "pubDatetime" in data;
+            const href = `/${isPost ? "blog" : "projects"}/${slug}`
+            return (
+                <a data-title={slugifyStr(data.title)} href={href} class="bg-skin-fill rounded-lg p-3 flex flex-col">
+                    <span class="text-skin-base/70">{isPost ? "Post" : "Project"}</span>
+                    <span transition:name={slug}  class="text-skin-accent">{data.title}</span>
+                    <div class="inline">
+                      <span aria-label="pre" class="" /><span aria-label="match" class="bg-red-500" /><span aria-label="post" class="" />
+                    </div>
+                </a>
+            )
+        }
+    )}
+    </ul>
+  </section>
+<script>
+    import { slugifyStr } from "@utils/slugify";
+    import { getCollection, type  CollectionEntry } from "astro:content";
+    const posts = await getCollection("blog");
+    const projects = await getCollection("projects"); 
+    const entries = [...posts, ...projects] as Entry[] 
+    type Entry = CollectionEntry<"blog"> | CollectionEntry<"projects"> 
+    function getMatch(entry: Entry, query: string) {
+        const blob = [entry.body, entry.data.description, entry.data.title].join(" ")
+        const start = blob.toLowerCase().indexOf(query.toLowerCase())
+        const end = start + query.length
+        const windowSize = 30; 
+        if (start !== -1) {
+          const pre = blob.slice(start - windowSize, start)
+          const match = blob.slice(start, end)
+          const post = blob.slice(end, end + windowSize)
+
+            return{
+                match: [pre, match, post],
+                title: slugifyStr(entry.data.title)
+            } 
+                
+        }
+
+    }
+
+    type searchResult =  {
+        match: [string, string, string]
+        title: string
+    }
+
+    const parentElement = document.getElementById("search-results") as HTMLUListElement
+    function updateList(searchResults: searchResult[]) {
+        [...parentElement.children].forEach((child: any) => {
+            const match = searchResults.find(({title}) => title === child.dataset.title) as searchResult;
+            if (!match) {
+                child.classList.add("hidden")
+                return
+            }
+            child.classList.remove("hidden")
+            child.querySelector(`[aria-label='pre']`).textContent = match.match[0]
+            child.querySelector(`[aria-label='match']`).textContent = match.match[1]
+            child.querySelector(`[aria-label='post']`).textContent = match.match[2]
+        })
+    }
+    const searchInput = (document.getElementById("search-input") as HTMLInputElement)
+    
+    
+    searchInput.addEventListener("input", (e) => {
+        const inputVal = (e.target as HTMLInputElement).value
+        const searchResults = entries.map((entry) => getMatch(entry, inputVal)).filter((match) => match !== undefined) as searchResult[];
+        updateList(searchResults)
+    })
+</script>
+ 

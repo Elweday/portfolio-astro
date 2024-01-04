@@ -81,9 +81,6 @@ export default (post: Collection) => {
               >
                 "
               </span>
-              <span style={{ overflow: "hidden", fontWeight: "bold" }}>
-                {post.data.author}
-              </span>
             </span>
 
             <span style={{ overflow: "hidden", fontWeight: "bold" }}>

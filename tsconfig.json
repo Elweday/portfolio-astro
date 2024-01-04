@@ -11,6 +11,9 @@
       "@config": [
         "config.ts"
       ],
+      "@_types": [
+        "types.ts"
+      ],
       "@components/*": [
         "components/*"
       ],

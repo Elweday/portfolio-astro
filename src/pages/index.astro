@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import LinkButton from "@components/LinkButton.astro";
 import Hr from "@components/Hr.astro";
-import Card from "@components/PostCard.astro";
+import PostCard from "@components/PostCard.astro";
 import ProjectCard from "@components/ProjectCard.astro";
 import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
@@ -23,6 +23,7 @@ import MovingLogos from "@components/MovingLogos.astro";
   const techStackByType = groupBy(Object.values(Technologies), (tech) => tech.type);
 
  */
+
 const posts = await getCollection("blog");
 const projects = await getCollection("projects"); 
 
@@ -71,7 +72,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
               <span>
               Projects
               </span>  
-              <LinkButton href="/my-projects">
+              <LinkButton href="/projects">
                 <span class="inline-flex items-center scale-[60%] whitespace-nowrap origin-right">
                   View All...
                   <svg xmlns="http://www.w3.org/2000/svg"
@@ -83,12 +84,10 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         </LinkButton>
               </h2>
             <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
-              {projects.slice(0, 2).map(({ data }) => (
+              {projects.slice(0, 2).map((project) => (
                 <ProjectCard
+                  project={project}
                   class="size-[25rem]"
-                  href={`/my-projects/${slugify(data)}`}
-                  frontmatter={data}
-                  secHeading={false}
                 />
               ))}
             </ul>
@@ -106,7 +105,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
       <h2 class="flex justify-between w-full  pb-2"><span>
         Recent Posts
         </span>  
-        <LinkButton href="/posts">
+        <LinkButton href="/blog">
           <span class="inline-flex items-center scale-[60%] whitespace-nowrap origin-right">
             Read More...
             <svg xmlns="http://www.w3.org/2000/svg"
@@ -121,10 +120,9 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         {
           sortedPosts.slice(0, 2)
             .map(
-              ({ data }) =>
-                  <Card
-                    href={`/posts/${slugify(data)}`}
-                    frontmatter={data}
+              (post) =>
+                  <PostCard
+                  post = {post}
                   />
             )
         }

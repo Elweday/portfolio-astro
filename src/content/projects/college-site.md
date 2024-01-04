@@ -3,7 +3,7 @@ startDate: 2022-09-23T15:22:00Z
 endDate: 2022-10-23T15:22:00Z
 title: College Tracking System
 description: College website with intuitive dashboard, control center, and detailed grade statistics for students and educators.
-postSlug: p1
+slug: college-tracking-system
 draft: false
 tags:
   - docs
