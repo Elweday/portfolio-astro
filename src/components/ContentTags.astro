@@ -1,0 +1,19 @@
+---
+import slugifyStr from "@utils/slugify";
+import Tag from "@components/Tag.astro";
+import { twMerge } from "tailwind-merge";
+
+export interface Props {
+    tags: string[]
+    class?: string
+    type?: "tag" | "category"
+    sort ?: boolean
+
+}
+
+const { tags, class: className, type, sort } = Astro.props
+---
+<p class={twMerge("my-8 flex gap-2  flex-wrap", className)}>
+    {tags.sort((a, b) => a.length - b.length).map((tag) => <Tag type={type} name={tag} />)}
+    <slot /> 
+</p>
