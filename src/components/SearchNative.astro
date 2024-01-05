@@ -2,11 +2,13 @@
 
 import { slugifyStr } from "@utils/slugify";
 import { getCollection } from "astro:content";
+import Datetime from "./Datetime.astro";
 
 
 const posts = await getCollection("blog");
 const projects = await getCollection("projects"); 
 const entries = [...posts, ...projects];
+import { Icon } from "astro-icon";
 ---
 
 
@@ -33,14 +35,20 @@ const entries = [...posts, ...projects];
       />
     </label>
 
+    <p id="number-of-results" class="text-skin-base/70 p-3">Search results</p>
     <ul id="search-results" class="grid grid-cols-1 gap-4 p-4">
       {
-        
         entries.map(({slug, data, collection}) => {
             const href = `/${collection}/${slug}`
             return (
                 <a data-title={slugifyStr(data.title)} href={href} class="bg-skin-fill rounded-lg p-3 flex flex-col">
-                    <span class="text-skin-base/70">{collection == "blog" ? "Post" : "Project"}</span>
+                  <div class="flex justify-between w-full">
+                    <Datetime relative={true} size="sm" datetime={collection == "blog"? data.pubDatetime : data.startDate} endDate={collection == "blog" ? undefined:data.startDate} class="text-skin-base/70 w-full scale-75 origin-left" />
+                    <div class="w-full flex gap-1  place-items-center justify-end">
+                      <Icon class="text-skin-base/70 size-4" name={collection == "blog" ? "ant-design:read-outlined" : "ic:baseline-code" }/> 
+                      <span class="text-skin-base/70 scale-90">{collection == "blog" ? "Post" : "Project"}</span>
+                    </div>
+                  </div>
                     <span transition:name={slug}  class="text-skin-accent">{data.title}</span>
                     <div class="inline">
                       <span aria-label="pre" class="" /><span aria-label="match" class="bg-red-500" /><span aria-label="post" class="" />
@@ -59,6 +67,7 @@ const entries = [...posts, ...projects];
     const posts = await getCollection("blog");
     const projects = await getCollection("projects"); 
     const entries = [...posts, ...projects] as Entry[] 
+    const entriesCount = entries.length 
     type Entry = CollectionEntry<"blog"> | CollectionEntry<"projects"> 
     function getMatch(entry: Entry, query: string) {
         const blob = [removeMd(entry.body), entry.data.description, entry.data.title].join(". ")
@@ -86,17 +95,21 @@ const entries = [...posts, ...projects];
 
     const parentElement = document.getElementById("search-results") as HTMLUListElement
     function updateList(searchResults: searchResult[]) {
+      let hiddenCount = 0;
         [...parentElement.children].forEach((child: any) => {
             const match = searchResults.find(({title}) => title === child.dataset.title) as searchResult;
             if (!match) {
                 child.classList.add("hidden")
+                hiddenCount += 1
                 return
             }
             child.classList.remove("hidden")
             child.querySelector(`[aria-label='pre']`).textContent = match.match[0]
             child.querySelector(`[aria-label='match']`).textContent = match.match[1]
             child.querySelector(`[aria-label='post']`).textContent = match.match[2]
-        })
+        });
+        
+        (document.getElementById("number-of-results") as HTMLParagraphElement).innerText = hiddenCount === entriesCount ? "No results found" : `Showing ${searchResults.length} results`;
     }
     const searchInput = (document.getElementById("search-input") as HTMLInputElement)
     

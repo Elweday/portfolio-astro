@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 import slugify from "@utils/slugify";
 import Layout from "@layouts/Layout.astro";
 import Tag from "@components/Tag.astro";
-import Datetime from "@components/Datetime";
+import Datetime from "@components/Datetime.astro";
 import { slugifyStr } from "@utils/slugify";
 import ContentTags from "@components/ContentTags.astro";
 
@@ -53,7 +53,7 @@ const { Content } = await post.render();
     </div>
 
     <h1 transition:name={slugged} class="post-title">{title}</h1>
-    <Datetime datetime={pubDatetime} size="lg" className="my-2" />
+    <Datetime datetime={pubDatetime} size="lg" class="my-2" />
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
       <figure>
          <img 

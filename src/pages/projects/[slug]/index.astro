@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 import slugify from "@utils/slugify";
 import Layout from "@layouts/Layout.astro";
 import Tag from "@components/Tag.astro";
-import Datetime from "@components/Datetime";
+import Datetime from "@components/Datetime.astro";
 /* @ts-ignore */
 import { Icon } from "astro-icon";
 import { Technologies, type TechnologyKey } from "../../../types";
@@ -46,7 +46,7 @@ const ogUrl = new URL(cover ?? `/projects/${slug}.png`, Astro.url.origin).href;
 >
 
   <main id="main-content">
-    <Datetime datetime={startDate} endDate={endDate} size="lg" className="my-2" />
+    <Datetime datetime={startDate} endDate={endDate} size="lg" class="my-2" />
     <img transition:name={slug+":cover"} src={cover}  class="my-5 rounded-xl" alt="" />
 
     <h1 transition:name={slug} class="post-title">{title}</h1>

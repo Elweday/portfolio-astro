@@ -1,7 +1,7 @@
 ---
 
 import { slugifyStr } from "@utils/slugify";
-import Datetime from "./Datetime";
+import Datetime from "./Datetime.astro";
 import type { CollectionEntry } from "astro:content";
 
 
@@ -26,6 +26,6 @@ const href = `/blog/${slug}`;
     <img transition:name={slug+":image"} class=" rounded-2xl w-full p-2 aspect-video  object-cover"  src={cover}  alt="" />
       <a transition:name={slug} href={href}   class="py-1 text-wrap text-xl origin-top-left font-medium text-skin-accent underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0   hover:underline" >{title}</a>
       <p class="">{description}</p>
-      <Datetime className="scale-90 origin-bottom-left mt-auto  " datetime={pubDatetime} />
+      <Datetime class="scale-90 origin-bottom-left mt-auto  " datetime={pubDatetime} />
     </div>
   </li>

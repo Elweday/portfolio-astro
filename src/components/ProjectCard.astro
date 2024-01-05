@@ -1,5 +1,5 @@
 ---
-import Datetime from "./Datetime";
+import Datetime from "./Datetime.astro";
 import type { CollectionEntry } from "astro:content";
 /** @ts-ignore */
 import { Icon } from "astro-icon";
@@ -40,7 +40,7 @@ const flagColor = projectURL ? "project-available" : "under-construction"
       <span class="h-full justify-end pointer-events-none w-full  flex flex-col  gap-2">
         
         <div class="origin-bottom-left" >
-          <Datetime datetime={startDate} endDate={endDate} size="sm" className="my-2 inline-block text-xs font-extralight transform origin-bottom-left translate-y-2 scale-75" />
+          <Datetime datetime={startDate} endDate={endDate} size="sm" class="my-2 inline-block text-xs font-extralight transform origin-bottom-left translate-y-2 scale-75" />
           <h2 class="text-lg sm:text-2xl font-bold " transition:name={slug}>{title}</h2>
           <h3 class="sm:text-sm text-[10pt]  font-thin  " transition:name={slug+":desc"}>{description}</h3>
           </div>
