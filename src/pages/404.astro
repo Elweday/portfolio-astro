@@ -3,30 +3,28 @@
 import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
 import LinkButton from "@components/LinkButton.astro";
+import { Image } from "astro-preload/components";
 ---
 
 <Layout title={`404 Not Found | ${SITE.title}`}>
-    <div class="not-found-wrapper">
-      <h1 aria-label="404 Not Found">404</h1>
-      <span aria-hidden="true">¯\_(ツ)_/¯</span>
-      <p>Page Not Found</p>
+    <div class=" mb-14 flex   flex-col w-full items-center">
+      <div class="flex items-center">
+        <h1 class="text-9xl font-bold text-skin-accent text-center" aria-label="404 Not Found">404</h1>
+        <Image name="404.png" class={"not-found-image aspect-auto w-40"} url="assets/404.png" />
+
+      </div>
+      
+              <p class="mt-4 text-2xl sm:text-3xl">
+                Sorry bro, 
+                justice is not served.
+                If you think this is an error, please don't contact me.
+              </p>
+
       <LinkButton
         href="/"
         className="my-6  text-lg"
       >
-        Go back home
+        Leave me alone.
       </LinkButton>
     </div>
 </Layout>
-
-<style>
-  .not-found-wrapper {
-    @apply mb-14 flex flex-col items-center justify-center;
-  }
-  .not-found-wrapper h1 {
-    @apply text-9xl font-bold text-skin-accent;
-  }
-  .not-found-wrapper p {
-    @apply mt-4 text-2xl sm:text-3xl;
-  }
-</style>
