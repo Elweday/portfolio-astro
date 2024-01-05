@@ -19,5 +19,5 @@ stack:
 ---
 
 <Main>
-Hello To my first project you idiot
+the content is being prepared by the author!
 </Main>
