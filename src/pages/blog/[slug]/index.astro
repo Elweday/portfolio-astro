@@ -40,7 +40,7 @@ const { Content } = await post.render();
 >
 
 
-<main id="main-content">
+<main class="mx-auto w-full px-4 pb-12" id="main-content">
     <div class="mx-auto flex w-full  justify-start px-2">
       <button
       class=" mb-2 mt-8 flex hover:opacity-75"
@@ -54,12 +54,13 @@ const { Content } = await post.render();
   </button>
     </div>
 
-    <h1 transition:name={slugged} class="post-title">{title}</h1>
+    <h1 transition:name={slugged} class="text-2xl font-semibold text-skin-accent">{title}</h1>
     <Datetime datetime={pubDatetime} size="lg" class="my-2" />
+    <figure>
+      <Image transition:name={slugged+":image"} name={slugged+".png"} url={cover} class="rounded-2xl w-full p-2 aspect-video  object-cover" />
+    </figure>
+    <p>{description}</p>
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
-      <figure>
-        <Image transition:name={slugged+":image"} name={slugged+".png"} url={cover} class="rounded-2xl w-full p-2 aspect-video  object-cover" />
-      </figure>
       
       <Content />
     </article>
@@ -68,15 +69,6 @@ const { Content } = await post.render();
   </main>
 </Layout>
 
-<style>
-  main {
-    @apply mx-auto w-full px-4 pb-12;
-  }
-  .post-title {
-    @apply text-2xl font-semibold text-skin-accent;
-  }
-
-</style>
 
 
 <script>

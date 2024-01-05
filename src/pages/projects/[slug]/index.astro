@@ -47,9 +47,23 @@ const ogUrl = new URL(cover ?? `/projects/${slug}.png`, Astro.url.origin).href;
 >
 
   <main id="main-content">
+        <div class="mx-auto flex w-full  justify-start px-2">
+      <button
+      class=" mb-2 mt-8 flex hover:opacity-75"
+      onclick="history.back()"
+      >
+      <svg xmlns="http://www.w3.org/2000/svg"
+      ><path
+      d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
+      ></path>
+    </svg><span>back</span>
+  </button>
+    </div>
+
+
+    <h1 transition:name={slug} class="post-title">{title}</h1>
     <Datetime datetime={startDate} endDate={endDate} size="lg" class="my-2" />
     <Image transition:name={slug+":cover"} name={slug+".png"} url={cover} class="my-5 rounded-xl aspect-video w-full" alt="" />
-    <h1 transition:name={slug} class="post-title">{title}</h1>
     <p transition:name={slug+":desc"}>{description}</p>
     <h2 class="mt-5 mb-3 text-xl font-bold">Tech Stack</h2>
     <ul class="flex flex-col gap-7">
