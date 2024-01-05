@@ -43,7 +43,7 @@ import { Icon } from "astro-icon";
             return (
                 <a data-title={slugifyStr(data.title)} href={href} class="bg-skin-fill rounded-lg p-3 flex flex-col">
                   <div class="w-full flex flex-row justify-between">
-                    <Datetime size="sm" datetime={collection == "blog"? data.pubDatetime : data.startDate} endDate={collection == "blog" ? undefined:data.startDate} class="text-skin-base/70  inline-block scale-75 origin-left" />
+                    <Datetime relative size="sm" datetime={collection == "blog"? data.pubDatetime : data.startDate} endDate={collection == "blog" ? undefined:data.startDate} class="text-skin-base/70  inline-block scale-75 origin-left" />
                     <div class="w-fit flex gap-1  place-items-center justify-end ">
                       <Icon class="text-skin-base/70 size-4" name={collection == "blog" ? "ant-design:read-outlined" : "ic:baseline-code" }/> 
                       <span class="text-skin-base/70 scale-90">{collection == "blog" ? "Post" : "Project"}</span>
