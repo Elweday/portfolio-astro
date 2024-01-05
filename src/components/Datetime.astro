@@ -1,5 +1,6 @@
 ---
 import { LOCALE } from "@config";
+import getRelativeTime from "@utils/relativeTime";
 export interface Props {
   datetime: string | Date;
   endDate?: string | Date;
@@ -8,19 +9,6 @@ export interface Props {
   relative?: boolean
 }
 
-const DAY_MILLISECONDS = 1000 * 60 * 60 * 24;
-
-function getRelativeTime(timestamp: Date) {
-  const timeNumber =  timestamp.getTime();
-  const rtf = new Intl.RelativeTimeFormat('en', {
-    numeric: 'auto',
-  });
-  const daysDifference = Math.round(
-    (timeNumber - new Date().getTime()) / DAY_MILLISECONDS,
-  );
-
-  return rtf.format(daysDifference, 'day');
-}
 
 
 const { datetime, size, class:className, endDate, relative = false } = Astro.props;
