@@ -7,24 +7,34 @@ import { Image } from "astro-preload/components";
 ---
 
 <Layout title={`404 Not Found | ${SITE.title}`}>
-    <div class=" mb-14 flex   flex-col w-full items-center">
-      <div class="flex items-center">
-        <h1 class="text-9xl font-bold text-skin-accent text-center" aria-label="404 Not Found">404</h1>
-        <Image name="404.png" class={"not-found-image aspect-auto w-40"} url="assets/404.png" />
+
+<button
+class=" mb-2 mt-8 flex hover:opacity-75"
+onclick="history.back()"
+>
+<svg xmlns="http://www.w3.org/2000/svg"
+><path
+d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
+></path>
+</svg><span>Leave me Alone</span>
+</button>
+    <div class="  flex   flex-col w-full items-center">
+      <div class="flex flex-col items-center gap-0">
+        <Image name="404.png" class={"not-found-image aspect-auto w-40 -mb-10"} url="assets/404.png" />
+        <div class="font-bold text-skin-accent text-center flex flex-col">
+          <h1 class="text-8xl " aria-label="404 Not Found">404</h1>
+          <span class="text-3xl">justice is <br>
+            not served.</span>
+
+        </div>
 
       </div>
       
-              <p class="mt-4 text-2xl sm:text-3xl">
-                Sorry bro, 
-                justice is not served.
+              <p class="mt-4 text-lg sm:text-3xl p-2">
                 If you think this is an error, please don't contact me.
+                Just visit other pages.
               </p>
 
-      <LinkButton
-        href="/"
-        className="my-6  text-lg"
-      >
-        Leave me alone.
-      </LinkButton>
+
     </div>
 </Layout>
