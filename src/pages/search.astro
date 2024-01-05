@@ -4,16 +4,6 @@ import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import SearchBar from "@components/SearchNative.astro";
 
-
-// Retrieve all articles
-const posts = await getCollection("blog", ({ data }) => !data.draft);
-
-// List of items to search in
-const searchList = posts.map(({ data }) => ({
-  title: data.title,
-  description: data.description,
-  data,
-}));
 ---
 
 <Layout title="search">
