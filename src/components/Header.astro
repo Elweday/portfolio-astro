@@ -48,7 +48,7 @@ export interface Props {
           <div id="menu" class="sm:contents flex flex-col w-full place-content-center place-items-center p-2 ">
             {
               PATHS.map(({name, path}) => {
-                const isActive = Astro.url.pathname === path
+                const isActive = Astro.url.pathname.replaceAll('/', '') === path.replaceAll('/', '')
                 return (
                   <li class="relative w-40  sm:w-28 p-1">
                     <a href={path}  class={isActive?"active w-full":""}>{name}</a>
