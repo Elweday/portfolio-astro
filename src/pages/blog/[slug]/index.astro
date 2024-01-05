@@ -7,6 +7,7 @@ import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime.astro";
 import { slugifyStr } from "@utils/slugify";
 import ContentTags from "@components/ContentTags.astro";
+import { Image } from "astro-preload/components";
 
 
 export async function getStaticPaths() {
@@ -26,6 +27,7 @@ const { post } = Astro.props;
 const { title, description, canonicalURL, pubDatetime, tags, cover } = post.data;
 const slugged = slugifyStr(title);
 const { Content } = await post.render();
+
 
 
 
@@ -56,9 +58,7 @@ const { Content } = await post.render();
     <Datetime datetime={pubDatetime} size="lg" class="my-2" />
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
       <figure>
-         <img 
-            transition:name={slugged+":image"}
-            class=" rounded-2xl w-full p-2 aspect-video  object-cover" src={cover}  alt="" />
+        <Image transition:name={slugged+":image"} name={slugged+".png"} url={cover} class="rounded-2xl w-full p-2 aspect-video  object-cover" />
       </figure>
       
       <Content />

@@ -10,6 +10,7 @@ import { Icon } from "astro-icon";
 import { Technologies, type TechnologyKey } from "../../../types";
 import { slugifyStr } from "@utils/slugify";
 import ContentTags from "@components/ContentTags.astro";
+import { Image } from "astro-preload/components";
 
 
 
@@ -47,8 +48,7 @@ const ogUrl = new URL(cover ?? `/projects/${slug}.png`, Astro.url.origin).href;
 
   <main id="main-content">
     <Datetime datetime={startDate} endDate={endDate} size="lg" class="my-2" />
-    <img transition:name={slug+":cover"} src={cover}  class="my-5 rounded-xl" alt="" />
-
+    <Image transition:name={slug+":cover"} name={slug+".png"} url={cover} class="my-5 rounded-xl" alt="" />
     <h1 transition:name={slug} class="post-title">{title}</h1>
     <p transition:name={slug+":desc"}>{description}</p>
     <h2 class="mt-5 mb-3 text-xl font-bold">Tech Stack</h2>

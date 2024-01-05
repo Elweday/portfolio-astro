@@ -7,6 +7,7 @@ import { Icon } from "astro-icon";
 import { twMerge } from "tailwind-merge";
 
 import { Technologies } from "../types";
+import { Image } from "astro-preload/components";
 
 type Technologies = keyof typeof Technologies;
 
@@ -26,7 +27,7 @@ const flagColor = projectURL ? "project-available" : "under-construction"
 
 <li class={twMerge("text-white group ", className)} data-title={slug} transition:name={slug+":cover"}>
   <div class=" relative  size-full">
-    <img  src={cover}  class="rounded-xl object-cover size-full" alt="" />
+    <Image transition:name={slug+":image"} name={slug+".png"} url={cover} class="rounded-xl object-cover size-full"  />
     <div class="absolute bottom-0  left-0 h-full w-full rounded-xl bg-gradient-to-b from-transparent to-skin-accent from-30%  opacity-100 duration-1000" />
   <span
   class=" absolute bottom-0 left-0  w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 transition-opacity pointer-events-none  group-hover:pointer-events-auto group-hover:opacity-100  flex"
