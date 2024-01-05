@@ -9,6 +9,7 @@ import Datetime from "@components/Datetime";
 import { Icon } from "astro-icon";
 import { Technologies, type TechnologyKey } from "../../../types";
 import { slugifyStr } from "@utils/slugify";
+import ContentTags from "@components/ContentTags.astro";
 
 
 
@@ -72,9 +73,7 @@ const ogUrl = new URL(cover ?? `/projects/${slug}.png`, Astro.url.origin).href;
       <Content />
     </article>
 
-    <ul class="tags-container">
-      {tags.map(tag => <Tag name={slugifyStr(tag)} />)}
-    </ul>
+      <ContentTags type="category" tags={tags} />
   </main>
 </Layout>
 

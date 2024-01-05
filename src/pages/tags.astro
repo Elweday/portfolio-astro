@@ -1,6 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import TagsElement from "@components/Tags.astro";
+import TagsElement from "@components/SearchByTag.astro";
 
 import getUniqueTags from "@utils/getUniqueTags";
 const allTags = await getUniqueTags("blog");
@@ -10,6 +10,7 @@ const allTags = await getUniqueTags("blog");
 ---
 
 <Layout title="tags">
+
   <h1 class="text-2xl tracking-wider sm:text-3xl text-start py-6">Tags</h1>
   Select tags to filter posts
 

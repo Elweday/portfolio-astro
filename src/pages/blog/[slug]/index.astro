@@ -6,6 +6,7 @@ import Layout from "@layouts/Layout.astro";
 import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
 import { slugifyStr } from "@utils/slugify";
+import ContentTags from "@components/ContentTags.astro";
 
 
 export async function getStaticPaths() {
@@ -63,9 +64,7 @@ const { Content } = await post.render();
       <Content />
     </article>
     
-    <ul class="my-8 flex gap-2 flex-wrap">
-      {tags.sort((a, b) => a.length - b.length).map(tag => <Tag type="tag" name={slugifyStr(tag)} />)}
-    </ul>
+    <ContentTags type="tag" tags={tags} />
   </main>
 </Layout>
 

@@ -10,6 +10,7 @@ import getUniqueTags from "@utils/getUniqueTags";
 import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
 import getPostsByTags from "@utils/getPostsByTags";
+import ContentTags from "@components/ContentTags.astro";
 
 
 
@@ -49,19 +50,12 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
 <data  id="tag-search-params" value={tagSearchParams}></data>
 <Layout title="posts", description="All the articles I've posted." >
   <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6" >Tags</h1>
-  <ul>
-      <template x-for="item in filteredItems" :key="item">
-          <li x-text="item"></li>
-      </template>
-  </ul>
 </div>
 
-  <ul class="flex flex-wrap gap-2 p-4">
-    {(isTags ? tags : allTags).slice(0, 6).sort((a,b) => a.length - b.length).map((tag) => 
-        <Tag name={tag} type="tag" class="pr-8 " />
-    )}
-    <Tag class="bg-skin-card/20 text-xl rounded-full px-6 *:scale-[1.6] " name="+" type="all" size="lg" >
-    </ul>
+<ContentTags tags={allTags} type="tag">
+  <Tag class="bg-skin-card/20 text-xl rounded-full px-6 *:scale-[1.6] " name="+" type="all" size="lg" >
+</ContentTags >
+
     <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6">Posts</h1>
     <ul id="posts"  class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
       {
@@ -127,18 +121,54 @@ section{
 
 
 
-<script>
+<script is:inline>
+  document.addEventListener("astro:after-swap", () => {
+    const tags = [...new URLSearchParams(window.location.search).getAll("tag").values()];
+    if (tags.length === 0) {
+      return 
+    }
+    function matching(tags, postTags) {
+      return postTags.some(postTag => tags.includes(postTag));
+    }
+
+    const tagsElements = document.querySelectorAll('[aria-type="post-tag"]');
+    const postsElements = document.querySelectorAll('[aria-type="blog-post"]');
+    const posts = [...postsElements].map(post => ({
+      postTitle:post.dataset.title,
+      postTags : (post.dataset.tags).split("/"),
+      element:post
+    }));
+    
+    //document.addEventListener("astro:after-swap", () => {
+      //console.log("Hello from before swap");
+      tagsElements.forEach(tag => {
+        if (tags.includes(tag.dataset.tag)) {
+          tag.classList.remove("hidden");
+          console.log(tag.dataset.tag)
+          return;
+        };
+        tag.classList.add("hidden");
+
+      })
+      posts.filter(({postTags}) => !matching(tags, postTags)).forEach(({element}) => {
+        element.classList.add("hidden");
+      })
+    //})
+    
+  })
+</script>
+
+<!-- <script>
   document.addEventListener("astro:page-load", () => {
     const tags = [...new URLSearchParams(window.location.search).getAll("tag").values()];
     if (tags.length === 0) {
       return 
     }
+    function matching(tags:string[], postTags:string[]) {
+      return postTags.some(postTag => tags.includes(postTag));
+    }
 
     const tagsElements = document.querySelectorAll('[aria-type="post-tag"]') as NodeListOf<HTMLElement>;
-    tagsElements.forEach(tag => {
-      if (tags.includes(tag.dataset.tag as string)) return;
-      tag.classList.add("hidden");
-    })
     const postsElements = document.querySelectorAll('[aria-type="blog-post"]') as NodeListOf<HTMLElement>;
     type Post = {postTitle:string,postTags:string[], element:HTMLElement}
     const posts: Post[] = [...postsElements].map(post => ({
@@ -146,14 +176,16 @@ section{
       postTags : (post.dataset.tags as string).split("/"),
       element:post
     }));
-  
-    function matching(tags:string[], postTags:string[]) {
-      return postTags.some(postTag => tags.includes(postTag));
-    }
-    posts.filter(({postTags}) => !matching(tags, postTags)).forEach(({element}) => {
-      element.classList.add("hidden");
-    })
+    
+    //document.addEventListener("", () => {
+      tagsElements.forEach(tag => {
+        if (tags.includes(tag.dataset.tag as string)) return;
+        tag.classList.add("hidden");
+      })
+      posts.filter(({postTags}) => !matching(tags, postTags)).forEach(({element}) => {
+        element.classList.add("hidden");
+      })
+    //})
     
   })
-  // get the difference between the posts and the postsByTags
-</script>
+</script> -->
