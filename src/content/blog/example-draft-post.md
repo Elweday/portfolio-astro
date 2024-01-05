@@ -7,8 +7,7 @@ tags:
   - Astro
 description:
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-  incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel
-  fringilla est
+  incididunt ut labore et dolore magna aliqua.
 ---
 
 ## Motivation

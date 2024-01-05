@@ -9,8 +9,7 @@ description:
   Exploring manim
 ---
 
-Nothing Yet.
+I've always liked mathematics, my love for math was magnified when I discovered 
+3b1b by the briliant Grant Sanderson, his animations were intuitive, clean, and most importantly impressive.
 
-## Motivation
-
-rec 1
+> to be continued...
