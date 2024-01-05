@@ -38,7 +38,8 @@ else {
 
 <script is:inline>
   import { getRelativeTime } from "@utils/relativeTime";
-  document.addEventListener("DOMContentLoaded", () => {
+
+  document.addEventListener("astro:page-load", () => {
     const dates = document.querySelectorAll("[data-time]");
     dates.forEach((date) => {
       const time = date.dataset.time;
