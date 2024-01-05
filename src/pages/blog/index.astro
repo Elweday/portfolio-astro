@@ -4,7 +4,6 @@ import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
 import PostCard from "@components/PostCard.astro";
 import LinkButton from "@components/LinkButton.astro";
-import slugify from "@utils/slugify";
 import Tag from "@components/Tag.astro";
 import getUniqueTags from "@utils/getUniqueTags";
 import getSortedPosts from "@utils/getSortedPosts";
@@ -12,39 +11,23 @@ import getPageNumbers from "@utils/getPageNumbers";
 import getPostsByTags from "@utils/getPostsByTags";
 import ContentTags from "@components/ContentTags.astro";
 
-
-
 const allPosts = await getCollection("blog");
 const allTags = await getUniqueTags("blog");
-
-
-
 
 const tags = Astro.url.searchParams.getAll('tag');
 const pageNum =  parseInt(Astro.url.searchParams.get('page')|| "1" )
 const isTags = tags.length > 0
 const posts = isTags ? getPostsByTags(allPosts, tags) : allPosts;
-
 const sortedPosts = getSortedPosts(posts);
-
 const totalPages = getPageNumbers(sortedPosts.length);
 const numPages = totalPages.length; 
 const lastPost = pageNum * SITE.postPerPage;
 const startPost = lastPost - SITE.postPerPage;
-
 const paginatedPosts = sortedPosts.slice(startPost, lastPost);
-
 const prev = pageNum > 1 ? "" : "disabled";
 const next = pageNum < numPages ? "" : "disabled";
 
 const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : ''; 
-
-
-
-
-
-
-
 ---
 
 <data  id="tag-search-params" value={tagSearchParams}></data>
@@ -122,7 +105,8 @@ section{
 
 
 <script is:inline>
-  document.addEventListener("astro:after-swap", () => {
+
+  const SearchparamsBasedFiltering = () => {
     const tags = [...new URLSearchParams(window.location.search).getAll("tag").values()];
     if (tags.length === 0) {
       return 
@@ -139,8 +123,6 @@ section{
       element:post
     }));
     
-    //document.addEventListener("astro:after-swap", () => {
-      //console.log("Hello from before swap");
       tagsElements.forEach(tag => {
         if (tags.includes(tag.dataset.tag)) {
           tag.classList.remove("hidden");
@@ -153,9 +135,10 @@ section{
       posts.filter(({postTags}) => !matching(tags, postTags)).forEach(({element}) => {
         element.classList.add("hidden");
       })
-    //})
     
-  })
+  }
+  document.addEventListener("astro:after-swap", SearchparamsBasedFiltering)
+  document.addEventListener("DOMContentLoaded", SearchparamsBasedFiltering)
 </script>
 
 <!-- <script>

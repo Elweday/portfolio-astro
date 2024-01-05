@@ -36,7 +36,7 @@ import { Icon } from "astro-icon";
     </label>
 
     <p id="number-of-results" class="text-skin-base/70 p-3">Search results</p>
-    <ul id="search-results" class="grid grid-cols-1 gap-4 p-4">
+    <ul id="search-results" class="grid grid-cols-1 gap-4 p-4 overflow-y-auto">
       {
         entries.map(({slug, data, collection}) => {
             const href = `/${collection}/${slug}`

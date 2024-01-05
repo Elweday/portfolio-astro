@@ -1,4 +1,3 @@
-//@ts-nocheck
 export default function (time) {
 	switch (typeof time) {
 		case "number":
