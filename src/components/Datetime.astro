@@ -39,12 +39,16 @@ else {
 <script is:inline>
   
   import { getRelativeTime } from "@utils/relativeTime";
-  
-  document.addEventListener("astro:page-load", () => {
+
+  function updateTime(){
     const dates = document.querySelectorAll("[data-time]");
     dates.forEach((date) => {
       const time = date.dataset.time;
       date.innerText = getRelativeTime(new Date(time))
     })
-  })
+
+  }
+  
+  document.addEventListener("DOMContentLoaded", updateTime);
+  document.addEventListener("astro:page-load", updateTime);
 </script>
