@@ -2,16 +2,6 @@ import { SITE } from "@config";
 import { defineCollection, z } from "astro:content";
 import { Technologies } from "../types";
 
-
-
-const baseItem = z.object({
-  title: z.string(),
-  cover: z.string(),
-  draft: z.boolean().optional(),
-  tags: z.array(z.string()).default([]),
-  description: z.string(),
-})
-
 type FlexibleType<T> = {
   [K in keyof T]: T[K];
 } & {
@@ -20,6 +10,14 @@ type FlexibleType<T> = {
 
 
 type Entry = FlexibleType<z.infer<typeof baseItem> >;
+
+const baseItem = z.object({
+  title: z.string(),
+  cover: z.string(),
+  draft: z.boolean().optional(),
+  tags: z.array(z.string()).default([]),
+  description: z.string(),
+})
 
 const blog = defineCollection({
   type: "content",

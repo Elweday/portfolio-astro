@@ -28,7 +28,7 @@ const entries = [...posts, ...projects];
         type="text"
         name="search"
         onchange=""
-        autocomplete="on"
+        autocomplete="off"
         autofocus
       />
     </label>
@@ -36,12 +36,11 @@ const entries = [...posts, ...projects];
     <ul id="search-results" class="grid grid-cols-1 gap-4 p-4">
       {
         
-        entries.map(({slug, data}) => {
-            const isPost = "pubDatetime" in data;
-            const href = `/${isPost ? "blog" : "projects"}/${slug}`
+        entries.map(({slug, data, collection}) => {
+            const href = `/${collection}/${slug}`
             return (
                 <a data-title={slugifyStr(data.title)} href={href} class="bg-skin-fill rounded-lg p-3 flex flex-col">
-                    <span class="text-skin-base/70">{isPost ? "Post" : "Project"}</span>
+                    <span class="text-skin-base/70">{collection == "blog" ? "Post" : "Project"}</span>
                     <span transition:name={slug}  class="text-skin-accent">{data.title}</span>
                     <div class="inline">
                       <span aria-label="pre" class="" /><span aria-label="match" class="bg-red-500" /><span aria-label="post" class="" />
@@ -55,12 +54,14 @@ const entries = [...posts, ...projects];
 <script>
     import { slugifyStr } from "@utils/slugify";
     import { getCollection, type  CollectionEntry } from "astro:content";
+    // @ts-expect-error
+    import removeMd from "remove-markdown";
     const posts = await getCollection("blog");
     const projects = await getCollection("projects"); 
     const entries = [...posts, ...projects] as Entry[] 
     type Entry = CollectionEntry<"blog"> | CollectionEntry<"projects"> 
     function getMatch(entry: Entry, query: string) {
-        const blob = [entry.body, entry.data.description, entry.data.title].join(" ")
+        const blob = [removeMd(entry.body), entry.data.description, entry.data.title].join(". ")
         const start = blob.toLowerCase().indexOf(query.toLowerCase())
         const end = start + query.length
         const windowSize = 30; 

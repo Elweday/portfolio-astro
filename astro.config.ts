@@ -7,25 +7,44 @@ import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
 import compress from "astro-compress";
 import preload from "astro-preload";
-
+import stripMarkdown from 'strip-markdown'
 import alpinejs from "@astrojs/alpinejs";
+
+
+type UserConfig = Parameters<typeof defineConfig>[0]
+
+const markdownConfig: UserConfig["markdown"] = {
+  remarkPlugins: [
+    [remarkToc, {
+      heading: "Contents",
+      tight: true,
+      maxDepth: 3
+    }],
+    [remarkCollapse, {
+      test: "Contents",
+      content: "show contents",
+    }],
+    //[stripMarkdown, {}]
+    
+  ],
+  shikiConfig: {
+    theme: 'dracula',
+    wrap: true
+  }
+}
+
+
+const integrations: UserConfig["integrations"] = [preload(), tailwind({
+  applyBaseStyles: false
+}), react(), sitemap(), compress(), alpinejs()]
+
+
 
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
-  integrations: [preload(), tailwind({
-    applyBaseStyles: false
-  }), react(), sitemap(), compress(), alpinejs()],
-  markdown: {
-    remarkPlugins: [[remarkToc, {}], [remarkCollapse, {
-      test: "Table of contents",
-      summary: "show table of contents"
-    }]],
-    shikiConfig: {
-      theme: "one-dark-pro",
-      wrap: true
-    }
-  },
+  integrations: integrations,
+  markdown: markdownConfig,
   vite: {
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"]

@@ -17,7 +17,7 @@ description:
 
 
 
-## Table of contents
+## Contents
 
 ## Motivation
 
