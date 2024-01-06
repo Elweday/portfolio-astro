@@ -12,7 +12,7 @@ import { Icon } from "astro-icon";
 import Tabs from "@components/Tabs.astro";
 ---
 
-    <label class="relative block">
+    <label  class="relative block">
       <span class="absolute inset-y-0 left-0 flex items-center pl-2 opacity-75">
         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"></path>
@@ -34,7 +34,7 @@ import Tabs from "@components/Tabs.astro";
     </label>
 
     <p id="number-of-results" class="text-skin-base/70 p-3">Search results</p>
-    <ul id="search-results" class="grid grid-cols-1 gap-4 p-4 overflow-y-auto">
+    <ul id="search-results"  class="grid grid-cols-1 gap-4 p-4 overflow-y-auto">
       {
         entries.map(({slug, data, collection}) => {
             const href = `/${collection}/${slug}`
@@ -64,9 +64,14 @@ import Tabs from "@components/Tabs.astro";
   const posts = await getCollection("blog");
   const projects = await getCollection("projects"); 
   type Entry = CollectionEntry<"blog"> | CollectionEntry<"projects"> 
+  type searchResult =  {
+        match: [string, string, string]
+        title: string
+  }
+
   const entries = [...posts, ...projects] as Entry[] 
   const entriesCount = entries.length 
-    function sentence(s: string, first: boolean) {
+  function sentence(s: string, first: boolean) {
       const delimiters = /[.!?,;\n]/g; // Include newline character as a sentence delimiter
       const delimiterPositions = [...s.matchAll(delimiters)].map(match => match.index);
       if (first) {
@@ -77,7 +82,7 @@ import Tabs from "@components/Tabs.astro";
           return lastDelimiterPosition !== undefined ? s.slice(lastDelimiterPosition + 1) : s;
       }
     }
-    function getMatch(entry: Entry, query: string) {
+  function getMatch(entry: Entry, query: string) {
         const blob = [removeMd(entry.body), entry.data.description, entry.data.title].join("\n")
         const start = blob.toLowerCase().indexOf(query.toLowerCase())
         const end = start + query.length
@@ -97,37 +102,34 @@ import Tabs from "@components/Tabs.astro";
 
     }
 
-    type searchResult =  {
-        match: [string, string, string]
-        title: string
-    }
 
-    const parentElement = document.getElementById("search-results") as HTMLUListElement
-    function updateList(searchResults: searchResult[]) {
+    function updateList(e: any) {
+      if (e.target.id !== "search-input") return;
+      const searchResults = getSearchResults()
       let hiddenCount = 0;
-        [...parentElement.children].forEach((child: any) => {
-            const match = searchResults.find(({title}) => title === child.dataset.title) as searchResult;
-            if (!match) {
-                child.classList.add("hidden")
-                hiddenCount += 1
-                return
-            }
-            child.classList.remove("hidden")
-            child.querySelector(`[aria-label='pre']`).textContent = match.match[0]
-            child.querySelector(`[aria-label='match']`).textContent = match.match[1]
-            child.querySelector(`[aria-label='post']`).textContent = match.match[2]
-        });
-        
-        (document.getElementById("number-of-results") as HTMLParagraphElement).innerText = hiddenCount === entriesCount ? "No results found" : `Showing ${searchResults.length} results`;
+      const parentElement = document.getElementById("search-results") as HTMLUListElement
+      [...parentElement.children].forEach((child: any) => {
+        const match = searchResults.find(({title}) => title === child.dataset.title) as searchResult;
+        console.log(match)
+        if (match) {
+          child.classList.remove("hidden")
+          child.querySelector(`[aria-label='pre']`).innerText = match.match[0]
+          child.querySelector(`[aria-label='match']`).innerText = match.match[1]
+          child.querySelector(`[aria-label='post']`).innerText = match.match[2]
+          
+        }
+        else {
+          child.classList.add("hidden")
+          hiddenCount += 1
+        }
+      });
+      (document.getElementById("number-of-results") as HTMLParagraphElement).innerText = hiddenCount === entriesCount ? "No results found" : `Showing ${searchResults.length} results`;
     }
-    const searchInput = (document.getElementById("search-input") as HTMLInputElement)
-    
-    
-    searchInput.addEventListener("input", (e) => {
-        const inputVal = (e.target as HTMLInputElement).value
-        const searchResults = entries.map((entry) => getMatch(entry, inputVal)).filter((match) => match !== undefined) as searchResult[];
-        updateList(searchResults)
-    })
+    function getSearchResults () {
+      const inputVal = (document.getElementById("search-input") as HTMLInputElement).value
+      return entries.map((entry) => getMatch(entry, inputVal)).filter((match) => match !== undefined) as searchResult[];
 
+    }
+    addEventListener("input", updateList);
 </script>
  
