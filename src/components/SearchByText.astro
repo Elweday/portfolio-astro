@@ -9,11 +9,9 @@ const posts = await getCollection("blog");
 const projects = await getCollection("projects"); 
 const entries = [...posts, ...projects];
 import { Icon } from "astro-icon";
+import Tabs from "@components/Tabs.astro";
 ---
 
-
-
-<section  class="mt-3 flex-grow">
     <label class="relative block">
       <span class="absolute inset-y-0 left-0 flex items-center pl-2 opacity-75">
         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -58,7 +56,6 @@ import { Icon } from "astro-icon";
         }
     )}
     </ul>
-  </section>
   <script>
   import { slugifyStr } from "@utils/slugify";
   import { getCollection, type  CollectionEntry } from "astro:content";

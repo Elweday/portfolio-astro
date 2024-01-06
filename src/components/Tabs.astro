@@ -1,0 +1,21 @@
+---
+const TABS = [{name:"Search by text", path:"/search"}, {name:"Search by tag", path:"/search/tags"}];
+
+
+const selected = TABS[1];
+console.log();
+---
+
+      <ul class="relative w-full my-4  flex flex-wrap p-2 list-none rounded-lg bg-skin-fill" data-tabs="tabs" role="list">
+        {TABS.map(({name, path}) => (
+        <li class="relative z-30 flex-auto text-center cursor-pointer">
+            {Astro.url.pathname === path ?<div transition:name="tab-selected" class="absolute rounded-lg w-full h-full bg-skin-accent/30" /> : null}
+        <a href={path} class="z-30 flex items-center justify-center w-full  py-1 mb-0 transition-all ease-in-out border-0 rounded-lg  "
+            data-tab-target="" role="tab" aria-selected="true">
+            <span class="ml-1">{name}</span>
+          </a>
+        </li>
+
+        ))}
+      </ul>
+  

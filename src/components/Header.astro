@@ -1,26 +1,27 @@
 ---
 import { SITE, PATHS } from "@config";
 import Hr from "./Hr.astro";
+import { Icon } from "astro-icon";
 
 export interface Props {
   path?: string;
 }
 
-const currentPagePath = Astro.url.pathname.replaceAll("/", "");
+const currentPagePath = Astro.url.pathname.split("/");
 
 ---
 
 <header  class="h-fit sticky top-0 " >
-  <nav class="flex h-fit"> 
-<div class="flex w-full  justify-between place-content-center ">
+  <nav class="flex h-fit w-full flex-col items-center justify-between sm:flex-row  "> 
+      <div class="flex  place-content-center justify-between w-full">
 
-  <button  class="crimeInGotham" id="">
+  <button  class="" id="batman-trigger">
     <svg
           xmlns="http://www.w3.org/2000/svg"
           class={"h-14 w-14 hover:scale-[110%] transition-scale duration-150 " + (Astro.url.pathname == "/"? "fill-skin-accent":"fill-skin-base") }
           viewBox="0 0 680 295"
           >
-          <a id="skip-to-content" href="#main-content">Skip to content</a>
+          <a class="absolute -top-full left-16 z-50 bg-skin-accent px-3 py-2 text-skin-inverted transition-all focus:top-4" id="skip-to-content" href="#main-content">Skip to content</a>
           <path
                 stroke-width="0"
                 fill="rgb(var(--color-skin-accent))"
@@ -31,7 +32,7 @@ const currentPagePath = Astro.url.pathname.replaceAll("/", "");
   </button>
       
         <button
-          class="menu-trigger sm:opened"
+          class="menu-trigger sm:opened scale-150 block sm:hidden pointer-cursor"
           aria-label="Open Menu"
           aria-expanded="false"
           aria-controls="menu-items"
@@ -44,31 +45,31 @@ const currentPagePath = Astro.url.pathname.replaceAll("/", "");
       
         </button>
       </div>
-        <ul id="menu-items" class="max-h-0">
+        <ul id="menu-items" class="place-self-center items-center content-center gap-4 max-h-0 sm:max-h-[1000px] ease-in-out overflow-hidden sm:flex flex-row sm:p-2 px-3 w-full relative flex  h-full  mb-2 ">
 
-          <div id="menu" class="sm:contents flex flex-col w-full place-content-center place-items-center p-2 ">
+          <div id="menu" class="sm:contents  flex flex-col w-full place-content-center place-items-center  p-2 ">
             {
-              PATHS.map(({name, path}) => {
-                const isActive = currentPagePath === path.replaceAll('/', '')
+              PATHS.map(({name, path, icon}) => {
+                const isActive = currentPagePath.includes(path.replaceAll('/', ''))
                 return (
-                  <li class="relative w-40  sm:w-28 p-1">
-                    <a href={path}  class={isActive?"active w-full":""}>{name}</a>
+                  <li class="relative w-full ">
+                    <a href={path}  class={"flex flex-row items-center gap-2 w-full px-4 py-3 text-center font-medium hover:text-skin-accent sm:my-0 sm:px-2 sm:py-1" + (isActive?" font-bold text-skin-accent w-full":"")}>
+                      {
+                        /*
+                         <Icon class={" size-7" +(isActive?"fill-skin-accent font-extrabold ":"fill-skin-base")} name={icon} />
+                         */
+                      }
+                      <span class="place-self-center  w-full">{name}</span>
+                    </a>
                     { isActive ? (<span transition:name="active-nav" class="absolute top-0 left-0 h-full hidden sm:block w-full  border-skin-accent bg-black/10 border-2 rounded-xl"></span>) : null }
-                  </li>)
+                    </li>)
               })
           }
-          <li class="relative w-40  sm:w-28 p-1">
-            <a href={"/search"}  class={currentPagePath === 'search'?"active w-full":""}>
-            <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100" ><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" ></path></svg>
-            
-            </a>
-            { currentPagePath === 'search' ? (<span transition:name="active-nav" class="absolute top-0 left-0 h-full hidden sm:block  w-full  border-skin-accent bg-black/10 border-2 rounded-xl"></span>) : null }
-          </li>
-          <li>
+          <li class="relative w-full items-center content-center">
             {
               SITE.lightAndDarkMode && (
-                <button id="theme-btn" class="focus-outline " title="Toggles light & dark" aria-label="auto" aria-live="polite">
-                  <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg">
+                <button id="theme-btn" class="  px-4 py-3 text-center font-medium hover:text-skin-accent sm:my-0 sm:px-2 sm:py-1 w-full  flex content-center place-content-center  " title="Toggles light & dark" aria-label="auto" aria-live="polite">
+                  <svg class="" xmlns="http://www.w3.org/2000/svg" id="moon-svg">
                     <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" />
                   </svg>
                   <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg">
@@ -88,11 +89,6 @@ const currentPagePath = Astro.url.pathname.replaceAll("/", "");
 
 
 
-.menu-trigger {
-
-  @apply scale-150 block sm:hidden;
-  cursor: pointer;
-}
 
 .line {
   @apply stroke-skin-accent;
@@ -116,65 +112,6 @@ const currentPagePath = Astro.url.pathname.replaceAll("/", "");
   transform: rotate(-45deg);
 }
 
-
-
-#menu-items {
-  @apply sm:max-h-[1000px] ease-in-out overflow-hidden sm:flex flex-row gap-4 sm:p-2 px-3 w-full relative;
-}
-
-
-  #skip-to-content {
-    @apply absolute -top-full left-16 z-50 bg-skin-accent px-3 py-2 text-skin-inverted transition-all focus:top-4;
-  }
-  .focus-outline {
-    @apply outline-2 outline-offset-1 outline-skin-fill focus-visible:no-underline ;
-  }
-
-  .top-nav-wrap {
-    @apply relative flex w-full items-start justify-between p-4 sm:items-center sm:py-8;
-  }
-  .logo {
-    @apply absolute py-1 text-xl font-semibold sm:static sm:text-2xl;
-  }
-  .hamburger-menu {
-    @apply  sm:hidden place-self-center justify-self-center h-full;
-  }
-  .hamburger-menu svg {
-    @apply h-8 w-8 scale-125 fill-skin-base;
-  }
-
-  nav {
-    @apply flex w-full flex-col items-center sm:ml-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0;
-  }
-  nav ul {
-    @apply w-full flex flex-col h-full sm:ml-0 sm:mt-0 mb-2 ;
-  }
-  nav ul li {
-    @apply  flex items-center justify-center;
-  }
-  nav ul li a {
-    @apply w-full px-4 py-3 text-center font-medium hover:text-skin-accent sm:my-0 sm:px-2 sm:py-1;
-  }
-  nav ul li:nth-last-child(2) a {
-    @apply w-auto;
-  }
-  nav ul li:nth-last-child(1),
-  nav ul li:nth-last-child(2) {
-    @apply col-span-1;
-  }
-  nav a.active {
-    @apply  mx-5 sm:mx-0 font-bold text-skin-accent;
-  }
-  nav a.active svg {
-    @apply fill-skin-accent font-extrabold;
-  }
-
-  nav button {
-    @apply p-1;
-  }
-  nav button svg {
-    @apply h-6 w-6 ;
-  }
   #theme-btn {
     @apply p-3 sm:p-1;
   }
@@ -236,7 +173,7 @@ const currentPagePath = Astro.url.pathname.replaceAll("/", "");
 }
 
     menuBtn?.addEventListener("click", toggleMenu); 
-    const trigger = document.querySelector(".crimeInGotham") as HTMLButtonElement
+    const trigger = document.getElementById("batman-trigger") as HTMLButtonElement
     const items = ["thicken", "glowingBat", "gotham"].map(item => document.getElementById(item) as HTMLElement)
     const isLong = (window.location.pathname === '/')  
     const animationDuration = isLong? 3000: 500;

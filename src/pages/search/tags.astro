@@ -1,0 +1,11 @@
+---
+import SearchPage from "@layouts/SearchPage.astro";
+import SearchByTag from "@components/SearchByTag.astro";
+import getUniqueTags from "@utils/getUniqueTags";
+const tags = await getUniqueTags("blog", "projects");
+
+---
+
+<SearchPage>
+    <SearchByTag tags={tags} />
+</SearchPage>

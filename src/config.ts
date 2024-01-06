@@ -11,10 +11,12 @@ export const SITE: Site = {
 };
 
 export const PATHS = [
-  { name: "Blog", path: "/blog" },
-  { name: "Projects", path: "/projects" },
-  { name: "About", path: "/about" },
+  { name: "Blog", path: "/blog", icon: "ant-design:read-outlined" },
+  { name: "Projects", path: "/projects", icon: "ic:baseline-code" },
+  { name: "About", path: "/about", icon: "mdi:about-circle-outline" },
+  { name: "Search", path: "/search", icon: "ic:baseline-search" },
 ]
+
 
 
 export type NAV_LINKS = "posts" | "projects" | "about" | "search" | "tags" | "home" | "search"
