@@ -75,14 +75,13 @@
   .prose {
     @apply 
     prose-headings:!mb-3 prose-headings:!text-skin-base 
+
     prose-h3:italic prose-p:!text-skin-base 
     prose-a:!text-skin-base prose-a:underline-offset-8
     hover:prose-a:text-skin-accent prose-blockquote:!border-l-skin-accent
     prose-blockquote:border-opacity-50 prose-blockquote:opacity-80
     prose-figcaption:!text-skin-base prose-figcaption:opacity-70
     prose-strong:!text-skin-base
-
-    
     prose-code:rounded prose-code:bg-skin-card 
     prose-code:bg-opacity-75 prose-code:p-1 
     prose-code:before:!content-[''] prose-code:after:!content-['']
@@ -93,6 +92,9 @@
     prose-td:border-skin-line prose-img:mx-auto 
     prose-img:!mt-2 prose-img:rounded-xl   
     prose-img:border-skin-line prose-hr:!border-skin-line;
+  }
+  .prose h2 {
+    @apply mb-2 !text-skin-accent;
   }
   .prose a {
     @apply break-words hover:!text-skin-accent;
