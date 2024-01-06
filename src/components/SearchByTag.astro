@@ -5,7 +5,7 @@ export interface Props {
 }
 const {tags} = Astro.props;
 import getUniqueTags from "@utils/getUniqueTags";
-const allTags = await getUniqueTags("blog");
+const allTags = await getUniqueTags("blog", "projects");
 
 const isTags = tags.length > 0
 
@@ -45,7 +45,7 @@ const isTags = tags.length > 0
       const url = new URL(window.location.href)
       const inputs = form.querySelectorAll("input[type=checkbox]") as NodeListOf<HTMLInputElement>
       const tags = [...inputs].filter((input)=>input.checked)
-      const path = url.origin + "/blog?" + tags.map((input)=>'tag='+input.name).join("&")
+      const path = url.origin + "/search/content?" + tags.map((input)=>'tag='+input.name).join("&")
       navigate(path, {
 
 

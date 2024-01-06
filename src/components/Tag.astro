@@ -19,7 +19,7 @@ let {name, class: otherClasses, type} =  Astro.props;
 let href;
 switch (type) {
   case "tag":
-    href = `/blog?tag=${name.toLowerCase()}`
+    href = `/search/content?tag=${name.toLowerCase()}`
     break
   case "category":
     href = `#`
@@ -33,7 +33,7 @@ let tagProps = {}
 
 if (type !== "all") {
   tagProps = {
-    "aria-type": "post-tag",
+    "aria-type": "item-tag",
     "data-tag": slugifyStr(name)
   }
 }

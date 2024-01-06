@@ -21,7 +21,7 @@ const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
 const href = `/blog/${slug}`;
 
 ---
-<li aria-type="blog-post" data-slug={slug} data-tags={strTags}  class="flex flex-row p-3 bg-skin-fill rounded-lg  h-full ">
+<li aria-type="search-item" data-slug={slug} data-tags={strTags}  class="flex flex-row p-3 bg-skin-fill rounded-lg  h-full ">
     <div class=" flex flex-col justify-between text-wrap w-full">
       <Image transition:name={slug+":image"} name={slug+".png"} url={cover} class="rounded-2xl w-full p-2 aspect-video  object-cover"  />
       <a transition:name={slug} href={href}   class="py-1 text-wrap text-xl origin-top-left font-medium text-skin-accent underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0   hover:underline" >{title}</a>

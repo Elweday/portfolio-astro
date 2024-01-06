@@ -8,6 +8,8 @@ import { twMerge } from "tailwind-merge";
 
 import { Technologies } from "../types";
 import { Image } from "astro-preload/components";
+import { slugifyStr } from "@utils/slugify";
+
 
 type Technologies = keyof typeof Technologies;
 
@@ -19,13 +21,14 @@ interface Props {
 const { project, class:className} = Astro.props;
 const { data, slug } = project;
 const { title, description, cover, stack, tags, startDate, endDate, projectURL } = data;
-const href = projectURL ? projectURL : `/projects/${slug}`
 
 const flagColor = projectURL ? "project-available" : "under-construction"
+const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
+
 
 ---
 
-<li class={twMerge("text-white group ", className)} data-title={slug} transition:name={slug+":cover"}>
+<li aria-type="search-item" data-slug={slug} data-tags={strTags} class={twMerge("text-white group ", className)} data-title={slug} transition:name={slug+":cover"}>
   <div class=" relative  size-full ">
     <Image transition:name={slug+":image"} name={slug+".png"} url={cover} class="rounded-xl object-cover size-full"  />
     <div class="absolute bottom-0  left-0 h-full w-full rounded-xl bg-gradient-to-b from-transparent to-skin-accent from-50%   opacity-100 duration-1000" />

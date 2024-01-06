@@ -6,24 +6,28 @@ import PostCard from "@components/PostCard.astro";
 import LinkButton from "@components/LinkButton.astro";
 import Tag from "@components/Tag.astro";
 import getUniqueTags from "@utils/getUniqueTags";
-import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
 import getItemsByTags from "@utils/getItemsByTags";
 import ContentTags from "@components/ContentTags.astro";
+import ProjectCard from "@components/ProjectCard.astro";
 
-const allPosts = await getCollection("blog");
-const allTags = await getUniqueTags("blog");
+
+const allitems = await getCollection("blog");
+const allProjects = await getCollection("projects");
+
+const allItems = [...allitems, ...allProjects];
+
+const allTags = await getUniqueTags("blog", "projects");
 
 const tags = Astro.url.searchParams.getAll('tag');
 const pageNum =  parseInt(Astro.url.searchParams.get('page')|| "1" )
 const isTags = tags.length > 0
-const posts = isTags ? getItemsByTags(allPosts, tags) as any : allPosts;
-const sortedPosts = getSortedPosts(posts);
-const totalPages = getPageNumbers(sortedPosts.length);
+const Items = isTags ? getItemsByTags(allItems, tags) : allItems;
+const totalPages = getPageNumbers(Items.length);
 const numPages = totalPages.length; 
-const lastPost = pageNum * SITE.itemsPerPage;
-const startPost = lastPost - SITE.itemsPerPage;
-const paginatedPosts = sortedPosts.slice(startPost, lastPost);
+const lastItem = pageNum * SITE.itemsPerPage;
+const startItem = lastItem - SITE.itemsPerPage;
+const paginatedItems = Items.slice(startItem, lastItem);
 const prev = pageNum > 1 ? "" : "disabled";
 const next = pageNum < numPages ? "" : "disabled";
 
@@ -31,7 +35,7 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
 ---
 
 <data  id="tag-search-params" value={tagSearchParams}></data>
-<Layout title="posts", description="All the articles I've posted." >
+<Layout title="Search By tag", description="Search by tags used in some of my technical projects and my blog Items." >
   <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6" >Tags</h1>
 </div>
 
@@ -39,15 +43,18 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
   <Tag class="bg-skin-card/20 text-xl rounded-full px-6 *:scale-[1.6] " name="+" type="all" size="lg" >
 </ContentTags >
 
-    <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6">Posts</h1>
-    <ul id="posts"  class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
+    <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6">Search Results..</h1>
+    <ul id="Items"  class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
       {
-        paginatedPosts
+        paginatedItems
           .map(
-            (post) =>
-                <PostCard
-                post = {post}
-                />
+            (item) =>
+            (
+              item.collection === "projects" ?
+              <ProjectCard class="size-[27rem]"  project={item} /> :
+              <PostCard  post={item} />
+            )
+                
           )
       }
     </ul>
@@ -102,4 +109,42 @@ section{
     }
 </style>
 
+
+
+<script is:inline>
+
+  const SearchparamsBasedFiltering = () => {
+    const tags = [...new URLSearchParams(window.location.search).getAll("tag").values()];
+    if (tags.length === 0) {
+      return 
+    }
+    function matching(tags, itemTags) {
+      return itemTags.some(itemTag => tags.includes(itemTag));
+    }
+
+    const tagsElements = document.querySelectorAll('[aria-type="item-tag"]');
+    const ItemsElements = document.querySelectorAll('[aria-type="search-item"]');
+    const Items = [...ItemsElements].map(item => ({
+      itemTitle:item.dataset.title,
+      itemTags : (item.dataset.tags).split("/"),
+      element:item
+    }));
+    
+      tagsElements.forEach(tag => {
+        if (tags.includes(tag.dataset.tag)) {
+          tag.classList.remove("hidden");
+          console.log(tag.dataset.tag)
+          return;
+        };
+        tag.classList.add("hidden");
+
+      })
+      Items.filter(({itemTags}) => !matching(tags, itemTags)).forEach(({element}) => {
+        element.classList.add("hidden");
+      })
+    
+  }
+  document.addEventListener("astro:after-swap", SearchparamsBasedFiltering)
+  document.addEventListener("DOMContentLoaded", SearchparamsBasedFiltering)
+</script>
 

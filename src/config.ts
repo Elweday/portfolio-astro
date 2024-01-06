@@ -7,7 +7,7 @@ export const SITE: Site = {
   title: "Nasser's Blog",
   ogImage: "assets/images/fallback.png",
   lightAndDarkMode: true,
-  postPerPage: 5,
+  itemsPerPage: 20,
 };
 
 export const PATHS = [
