@@ -1,6 +1,7 @@
 ---
-title: Advent of code.
+title: Rethinking Problem Solving.
 slug: "aoc"
+pubDatetime: 2023-12-23T15:22:00Z
 draft: false
 cover: "https://assets.leetcode.com/users/images/65e42236-d80d-41cc-9435-611d2bd09aef_1653139481.8304794.png"
 tags:

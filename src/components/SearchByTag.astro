@@ -13,7 +13,7 @@ const isTags = tags.length > 0
 
 
 ---
-<form method="get" class="grid">
+<form class="grid">
 
     <ul class="flex flex-wrap gap-2 p-1 ">
         {(isTags ? tags : allTags).sort((a,b) => a.length - b.length).map((tag) => 
@@ -24,7 +24,7 @@ const isTags = tags.length > 0
         
         )}
     </ul>
-    <button type="submit" class=" bg-skin-accent/50 rounded-2xl py-5  px-9 w-40 place-self-center text-lg font-bold m-3"> 
+    <button type="submit"  class=" bg-skin-accent/50 rounded-2xl py-5  px-9 w-40 place-self-center text-lg font-bold m-3"> 
         Search
     </button >
 
@@ -32,13 +32,11 @@ const isTags = tags.length > 0
 
 <script>
     import { navigate } from 'astro:transitions/client';
-    import {$items} from "@utils/checksStore"
-    document.querySelectorAll("input[type=checkbox]").forEach((input)=>{
+    /* document.querySelectorAll("input[type=checkbox]").forEach((input)=>{
         input.addEventListener("change", (e)=>{
           const name = (e.target as HTMLInputElement).name
-          $items.toggle(name)
         })
-    })
+    }) */
     addEventListener("submit", (e) => {
       e.preventDefault()
       const form = e.target as HTMLFormElement
@@ -46,9 +44,6 @@ const isTags = tags.length > 0
       const inputs = form.querySelectorAll("input[type=checkbox]") as NodeListOf<HTMLInputElement>
       const tags = [...inputs].filter((input)=>input.checked)
       const path = url.origin + "/search/content?" + tags.map((input)=>'tag='+input.name).join("&")
-      navigate(path, {
-
-
-      })
+      navigate(path)
     })
   </script>

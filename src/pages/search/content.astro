@@ -144,7 +144,8 @@ section{
       })
     
   }
-  document.addEventListener("astro:after-swap", SearchparamsBasedFiltering)
+  document.addEventListener("astro:after-preparation", SearchparamsBasedFiltering)
+  document.addEventListener("astro:page-load", SearchparamsBasedFiltering)
   document.addEventListener("DOMContentLoaded", SearchparamsBasedFiltering)
 </script>
 
