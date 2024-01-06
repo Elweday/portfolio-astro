@@ -6,8 +6,14 @@ description: College website with intuitive dashboard, control center, and detai
 slug: college-tracking-system
 draft: false
 tags:
-  - docs
-  - tag2
+  - System Design
+  - DBMS
+  - Fullstack
+  - UI
+  - Education
+  - Responsive Web Design
+  - REST
+  - API
 cover: /assets/images/projects/helwan.jpg
 projectURL: https://github.com/elweday/CollegeSite
 stack:
