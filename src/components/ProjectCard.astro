@@ -26,25 +26,24 @@ const flagColor = projectURL ? "project-available" : "under-construction"
 ---
 
 <li class={twMerge("text-white group ", className)} data-title={slug} transition:name={slug+":cover"}>
-  <div class=" relative  size-full">
+  <div class=" relative  size-full ">
     <Image transition:name={slug+":image"} name={slug+".png"} url={cover} class="rounded-xl object-cover size-full"  />
-    <div class="absolute bottom-0  left-0 h-full w-full rounded-xl bg-gradient-to-b from-transparent to-skin-accent from-30%  opacity-100 duration-1000" />
+    <div class="absolute bottom-0  left-0 h-full w-full rounded-xl bg-gradient-to-b from-transparent to-skin-accent from-50%   opacity-100 duration-1000" />
   <span
-  class=" absolute bottom-0 left-0  w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 transition-opacity pointer-events-none  group-hover:pointer-events-auto group-hover:opacity-100  flex"
+  class="  absolute bottom-0 left-0  w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 transition-opacity pointer-events-none  group-hover:pointer-events-auto group-hover:opacity-100  flex"
   >
-  <div class="opacity-0 group-hover:opacity-100 transition-all duration-500">
+  <div class="opacity-0 group-hover:opacity-100 transition-all duration-500 ">
 
     <a href={projectURL} class={`h-10 w-10  triangle absolute right-0 top-0 cursor-pointer rounded-tr-xl border-t-transparent border-b-transparent border-l-transparent  sm:scale-100 scale-75 origin-top-right opacity-0 group-hover:opacity-100 ${flagColor} ${projectURL?"":"pointer-events-none"} `} >
       <Icon class="size-14  rotate-45   top-1/2 left-1/2 translate-x-[70%] translate-y-[70%]  origin-bottom-right" name={projectURL?"teenyicons:github-solid":"ic:twotone-construction"}>
       </a>
     </div>
-      <span class="h-full justify-end pointer-events-none w-full  flex flex-col  gap-2">
+      <a href={`/projects/${slug}`} class="h-full justify-end  w-full  flex flex-col  gap-2">
         
         <div class="origin-bottom-left" >
           <Datetime datetime={startDate} endDate={endDate} size="sm" class="my-2 inline-block text-xs font-extralight transform origin-bottom-left translate-y-2 scale-75" />
           <h2 class="text-lg sm:text-2xl font-bold " transition:name={slug}>{title}</h2>
-          <h3 class="sm:text-sm text-[10pt]  font-thin  " transition:name={slug+":desc"}>{description}</h3>
-          </div>
+        </div>
         <div class="flex justify-between  w-full place-content-center place-items-center ">
 
           <div class="flex justify-stretch gap-2 ">
@@ -54,8 +53,7 @@ const flagColor = projectURL ? "project-available" : "under-construction"
             )}
         </div>
       </div>
-    </span>
-    <a class="underline " href={`/projects/${slug}`}> <Icon class=" p-1 rounded-lg  size-10" name="uiw:more"/></a>
+    </a>
       
     </span>
   </div>

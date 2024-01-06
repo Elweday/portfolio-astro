@@ -61,10 +61,10 @@ const ogUrl = new URL(cover ?? `/projects/${slug}.png`, Astro.url.origin).href;
     </div>
 
 
-    <h1 transition:name={slug} class="post-title">{title}</h1>
     <Datetime datetime={startDate} endDate={endDate} size="lg" class="my-2" />
-    <Image transition:name={slug+":cover"} name={slug+".png"} url={cover} class="my-5 rounded-xl aspect-video w-full" alt="" />
+    <h1 transition:name={slug} class="post-title">{title}</h1>
     <p transition:name={slug+":desc"}>{description}</p>
+    <Image transition:name={slug+":cover"} name={slug+".png"} url={cover} class="my-5 rounded-xl aspect-video w-full" alt="" />
     <h2 class="mt-5 mb-3 text-xl font-bold">Tech Stack</h2>
     <ul class="flex flex-col gap-7">
       {(stack as TechnologyKey[]).map((t) =>
