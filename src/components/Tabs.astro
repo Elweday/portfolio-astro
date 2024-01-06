@@ -1,19 +1,6 @@
 ---
+import trim from "@utils/trim";
 const TABS = [{name:"Search by text", path:"search"}, {name:"Search by tag", path:"search/tags"}];
-
-function trim(str: string, ch: string) {
-    var start = 0, 
-        end = str.length;
-
-    while(start < end && str[start] === ch)
-        ++start;
-
-    while(end > start && str[end - 1] === ch)
-        --end;
-
-    return (start > 0 || end < str.length) ? str.substring(start, end) : str;
-}
-
 
 
 const currentPathName = trim(Astro.url.pathname, "/");

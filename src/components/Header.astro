@@ -7,7 +7,10 @@ export interface Props {
   path?: string;
 }
 
-const currentPagePath = Astro.url.pathname.split("/");
+import trim from "@utils/trim";
+
+
+const currentPagePath = trim(Astro.url.pathname, "/").split("/");
 
 ---
 
@@ -50,7 +53,7 @@ const currentPagePath = Astro.url.pathname.split("/");
           <div id="menu" class="sm:contents  flex flex-col w-full place-content-center place-items-center  p-2 ">
             {
               PATHS.map(({name, path, icon}) => {
-                const isActive = currentPagePath.includes(path.replaceAll('/', ''))
+                const isActive = currentPagePath.includes(trim(path, "/"))
                 return (
                   <li class="relative w-full ">
                     <a href={path}  class={"flex flex-row items-center gap-2 w-full px-4 py-3 text-center font-medium hover:text-skin-accent sm:my-0 sm:px-2 sm:py-1" + (isActive?" font-bold text-skin-accent w-full":"")}>
