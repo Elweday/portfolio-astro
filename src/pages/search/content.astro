@@ -51,8 +51,8 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
             (item) =>
             (
               item.collection === "projects" ?
-              <ProjectCard class="size-[27rem]"  project={item} /> :
-              <PostCard  post={item} />
+              <ProjectCard class="size-full"  project={item} /> :
+              <PostCard class="size-full"   post={item} />
             )
                 
           )

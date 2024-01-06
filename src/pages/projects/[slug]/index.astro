@@ -31,7 +31,7 @@ const { project } = Astro.props;
 const { Content } = await project.render();
 
 
-const { slug, data: {title, description, cover, stack, tags, startDate, endDate}} = project;
+const { slug, data: {title, description, cover, stack, tags, dateTime, endDate}} = project;
 
 
 const ogUrl = new URL(cover ?? `/projects/${slug}.png`, Astro.url.origin).href;
@@ -61,7 +61,7 @@ const ogUrl = new URL(cover ?? `/projects/${slug}.png`, Astro.url.origin).href;
     </div>
 
 
-    <Datetime datetime={startDate} endDate={endDate} size="lg" class="my-2" />
+    <Datetime datetime={dateTime} endDate={endDate} size="lg" class="my-2" />
     <h1 transition:name={slug} class="post-title">{title}</h1>
     <p transition:name={slug+":desc"}>{description}</p>
     <Image transition:name={slug+":cover"} name={slug+".png"} url={cover} class="my-5 rounded-xl aspect-video w-full" alt="" />

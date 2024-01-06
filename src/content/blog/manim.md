@@ -1,7 +1,7 @@
 ---
 title: Programatic Mathmatical Animations Using manim.
 slug: exploring-manim
-pubDatetime: 2024-1-1T00:15:00Z
+dateTime: 2024-1-1T00:15:00Z
 cover: "https://miro.medium.com/max/1400/1*GmtmNjqMgQGs8VBPTRF6EQ.png"
 tags:
   - Mathematics

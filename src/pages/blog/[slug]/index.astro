@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 
 
 const { post } = Astro.props;
-const { title, description, canonicalURL, pubDatetime, tags, cover } = post.data;
+const { title, description, canonicalURL, dateTime, tags, cover } = post.data;
 const slugged = slugifyStr(title);
 const { Content } = await post.render();
 
@@ -54,7 +54,7 @@ const { Content } = await post.render();
   </button>
     </div>
 
-    <Datetime datetime={pubDatetime} size="lg" class="my-2" />
+    <Datetime datetime={dateTime} size="lg" class="my-2" />
     <h1 transition:name={slugged} class="text-2xl font-semibold text-skin-accent">{title}</h1>
     <p>{description}</p>
     <figure>

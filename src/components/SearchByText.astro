@@ -41,7 +41,7 @@ import Tabs from "@components/Tabs.astro";
             return (
                 <a data-title={slugifyStr(data.title)} href={href} class="bg-skin-fill rounded-lg p-3 flex flex-col">
                   <div class="w-full flex flex-row justify-between">
-                    <Datetime relative size="sm" datetime={collection == "blog"? data.pubDatetime : data.startDate} endDate={collection == "blog" ? undefined:data.startDate} class="text-skin-base/70  inline-block scale-75 origin-left" />
+                    <Datetime relative size="sm" datetime={data.dateTime} endDate={collection == "blog" ? undefined:data.endDate} class="text-skin-base/70  inline-block scale-75 origin-left" />
                     <div class="w-fit flex gap-1  place-items-center justify-end ">
                       <Icon class="text-skin-base/70 size-4" name={collection == "blog" ? "ant-design:read-outlined" : "ic:baseline-code" }/> 
                       <span class="text-skin-base/70 scale-90">{collection == "blog" ? "Post" : "Project"}</span>
@@ -110,13 +110,11 @@ import Tabs from "@components/Tabs.astro";
       const parentElement = document.getElementById("search-results") as HTMLUListElement
       [...parentElement.children].forEach((child: any) => {
         const match = searchResults.find(({title}) => title === child.dataset.title) as searchResult;
-        console.log(match)
         if (match) {
           child.classList.remove("hidden")
           child.querySelector(`[aria-label='pre']`).innerText = match.match[0]
           child.querySelector(`[aria-label='match']`).innerText = match.match[1]
           child.querySelector(`[aria-label='post']`).innerText = match.match[2]
-          
         }
         else {
           child.classList.add("hidden")

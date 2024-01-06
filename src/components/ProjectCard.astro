@@ -20,7 +20,7 @@ interface Props {
 
 const { project, class:className} = Astro.props;
 const { data, slug } = project;
-const { title, description, cover, stack, tags, startDate, endDate, projectURL } = data;
+const { title, description, cover, stack, tags, dateTime, endDate, projectURL } = data;
 
 const flagColor = projectURL ? "project-available" : "under-construction"
 const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
@@ -44,7 +44,7 @@ const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
       <a href={`/projects/${slug}`} class="h-full justify-end  w-full  flex flex-col  gap-2">
         
         <div class="origin-bottom-left" >
-          <Datetime datetime={startDate} endDate={endDate} size="sm" class="my-2 inline-block text-xs font-extralight transform origin-bottom-left translate-y-2 scale-75" />
+          <Datetime datetime={dateTime} endDate={endDate} size="sm" class="my-2 inline-block text-xs font-extralight transform origin-bottom-left translate-y-2 scale-75" />
           <h2 class="text-lg sm:text-2xl font-bold " transition:name={slug}>{title}</h2>
         </div>
         <div class="flex justify-between  w-full place-content-center place-items-center ">

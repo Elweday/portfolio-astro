@@ -2,7 +2,7 @@
 title: View Transitions API.
 slug: transitions-api
 featured: false
-pubDatetime: 2024-1-04T08:00:00Z
+dateTime: 2024-1-04T08:00:00Z
 
 cover: "https://michalkuncio.com/how-to-create-beautiful-page-transitons-in-nuxt-with-view-transitions-api/support.png"
 tags:
