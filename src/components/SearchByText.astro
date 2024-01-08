@@ -59,7 +59,6 @@ import Tabs from "@components/Tabs.astro";
   <script>
   import { slugifyStr } from "@utils/slugify";
   import { getCollection, type  CollectionEntry } from "astro:content";
-  // @ts-expect-error
   import removeMd from "remove-markdown"; 
   const posts = await getCollection("blog");
   const projects = await getCollection("projects"); 

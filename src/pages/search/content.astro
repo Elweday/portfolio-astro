@@ -11,7 +11,6 @@ import getItemsByTags from "@utils/getItemsByTags";
 import ContentTags from "@components/ContentTags.astro";
 import ProjectCard from "@components/ProjectCard.astro";
 
-
 const allitems = await getCollection("blog");
 const allProjects = await getCollection("projects");
 
@@ -133,7 +132,6 @@ section{
       tagsElements.forEach(tag => {
         if (tags.includes(tag.dataset.tag)) {
           tag.classList.remove("hidden");
-          console.log(tag.dataset.tag)
           return;
         };
         tag.classList.add("hidden");

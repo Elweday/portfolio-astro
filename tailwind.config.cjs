@@ -37,8 +37,9 @@ module.exports = {
           "line": withOpacity("--color-border"),
         }
       },
+
       fontFamily: {
-        mono: ["IBM Plex Mono", "monospace"],
+        mono: ['Nunito', 'sans-serif'],
       },
 
       typography: {

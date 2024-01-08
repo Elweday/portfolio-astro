@@ -13,16 +13,6 @@ import { SOCIALS } from "@config";
 import MovingLogos from "@components/MovingLogos.astro";
 
 
-/* const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
-  arr.reduce((groups, item) => {
-    (groups[key(item)] ||= []).push(item);
-    return groups;
-  }, {} as Record<K, T[]>);
-  
-  // 
-  const techStackByType = groupBy(Object.values(Technologies), (tech) => tech.type);
-
- */
 
 const posts = await getCollection("blog");
 const projects = await getCollection("projects"); 
@@ -34,17 +24,21 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 
 
 <Layout title="home" description="Mohammed Nasser's personal blog">
-    <section id="hero">
-      <h1>whoami</h1>
-      <p>
-        Hi, I'm <strong class="text-skin-accent">Mohammed Nasser</strong>,
-        I'm a junior Computer Engineering Student at Helwan Univeristy.
-        Code craftsman by day, Vigilante in a bat suit by night.
+    <section class="pb-6 pt-8" id="hero">
+      <p class="relative my-2">
+        <span>Hi, I'm</span> 
+        <strong class="text-skin-accent">
+  
+          <h1 class="inline-block text-3xl font-bold sm:mb-4 sm:text-5xl">Mohammed Nasser</h1>
+        </strong>
+        <br>
+        I'm a junior Computer Engineering Student at Helwan University.
+        Code craftsman by day, Vigilante in a batsuit by night.
       </p>
       {
         // only display if at least one social link is enabled
         socialCount > 0 && (
-            <div class="social-links font-bold">Follow Me on: <Socials /></div> 
+            <div class="mb-1 mr-2 whitespace-nowrap sm:mb-0 font-bold">Follow Me on: <Socials /></div> 
         )
       }
     </section>
@@ -91,9 +85,6 @@ const socialCount = SOCIALS.filter(social => social.active).length;
                 />
               ))}
             </ul>
-                  <div class="all-posts-btn-wrapper">
-
-      </div>
           </section>
           
           <Hr />
@@ -135,40 +126,15 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 </Layout>
 
 <style>
-  /* ===== Hero Section ===== */
-  #hero {
-    @apply pb-6 pt-8;
-  }
-  #hero h1 {
-    @apply my-4 inline-block text-3xl font-bold sm:my-8 sm:text-5xl;
-  }
-  #hero .rss-link {
-    @apply mb-6;
-  }
-  #hero .rss-icon {
-    @apply mb-2 h-6 w-6 scale-110 fill-skin-accent sm:mb-3 sm:scale-125;
-  }
-  #hero p {
-    @apply my-2;
-  }
-  .social-wrapper {
-    @apply mt-4 flex flex-col sm:flex-row sm:items-center;
-  }
-  .social-links {
-    @apply mb-1 mr-2 whitespace-nowrap sm:mb-0;
-  }
 
-  /* ===== Featured & Recent Posts Sections ===== */
   section {
     @apply pb-6 pt-12 w-full;
   }
   h2 {
     @apply text-2xl font-semibold tracking-wide;
   }
-  .all-posts-btn-wrapper {
-    @apply my-8 text-center;
-  }
-
-
+ 
 </style>
+
+
 
