@@ -254,6 +254,27 @@ export const Technologies = {
     description: "An open-source library for computer vision in Python.",
     type: "data science",
   },
+  ffmpeg: {
+    name: "FFmpeg",
+    icon: "file-icons:ffmpeg",
+    url: "https://ffmpeg.org/",
+    description: "An open-source library for video and audio manipulation.",
+    type: "data science",
+  },
+  opengl : {
+    name: "OpenGL",
+    icon: "simple-icons:opengl",
+    url: "https://www.opengl.org/",
+    description: "A cross-platform 3D graphics API.",
+    type: "data science",
+  },
+  gcp: {
+    name: "Google Cloud Platform",
+    icon: "mdi:google-cloud",
+    url: "https://cloud.google.com/",
+    description: "A platform for building and managing cloud computing services.",
+    type: "technology",
+  }
 };
 
 

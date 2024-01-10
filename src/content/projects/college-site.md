@@ -23,7 +23,7 @@ stack:
   - prisma
   - nodejs
   - typescript
-images:
+media:
   - "/assets/images/projects/helwan.jpg"
   - "/assets/images/projects/helwan2.jpg"
   - "/assets/images/projects/helwan.jpg"

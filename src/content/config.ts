@@ -36,7 +36,7 @@ const projects = defineCollection({
       .default("Present"),
     stack: z.array(z.enum(Stacks)).default([]),
     projectURL: z.string().url().optional(),
-    images: z.array(z.string()).min(1),
+    media: z.array(z.string()).min(1),
   })
 });
 
