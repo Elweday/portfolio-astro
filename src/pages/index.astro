@@ -24,6 +24,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 
 
 <Layout title="home" description="Mohammed Nasser's personal blog">
+
     <section class="pb-6 pt-8" id="hero">
       <p class="relative my-2">
         <span>Hi, I'm</span> 
@@ -78,7 +79,8 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         </LinkButton>
               </h2>
             <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
-              {projects.slice(0, 2).map((project) => (
+              {projects.slice(0, 2)
+                .map((project) => (
                 <ProjectCard
                   project={project}
                   class="size-[25rem]"
@@ -93,7 +95,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     }
 
     <section id="recent-posts">
-      <h2 class="flex justify-between w-full  pb-2"><span>
+      <h2 class=" flex justify-between w-full  pb-2"><span>
         Recent Posts
         </span>  
         <LinkButton href="/blog">
