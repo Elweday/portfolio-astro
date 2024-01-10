@@ -24,6 +24,11 @@ stack:
   - prisma
   - nodejs
   - typescript
+gallery:
+  - "/assets/images/projects/helwan.jpg"
+  - "/assets/images/projects/helwan2.jpg"
+  - "/assets/images/projects/helwan.jpg"
+  - "/assets/images/projects/helwan2.jpg"
 ---
 
 

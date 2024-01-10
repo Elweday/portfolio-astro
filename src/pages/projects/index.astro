@@ -9,7 +9,6 @@ import getUniqueTags from "@utils/getUniqueTags";
 
 const allTags = await getUniqueTags("projects");
 import  {type CollectionEntry , getCollection} from "astro:content";
-
 export interface Props {
   pageNum?: number;
   tags?: string[];
@@ -22,6 +21,8 @@ const allProjects: CollectionEntry<"projects">[] = await getCollection("projects
   <article>
     <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6" >Tags</h1>
   </div>
+
+
   
   <ContentTags tags={allTags} type="tag">
     <Tag class="bg-skin-card/20 text-xl rounded-full px-6 *:scale-[1.6] " name="+" type="all" size="lg" >
