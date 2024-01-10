@@ -8,7 +8,8 @@ draft: false
 tags:
   - docs
   - tag2
-cover: /assets/images/projects/eda.jpg
+images: 
+  - /assets/images/projects/eda.jpg
 stack:
   - python
   - jupyter

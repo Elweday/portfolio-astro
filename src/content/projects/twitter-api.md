@@ -8,7 +8,8 @@ draft: false
 tags:
   - docs
   - tag2
-cover: /assets/images/projects/twitter.jpg
+images: 
+  - /assets/images/projects/twitter.jpg
 projectURL: https://github.com/elweday/CollegeSite
 stack:
   - python

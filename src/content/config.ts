@@ -14,7 +14,6 @@ type Entry = FlexibleType<z.infer<typeof baseItem> >;
 const baseItem = z.object({
   dateTime: z.date().default(new Date()),
   title: z.string(),
-  cover: z.string(),
   draft: z.boolean().optional(),
   tags: z.array(z.string()).default([]),
   description: z.string(),
@@ -23,8 +22,9 @@ const baseItem = z.object({
 const blog = defineCollection({
   type: "content",
   schema: baseItem.extend({
-    canonicalURL: z.string().optional(),
-    }),
+    canonicalURL: z.string().optional(),    
+    cover: z.string(),
+  }),
 });
 
 const projects = defineCollection({
@@ -36,7 +36,7 @@ const projects = defineCollection({
       .default("Present"),
     stack: z.array(z.enum(Stacks)).default([]),
     projectURL: z.string().url().optional(),
-    gallery : z.array(z.string()).default([]),
+    images: z.array(z.string()).min(1),
   })
 });
 

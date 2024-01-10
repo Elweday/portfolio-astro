@@ -32,10 +32,10 @@ const { project } = Astro.props;
 const { Content } = await project.render();
 
 
-const { slug, data: {title, description, cover, stack, tags, dateTime, endDate, gallery}} = project;
+const { slug, data: {title, description, images, stack, tags, dateTime, endDate}} = project;
 
 
-const ogUrl = new URL(cover ?? `/projects/${slug}.png`, Astro.url.origin).href;
+const ogUrl = new URL(images[0] ?? `/projects/${slug}.png`, Astro.url.origin).href;
 
 
 
@@ -65,7 +65,7 @@ const ogUrl = new URL(cover ?? `/projects/${slug}.png`, Astro.url.origin).href;
         <Datetime datetime={dateTime} endDate={endDate} size="lg" class="my-2" />
         <h1 transition:name={slug} class="text-4xl font-semibold text-skin-accent ">{title}</h1>
         <p transition:name={slug+":desc"}>{description}</p>
-        <Image transition:name={slug+":cover"} name={slug+".png"} url={cover} class="my-5 rounded-xl aspect-video w-full" alt="" />
+        <Image transition:name={slug+":cover"} name={slug+".png"} url={images[0]} class="my-5 rounded-xl aspect-video w-full" alt="" />
         <h2 class="text-2xl mb-2 font-semibold tracking-wide text-skin-accent">Tech Stack</h2>
         <ul class="flex flex-col gap-7">
           {(stack as TechnologyKey[]).map((t) =>
@@ -83,9 +83,9 @@ const ogUrl = new URL(cover ?? `/projects/${slug}.png`, Astro.url.origin).href;
           }
           )}
           {
-            gallery && (
+            images.length > 1 && (
               <h2 class="text-2xl font-semibold tracking-wide text-skin-accent">Gallery</h2>
-              <Carousel images={gallery} client:load />
+              <Carousel images={images.slice(1)} client:load />
             )
           }
     

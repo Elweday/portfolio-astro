@@ -14,7 +14,6 @@ tags:
   - Responsive Web Design
   - REST
   - API
-cover: /assets/images/projects/helwan.jpg
 projectURL: https://github.com/elweday/CollegeSite
 stack:
   - svelte
@@ -24,7 +23,7 @@ stack:
   - prisma
   - nodejs
   - typescript
-gallery:
+images:
   - "/assets/images/projects/helwan.jpg"
   - "/assets/images/projects/helwan2.jpg"
   - "/assets/images/projects/helwan.jpg"
@@ -33,8 +32,6 @@ gallery:
 
 
 ## Contents
-
-
 
 ## Motivation
 The motivation behind the College Tracking System project stemmed from the realization that the existing website of my local college was insufficient and lacked essential features. To address this, I set out to create a more functional platform that would cater to the needs of both students and educators. The primary objectives included:
