@@ -1,6 +1,6 @@
 ---
-dateTime: 2023-6-23T00:00:00Z
-endDate: 2023-9-23T00:00:00Z
+dateTime: 2023-11-23T00:00:00Z
+endDate: 2024-1-23T00:00:00Z
 title: Mathematical Animations
 description: Programatic Mathmatical Animations Using manim.
 slug: manim

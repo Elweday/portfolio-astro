@@ -16,10 +16,10 @@ const isTags = tags.length > 0
 <form class="grid">
 
     <ul class="flex flex-wrap gap-2 p-1 ">
-        {(isTags ? tags : allTags).sort((a,b) => a.length - b.length).map((tag) => 
+        {(isTags ? tags : allTags).map((tag) => 
         <label for={tag} class="relative">
             <input name={tag} id={tag} type="checkbox" hidden class="peer absolute top-[10px] right-5 rounded-full h-6 w-6  accent-[rgb(var(--color-accent))]"/>
-            <Tag name={tag} size="lg" type="category" class="pr-3 w-full peer-checked:ring-2 peer-checked:ring-skin-accent   peer-checked:text-skin-accent peer-checked:[&>*:nth-child(1)]:[&>*:nth-child(1)]:fill-skin-accent  " />
+            <Tag name={tag} size="lg" type="category" class="pr-3 w-full peer-checked:ring-2 peer-checked:ring-skin-accent  peer-checked:bg-skin-card/10  peer-checked:text-skin-accent peer-checked:[&>*:nth-child(1)]:[&>*:nth-child(1)]:fill-skin-accent  " />
         </label>
         
         )}

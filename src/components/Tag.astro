@@ -1,6 +1,7 @@
 ---
 // import tailwind merge 
 import { slugifyStr } from "@utils/slugify";
+import Icon from "astro-icon";
 import { twMerge } from "tailwind-merge"; 
 export interface Props {
   name: string;
@@ -38,23 +39,26 @@ if (type !== "all") {
   }
 }
 
+const quickHash  = (s: string) => Array.from(s).reduce((a, b) => a + b.charCodeAt(0) * 17, 0) % 360;  
+
+
+const hsl = ( h: number,  a = 100, s = 40, l = 50 ) =>  `hsl(${h} ${s}%  ${l}% / ${a}%)`
+const hueVal = quickHash(name);
+const colorPartial = hsl(hueVal, 30);
+const color = hsl(hueVal, 100);
+
 ---
 
 
 
 <a
-  class={twMerge(`bg-skin-card  rounded-xl  group  hover:-top-0.5 hover:text-skin-accent focus-visible:p-1 py-1 px-1 w-fit gap-1 flex justify-center ${type === "category" ? "pointer-events-none" : ""} `, otherClasses)}
+  style={{ "--tag-color-partial": colorPartial, "--tag-color": color }}
+  class={twMerge(`   text-[var(--tag-color)] bg-[var(--tag-color-partial)] bg-opacity-90  rounded-xl  group  hover:-top-0.5 hover:text-skin-accent focus-visible:p-1 py-1 px-1 w-fit gap-1 flex justify-center ${type === "category" ? "pointer-events-none" : ""} `, otherClasses)}
   href={href}
   transition:name={"tag:"+slugifyStr(name)}
   {...tagProps}
 >
-  
-   { (type !== "all") ? (<svg class="size-7  scale-95 text-skin-base opacity-80 group-hover:fill-skin-accent data-[theme=dark]:outline-2"
-      xmlns="http://www.w3.org/2000/svg"
-      ><path
-        d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z"
-      ></path>
-    </svg>) : ""}
+   {(type !== "all") && <Icon class="size-7 scale-95 fill-[var(--tag-color)] opacity-80 group-hover:fill-skin-accent data-[theme=dark]:outline-2" name="ph:hash-bold" />}
     <span class="whitespace-nowrap text-sm element-to-style place-self-center scale-95 origin-left" >{name.toLowerCase()}</span>
   </a>
 

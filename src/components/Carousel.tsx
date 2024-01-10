@@ -9,36 +9,27 @@ import {
 } from "@components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 
-const carouselPlugins = [Autoplay({  delay: 2000, stopOnInteraction: true,  pauseOnMouseEnter: true,  })]
+
+const carouselPlugins = [Autoplay({  delay: 4000, stopOnInteraction: true,  pauseOnMouseEnter: true,  })]
 
 type Props = {
     media: string[]
 }
 
-function Image ({ src }: { src: string }) {
-  return (
-    <img
-      src={src}
-      alt="image"
-      className="rounded-lg"
-    />
-  )
-}
 
-
-function Video ({ src }: { src: string }) {
-    return ( 
+function MediaItem({src}: {src: string}) {
+    const isVideo = [".mp4", ".webm",".ogg",".webp",".avif",".mov",".mkv",].some(ext => src.endsWith(ext))
+    if (isVideo) {
+    return (
         <video className="rounded-lg" controls>
             <source src={src} type="video/mp4" />
         </video>
     )
-}
+  } else { 
+    return (
 
-function MediaItem({src}: {src: string}) {
-  if (src.endsWith(".mp4")) {
-    return <Video src={src} />
-  } else {
-    return <Image src={src} />
+        <img src={src} alt="image" className="rounded-lg" />
+    )
   }
 }
 

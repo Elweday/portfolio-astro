@@ -10,6 +10,7 @@ import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
 import getItemsByTags from "@utils/getItemsByTags";
 import ContentTags from "@components/ContentTags.astro";
+import Icon from 'astro-icon';
 
 const allPosts = await getCollection("blog");
 const allTags = await getUniqueTags("blog");
@@ -36,7 +37,7 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
 </div>
 
 <ContentTags tags={allTags} type="tag">
-  <Tag class="bg-skin-card/20 text-xl rounded-full px-6 *:scale-[1.6] " name="+" type="all" size="lg" >
+  <Tag class="bg-skin-card  text-xl  px-5  text-skin-inverted py-2" name="VIEW-ALL" type="all" size="lg" />
 </ContentTags >
 
     <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6">Posts</h1>
