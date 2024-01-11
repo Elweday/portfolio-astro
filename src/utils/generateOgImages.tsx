@@ -1,20 +1,19 @@
 import satori, { type SatoriOptions } from "satori";
 import { Resvg } from "@resvg/resvg-js";
-import { type CollectionEntry } from "astro:content";
-import postOgImage from "./og-templates/post";
+import generateOG from "./og-templates/cover";
 import siteOgImage from "./og-templates/site";
 import { type Collection } from "../types"; 
 
 const fetchFonts = async () => {
   // Regular Font
   const fontFileRegular = await fetch(
-    "https://www.1001fonts.com/download/font/ibm-plex-mono.regular.ttf"
+    "https://www.1001fonts.com/download/font/nunito.regular.ttf"
   );
   const fontRegular: ArrayBuffer = await fontFileRegular.arrayBuffer();
 
   // Bold Font
   const fontFileBold = await fetch(
-    "https://www.1001fonts.com/download/font/ibm-plex-mono.bold.ttf"
+    "https://www.1001fonts.com/download/font/nunito.bold.ttf"
   );
   const fontBold: ArrayBuffer = await fontFileBold.arrayBuffer();
 
@@ -29,13 +28,13 @@ const options: SatoriOptions = {
   embedFont: true,
   fonts: [
     {
-      name: "IBM Plex Mono",
+      name: "Nunito",
       data: fontRegular,
       weight: 400,
       style: "normal",
     },
     {
-      name: "IBM Plex Mono",
+      name: "Nunito",
       data: fontBold,
       weight: 600,
       style: "normal",
@@ -49,8 +48,8 @@ function svgBufferToPngBuffer(svg: string) {
   return pngData.asPng();
 }
 
-export async function generateOgImageForPost(post: Collection) {
-  const svg = await satori(postOgImage(post), options);
+export async function generateOGImage(entry: Collection) {
+  const svg = await satori(generateOG(entry), options);
   return svgBufferToPngBuffer(svg);
 }
 
