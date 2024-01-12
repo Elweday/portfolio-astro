@@ -21,15 +21,15 @@ export interface Props {
   title: string;
   description?: string;
   ogImage?: string;
-  canonicalURL?: string;
 }
 
 let {
   title = SITE.title,
   description = SITE.desc,
   ogImage = SITE.ogImage,
-  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href + ".png"; 
 
 const { title: siteTitle } = SITE;
 

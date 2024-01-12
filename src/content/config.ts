@@ -22,7 +22,6 @@ const baseItem = z.object({
 const blog = defineCollection({
   type: "content",
   schema: baseItem.extend({
-    canonicalURL: z.string().optional(),    
     cover: z.string(),
   }),
 });

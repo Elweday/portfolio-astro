@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 
 
 const { post } = Astro.props;
-const { title, description, canonicalURL, dateTime, tags, cover } = post.data;
+const { title, description, dateTime, tags, cover } = post.data;
 const slugged = slugifyStr(title);
 const { Content } = await post.render();
 
@@ -36,7 +36,6 @@ const { Content } = await post.render();
 <Layout
   title={title}
   description={description}
-  canonicalURL={canonicalURL}
 >
 
 
