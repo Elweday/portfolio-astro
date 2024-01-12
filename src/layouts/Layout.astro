@@ -37,7 +37,7 @@ const path = title;
 const pageTitle = siteTitle + " | " + toTitleCase(title);
 
 const socialImageURL = new URL(
-  canonicalURL+".png",
+  canonicalURL.slice(0, -1)+".png",
   Astro.url.origin
 ).href;
 
