@@ -29,7 +29,7 @@ let {
   ogImage = SITE.ogImage,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).href + ".png"; 
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href; 
 
 const { title: siteTitle } = SITE;
 
@@ -37,7 +37,7 @@ const path = title;
 const pageTitle = siteTitle + " | " + toTitleCase(title);
 
 const socialImageURL = new URL(
-  ogImage ?? SITE.ogImage ?? "og.png",
+  ogImage ?? canonicalURL+".png"  ?? SITE.ogImage,
   Astro.url.origin
 ).href;
 
