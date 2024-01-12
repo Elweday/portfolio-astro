@@ -36,11 +36,7 @@ const { title: siteTitle } = SITE;
 const path = title;
 const pageTitle = siteTitle + " | " + toTitleCase(title);
 
-const socialImageURL = new URL(
-  canonicalURL.slice(0, -1)+".png",
-  Astro.url.origin
-).href;
-
+const socialImageURL = canonicalURL+".png"
 console.log(socialImageURL)
 ---
 
