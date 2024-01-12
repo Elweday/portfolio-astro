@@ -7,6 +7,10 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Scroller from "@components/Scroller.astro";
 
+import trim from "@utils/trim";
+
+
+
 
 
 
@@ -36,8 +40,8 @@ const { title: siteTitle } = SITE;
 const path = title;
 const pageTitle = siteTitle + " | " + toTitleCase(title);
 
-const socialImageURL = canonicalURL+".png"
-console.log(socialImageURL)
+
+const socialImageURL = trim(canonicalURL, "/") + ".png";
 ---
 
 <!doctype html>
