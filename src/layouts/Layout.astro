@@ -26,7 +26,7 @@ export interface Props {
 let {
   title = SITE.title,
   description = SITE.desc,
-  ogImage = SITE.ogImage,
+  ogImage,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href; 
