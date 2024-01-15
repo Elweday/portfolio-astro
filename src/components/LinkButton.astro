@@ -14,7 +14,7 @@ const { href, className, ariaLabel, title, disabled = false } = Astro.props;
 <a
   href={disabled ? "#" : href}
   tabindex={disabled ? "-1" : "0"}
-  class={twMerge("group hover:text-skin-accent inline-block size-full", className)}
+  class={twMerge("group hover:text-skin-accent inline-block ", className)}
   aria-label={ariaLabel}
   title={title}
   aria-disabled={disabled}

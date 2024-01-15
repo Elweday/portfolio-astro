@@ -8,13 +8,12 @@ import { Technologies } from "../types";
 
 <div class="scroller overflow-visible w-full h-full">
 
-  <ul id="tech-stack" class="w-full flex justify-between gap-10  p-5  overflow-scroll" style={{animation: `scroll 140s linear forwards infinite`}}>
+  <div id="tech-stack" class="w-full flex justify-between gap-10  p-5  overflow-scroll" style={{animation: `scroll 140s linear forwards infinite`}}>
     {
       
       Object.values(Technologies).map(({type, name, icon, url})=>{
         return (
-          <div class="stackType  flex flex-col group " data-type={type}>
-            <ul class="contents">
+          <ul class="stackType  flex flex-col group " data-type={type}>
                   <li class="stack group/tech flex flex-col justify-center  gap-5 ">
                     <Icon  class="size-14 grid place-self-center cursor-pointer hover:scale-125 transition-all " name={icon} />
                     <a href={url}>
@@ -22,12 +21,11 @@ import { Technologies } from "../types";
                       </a>
                       </li>
               </ul>
-              </div>
             )
           })
           
         }
-        </ul>
+        </div>
 
       </div>
 
