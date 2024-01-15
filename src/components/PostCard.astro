@@ -25,9 +25,9 @@ const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
 const href = `/blog/${slug}`;
 
 ---
-<li aria-type="search-item" data-slug={slug} data-tags={strTags}  class={twMerge("flex flex-row p-3 bg-skin-fill rounded-lg  h-full ", className)}>
+<li data-item-type="search-item" data-slug={slug} data-tags={strTags}  class={twMerge("flex flex-row p-3 bg-skin-fill rounded-lg  h-full ", className)}>
     <div class=" flex flex-col justify-between text-wrap w-full">
-      <Image transition:name={slug+":image"} alt="dffs" width={450} height={450} format="avif" src={cover} class="rounded-2xl w-full p-2 aspect-video  object-cover"  />
+      <Image transition:name={slug+":image"} alt="dffs" width={450} height={450} loading="eager" format="avif" src={cover} class="rounded-2xl w-full p-2 aspect-video  object-cover"  />
       <a transition:name={slug} href={href}   class="py-1 text-wrap text-xl origin-top-left font-medium text-skin-accent underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0   hover:underline" >{title}</a>
       <p class="">{description}</p>
       <Datetime class="scale-90 origin-bottom-left mt-auto  " datetime={dateTime} />
