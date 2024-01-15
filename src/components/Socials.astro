@@ -1,9 +1,9 @@
 ---
 import { SOCIALS } from "@config";
 import LinkButton from "./LinkButton.astro";
-import socialIcons from "@assets/socialIcons";
 /* @ts-ignore */
 import { twMerge } from 'tailwind-merge'
+import { Icon } from "astro-icon";
 
 
 
@@ -12,25 +12,21 @@ export interface Props {
   class?: string;
 }
 
-const { centered = false, class: className } = Astro.props;
+const { class: className } = Astro.props;
 ---
 
-<div class={twMerge('inline-flex justify-center gap-4 sm:scale-100 scale-75 p-2 origin-center', className)}>
+<div class={twMerge('inline-flex justify-center gap-4 sm:scale-100 p-2 origin-center', className)}>
   {
     SOCIALS.filter(social => social.active).map(social => (
       <LinkButton
         href={social.href}
-        className="link-button"
+        className="hover:rotate-6 size-6"
         title={social.linkTitle}
+        ariaLabel={social.linkTitle}
       >
-        <Fragment set:html={socialIcons[social.name]} />
+        <Icon name={social.icon} class="w-6 h-6"
+         />
       </LinkButton>
     ))
   }
 </div>
-
-<style>
-  .link-button {
-    @apply hover:rotate-6 overflow-visible;
-  }
-</style>

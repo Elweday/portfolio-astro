@@ -36,10 +36,17 @@ const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
   >
   <div class="opacity-0 group-hover:opacity-100 transition-all duration-500 ">
 
-    <a href={projectURL} class={`h-10 w-10  triangle absolute right-0 top-0 cursor-pointer rounded-tr-xl border-t-transparent border-b-transparent border-l-transparent  sm:scale-100 scale-75 origin-top-right opacity-0 group-hover:opacity-100 ${flagColor} ${projectURL?"":"pointer-events-none"} `} >
-      <Icon class="size-14  rotate-45   top-1/2 left-1/2 translate-x-[70%] translate-y-[70%]  origin-bottom-right" name={projectURL?"teenyicons:github-solid":"ic:twotone-construction"}>
+    {
+      projectURL? (
+      <a href={projectURL} aria-label="Github" class={`h-10 w-10  triangle absolute right-0 top-0 cursor-pointer rounded-tr-xl border-t-transparent border-b-transparent border-l-transparent  sm:scale-100 scale-75 origin-top-right opacity-0 group-hover:opacity-100 ${flagColor} ${projectURL?"":"pointer-events-none"} `} >
+        <Icon class="size-14  rotate-45   top-1/2 left-1/2 translate-x-[70%] translate-y-[70%]  origin-bottom-right" name="teenyicons:github-solid" />
       </a>
-    </div>
+      ) : (
+      <div class={`h-10 w-10  triangle absolute right-0 top-0 cursor-pointer rounded-tr-xl border-t-transparent border-b-transparent border-l-transparent  sm:scale-100 scale-75 origin-top-right opacity-0 group-hover:opacity-100 ${flagColor} ${projectURL?"":"pointer-events-none"} `} >
+      <Icon class="size-14  rotate-45   top-1/2 left-1/2 translate-x-[70%] translate-y-[70%]  origin-bottom-right" name={"ic:twotone-construction"} />
+      </div>
+      )
+    }
       <a href={`/projects/${slug}`} class="h-full justify-end  w-full  flex flex-col  gap-2">
         
         <div class="origin-bottom-left" >
@@ -77,7 +84,7 @@ const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
 	border-style: solid;
 }
 .under-construction {
-  border-right-color:  #FAD02C;
+  border-right-color:  #c5ae4f;
   opacity: 0.8;
 
 }

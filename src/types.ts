@@ -20,6 +20,7 @@ export type SocialObjects = {
   href: string;
   active: boolean;
   linkTitle: string;
+  icon: string;
 }[];
 
 export type SocialIcons = {
@@ -45,7 +46,7 @@ export const Technologies = {
     type: "programming language",
   },
   golang: {
-    name: "Go",
+    name: "Golang",
     icon: "cib:go",
     url: "https://www.golang.org/",
     description: "A popular general-purpose programming language.",

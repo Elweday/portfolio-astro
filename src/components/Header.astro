@@ -18,7 +18,7 @@ const currentPagePath = trim(Astro.url.pathname, "/").split("/");
   <nav class="flex h-fit w-full flex-col items-center justify-between sm:flex-row  "> 
       <div class="flex  place-content-center justify-between w-full">
 
-  <button  class="" id="batman-trigger">
+  <button  class="" aria-label="homepage" id="batman-trigger">
     <svg
           xmlns="http://www.w3.org/2000/svg"
           class={"h-14 w-14 hover:scale-[110%] transition-scale duration-150 " + (Astro.url.pathname == "/"? "fill-skin-accent":"fill-skin-base") }
@@ -48,9 +48,9 @@ const currentPagePath = trim(Astro.url.pathname, "/").split("/");
       
         </button>
       </div>
-        <ul id="menu-items" class="place-self-center items-center content-center gap-4 max-h-0 sm:max-h-[1000px] ease-in-out overflow-hidden sm:flex flex-row sm:p-2 px-3 w-full relative flex  h-full  mb-2 ">
+        <div id="menu-items" class="place-self-center items-center content-center gap-4 max-h-0 sm:max-h-[1000px] ease-in-out overflow-hidden sm:flex flex-row sm:p-2 px-3 w-full relative flex  h-full  mb-2 ">
 
-          <div id="menu" class="sm:contents  flex flex-col w-full place-content-center place-items-center  p-2 ">
+          <ul id="menu" class="sm:contents  flex flex-col w-full place-content-center place-items-center  p-2 ">
             {
               PATHS.map(({name, path, icon}) => {
                 const isActive = currentPagePath.includes(trim(path, "/"))
@@ -82,8 +82,8 @@ const currentPagePath = trim(Astro.url.pathname, "/").split("/");
                   )
                 }
           </li>
-        </div>
         </ul>
+      </div>
       </nav>
   <Hr />
 </header>

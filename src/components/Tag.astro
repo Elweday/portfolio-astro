@@ -52,6 +52,7 @@ const color = hsl(hueVal, 100);
 
 
 <a
+  aria-label={name}
   style={{ "--tag-color-partial": colorPartial, "--tag-color": color }}
   class={twMerge(`   text-[var(--tag-color)] bg-[var(--tag-color-partial)] bg-opacity-90  rounded-xl  group  hover:-top-0.5 hover:text-skin-accent focus-visible:p-1 py-1 px-1 w-fit gap-1 flex justify-center ${type === "category" ? "pointer-events-none" : ""} `, otherClasses)}
   href={href}

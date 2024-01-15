@@ -36,24 +36,28 @@ export const SOCIALS: SocialObjects = [
     href: "https://github.com/elweday",
     linkTitle: ` ${SITE.author} on Github`,
     active: true,
+    icon: "mdi:github",
   },
   {
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/mohamed-nasser-38b045234/",
     linkTitle: `${SITE.author} on LinkedIn`,
     active: true,
+    icon: "mdi:linkedin",
   },
   {
     name: "Mail",
     href: "mailto:mohammednh2864@gmail.com",
     linkTitle: `Send an email to ${SITE.author}`,
     active: true,
+    icon: "mdi:email",
   },
   {
     name: "Discord",
     href: "https://discord.com/users/elweday",
     linkTitle: `${SITE.author} on Discord`,
     active: true,
+    icon: "ic:baseline-discord",
   },
 ];
 

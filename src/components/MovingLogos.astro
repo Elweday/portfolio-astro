@@ -14,14 +14,14 @@ import { Technologies } from "../types";
       Object.values(Technologies).map(({type, name, icon, url})=>{
         return (
           <div class="stackType  flex flex-col group " data-type={type}>
-            <div class="contents">
+            <ul class="contents">
                   <li class="stack group/tech flex flex-col justify-center  gap-5 ">
                     <Icon  class="size-14 grid place-self-center cursor-pointer hover:scale-125 transition-all " name={icon} />
                     <a href={url}>
                       <h3 class="h-0  z-[1000] text-xl font-bold place-self-center scale-y-0 group-hover/tech:opacity-100 group-hover/tech:scale-y-100 transition-all text-center">{name}</h3>
                       </a>
                       </li>
-              </div>
+              </ul>
               </div>
             )
           })
