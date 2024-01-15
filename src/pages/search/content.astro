@@ -121,8 +121,8 @@ section{
       return itemTags.some(itemTag => tags.includes(itemTag));
     }
 
-    const tagsElements = document.querySelectorAll('[aria-type="item-tag"]');
-    const ItemsElements = document.querySelectorAll('[aria-type="search-item"]');
+    const tagsElements = document.querySelectorAll('[data-item-type="item-tag"]');
+    const ItemsElements = document.querySelectorAll('[data-item-type="search-item"]');
     const Items = [...ItemsElements].map(item => ({
       itemTitle:item.dataset.title,
       itemTags : (item.dataset.tags).split("/"),
