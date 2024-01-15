@@ -32,7 +32,7 @@ const allProjects: CollectionEntry<"projects">[] = await getCollection("projects
     <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
       {
         allProjects.map((project) => (
-          <ProjectCard class="size-[25rem]" project={project} />
+          <ProjectCard project={project} />
           ))
         }
     </ul>

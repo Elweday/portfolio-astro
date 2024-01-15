@@ -24,10 +24,10 @@ stack:
   - nodejs
   - typescript
 media:
-  - "/assets/images/projects/helwan.jpg"
-  - "/assets/images/projects/helwan2.jpg"
-  - "/assets/images/projects/helwan.jpg"
-  - "/assets/images/projects/helwan2.jpg"
+  - "./images/helwan.jpg"
+  - "./images/helwan2.jpg"
+  - "./images/helwan.jpg"
+  - "./images/helwan2.jpg"
 ---
 
 
@@ -68,7 +68,8 @@ Provide aggregated and anonymized analytics to educators, giving them a high-lev
 
 
 ## DB Design
-<img src="/assets/images/projects/schema.jpg" />
+![Schema Design](./images/schema.jpg)
+
 
 Schema Overview and Design Choices
 The database schema presented reflects the intricate structure of a college environment, encapsulating the relationships and interactions among students, courses, assessments, staff, and semesters. The design choices aim to align with the business logic inherent in the college structure. Let's delve into the key aspects of the schema and the rationale behind each decision:
@@ -132,7 +133,7 @@ API routes are organized to adhere to `REST` principles, enhancing maintainabili
 - Integrate with the OAuth provider's API to enable authentication using the existing student and educator email accounts.
 
 ## Frontend
-<img src="/assets/images/projects/helwan2.jpg" />
+![Front end image](./images/helwan2.jpg)
 
 ### Svelte/SvelteKit
 Leverage SvelteKit's reactivity to create dynamic and responsive components that update automatically when the underlying data changes.
@@ -239,7 +240,7 @@ The library is known for its simplicity and ease of use, allowing developers to 
 - Interactivity:
 Chart.js supports interactive features, such as tooltips and animations, enhancing the user experience when exploring and interpreting data.
 I mean Look at these pretty charts, made with ease.
-<img src="/assets/images/projects/charts.jpg" />
+![Charts](./images/charts.jpg)
 
 
 In summary, the combination of SvelteKit, Tailwind CSS, and Chart.js creates a frontend stack that is not only efficient and performant but also promotes a developer-friendly and visually appealing user interface for the College Tracking System. The simplicity of Svelte's syntax, the locality of behavior encouraged by Tailwind CSS, and the versatility of Chart.js contribute to an optimal frontend development experience.

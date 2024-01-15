@@ -13,7 +13,7 @@ import Autoplay from "embla-carousel-autoplay"
 const carouselPlugins = [Autoplay({  delay: 4000, stopOnInteraction: true,  pauseOnMouseEnter: true,  })]
 
 type Props = {
-    media: string[]
+    media: any[]
 }
 
 
@@ -38,9 +38,9 @@ export default function MediaCarousel(props: Props) {
   return (
     <Carousel plugins={carouselPlugins} className=" w-full">
       <CarouselContent>
-        {props.media.map((src: string, index: number) => (
+        {props.media.map((src: any, index: number) => (
           <CarouselItem key={index}>
-                <MediaItem src={src} />
+                <MediaItem src={src.src} />
           </CarouselItem>
         ))}
       </CarouselContent>

@@ -21,21 +21,21 @@ const baseItem = z.object({
 
 const blog = defineCollection({
   type: "content",
-  schema: baseItem.extend({
-    cover: z.string(),
+  schema: ({ image }) => baseItem.extend({
+    cover: image(),
   }),
 });
 
 const projects = defineCollection({
   type: "content",
-  schema: baseItem.extend({
+  schema: ({ image }) =>  baseItem.extend({
     endDate: z
       .date()
       .or(z.enum(["Present"]))
       .default("Present"),
     stack: z.array(z.enum(Stacks)).default([]),
     projectURL: z.string().url().optional(),
-    media: z.array(z.string()).min(1),
+    media: z.array(image()).min(1),
   })
 });
 

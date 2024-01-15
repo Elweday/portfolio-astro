@@ -10,7 +10,8 @@ import { Icon } from "astro-icon";
 import { Technologies, type TechnologyKey } from "../../../types";
 import { slugifyStr } from "@utils/slugify";
 import ContentTags from "@components/ContentTags.astro";
-import { Image } from "astro-preload/components";
+import { Image } from "astro:assets";
+import { getImage } from "astro:assets";
 
 import MediaCarousel from "@components/Carousel";
 
@@ -35,9 +36,8 @@ const { Content } = await project.render();
 const { slug, data: {title, description, media, stack, tags, dateTime, endDate}} = project;
 
 
-const ogUrl = new URL(media[0] ?? `/projects/${slug}.png`, Astro.url.origin).href;
-
-
+const ogUrl = new URL(media[0].src ?? `/projects/${slug}.png`, Astro.url.origin).href;
+//const img = await getImage({src: media[0]});
 
 ---
 
@@ -65,7 +65,7 @@ const ogUrl = new URL(media[0] ?? `/projects/${slug}.png`, Astro.url.origin).hre
         <Datetime datetime={dateTime} endDate={endDate} size="lg" class="my-2" />
         <h1 transition:name={slug} class="text-4xl font-semibold text-skin-accent ">{title}</h1>
         <p transition:name={slug+":desc"}>{description}</p>
-        <Image transition:name={slug+":cover"} name={slug+".png"} url={media[0]} class="my-5 rounded-xl aspect-video w-full" alt="" />
+        <Image transition:name={slug+":cover"}  width={450} height={450} format="avif" src={media[0]} class="my-5 rounded-xl aspect-video w-full" alt="" />
         <h2 class="text-2xl mb-2 font-semibold tracking-wide text-skin-accent">Tech Stack</h2>
         <ul class="flex flex-col gap-7">
           {(stack as TechnologyKey[]).map((t) =>

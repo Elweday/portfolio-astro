@@ -4,7 +4,7 @@ slug: transitions-api
 featured: false
 dateTime: 2024-1-04T08:00:00Z
 
-cover: "https://michalkuncio.com/how-to-create-beautiful-page-transitons-in-nuxt-with-view-transitions-api/support.png"
+cover: "./images/transitions.png"
 tags:
   - Astro
   - Animation

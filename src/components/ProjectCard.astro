@@ -7,7 +7,7 @@ import { Icon } from "astro-icon";
 import { twMerge } from "tailwind-merge";
 
 import { Technologies } from "../types";
-import { Image } from "astro-preload/components";
+import { Image } from "astro:assets";
 import { slugifyStr } from "@utils/slugify";
 
 
@@ -25,12 +25,11 @@ const { title, description, media, stack, tags, dateTime, endDate, projectURL } 
 const flagColor = projectURL ? "project-available" : "under-construction"
 const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
 
-
 ---
 
-<li aria-type="search-item" data-slug={slug} data-tags={strTags} class={twMerge("text-white group ", className)} data-title={slug} transition:name={slug+":cover"}>
-  <div class=" relative  size-full ">
-    <Image transition:name={slug+":image"} name={slug+".png"} url={media[0]} class="rounded-xl object-cover size-full"  />
+<li aria-type="search-item" data-slug={slug} data-tags={strTags} class={twMerge("text-white group   ", className)} data-title={slug} transition:name={slug+":cover"}>
+  <div class=" relative  ">
+    <Image transition:name={slug+":image"} alt="" width={600} height={400} src={media[0]} class="rounded-xl   aspect-video"  />
     <div class="absolute bottom-0  left-0 h-full w-full rounded-xl bg-gradient-to-b from-transparent to-skin-accent from-50%   opacity-100 duration-1000" />
   <span
   class="  absolute bottom-0 left-0  w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 transition-opacity pointer-events-none  group-hover:pointer-events-auto group-hover:opacity-100  flex"
