@@ -47,6 +47,8 @@ const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
       </div>
       )
     }
+            </div>
+
       <a href={`/projects/${slug}`} class="h-full justify-end  w-full  flex flex-col  gap-2">
         
         <div class="origin-bottom-left" >
@@ -60,7 +62,6 @@ const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
             {(stack as Technologies[]).map(( technology ) =>
             <Icon transition:name={slug+":stack:"+Technologies[technology].name} class={"sm:size-8"} name={Technologies[technology].icon} />
             )}
-        </div>
       </div>
     </a>
       
