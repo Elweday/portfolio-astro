@@ -10,6 +10,12 @@ const getShow = async (showName: string) => {
   return data as Show;
 };
 
+const MESSAGE_OPTIONS = [
+  {name: "Request CV", value: "report", icon: "feather:thumbs-up"},
+  {name: "Suggest", value: "suggestion", icon: "feather:thumbs-up"},
+  {name: "Other", value: "other", icon: "feather:thumbs-up"},
+]
+
 import { techStackByType } from "@utils/getTechStack";
 
 /** @ts-ignore */
@@ -57,8 +63,8 @@ type Show = {
 
     <h1 class="py-6 text-start text-2xl tracking-wider sm:text-3xl">About</h1>
     <div class="flex flex-col gap-12">
-<!--     <section>
-      <h2>Send A message</h2>
+    <section class="hidden">
+      <h2>Contact Me</h2>
       <label  class="relative block">
         <span class="absolute inset-y-0 left-0 flex items-center pl-2 opacity-75">
           <Icon class="text-skin-base/50 size-6" name="ic:baseline-mail" />
@@ -67,24 +73,39 @@ type Show = {
           id="search-input"
           class=" px-[0.75rem] py-[0.32rem] indent-8 w-full justify-self-center bg-skin-card/30 rounded-lg text-md  block border border-skin-fill 
         border-opacity-40 bg-skin-fill 
-         placeholder:italic placeholder:text-opacity-75 
+         placeholder:italic  placeholder:text-slate-400/80
         focus:border-skin-accent focus:outline-none"
           placeholder="john@example.com"
           type="email"
-          name="search"
+          name="email"
           onchange=""
-          autocomplete="off"
-          autofocus
+          autocomplete="on"
           required
         />
+      </label>
+      <label  class="relative block">
+        <select
+          class=" px-[0.75rem] py-[0.32rem]  w-full justify-self-center bg-skin-card/30 rounded-lg text-md  block border border-skin-fill 
+        border-opacity-40 bg-skin-fill 
+        focus:border-skin-accent focus:outline-none invalid:text-slate-400/80"
+          name="search"
+          onchange=""
+          required
+          autocomplete="off"
+
+        >
+        <option class="text-opacity-75 " value="" disabled selected > Message Subject...</option>
+        {MESSAGE_OPTIONS.map(({name, value, icon}) => (
+          <option value={value} class="text-lg font-bold">{name} <Icon class="size-8 bg-red-500" name={icon} /></option>
+        ))}
+        </select>
       </label>
 
       <label  class="relative block">
         <textarea
-          id="search-input"
-          class=" px-[0.75rem] py-[0.32rem]  w-full justify-self-center bg-skin-card/30 rounded-lg text-md  block border border-skin-fill 
+          class=" px-[0.75rem] py-[0.32rem] h-32  w-full justify-self-center bg-skin-card/30 rounded-lg text-md  block border border-skin-fill 
         border-opacity-40 bg-skin-fill 
-         placeholder:italic placeholder:text-opacity-75 
+         placeholder:italic placeholder:text-opacity-75 placeholder:text-slate-400/80 
         focus:border-skin-accent focus:outline-none"
           placeholder="Message..."
           required
@@ -93,8 +114,8 @@ type Show = {
         />
       </label>
   
-    </section> -->
-<!--     <section>
+    </section>
+    <section class="hidden">
       <h2>Resume</h2>
       <a class="text-lg py-2 px-4 rounded-lg bg-skin-accent/30 w-1/2 place-self-center justify-center place-content-center" href={RESUME} download>
         <Icon class="fill-skin-base" name="lucide:download" />
@@ -102,7 +123,7 @@ type Show = {
         Download my resume
       </span>
       </a>
-    </section> -->
+    </section>
     <section>
       <h2>Education</h2>
       <div class="flex flex-col">
