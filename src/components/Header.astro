@@ -15,10 +15,10 @@ const currentPagePath = trim(Astro.url.pathname, "/").split("/");
 ---
 
 <header  class="h-fit sticky top-0 " >
-  <nav class="flex h-fit w-full flex-col items-center justify-between sm:flex-row  "> 
-      <div class="flex  place-content-center justify-between w-full">
+  <nav class="flex h-fit w-full flex-col items-center  sm:flex-row  "> 
+      <div class="flex  place-content-center justify-between sm:w-fit w-full ">
 
-  <button  class="" aria-label="homepage" id="batman-trigger">
+  <button  class="w-fit" aria-label="homepage" id="batman-trigger">
     <svg
           xmlns="http://www.w3.org/2000/svg"
           class={"h-14 w-14 hover:scale-[110%] transition-scale duration-150 " + (Astro.url.pathname == "/"? "fill-skin-accent":"fill-skin-base") }
@@ -48,7 +48,7 @@ const currentPagePath = trim(Astro.url.pathname, "/").split("/");
       
         </button>
       </div>
-        <div id="menu-items" class="place-self-center items-center content-center gap-4 max-h-0 sm:max-h-[1000px] ease-in-out overflow-hidden sm:flex flex-row sm:p-2 px-3 w-full relative flex  h-full  mb-2 ">
+        <div id="menu-items" class="place-self-center   sm:pl-56 items-center content-center gap-4 max-h-0 sm:max-h-[1000px] ease-in-out overflow-hidden sm:flex flex-row sm:p-2 px-3 w-full relative flex  h-full  mb-2 ">
 
           <ul id="menu" class="sm:contents  flex flex-col w-full place-content-center place-items-center  p-2 ">
             {
@@ -57,11 +57,6 @@ const currentPagePath = trim(Astro.url.pathname, "/").split("/");
                 return (
                   <li class="relative w-full ">
                     <a href={path}  class={"flex flex-row items-center gap-2 w-full px-4 py-3 text-center font-medium hover:text-skin-accent sm:my-0 sm:px-2 sm:py-1" + (isActive?" font-bold text-skin-accent w-full":"")}>
-                      {
-                        /*
-                         <Icon class={" size-7" +(isActive?"fill-skin-accent font-extrabold ":"fill-skin-base")} name={icon} />
-                         */
-                      }
                       <span class="place-self-center  w-full">{name}</span>
                     </a>
                     { isActive ? (<span transition:name="active-nav" class="absolute top-0 left-0 h-full hidden sm:block w-full  border-skin-accent bg-black/10 border-2 rounded-xl"></span>) : null }

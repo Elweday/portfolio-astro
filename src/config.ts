@@ -1,7 +1,7 @@
 import type { Site, SocialObjects } from "./types";
 
 export const SITE: Site = {
-  website: "https://elweday.github.io", // replace this with your deployed domain
+  website: "https://elweday.github.io",
   author: "Mohammed Nasser",
   desc: "A personal portfolio and blog.",
   title: "Nasser's Blog",
@@ -9,6 +9,9 @@ export const SITE: Site = {
   lightAndDarkMode: true,
   itemsPerPage: 20,
 };
+
+export const omdbApiKey = "50788f34" // not a secret, feel free to use (It's pointless).
+export const RESUME = "https://docs.google.com/document/d/1Lmc80EBvlTwp2vp5kkrLQEzGkF5WvxCQ/export?format=pdf"
 
 export const PATHS = [
   { name: "Blog", path: "/blog", icon: "ant-design:read-outlined" },
@@ -19,9 +22,9 @@ export const PATHS = [
 
 
 
-export type NAV_LINKS = "posts" | "projects" | "about" | "search" | "tags" | "home" | "search"
+export type NAV_LINKS = "posts" | "projects" | "about" | "search" | "home" | "search"
 
-export const LOCALE = ["en-EN"]; // set to [] to  use the environment default
+export const LOCALE = ["en-EN"];
 
 export const LOGO_IMAGE = {
   enable: false,
