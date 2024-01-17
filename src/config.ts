@@ -80,10 +80,14 @@ export const MY_SHOWS = [
 ];
 
 export const HOBBIES = [
-  { name: "coding personal projects", icon: "ph:code-bold"},
-  { name: "playing video games", icon: "cil:gamepad"},
-  { name: "3d modeling with blender", icon: "carbon:chart-3d"},
-  { name: "watching tv shows", icon: "ic:round-tv"},
-  { name: "cooking food", icon: "ph:cooking-pot-bold"},
+  { name: "Coding", icon: "ph:code-bold"},
+  { name: "Gaming", icon: "cil:gamepad"},
+  { name: "3d Modeling", icon: "carbon:chart-3d"},
+  { name: "TV shows", icon: "ic:round-tv"},
+  { name: "Cooking Food", icon: "ph:cooking-pot-bold"},
+  { name: "Reading", icon: "ic:baseline-book"},
+  { name: "Movies", icon: "mdi:movie"},
+  { name: "Music", icon: "mdi:music-box-multiple"},
+  { name: "Teaching", icon: "mdi:teacher"},
 
 ]

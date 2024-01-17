@@ -166,19 +166,19 @@ type Show = {
     </section>
     <section>
       <h2>Intersest And Activities</h2>
-      <div class="flex flex-col justify-center gap-3">
+      <ul class="grid sm:grid-cols-3 grid-cols-2  justify-center gap-3">
         {
           hobbies.map(hobby => (
-            <div class="px-5">
-              <Icon name={hobby.icon} class="h-5 w-5" />
+            <li class="px-5 gap-5 flex bg-skin-card/60 rounded-lg p-2">
+              <Icon name={hobby.icon} class="size-8" />
               {hobby.name}
-            </div>
+            </li>
           ))
         }
-      </div>
+      </ul>
     </section>
     <section>
-      <h2>Shows I like</h2>
+      <h2>Movies and TV Suggestions</h2>
       <div
         class="grid grid-cols-2 place-content-stretch justify-stretch gap-5 sm:grid-cols-4"
       >
