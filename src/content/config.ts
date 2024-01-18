@@ -1,8 +1,7 @@
 import { SITE } from "@config";
 import { defineCollection, z } from "astro:content";
-import { Technologies } from "../types";
+import { Technologies } from "@config";
 
-const Stacks = [...Object.keys(Technologies)] as [string, ...string[]];
 type FlexibleType<T> = {
   [K in keyof T]: T[K];
 } & {
@@ -10,6 +9,9 @@ type FlexibleType<T> = {
 };
 
 type Entry = FlexibleType<z.infer<typeof baseItem> >;
+
+const keys = Object.keys(Technologies) as [string, ...string[]];
+
 
 const baseItem = z.object({
   dateTime: z.date().default(new Date()),
@@ -33,7 +35,7 @@ const projects = defineCollection({
       .date()
       .or(z.enum(["Present"]))
       .default("Present"),
-    stack: z.array(z.enum(Stacks)).default([]),
+    stack: z.array(z.enum(keys)).default([]),
     projectURL: z.string().url().optional(),
     media: z.array(image()).min(1),
   })

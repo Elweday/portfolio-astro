@@ -4,16 +4,18 @@ import MoviesGallery from "@components/MoviesGallery";
 
 import getShowsData from "@utils/shows";
 
+
 const showsData = await getShowsData(omdbApiKey, showsList);
 
 const MESSAGE_OPTIONS = [
-  {name: "Request CV", value: "report", icon: "feather:thumbs-up"},
-  {name: "Suggest", value: "suggestion", icon: "feather:thumbs-up"},
-  {name: "Other", value: "other", icon: "feather:thumbs-up"},
-]
+  {name: "Suggestion", icon: "feather:thumbs-up"},
+  {name: "Bug", icon: "feather:thumbs-down"},
+  {name: "Feedback", icon: "feather:thumbs-up"},
+  {name: "Business inquiry", icon: "feather:thumbs-up"},
+  {name: "Other",  icon: "feather:thumbs-up"},
+] as const;
 
 import { techStackByType } from "@utils/getTechStack";
-import { Image } from "astro-preload/components";
 import { Icon } from "astro-icon";
 import Layout from "@layouts/Layout.astro";
 import Socials from "@components/Socials.astro";
@@ -24,8 +26,10 @@ import Socials from "@components/Socials.astro";
 
     <h1 class="py-6 text-start text-2xl tracking-wider sm:text-3xl">About</h1>
     <div class="flex flex-col gap-12">
-    <section class="hidden">
-      <h2>Contact Me</h2>
+    <section>
+      <h2>Contact Me <Socials class="scale-100 place-self-start" /></h2>
+      <form id="message-form" method="POST" class="flex flex-col gap-3" >
+
       <label  class="relative block">
         <span class="absolute inset-y-0 left-0 flex items-center pl-2 opacity-75">
           <Icon class="text-skin-base/50 size-6" name="ic:baseline-mail" />
@@ -49,15 +53,15 @@ import Socials from "@components/Socials.astro";
           class=" px-[0.75rem] py-[0.32rem]  w-full justify-self-center bg-skin-card/30 rounded-lg text-md  block border border-skin-fill 
         border-opacity-40 bg-skin-fill 
         focus:border-skin-accent focus:outline-none invalid:text-slate-400/80"
-          name="search"
+          name="message-type"
           onchange=""
           required
           autocomplete="off"
 
         >
-        <option class="text-opacity-75 " value="" disabled selected > Message Subject...</option>
-        {MESSAGE_OPTIONS.map(({name, value, icon}) => (
-          <option value={value} class="text-lg font-bold">{name} <Icon class="size-8 bg-red-500" name={icon} /></option>
+        <option class="text-opacity-75 " value="" disabled selected > Choose message Subject...</option>
+        {MESSAGE_OPTIONS.map(({name, icon}) => (
+          <option value={name} class="text-lg font-bold">{name} <Icon class="size-8 bg-red-500" name={icon} /></option>
         ))}
         </select>
       </label>
@@ -74,28 +78,32 @@ import Socials from "@components/Socials.astro";
           autocomplete="off"
         />
       </label>
-  
-    </section>
-    <section class="hidden">
-      <h2>Resume</h2>
-      <a class="text-lg py-2 px-4 rounded-lg bg-skin-accent/30 w-1/2 place-self-center justify-center place-content-center" href={RESUME} download>
+
+      <div class="flex gap-3">
+
+        <button
+        class="text-lg py-2 flex gap-2 px-4 rounded-lg bg-skin-accent/30 w-full place-self-center justify-center place-items-center"
+        type="submit"
+      >
+        <Icon class="fill-skin-base" name="lucide:send" />
+        <span>
+          Send
+        </span>
+      </button>
+      <a class="text-lg py-2 px-4 rounded-lg bg-skin-accent/30 w-full flex gap-2 place-self-center justify-center place-items-center" href={RESUME} download>
         <Icon class="fill-skin-base" name="lucide:download" />
       <span>
-        Download my resume
+        Resume
       </span>
-      </a>
+    </a>
+  </div>
+    <span class="hidden text-green-400" id="message-status">
+      Message sent successfully, You will be contacted soon, Thank you!!
+    </span>
+    </form>
+  
     </section>
-    <section>
-      <h2>Education</h2>
-      <div class="flex flex-col">
-        <a class="text-lg font-bold" href="http://engh.helwan.edu.eg/">
-          Faculty of Engineering, Helwan University
-        </a>
-        <span class="font-extralight"
-          >Computer and Communication Department 2021-2026</span
-        >
-      </div>
-    </section>
+
     <section>
       <h2>Tech Stack</h2>
       <ul class="flex flex-col gap-6">
@@ -120,10 +128,6 @@ import Socials from "@components/Socials.astro";
           })
         }
       </ul>
-    </section>
-    <section>
-      <h2>My Contacts</h2>
-      <Socials class="scale-100 place-self-start" />
     </section>
     <section>
       <h2>Intersest And Activities</h2>
@@ -155,3 +159,28 @@ import Socials from "@components/Socials.astro";
     @apply text-start text-xl tracking-wider  sm:text-2xl;
   }
 </style>
+
+
+
+<script>
+  // form submit
+  import { TELEGRAM_BOT_TOKEN, MY_CHAT_ID } from "@config"
+  import { telegramHandler } from "@utils/messages";
+  const formatMessage = (data: FormData) => {
+    return  `
+    New ${data.get("message-type")} from ${data.get("email")} %0A %0A
+    ${data.get("message")}
+    `
+  }
+  const sendTelegramMessage = telegramHandler(TELEGRAM_BOT_TOKEN, MY_CHAT_ID);
+  const form = document.querySelector("#message-form") as HTMLFormElement;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const message = formatMessage(formData)
+    sendTelegramMessage(message);
+    form.reset();
+    document.querySelector("#message-status")?.classList.remove("hidden");
+  })
+</script>

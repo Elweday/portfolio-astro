@@ -7,7 +7,7 @@ import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime.astro";
 /* @ts-ignore */
 import { Icon } from "astro-icon";
-import { Technologies, type TechnologyKey } from "../../../types";
+import { Technologies } from "@config";
 import { slugifyStr } from "@utils/slugify";
 import ContentTags from "@components/ContentTags.astro";
 import { Image } from "astro:assets";
@@ -68,7 +68,7 @@ const ogUrl = new URL(media[0].src ?? `/projects/${slug}.png`, Astro.url.origin)
         <Image transition:name={slug+":cover"}  width={450} height={450} format="avif" src={media[0]} class="my-5 rounded-xl aspect-video w-full" alt="" />
         <h2 class="text-2xl mb-2 font-semibold tracking-wide text-skin-accent">Tech Stack</h2>
         <ul class="flex flex-col gap-7">
-          {(stack as TechnologyKey[]).map((t) =>
+          {(stack as (keyof typeof Technologies)[]).map((t) =>
           {
            const { name, icon, url, description } = Technologies[t];
            return (
