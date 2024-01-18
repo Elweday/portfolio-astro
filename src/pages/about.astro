@@ -1,14 +1,10 @@
 ---
 import { MY_SHOWS as showsList, HOBBIES as hobbies, RESUME, omdbApiKey } from "@config";
+import MoviesGallery from "@components/MoviesGallery";
 
-const getShow = async (showName: string) => {
-  const res = await fetch(
-    `https://www.omdbapi.com/?t=${showName}&apikey=${omdbApiKey}`, // Free API key no worries
-    { cache: "force-cache" }
-  );
-  const data = await res.json();
-  return data as Show;
-};
+import getShowsData from "@utils/shows";
+
+const showsData = await getShowsData(omdbApiKey, showsList);
 
 const MESSAGE_OPTIONS = [
   {name: "Request CV", value: "report", icon: "feather:thumbs-up"},
@@ -17,45 +13,10 @@ const MESSAGE_OPTIONS = [
 ]
 
 import { techStackByType } from "@utils/getTechStack";
-
-/** @ts-ignore */
 import { Image } from "astro-preload/components";
-/** @ts-ignore */
 import { Icon } from "astro-icon";
 import Layout from "@layouts/Layout.astro";
 import Socials from "@components/Socials.astro";
-const showsData = showsList.map(async showName => {
-  const value = await getShow(showName);
-  return value;
-});
-
-type Show = {
-  Title: string;
-  Year: string;
-  Rated: string;
-  Released: string;
-  Runtime: string;
-  Genre: string;
-  Director: string;
-  Writer: string;
-  Actors: string;
-  Plot: string;
-  Language: string;
-  Country: string;
-  Awards: string;
-  Poster: string;
-  Ratings: { Source: string; Value: string }[];
-  Metascore: string;
-  imdbRating: string;
-  imdbVotes: string;
-  imdbID: string;
-  Type: string;
-  DVD: string;
-  BoxOffice: string;
-  Production: string;
-  Website: string;
-  Response: string;
-};
 ---
 
 <Layout ogImage="/assets/images/fallback.png" title="about" description="Mohammed Nasser's personal blog">
@@ -179,32 +140,7 @@ type Show = {
     </section>
     <section>
       <h2>Movies and TV Suggestions</h2>
-      <div
-        class="grid grid-cols-2 place-content-stretch justify-stretch gap-5 sm:grid-cols-4"
-      >
-        {
-          showsData.map(async data => {
-            const { imdbID, Poster, Title } = await data;
-            return (
-              <a href={`https://www.imdb.com/title/${imdbID}`}>
-                <div class="group relative h-full w-full">
-                  <Image
-                    width={300}
-                    height={300}
-                    url={Poster}
-                    class=" h-full w-full rounded-xl"
-                    alt=""
-                  />
-                  <div class="absolute left-0 top-0  hidden h-full w-full  rounded-xl bg-gradient-to-b from-[rgba(0,0,0,0)] from-70% to-skin-accent opacity-80 duration-500 group-hover:block" />
-                  <span class="absolute bottom-0 left-0  hidden p-3 text-lg font-bold text-white duration-300 group-hover:flex">
-                    {Title}
-                  </span>
-                </div>
-              </a>
-            );
-          })
-        }
-      </div>
+      <MoviesGallery showsData={showsData} client:load />
     </section>
   </div>
 </article>
