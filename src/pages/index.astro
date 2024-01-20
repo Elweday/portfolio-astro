@@ -50,14 +50,19 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     <Hr />
 
     <section>
-      <h2 class="flex flex-col">
-        <span class="">
-          Tech Stack
-        </span>
-
-        <span class="text-sm " id="suffix"> 
-          &nbsp;
-        </span></h2>
+      <h2 class="flex  w-full justify-between">
+        <span>Tech Stack</span>
+              <LinkButton href="/about#tech-stack-section">
+                <span class="inline-flex  scale-[60%] whitespace-nowrap ">
+                  Expand...
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                    ><path
+                      d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
+                    ></path>
+                  </svg>
+                </span>
+        </LinkButton>
+</h2>
       <MovingLogos/>
     </section>
       <Hr />
