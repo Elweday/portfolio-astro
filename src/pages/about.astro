@@ -1,18 +1,23 @@
 ---
-import { MY_SHOWS as showsList, HOBBIES as hobbies, RESUME, omdbApiKey } from "@config";
+import {
+  MY_SHOWS as showsList,
+  HOBBIES as hobbies,
+  RESUME,
+  omdbApiKey,
+} from "@config";
 import MoviesGallery from "@components/MoviesGallery";
+import Tooltip from "@components/StackIconTooltip";
 
 import getShowsData from "@utils/shows";
-
 
 const showsData = await getShowsData(omdbApiKey, showsList);
 
 const MESSAGE_OPTIONS = [
-  {name: "Suggestion", icon: "feather:thumbs-up"},
-  {name: "Bug", icon: "feather:thumbs-down"},
-  {name: "Feedback", icon: "feather:thumbs-up"},
-  {name: "Business inquiry", icon: "feather:thumbs-up"},
-  {name: "Other",  icon: "feather:thumbs-up"},
+  { name: "Suggestion", icon: "feather:thumbs-up" },
+  { name: "Bug", icon: "feather:thumbs-down" },
+  { name: "Feedback", icon: "feather:thumbs-up" },
+  { name: "Business inquiry", icon: "feather:thumbs-up" },
+  { name: "Other", icon: "feather:thumbs-up" },
 ] as const;
 
 import { techStackByType } from "@utils/getTechStack";
@@ -21,133 +26,133 @@ import Layout from "@layouts/Layout.astro";
 import Socials from "@components/Socials.astro";
 ---
 
-<Layout ogImage="/assets/images/fallback.png" title="about" description="Mohammed Nasser's personal blog">
+<Layout
+  ogImage="/assets/images/fallback.png"
+  title="about"
+  description="Mohammed Nasser's personal blog"
+>
   <article>
-
     <h1 class="py-6 text-start text-2xl tracking-wider sm:text-3xl">About</h1>
     <div class="flex flex-col gap-12">
-    <section>
-      <h2>Contact Me <Socials class="scale-100 place-self-start" /></h2>
-      <form id="message-form" method="POST" class="flex flex-col gap-3" >
-
-      <label  class="relative block">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-2 opacity-75">
-          <Icon class="text-skin-base/50 size-6" name="ic:baseline-mail" />
-        </span>
-        <input
-          id="search-input"
-          class=" px-[0.75rem] py-[0.32rem] indent-8 w-full justify-self-center bg-skin-card/30 rounded-lg text-md  block border border-skin-fill 
-        border-opacity-40 bg-skin-fill 
-         placeholder:italic  placeholder:text-slate-400/80
+      <section>
+        <h2>Contact Me <Socials class="scale-100 place-self-start" /></h2>
+        <form id="message-form" method="POST" class="flex flex-col gap-3">
+          <label class="relative block">
+            <span
+              class="absolute inset-y-0 left-0 flex items-center pl-2 opacity-75"
+            >
+              <Icon class="size-6 text-skin-base/50" name="ic:baseline-mail" />
+            </span>
+            <input
+              id="search-input"
+              class="text-md block w-full justify-self-center rounded-lg border border-skin-fill border-opacity-40 bg-skin-card/30 bg-skin-fill px-[0.75rem]
+        py-[0.32rem] indent-8
+         placeholder:italic placeholder:text-slate-400/80
         focus:border-skin-accent focus:outline-none"
-          placeholder="john@example.com"
-          type="email"
-          name="email"
-          onchange=""
-          autocomplete="on"
-          required
-        />
-      </label>
-      <label  class="relative block">
-        <select
-          class=" px-[0.75rem] py-[0.32rem]  w-full justify-self-center bg-skin-card/30 rounded-lg text-md  block border border-skin-fill 
-        border-opacity-40 bg-skin-fill 
-        focus:border-skin-accent focus:outline-none invalid:text-slate-400/80"
-          name="message-type"
-          onchange=""
-          required
-          autocomplete="off"
+              placeholder="john@example.com"
+              type="email"
+              name="email"
+              onchange=""
+              autocomplete="on"
+              required
+            />
+          </label>
+          <label class="relative block">
+            <select
+              class="text-md block w-full justify-self-center rounded-lg border border-skin-fill border-opacity-40 bg-skin-card/30 bg-skin-fill
+        px-[0.75rem] py-[0.32rem]
+        invalid:text-slate-400/80 focus:border-skin-accent focus:outline-none"
+              name="message-type"
+              onchange=""
+              required
+              autocomplete="off"
+            >
+              <option class="text-opacity-75" value="" disabled selected>
+                Choose message Subject...</option
+              >
+              {
+                MESSAGE_OPTIONS.map(({ name, icon }) => (
+                  <option value={name} class="text-lg font-bold">
+                    {name} <Icon class="size-8 bg-red-500" name={icon} />
+                  </option>
+                ))
+              }
+            </select>
+          </label>
 
-        >
-        <option class="text-opacity-75 " value="" disabled selected > Choose message Subject...</option>
-        {MESSAGE_OPTIONS.map(({name, icon}) => (
-          <option value={name} class="text-lg font-bold">{name} <Icon class="size-8 bg-red-500" name={icon} /></option>
-        ))}
-        </select>
-      </label>
+          <label class="relative block">
+            <textarea class="text-md block h-32 w-full justify-self-center rounded-lg border border-skin-fill border-opacity-40 bg-skin-card/30 bg-skin-fill px-[0.75rem] py-[0.32rem] placeholder:italic placeholder:text-slate-400/80 placeholder:text-opacity-75 focus:border-skin-accent focus:outline-none" placeholder="Message..." required name="message" autocomplete="off" />
+          </label>
 
-      <label  class="relative block">
-        <textarea
-          class=" px-[0.75rem] py-[0.32rem] h-32  w-full justify-self-center bg-skin-card/30 rounded-lg text-md  block border border-skin-fill 
-        border-opacity-40 bg-skin-fill 
-         placeholder:italic placeholder:text-opacity-75 placeholder:text-slate-400/80 
-        focus:border-skin-accent focus:outline-none"
-          placeholder="Message..."
-          required
-          name="message"
-          autocomplete="off"
-        />
-      </label>
+          <div class="flex gap-3">
+            <button
+              class="flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg"
+              type="submit"
+            >
+              <Icon class="fill-skin-base" name="lucide:send" />
+              <span> Send</span>
+            </button>
+            <a
+              class="flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg"
+              href={RESUME}
+              download
+            >
+              <Icon class="fill-skin-base" name="lucide:download" />
+              <span> Resume</span>
+            </a>
+          </div>
+          <span class="hidden text-green-400" id="message-status">
+            Message sent successfully, You will be contacted soon, Thank you!!
+          </span>
+        </form>
+      </section>
 
-      <div class="flex gap-3">
-
-        <button
-        class="text-lg py-2 flex gap-2 px-4 rounded-lg bg-skin-accent/30 w-full place-self-center justify-center place-items-center"
-        type="submit"
-      >
-        <Icon class="fill-skin-base" name="lucide:send" />
-        <span>
-          Send
-        </span>
-      </button>
-      <a class="text-lg py-2 px-4 rounded-lg bg-skin-accent/30 w-full flex gap-2 place-self-center justify-center place-items-center" href={RESUME} download>
-        <Icon class="fill-skin-base" name="lucide:download" />
-      <span>
-        Resume
-      </span>
-    </a>
-  </div>
-    <span class="hidden text-green-400" id="message-status">
-      Message sent successfully, You will be contacted soon, Thank you!!
-    </span>
-    </form>
-  
-    </section>
-
-    <section>
-      <h2>Tech Stack</h2>
-      <ul class="flex flex-col gap-6">
-        {
-          Object.entries(techStackByType).map(([type, stack]) => {
-            return (
-              <div class="flex flex-col gap-1">
-                <div class="flex flex-col gap-1 bg-skin-fill  p-5">
-                  <h3>{type}</h3>
-                  <div class="flex gap-20 overflow-visible  overflow-x-auto rounded-lg p-4">
-                  {stack.map(({ name, icon, url }) => (
-                    
-                    <li class="stack group/tech relative   flex flex-col justify-center  overflow-visible ">
-                      <a class="absolute -top-6 scale-75 place-self-center font-bold  transition-opacity opacity-0 group-hover/tech:opacity-100 z-[1000]   whitespace-nowrap" href={url}> {name}</a>
-                      <Icon class="grid size-10 cursor-pointer place-self-center transition-all hover:scale-125 " name={icon} />
-                    </li>
-                    ))}
-                    </div>
-                    </div>
-                    </div>
-                );
-          })
-        }
-      </ul>
-    </section>
-    <section>
-      <h2>Intersest And Activities</h2>
-      <ul class="grid sm:grid-cols-3 grid-cols-2  justify-center gap-3">
-        {
-          hobbies.map(hobby => (
-            <li class="px-5 gap-5 flex bg-skin-card/60 rounded-lg p-2">
-              <Icon name={hobby.icon} class="size-8" />
-              {hobby.name}
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-    <section>
-      <h2>Movies and TV Suggestions</h2>
-      <MoviesGallery showsData={showsData} client:load />
-    </section>
-  </div>
-</article>
+      <section>
+        <h2>Tech Stack</h2>
+        <ul class="flex flex-col gap-4">
+          {
+            Object.entries(techStackByType).map(([type, stack]) => {
+              return (
+                <li class="flex flex-col gap-1">
+                  <div class="flex flex-col gap-2 rounded-lg  bg-skin-fill p-5">
+                    <h3 class=" font-bold">{type}</h3>
+                    <ul class="flex justify-evenly gap-4 overflow-visible overflow-x-auto rounded-lg p-2">
+                      {stack.map(({ name, icon, url }) => (
+                        <Tooltip
+                          delayDuration={800}
+                          name={name}
+                          icon={icon}
+                          url={url}
+                          client:load
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </section>
+      <section>
+        <h2>Intersest And Activities</h2>
+        <ul class="grid grid-cols-2 justify-center gap-3 sm:grid-cols-3">
+          {
+            hobbies.map(hobby => (
+              <li class="flex gap-5 rounded-lg  bg-skin-fill px-5 py-2">
+                <Icon name={hobby.icon} class="size-9" />
+                <span class="place-self-center">{hobby.name}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+      <section>
+        <h2>Movies and TV Suggestions</h2>
+        <MoviesGallery showsData={showsData} client:load />
+      </section>
+    </div>
+  </article>
 </Layout>
 
 <style>
@@ -160,27 +165,26 @@ import Socials from "@components/Socials.astro";
   }
 </style>
 
-
-
 <script>
   // form submit
-  import { TELEGRAM_BOT_TOKEN, MY_CHAT_ID } from "@config"
+  import { TELEGRAM_BOT_TOKEN, MY_CHAT_ID } from "@config";
   import { telegramHandler } from "@utils/messages";
   const formatMessage = (data: FormData) => {
-    return  `
+    return `
     New ${data.get("message-type")} from ${data.get("email")} %0A %0A
     ${data.get("message")}
-    `
-  }
+    `;
+  };
   const sendTelegramMessage = telegramHandler(TELEGRAM_BOT_TOKEN, MY_CHAT_ID);
   const form = document.querySelector("#message-form") as HTMLFormElement;
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", e => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
-    const message = formatMessage(formData)
+    const message = formatMessage(formData);
     sendTelegramMessage(message);
     form.reset();
     document.querySelector("#message-status")?.classList.remove("hidden");
-  })
+  });
 </script>
+@components/StackIconTooltip

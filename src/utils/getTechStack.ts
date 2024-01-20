@@ -7,7 +7,7 @@ const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
   }, {} as Record<K, T[]>);
 
 
-const techStackByType = groupBy(Object.values(Technologies), (tech) => tech.type);
+const techStackByType = groupBy(Object.values(Technologies).filter(i => i.display), (tech) => tech.type);
 
 
 const getAllStack = (projects: CollectionEntry<"projects">[]) => {
