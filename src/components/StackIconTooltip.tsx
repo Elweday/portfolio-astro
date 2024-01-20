@@ -18,18 +18,22 @@ export default ({name, url, icon, delayDuration=400}: { name: string, url: strin
     const open = () => setOpen(true)
 
     return (
-<TooltipProvider 
+  <li
+  onFocus={open}
+  onMouseOver={open}
+  onBlur={close}
+  onMouseLeave={close}
+  
+  > 
+      <TooltipProvider 
 delayDuration={delayDuration}
 
 >
 <Tooltip
   open={opened}
+
 >
   <TooltipTrigger
-    onFocus={open}
-    onMouseOver={open}
-    onBlur={close}
-    onMouseLeave={close}
     >
     <iconify-icon
     class="grid text-[33px] cursor-pointer place-self-center transition-all hover:scale-[1.3] " icon={icon} 
@@ -37,10 +41,7 @@ delayDuration={delayDuration}
 
   </TooltipTrigger>
   <TooltipContent
-        onBlur={close}
-        onMouseLeave={close}
-        onFocus={open}
-        onMouseOver={open} >
+        >
     <a href={url} className="bg-skin-card rounded-xl flex items-center justify-center gap-1 p-2  transition-all ">
   <iconify-icon class="text-[20px]" icon="ant-design:link-outlined" /> 
   <span>
@@ -51,6 +52,7 @@ delayDuration={delayDuration}
   </TooltipContent>
 </Tooltip>
 </TooltipProvider>
+</li>
 
 )
 }
