@@ -39,9 +39,7 @@ export default defineConfig({
   integrations: integrations,
   markdown: markdownConfig,
   output: "hybrid",
-  adapter: cloudflare({
-    
-  }),
+  adapter: cloudflare(),
   vite: {
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"]
