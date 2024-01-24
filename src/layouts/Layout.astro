@@ -9,6 +9,7 @@ import Scroller from "@components/Scroller.astro";
 
 
 import trim from "@utils/trim";
+import site from "@utils/og-templates/site";
 
 
 
@@ -41,8 +42,7 @@ const { title: siteTitle } = SITE;
 const path = title;
 const pageTitle = siteTitle + " | " + toTitleCase(title);
 
-
-const socialImageURL = ogImage ?? trim(canonicalURL, "/") + ".png";
+ogImage = ogImage? ogImage : SITE.website+"fallback.png"; 
 ---
 
 <!doctype html>
@@ -64,17 +64,15 @@ const socialImageURL = ogImage ?? trim(canonicalURL, "/") + ".png";
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image" content={ogImage} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={pageTitle} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={socialImageURL} />
+    <meta property="twitter:image" content={ogImage} />
     
-
-
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
