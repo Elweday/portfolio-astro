@@ -8,9 +8,7 @@ import { SITE } from "./src/config";
 import compress from "astro-compress";
 import preload from "astro-preload";
 import alpinejs from "@astrojs/alpinejs";
-import cloudflare from '@astrojs/cloudflare';
-
-
+import node from "@astrojs/node";
 type UserConfig = Parameters<typeof defineConfig>[0];
 const markdownConfig: UserConfig["markdown"] = {
   remarkPlugins: [[remarkToc, {
@@ -39,7 +37,9 @@ export default defineConfig({
   integrations: integrations,
   markdown: markdownConfig,
   output: "hybrid",
-  adapter: cloudflare(),
+  adapter: node({
+    mode: "standalone"
+  }),
   vite: {
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"]
