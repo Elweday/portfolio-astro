@@ -8,8 +8,8 @@ import { SITE } from "./src/config";
 import compress from "astro-compress";
 import preload from "astro-preload";
 import alpinejs from "@astrojs/alpinejs";
-import node from "@astrojs/node";
-import cloudflare from '@astrojs/cloudflare';
+import vercel from '@astrojs/vercel/serverless';
+
 
 type UserConfig = Parameters<typeof defineConfig>[0];
 const markdownConfig: UserConfig["markdown"] = {
@@ -39,9 +39,7 @@ export default defineConfig({
   integrations: integrations,
   markdown: markdownConfig,
   output: "hybrid",
-  adapter: node({
-    mode: 'standalone',
-  }),
+  adapter: vercel(),
   vite: {
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"]
