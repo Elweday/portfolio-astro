@@ -9,7 +9,6 @@ const posts = await getCollection("blog");
 const projects = await getCollection("projects"); 
 const entries = [...posts, ...projects];
 import { Icon } from "astro-icon";
-import Tabs from "@components/Tabs.astro";
 ---
 
     <label  class="relative block">
@@ -33,7 +32,7 @@ import Tabs from "@components/Tabs.astro";
       />
     </label>
 
-    <p id="number-of-results" class="text-skin-base/70 p-3">Search results</p>
+    <p id="number-of-results" class="text-skin-base/70 p-3 ">Search results</p>
     <ul id="search-results"  class="grid grid-cols-1 gap-4 p-4 overflow-y-auto">
       {
         entries.map(({slug, data, collection}) => {
@@ -68,46 +67,54 @@ import Tabs from "@components/Tabs.astro";
         title: string
   }
 
+
+
+  const WINDOW_SIZE = 800; 
+  const SENTENCES = 2; 
+
   const entries = [...posts, ...projects] as Entry[] 
-  const entriesCount = entries.length 
+  const entryCount = entries.length 
   function sentence(s: string, first: boolean) {
-      const delimiters = /[.!?,;\n]/g; // Include newline character as a sentence delimiter
+      const delimiters = /[.!?,;\n]/g; 
       const delimiterPositions = [...s.matchAll(delimiters)].map(match => match.index);
       if (first) {
-          const firstDelimiterPosition = delimiterPositions[0];
+          const firstDelimiterPosition = delimiterPositions.at(SENTENCES);
           return firstDelimiterPosition !== undefined ? s.slice(0, firstDelimiterPosition + 1) : s;
       } else {
-          const lastDelimiterPosition = delimiterPositions[delimiterPositions.length - 1];
+          const lastDelimiterPosition = delimiterPositions.at(-SENTENCES);
           return lastDelimiterPosition !== undefined ? s.slice(lastDelimiterPosition + 1) : s;
       }
     }
+
   function getMatch(entry: Entry, query: string) {
-        const blob = [removeMd(entry.body), entry.data.description, entry.data.title].join("\n")
+        const blob = [entry.data.title, entry.data.description, removeMd(entry.body)].join("\n")
         const start = blob.toLowerCase().indexOf(query.toLowerCase())
         const end = start + query.length
-        const windowSize = 120; 
         if (start !== -1) {
 
-          const pre = sentence(blob.slice(start - windowSize, start), false)
+          const pre = sentence(blob.slice(start - WINDOW_SIZE, start), false)
           const match = blob.slice(start, end)
-          const post = sentence(blob.slice(end, end + windowSize), true)
+          const post = sentence(blob.slice(end, end + WINDOW_SIZE), true)
 
             return{
                 match: [pre, match, post],
                 title: slugifyStr(entry.data.title)
-            } 
-                
+            }        
         }
 
     }
 
-
-    function updateList(e: any) {
-      if (e.target.id !== "search-input") return;
-      const searchResults = getSearchResults()
+    function updateList(q: string) {
+      const url = new URL(window.location as any) ;
+      url.searchParams.set('q', q);
+      if (!q) url.searchParams.delete("q");
+      window.history.pushState(null, '', url.toString());
+      const searchResults = q!==""?
+       entries.map((entry) => getMatch(entry, q)).filter((match) => match !== undefined) as searchResult[]: [] as searchResult[];;
       let hiddenCount = 0;
       const parentElement = document.getElementById("search-results") as HTMLUListElement
       [...parentElement.children].forEach((child: any) => {
+        if (!searchResults) return;
         const match = searchResults.find(({title}) => title === child.dataset.title) as searchResult;
         if (match) {
           child.classList.remove("hidden")
@@ -120,13 +127,35 @@ import Tabs from "@components/Tabs.astro";
           hiddenCount += 1
         }
       });
-      (document.getElementById("number-of-results") as HTMLParagraphElement).innerText = hiddenCount === entriesCount ? "No results found" : `Showing ${searchResults.length} results`;
-    }
-    function getSearchResults () {
-      const inputVal = (document.getElementById("search-input") as HTMLInputElement).value
-      return entries.map((entry) => getMatch(entry, inputVal)).filter((match) => match !== undefined) as searchResult[];
 
+      const nMatches = document.getElementById("number-of-results") as HTMLParagraphElement;
+      if (hiddenCount !== entryCount)
+      {
+        nMatches.innerText = `Found ${searchResults.length} ${searchResults.length === 1 ? "result" : "results" } for "${q}"`
+      }
+      else {
+        if (q === "")
+        {
+          nMatches.innerText = `Start Typing to get results!`
+        } else {
+          nMatches.innerText = `No results found for "${q}" `
+        }
+      }
     }
-    addEventListener("input", updateList);
+
+ 
+    const url = new URL(window.location as any) ;
+    const q = url.searchParams.get('q');
+    console.log(q)
+    if (q) {
+      (document.querySelector("#search-input") as HTMLInputElement).value = q;      
+      updateList(q)
+    };
+    addEventListener("input", (e: any) =>{ 
+      if (e.target.id !== "search-input") return;
+      updateList(e.target.value)
+    });
+
+
 </script>
  
