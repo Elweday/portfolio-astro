@@ -6,17 +6,6 @@ import Batman from "@components/batman.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Scroller from "@components/Scroller.astro";
-
-
-import trim from "@utils/trim";
-import site from "@utils/og-templates/site";
-
-
-
-
-
-
-
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 const toTitleCase = function (str: string) {
@@ -42,7 +31,7 @@ const { title: siteTitle } = SITE;
 const path = title;
 const pageTitle = siteTitle + " | " + toTitleCase(title);
 
-ogImage = ogImage? ogImage : SITE.website+"fallback.png"; 
+ogImage = ogImage? ogImage : SITE.website+"/assets/images/fallback.png"; 
 ---
 
 <!doctype html>
@@ -59,7 +48,7 @@ ogImage = ogImage? ogImage : SITE.website+"fallback.png";
     <meta name="title" content={pageTitle} />
     <meta name="description" content={description} />
     <meta name="author" content={SITE.author} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" href={SITE.website+"/rss.xml"} />
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -72,7 +61,7 @@ ogImage = ogImage? ogImage : SITE.website+"fallback.png";
     <meta property="twitter:title" content={pageTitle} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImage} />
-    
+
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
