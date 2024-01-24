@@ -39,7 +39,9 @@ export default defineConfig({
   integrations: integrations,
   markdown: markdownConfig,
   output: "hybrid",
-  adapter: node(),
+  adapter: node({
+    mode: 'standalone',
+  }),
   vite: {
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"]
