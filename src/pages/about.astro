@@ -1,16 +1,19 @@
 ---
+export const prerender = false; 
 import {
   MY_SHOWS as showsList,
   HOBBIES as hobbies,
   RESUME,
-  omdbApiKey,
 } from "@config";
 import MoviesGallery from "@components/MoviesGallery";
 import Tooltip from "@components/StackIconTooltip";
-
 import getShowsData from "@utils/shows";
+import { techStackByType } from "@utils/getTechStack";
+import { Icon } from "astro-icon";
+import Layout from "@layouts/Layout.astro";
+import Socials from "@components/Socials.astro";
 
-const showsData = await getShowsData(omdbApiKey, showsList);
+const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, showsList);
 
 const MESSAGE_OPTIONS = [
   { name: "Suggestion", icon: "feather:thumbs-up" },
@@ -21,10 +24,7 @@ const MESSAGE_OPTIONS = [
   { name: "Other", icon: "feather:thumbs-up" },
 ] as const;
 
-import { techStackByType } from "@utils/getTechStack";
-import { Icon } from "astro-icon";
-import Layout from "@layouts/Layout.astro";
-import Socials from "@components/Socials.astro";
+
 ---
 
 <Layout
@@ -37,7 +37,7 @@ import Socials from "@components/Socials.astro";
     <div class="flex flex-col gap-12">
       <section>
         <h2>Contact Me <Socials class="scale-100 place-self-start" /></h2>
-        <form id="message-form" method="POST" class="flex flex-col gap-3">
+        <form id="message-form" method="POST" action="/contactme" class="flex flex-col gap-3">
           <label class="relative block">
             <span
               class="absolute inset-y-0 left-0 flex items-center pl-2 opacity-75"
@@ -102,9 +102,7 @@ import Socials from "@components/Socials.astro";
               <span> Resume</span>
             </a>
           </div>
-          <span class="hidden text-green-400" id="message-status">
-            Message sent successfully, You will be contacted soon, Thank you!!
-          </span>
+          <span class="hidde" id="message-status" />
         </form>
       </section>
 
@@ -164,27 +162,35 @@ import Socials from "@components/Socials.astro";
   h2 {
     @apply text-start text-xl tracking-wider  sm:text-2xl;
   }
+
+  .message-success {
+    @apply text-green-400;
+  }
+  .message-failed {
+    @apply text-red-400;
+  }
 </style>
 
 <script>
-  // form submit
-  import { TELEGRAM_BOT_TOKEN, MY_CHAT_ID } from "@config";
-  import { telegramHandler } from "@utils/messages";
-  const formatMessage = (data: FormData) => {
-    return `
-    New ${data.get("message-type")} from ${data.get("email")} %0A %0A
-    ${data.get("message")}
-    `;
-  };
-  const sendTelegramMessage = telegramHandler(TELEGRAM_BOT_TOKEN, MY_CHAT_ID);
   const form = document.querySelector("#message-form") as HTMLFormElement;
-  form.addEventListener("submit", e => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
-    const message = formatMessage(formData);
-    sendTelegramMessage(message);
+    const res = await fetch("/contactme", {
+      method: "POST",
+      body: formData
+
+    })
+    const resBody = await res.json();
     form.reset();
-    document.querySelector("#message-status")?.classList.remove("hidden");
+
+    const messageStatus = document.querySelector("#message-status") as HTMLElement;
+    messageStatus.classList.remove("hidden");
+    if (resBody.status == 200) {
+      messageStatus.classList.remove("message-failed");
+      messageStatus.classList.add("message-success");
+    } 
+    messageStatus.innerText = resBody.message;
   });
 </script>

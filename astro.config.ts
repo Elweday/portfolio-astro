@@ -7,7 +7,6 @@ import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
 import compress from "astro-compress";
 import preload from "astro-preload";
-import stripMarkdown from 'strip-markdown'
 import alpinejs from "@astrojs/alpinejs";
 
 
@@ -45,6 +44,7 @@ export default defineConfig({
   site: SITE.website,
   integrations: integrations,
   markdown: markdownConfig,
+  output: "hybrid",
   vite: {
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"]

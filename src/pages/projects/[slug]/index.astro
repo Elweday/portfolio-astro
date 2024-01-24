@@ -1,21 +1,13 @@
 ---
 export const prerender = true 
 import { getCollection } from "astro:content";
-import slugify from "@utils/slugify";
 import Layout from "@layouts/Layout.astro";
-import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime.astro";
-/* @ts-ignore */
 import { Icon } from "astro-icon";
 import { Technologies } from "@config";
-import { slugifyStr } from "@utils/slugify";
 import ContentTags from "@components/ContentTags.astro";
 import { Image } from "astro:assets";
-import { getImage } from "astro:assets";
-
 import MediaCarousel from "@components/Carousel";
-
-
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -25,20 +17,13 @@ export async function getStaticPaths() {
 })
 );
 
-
   return [...projectResults];
 }
 
 const { project } = Astro.props;
 const { Content } = await project.render();
-
-
 const { slug, data: {title, description, media, stack, tags, dateTime, endDate}} = project;
-
-
 const ogUrl = new URL(media[0].src ?? `/projects/${slug}.png`, Astro.url.origin).href;
-//const img = await getImage({src: media[0]});
-
 ---
 
 <Layout
@@ -95,6 +80,6 @@ const ogUrl = new URL(media[0].src ?? `/projects/${slug}.png`, Astro.url.origin)
       <Content />
     </article>
 
-      <ContentTags type="category" tags={tags} />
+      <ContentTags type="tag" tags={tags} />
   </main>
 </Layout>

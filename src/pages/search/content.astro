@@ -1,4 +1,5 @@
 ---
+export const prerender = false;
 import  { getCollection} from "astro:content";
 import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
@@ -31,6 +32,8 @@ const prev = pageNum > 1 ? "" : "disabled";
 const next = pageNum < numPages ? "" : "disabled";
 
 const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : ''; 
+
+
 ---
 
 <data  id="tag-search-params" value={tagSearchParams}></data>
@@ -38,7 +41,7 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
   <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6" >Tags</h1>
 </div>
 
-<ContentTags tags={allTags} type="tag">
+<ContentTags tags={tags} type="tag">
   <Tag class="bg-skin-card  text-xl  px-5  text-skin-inverted" name="VIEW-ALL" type="all" size="lg" />
 </ContentTags >
 
@@ -109,41 +112,4 @@ section{
 </style>
 
 
-
-<script is:inline>
-
-  const SearchparamsBasedFiltering = () => {
-    const tags = [...new URLSearchParams(window.location.search).getAll("tag").values()];
-    if (tags.length === 0) {
-      return 
-    }
-    function matching(tags, itemTags) {
-      return itemTags.some(itemTag => tags.includes(itemTag));
-    }
-
-    const tagsElements = document.querySelectorAll('[data-item-type="item-tag"]');
-    const ItemsElements = document.querySelectorAll('[data-item-type="search-item"]');
-    const Items = [...ItemsElements].map(item => ({
-      itemTitle:item.dataset.title,
-      itemTags : (item.dataset.tags).split("/"),
-      element:item
-    }));
-    
-      tagsElements.forEach(tag => {
-        if (tags.includes(tag.dataset.tag)) {
-          tag.classList.remove("hidden");
-          return;
-        };
-        tag.classList.add("hidden");
-
-      })
-      Items.filter(({itemTags}) => !matching(tags, itemTags)).forEach(({element}) => {
-        element.classList.add("hidden");
-      })
-    
-  }
-  document.addEventListener("astro:after-preparation", SearchparamsBasedFiltering)
-  document.addEventListener("astro:page-load", SearchparamsBasedFiltering)
-  document.addEventListener("DOMContentLoaded", SearchparamsBasedFiltering)
-</script>
 
