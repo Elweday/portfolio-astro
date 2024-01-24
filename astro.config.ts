@@ -8,35 +8,29 @@ import { SITE } from "./src/config";
 import compress from "astro-compress";
 import preload from "astro-preload";
 import alpinejs from "@astrojs/alpinejs";
+import cloudflare from '@astrojs/cloudflare';
 
 
-type UserConfig = Parameters<typeof defineConfig>[0]
-
+type UserConfig = Parameters<typeof defineConfig>[0];
 const markdownConfig: UserConfig["markdown"] = {
-  remarkPlugins: [
-    [remarkToc, {
-      heading: "Contents",
-      tight: true,
-      maxDepth: 3
-    }],
-    [remarkCollapse, {
-      test: "Contents",
-      content: "show contents",
-    }],
-    //[stripMarkdown, {}]
-    
+  remarkPlugins: [[remarkToc, {
+    heading: "Contents",
+    tight: true,
+    maxDepth: 3
+  }], [remarkCollapse, {
+    test: "Contents",
+    content: "show contents"
+  }]
+  //[stripMarkdown, {}]
   ],
   shikiConfig: {
     theme: 'dracula',
     wrap: true
   }
-}
-
-
+};
 const integrations: UserConfig["integrations"] = [preload(), tailwind({
   applyBaseStyles: false
-}), react(), sitemap(), compress(), alpinejs()]
-
+}), react(), sitemap(), compress(), alpinejs()];
 
 
 // https://astro.build/config
@@ -45,6 +39,7 @@ export default defineConfig({
   integrations: integrations,
   markdown: markdownConfig,
   output: "hybrid",
+  adapter: cloudflare(),
   vite: {
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"]
