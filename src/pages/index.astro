@@ -8,11 +8,10 @@ import PostCard from "@components/PostCard.astro";
 import ProjectCard from "@components/ProjectCard.astro";
 import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
-import slugify from "@utils/slugify";
 import { SOCIALS } from "@config";
 import MovingLogos from "@components/MovingLogos.astro";
-
-import Carousel from "@components/Carousel";
+import { SITE } from "@config"
+import Icon from "astro-icon";
 
 
 
@@ -30,10 +29,15 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     <section class="pb-6 pt-8" id="hero">
       <p class="relative my-2">
         <span>Hi, I'm</span> 
-        <strong class="text-skin-accent">
-  
-          <h1 class="inline-block text-3xl font-bold sm:mb-4 sm:text-5xl">Mohammed Nasser</h1>
-        </strong>
+        <div class="text-skin-accent flex  gap-2">
+          <strong >
+            <h1 class="inline-block text-3xl font-bold sm:mb-4 sm:text-5xl ">{SITE.author}</h1>
+          </strong>
+          <a class="mt-3" href="/rss.xml">
+            <Icon name="ph:rss-bold" class="size-8   text-skin-accent rounded-md" />
+          </a>
+
+        </div>
         <br>
         <span class="text-balance">
           I'm a junior Computer Engineering Student at Helwan University.
