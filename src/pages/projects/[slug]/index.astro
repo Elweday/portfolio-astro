@@ -8,6 +8,7 @@ import { Technologies } from "@config";
 import ContentTags from "@components/ContentTags.astro";
 import { Image } from "astro:assets";
 import MediaCarousel from "@components/Carousel";
+import { SITE } from "@config";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -23,13 +24,13 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await project.render();
 const { slug, data: {title, description, media, stack, tags, dateTime, endDate}} = project;
-const ogUrl = new URL(media[0].src ?? `/projects/${slug}.png`, Astro.url.origin).href;
 ---
 
 <Layout
   title={title}
   description={description}
-  ogImage={ogUrl}
+  ogImage={SITE.website+ "/projects/"+ slug}
+
 >
 
   <main class="mx-8" id="main-content">

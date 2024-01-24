@@ -4,6 +4,7 @@ import {
   MY_SHOWS as showsList,
   HOBBIES as hobbies,
   RESUME,
+  SITE,
 } from "@config";
 import MoviesGallery from "@components/MoviesGallery";
 import Tooltip from "@components/StackIconTooltip";
@@ -28,7 +29,7 @@ const MESSAGE_OPTIONS = [
 ---
 
 <Layout
-  ogImage="/assets/images/fallback.png"
+  ogImage={SITE.website + "/assets/images/fallback.png"}
   title="about"
   description="Mohammed Nasser's personal blog"
 >

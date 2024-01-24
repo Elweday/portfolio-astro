@@ -11,6 +11,7 @@ import getPageNumbers from "@utils/getPageNumbers";
 import getItemsByTags from "@utils/getItemsByTags";
 import ContentTags from "@components/ContentTags.astro";
 import ProjectCard from "@components/ProjectCard.astro";
+import site from "@utils/og-templates/site";
 
 const allitems = await getCollection("blog");
 const allProjects = await getCollection("projects");
@@ -30,14 +31,14 @@ const startItem = lastItem - SITE.itemsPerPage;
 const paginatedItems = Items.slice(startItem, lastItem);
 const prev = pageNum > 1 ? "" : "disabled";
 const next = pageNum < numPages ? "" : "disabled";
-
 const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : ''; 
+
 
 
 ---
 
 <data  id="tag-search-params" value={tagSearchParams}></data>
-<Layout title="Search By tag", description="Search by tags used in some of my technical projects and my blog Items."  ogImage="/assets/images/fallback.png" >
+<Layout title="Search By tag", description="Search by tags used in some of my technical projects and my blog Items."  ogImage={SITE.website + "/assets/images/fallback.png"} >
   <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6" >Tags</h1>
 </div>
 
@@ -53,8 +54,8 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
             (item) =>
             (
               item.collection === "projects" ?
-              <ProjectCard   project={item} /> :
-              <PostCard class="size-full"   post={item} />
+              <ProjectCard project={item} /> :
+              <PostCard class="size-full" post={item} />
             )
                 
           )
