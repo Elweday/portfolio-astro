@@ -1,6 +1,6 @@
 
 export const SITE = {
-  website: "https://elweday-github-io.pages.dev",
+  website: "https://elweday.pages.dev",
   author: "Mohammed Nasser",
   desc: "A personal portfolio and blog.",
   title: "Nasser's Blog",
