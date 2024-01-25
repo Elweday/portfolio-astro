@@ -44,7 +44,7 @@ const { Content } = await post.render();
     <h1 transition:name={slugged} class="text-2xl font-semibold text-skin-accent">{title}</h1>
     <p>{description}</p>
     <figure>
-      <Image transition:name={slugged+":image"} width={450} height={450} alt="" format="avif" src={cover} class="rounded-2xl w-full p-2 aspect-video  object-cover" />
+      <Image transition:name={slugged+":image"} width={1280} height={1024} alt="" format="avif" src={cover} class="rounded-2xl w-full p-2 aspect-video  " />
     </figure>
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
       
