@@ -49,7 +49,7 @@ function svgBufferToPngBuffer(svg: string) {
 }
 
 export async function generateOGImage(entry: Collection) {
-  const svg = await satori(generateOG(entry), options);
+  const svg = await satori(await generateOG(entry), options);
   return svgBufferToPngBuffer(svg);
 }
 

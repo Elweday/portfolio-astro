@@ -4,7 +4,7 @@ slug: transitions-api
 featured: false
 dateTime: 2024-1-04T08:00:00Z
 
-cover: "./images/transitions.png"
+cover: "../images/transitions.png"
 tags:
   - Astro
   - Animation

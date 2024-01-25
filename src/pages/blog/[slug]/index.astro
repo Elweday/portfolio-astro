@@ -7,39 +7,25 @@ import { slugifyStr } from "@utils/slugify";
 import ContentTags from "@components/ContentTags.astro";
 import { Image } from "astro:assets";
 import { SITE } from "@config";
-
-
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
 
-  const postResult = posts.map(post => ({
+  return posts.map(post => ({
     params: { slug: post.slug },
     props: { post },
   }));
-
-
-  return [...postResult];
 }
-
-
 const { post } = Astro.props;
 const {data: { title, description, dateTime, tags, cover }, slug} = post;
 const slugged = slugifyStr(title);
 const { Content } = await post.render();
-
-
-
-
 ---
 
 <Layout
   title={title}
   description={description}
-  ogImage={SITE.website+ "/blog/"+ slug}
-  
+  ogImage={SITE.website+ "/blog/"+ slug + ".png"} 
 >
-
-
 <main class="mx-auto w-full px-4 pb-12" id="main-content">
     <div class="mx-auto flex w-full  justify-start px-2">
       <button

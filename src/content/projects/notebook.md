@@ -9,7 +9,7 @@ tags:
   - docs
   - tag2
 media: 
-  - ./images/eda.jpg
+  - ../images/eda.jpg
 stack:
   - python
   - jupyter

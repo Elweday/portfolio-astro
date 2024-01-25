@@ -1,7 +1,7 @@
 ---
 title: SEO, what is it?
 slug: seo
-cover: "./images/seo.jpg"
+cover: "../images/seo.jpg"
 dateTime: 2024-1-10T08:00:00Z
 tags:
   - Astro

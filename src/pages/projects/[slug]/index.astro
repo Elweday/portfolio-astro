@@ -12,13 +12,10 @@ import { SITE } from "@config";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
-  const projectResults = projects.map(project => ({
+  return projects.map(project => ({
     params: { slug: project.slug },
     props: { project },
-})
-);
-
-  return [...projectResults];
+  }));
 }
 
 const { project } = Astro.props;
@@ -29,7 +26,7 @@ const { slug, data: {title, description, media, stack, tags, dateTime, endDate}}
 <Layout
   title={title}
   description={description}
-  ogImage={SITE.website+ "/projects/"+ slug}
+  ogImage={SITE.website+ "/projects/"+ slug + ".png"}
 
 >
 

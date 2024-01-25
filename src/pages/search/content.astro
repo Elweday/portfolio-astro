@@ -17,9 +17,6 @@ const allitems = await getCollection("blog");
 const allProjects = await getCollection("projects");
 
 const allItems = [...allitems, ...allProjects];
-
-const allTags = await getUniqueTags("blog", "projects");
-
 const tags = Astro.url.searchParams.getAll('tag');
 const pageNum =  parseInt(Astro.url.searchParams.get('page')|| "1" )
 const isTags = tags.length > 0

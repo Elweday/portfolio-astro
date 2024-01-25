@@ -21,7 +21,7 @@ stack:
   - gcp
 
 media:
-  - "./images/manim.png"
+  - "../images/manim.png"
 ---
 
 Manim, short for Mathematical Animation Engine, is an open-source Python library developed by Grant Sanderson, the creator of the popular educational YouTube channel "3Blue1Brown." Manim is designed for creating high-quality mathematical animations which I personally liked and I've been a fan of since highschool.
