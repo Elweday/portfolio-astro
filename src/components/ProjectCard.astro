@@ -27,7 +27,7 @@ const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
 
 ---
 
-<li data-item-type="search-item" data-slug={slug} data-tags={strTags} class={twMerge("text-white group   ", className)} data-title={slug} transition:name={slug+":cover"}>
+<li class={twMerge("text-white group   ", className)}  transition:name={slug+":cover"}>
   <div class=" relative  ">
     <Image transition:name={slug+":image"} alt="" width={600} height={400} format="avif" src={media[0]} class="rounded-xl   aspect-video"  />
     <div class="absolute bottom-0  left-0 h-full w-full rounded-xl bg-gradient-to-b from-transparent to-skin-accent from-50%   opacity-100 duration-1000" />

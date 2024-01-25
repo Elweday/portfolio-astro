@@ -29,7 +29,10 @@ const paginatedItems = Items.slice(startItem, lastItem);
 const prev = pageNum > 1 ? "" : "disabled";
 const next = pageNum < numPages ? "" : "disabled";
 const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : ''; 
-
+import { slugifyStr } from "@utils/slugify";
+import Icon from "astro-icon";
+import Datetime from "@components/Datetime.astro";
+const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
 
 
 ---
@@ -44,19 +47,29 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
 </ContentTags >
 
     <h1 class="text-2xl tracking-wider sm:text-3xl text-start py-6 ">Search Results..</h1>
-    <ul id="Items"  class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
+    <ul id="search-results"  class="grid grid-cols-1 gap-4 p-4 overflow-y-auto">
       {
-        paginatedItems
-          .map(
-            (item) =>
-            (
-              item.collection === "projects" ?
-              <ProjectCard project={item} /> :
-              <PostCard class="size-full" post={item} />
+        Items.map(({slug, data, collection}) => {
+            const href = `/${collection}/${slug}`
+            return (
+                <a data-item-type="search-item" data-slug={slug} data-tags={strTags} data-title={slug} href={href} class="bg-skin-fill rounded-lg p-3 flex flex-col">
+                  <div class="w-full flex flex-row justify-between">
+                    <Datetime relative size="sm" datetime={data.dateTime} endDate={collection == "blog" ? undefined:data.endDate} class="text-skin-base/70  inline-block scale-75 origin-left" />
+                    <div class="w-fit flex gap-1  place-items-center justify-end ">
+                      <Icon class="text-skin-base/70 size-4" name={collection == "blog" ? "ant-design:read-outlined" : "ic:baseline-code" }/> 
+                      <span class="text-skin-base/70 scale-90">{collection == "blog" ? "Post" : "Project"}</span>
+                    </div>
+                  </div>
+                    <span transition:name={slug}  class="text-skin-accent">{data.title}</span>
+                    <div class="inline">
+                      {
+                        data.description
+                      }
+                    </div>
+                </a>
             )
-                
-          )
-      }
+        }
+    )}
     </ul>
 
 {
