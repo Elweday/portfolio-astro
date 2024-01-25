@@ -18,7 +18,7 @@ const dateFormat: Intl.DateTimeFormatOptions =  endDate? { year: "numeric", mont
 const timeFormat: Intl.DateTimeFormatOptions = { hour: "2-digit", minute: "2-digit"}
 const date = myDatetime.toLocaleDateString(LOCALE, dateFormat);
 const time = myDatetime.toLocaleTimeString(LOCALE, timeFormat);
-const end = endDate && new Date(endDate).toLocaleDateString(LOCALE, dateFormat);
+const end = endDate && endDate !== "Present"  ? new Date(endDate).toLocaleDateString(LOCALE, dateFormat): "Present";
 let stringDate = "";
 if (relative) {
   stringDate = getRelativeTime(myDatetime)

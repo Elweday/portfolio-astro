@@ -1,5 +1,5 @@
 ---
-dateTime: 2023-11-23T00:00:00Z
+dateTime: 2023-8-23T00:00:00Z
 endDate: 2024-1-23T00:00:00Z
 title: Mathematical Animations
 description: Programatic Mathmatical Animations Using manim.

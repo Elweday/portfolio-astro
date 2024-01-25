@@ -1,24 +1,19 @@
 ---
 
-import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import LinkButton from "@components/LinkButton.astro";
 import Hr from "@components/Hr.astro";
 import PostCard from "@components/PostCard.astro";
 import ProjectCard from "@components/ProjectCard.astro";
 import Socials from "@components/Socials.astro";
-import getSortedPosts from "@utils/getSortedPosts";
+import getSorted from "@utils/getSorted";
 import { SOCIALS } from "@config";
 import MovingLogos from "@components/MovingLogos.astro";
 import { SITE } from "@config"
 import Icon from "astro-icon";
 
-
-
-const posts = await getCollection("blog");
-const projects = await getCollection("projects"); 
-
-const sortedPosts = getSortedPosts(posts);
+const projects = await getSorted("projects");
+const posts = await getSorted("blog");
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
@@ -92,10 +87,9 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         </LinkButton>
               </h2>
             <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
-              {projects.slice(0, 2)
-                .map((project) => (
+              {projects.slice(0, 2).map((p) => (
                 <ProjectCard
-                  project={project}
+                  project={p}
                 />
               ))}
             </ul>
@@ -123,7 +117,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         </h2>
       <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
         {
-          sortedPosts.slice(0, 2)
+          posts.slice(0, 2)
             .map(
               (post) =>
                   <PostCard

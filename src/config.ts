@@ -259,6 +259,14 @@ export const HOBBIES = [
       display: false
   
     },
+    vercel: {
+      name: "Vercel",
+      icon: "simple-icons:vercel",
+      url: "https://vercel.com/",
+      description: "A platform for hosting and deploying websites.",
+      type: "Technology",
+      display: true
+    },
     docker: {
       name: "Docker",
       icon: "mdi:docker",
