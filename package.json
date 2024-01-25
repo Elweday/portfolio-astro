@@ -19,7 +19,6 @@
     "@astrojs/alpinejs": "^0.3.2",
     "@astrojs/check": "^0.2.1",
     "@astrojs/cloudflare": "^9.0.0",
-    "@astrojs/node": "^8.0.0",
     "@astrojs/rss": "^3.0.0",
     "@astrojs/vercel": "^6.1.0",
     "@radix-ui/react-slot": "^1.0.2",

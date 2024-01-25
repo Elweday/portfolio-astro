@@ -17,8 +17,7 @@ stack:
   - javascript
   - vercel
 
-media:
-  - "../images/portfolio.jpg"
+cover: "/src/content/media/portfolio.jpg"
 ---
 
 ## Astro
@@ -29,7 +28,7 @@ This project was inilially intended to be `statically generated` and deployed to
 I thought of it as a challenge to go back to the classics doing as much as possible with just plain old js, maybe with sprinkles of typescript, but the logic holds.
 
 However, When implementing this contact me form, it will use an API service to deliver the message to me, and this service will require an API key, and to make everything clientside ... this API key would be sent to the user, which is not obviously not safe, It can be redacted but cannot completly removed. 
-![Contact me](../images/form.jpg)
+![Contact me](../media/form.jpg)
 
 So, generally when using sensitive data it should be server-side. 
 
@@ -96,7 +95,7 @@ It's a common practice in astro to use a Layout component to add all the meta ta
 
 ### Dynamic OG images
 when you're posting some post to facebook (YOU'RE A BOOMER) you might find the post look something like this.
-![Dynamic OG](../images/dynamic-og.jpg)
+![Dynamic OG](../media/dynamic-og.jpg)
   
 To implement this behaviour you add meta tags like this one. 
 ```html
@@ -164,7 +163,7 @@ You might have seen view transitions api used, if not check it out in examples l
           }
 ```
 and used the same way to implement tabs, and here is the output.
-![View Transitions](../images/view-transitions-loop.gif)
+![View Transitions](../media/view-transitions-loop.gif)
 
 ## Search
 ### Search by tag
@@ -302,7 +301,7 @@ and render them and them all and then hide them in the client-side, which is -ag
 ```
 > this might be a huge blob of code but it's not doing any magic, jsut hiding items and handling different cases.
 
-![Search By text](../images/search-text.jpg)
+![Search By text](../media/search-text.jpg)
 
 ## BATMAN
 as you might have seen this site is sarcastically? heavily-batman-themed, which a great way to learn about svg pattern, `filter`s, optimization, `path`, `defs`, ...etc

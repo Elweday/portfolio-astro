@@ -6,6 +6,9 @@ import { twMerge } from "tailwind-merge";
 import { Technologies } from "@config";
 import { Image } from "astro:assets";
 import { slugifyStr } from "@utils/slugify";
+import getSorted from "@utils/getSorted";
+type Item = Awaited<ReturnType<typeof getSorted>>
+
 
 interface Props {
   project: CollectionEntry<"projects">;
@@ -14,7 +17,7 @@ interface Props {
 
 const { project, class:className} = Astro.props;
 const { data, slug } = project;
-const { title, description, media, stack, tags, dateTime, endDate, projectURL } = data;
+const { title, cover, stack, tags, dateTime, endDate, projectURL } = data;
 
 const flagColor = projectURL ? "project-available" : "under-construction"
 const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
@@ -23,7 +26,7 @@ const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
 
 <li data-item-type="search-item" data-slug={slug} data-tags={strTags} data-title={slug} class={twMerge("text-white group   ", className)}  transition:name={slug+":cover"}>
   <div class=" relative  ">
-    <Image transition:name={slug+":image"} alt="" width={600} height={400} format="avif" src={media[0]} class="rounded-xl   aspect-video"  />
+    <Image transition:name={slug+":image"} alt="" width={600} height={400} format="avif" src={cover} class="rounded-xl   aspect-video"  />
     <div class="absolute bottom-0  left-0 h-full w-full rounded-xl bg-gradient-to-b from-transparent to-skin-accent from-50%   opacity-100 duration-1000" />
   <span
   class="  absolute bottom-0 left-0  w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 transition-opacity pointer-events-none  group-hover:pointer-events-auto group-hover:opacity-100  flex"

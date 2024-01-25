@@ -3,7 +3,7 @@ title: Rethinking Problem Solving.
 slug: "aoc"
 dateTime: 2023-12-23T15:22:00Z
 draft: false
-cover: "../images/ps.png"
+cover: "../media/ps.png"
 tags:
   - problem solving
   - advent of code

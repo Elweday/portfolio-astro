@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await project.render();
-const { slug, data: {title, description, media, stack, tags, dateTime, endDate}} = project;
+const { slug, data: {title, description, media, cover, stack, tags, dateTime, endDate}} = project;
 ---
 
 <Layout
@@ -48,7 +48,7 @@ const { slug, data: {title, description, media, stack, tags, dateTime, endDate}}
         <Datetime datetime={dateTime} endDate={endDate} size="lg" class="my-2" />
         <h1 transition:name={slug} class="text-4xl font-semibold text-skin-accent ">{title}</h1>
         <p transition:name={slug+":desc"}>{description}</p>
-        <Image transition:name={slug+":cover"}  width={1280} height={1024} format="avif" src={media[0]} class="my-5 rounded-xl aspect-video  w-full" alt="" />
+        <Image transition:name={slug+":cover"}  width={1280} height={1024} format="avif" src={cover} class="my-5 rounded-xl aspect-video  w-full" alt="" />
         <h2 class="text-2xl mb-2 font-semibold tracking-wide text-skin-accent">Tech Stack</h2>
         <ul class="flex flex-col gap-7">
           {(stack as (keyof typeof Technologies)[]).map((t) =>
@@ -66,9 +66,9 @@ const { slug, data: {title, description, media, stack, tags, dateTime, endDate}}
           }
           )}
           {
-            media.length > 1 && (
+            media && (
               <h2 class="text-2xl font-semibold tracking-wide text-skin-accent">Gallery</h2>
-              <MediaCarousel media={media.slice(1)} client:load />
+              <MediaCarousel media={media} client:load />
             )
           }
     
