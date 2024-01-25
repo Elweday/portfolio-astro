@@ -1,5 +1,5 @@
 ---
-import  { getCollection} from "astro:content";
+import  { getCollection, type CollectionEntry} from "astro:content";
 import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
 import PostCard from "@components/PostCard.astro";
@@ -10,7 +10,7 @@ import getSorted from "@utils/getSorted";
 import getPageNumbers from "@utils/getPageNumbers";
 import getItemsByTags from "@utils/getItemsByTags";
 import ContentTags from "@components/ContentTags.astro";
-import Icon from 'astro-icon';
+
 
 const allPosts = await getCollection("blog");
 const allTags = await getUniqueTags("blog");
@@ -47,7 +47,7 @@ const tagSearchParams = isTags ? tags.map(tag => `tag=${tag}&`).join('') : '';
           .map(
             (post) =>
                 <PostCard
-                  post={post}
+                  post={post as CollectionEntry<"blog">}
                 />
           )
       }

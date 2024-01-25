@@ -11,6 +11,7 @@ import { SOCIALS } from "@config";
 import MovingLogos from "@components/MovingLogos.astro";
 import { SITE } from "@config"
 import Icon from "astro-icon";
+import type { CollectionEntry } from "astro:content";
 
 const projects = await getSorted("projects");
 const posts = await getSorted("blog");
@@ -89,7 +90,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
             <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
               {projects.slice(0, 2).map((p) => (
                 <ProjectCard
-                  project={p}
+                  project={p as CollectionEntry<"projects">}
                 />
               ))}
             </ul>
@@ -121,7 +122,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
             .map(
               (post) =>
                   <PostCard
-                  post = {post}
+                  post={post as CollectionEntry<"blog">}
                   />
             )
         }

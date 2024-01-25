@@ -1,6 +1,6 @@
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
-import getSorted from "@utils/getSortedPosts";
+import getSorted from "@utils/getSorted";
 import slugify from "@utils/slugify";
 import { SITE } from "@config";
 
