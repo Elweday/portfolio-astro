@@ -18,9 +18,6 @@ stack:
   - opengl
   - gcp
 cover: "../media/manim.png"
-media:
-  - "/src/content/media/vids/bst.mp4"
-  - "/src/content/media/vids/heap.mp4"
   
 ---
 
@@ -62,6 +59,8 @@ class AnimatedSquareToCircle(Scene):
 </video>
 
 
+
+
 ## Working with manim proffessionally
 My first gig as a freelancer was to create manim animations for an educational platform.
 ### Responsibilities
@@ -70,3 +69,11 @@ My first gig as a freelancer was to create manim animations for an educational p
  - Engineered Python packages for seamless integrations with various Cloud Services (`GCP`) APIs that uses a multitidue of gcp services like `AI` TTS and transcription, facilitating  streamlined workflows.
  - Optimized rendering algorithms to reduce rendering time by `70%`, ensuring faster loading times and enhanced user engagement.
  - Collaboratively developed and maintained Python packages, prioritizing code quality, modularity, and best practices.
+
+## Gallery
+<video class="rounded-lg" controls>
+  <source src="/src/content/media/vids/bst.mp4" type="video/mp4">
+</video>
+<video class="rounded-lg" controls>
+  <source src="/src/content/media/vids/heap.mp4" type="video/mp4">
+</video>

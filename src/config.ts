@@ -259,6 +259,31 @@ export const HOBBIES = [
       display: false
   
     },
+    trpc: {
+      name: "tRPC",
+      icon: "mdi:api",
+      url: "https://trpc.io/",
+      description: "A framework for building server-side and client-side applications.",
+      type: "Web Development",
+      display: true
+    },
+    jotai: {
+      name: "Jotai",
+      icon: "simple-icons:ghostery",
+      url: "https://jotai.org/",
+      description: "A state management library for React and React Native.",
+      type: "Technology",
+      display: true
+    },
+    ws: {
+      name: "WebSockets",
+      icon: "logos:websocket",
+      url: "https://www.websocket.org/",
+      description: "A protocol for real-time applications.",
+      type: "Technology",
+      display: true
+      
+    },
     vercel: {
       name: "Vercel",
       icon: "simple-icons:vercel",

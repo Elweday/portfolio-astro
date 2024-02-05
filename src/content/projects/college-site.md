@@ -25,7 +25,7 @@ stack:
   - typescript
 cover: "../media/helwan.jpg"
 media:
-  - "/src/content/media/helwan2.jpg"
+  - "/src/content/media/helwan2.jpg" 
 ---
 
 ## Contents
