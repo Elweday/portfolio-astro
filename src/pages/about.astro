@@ -80,14 +80,14 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
 
           <div class="flex gap-3">
             <button
-              class="flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg"
+              class="hover:bg-red-500  transition-all hover:scale-[1.03] flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg "
               type="submit"
             >
-              <Icon class="fill-skin-base" name="lucide:send" />
+              <Icon class=""  name="lucide:send" />
               <span> Send</span>
             </button>
             <a
-              class="flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg"
+              class="hover:bg-red-500  transition-all hover:scale-[1.03] flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg"
               href={RESUME}
               download
             >
