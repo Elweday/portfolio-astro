@@ -7,7 +7,6 @@ import { Icon } from "astro-icon";
 import { Technologies } from "@config";
 import ContentTags from "@components/ContentTags.astro";
 import { Image } from "astro:assets";
-import MediaCarousel from "@components/Carousel";
 import { SITE } from "@config";
 
 export async function getStaticPaths() {
@@ -65,13 +64,6 @@ const { slug, data: {title, description, media, cover, stack, tags, dateTime, en
             )
           }
           )}
-          {
-            media && (
-              <h2 class="text-2xl font-semibold tracking-wide text-skin-accent">Gallery</h2>
-              <MediaCarousel media={media} client:load />
-            )
-          }
-    
     
         </div>
     <article id="article" role="article" class="prose max-w-none">

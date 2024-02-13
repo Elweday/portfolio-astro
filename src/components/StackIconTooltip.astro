@@ -1,0 +1,34 @@
+---
+interface Props {
+   name: string
+   url: string
+   icon: string
+   delayDuration?: number
+   description?: string
+}
+
+const { name, url, icon, description } = Astro.props
+
+---
+
+<sl-tooltip placement="bottom">
+  <a href={url}>
+    <iconify-icon class="grid text-[33px] cursor-pointer place-self-center transition-all hover:scale-[1.3] " icon={icon} />
+  </a>
+    <div slot="content">
+      <a href={url} class="rounded-xl flex items-center justify-center gap-1 p-2  transition-all ">
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1">
+            <iconify-icon  class="text-[20px]" icon={icon} /> 
+            <span class="text-[15px]">{name}</span>
+          </div>
+          <span>{description}</span>
+  
+        </div>
+      </a>
+    </div>
+</sl-tooltip>
+
+
+
+

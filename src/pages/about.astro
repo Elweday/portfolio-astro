@@ -1,29 +1,20 @@
 ---
 export const prerender = false; 
 import {
-  MY_SHOWS as showsList,
+  MY_SHOWS,
   HOBBIES as hobbies,
   RESUME,
+  MESSAGE_OPTIONS
 } from "@config";
 import MoviesGallery from "@components/MoviesGallery.astro";
-import Tooltip from "@components/StackIconTooltip";
+import Tooltip from "@components/StackIconTooltip.astro";
 import getShowsData from "@utils/shows";
 import { techStackByType } from "@utils/getTechStack";
 import { Icon } from "astro-icon";
 import Layout from "@layouts/Layout.astro";
 import Socials from "@components/Socials.astro";
 
-const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, showsList);
-
-const MESSAGE_OPTIONS = [
-  { name: "Suggestion", icon: "feather:thumbs-up" },
-  { name: "The website needs more batman logos", icon: "feather:thumbs-down" },
-  { name: "Bug", icon: "feather:thumbs-down" },
-  { name: "Feedback", icon: "feather:thumbs-up" },
-  { name: "Business inquiry", icon: "feather:thumbs-up" },
-  { name: "Other", icon: "feather:thumbs-up" },
-] as const;
-
+const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
 
 ---
 
@@ -58,6 +49,8 @@ const MESSAGE_OPTIONS = [
             />
           </label>
           <label class="relative block">
+
+            
             <select
               class="text-md block w-full justify-self-center rounded-lg border border-skin-fill border-opacity-40 bg-skin-card/30 bg-skin-fill
         px-[0.75rem] py-[0.32rem]
@@ -102,7 +95,6 @@ const MESSAGE_OPTIONS = [
               <span> Resume</span>
             </a>
           </div>
-          <span class="hidde" id="message-status" />
         </form>
       </section>
 
@@ -116,13 +108,13 @@ const MESSAGE_OPTIONS = [
                   <div class="flex flex-col gap-2 rounded-lg  bg-skin-fill p-5">
                     <h3 class=" font-bold">{type}</h3>
                     <ul class="flex  gap-4 overflow-visible overflow-x-auto rounded-lg p-2">
-                      {stack.map(({ name, icon, url }) => (
+                      {stack.map(({ name, icon, url, description }) => (
                         <Tooltip
                           delayDuration={800}
                           name={name}
                           icon={icon}
                           url={url}
-                          client:load
+                          description={description}
                         />
                       ))}
                     </ul>
@@ -171,11 +163,29 @@ const MESSAGE_OPTIONS = [
   }
 </style>
 
-<script>
-  const form = document.querySelector("#message-form") as HTMLFormElement;
+<script is:inline>
+    function notify(title, message, variant = 'primary', icon = 'info-circle', duration = 8000) {
+    ;  
+    const closable = true;
+    const innerHTML = `
+      <div>
+        <h3>${title}</h3>
+        <sl-icon name="${icon}" slot="icon"></sl-icon>
+        <span>${message}</span>
+      </div>
+    `
+    const alertEl = document.createElement('sl-alert')
+    const alert =  Object.assign(alertEl, {variant,closable,duration,innerHTML});
+    document.body.append(alert);
+    customElements.whenDefined('sl-alert').then(() => alert.toast());
+    
+  }
+
+
+  const form = document.querySelector("#message-form");
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
+    const form = e.target;
     const formData = new FormData(form);
     const res = await fetch("/contactme", {
       method: "POST",
@@ -185,12 +195,10 @@ const MESSAGE_OPTIONS = [
     const resBody = await res.json();
     form.reset();
 
-    const messageStatus = document.querySelector("#message-status") as HTMLElement;
-    messageStatus.classList.remove("hidden");
     if (resBody.status == 200) {
-      messageStatus.classList.remove("message-failed");
-      messageStatus.classList.add("message-success");
+      notify( resBody.title, resBody.message);
     } 
-    messageStatus.innerText = resBody.message;
   });
 </script>
+
+

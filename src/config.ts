@@ -9,6 +9,36 @@ export const SITE = {
   itemsPerPage: 20,
 } as const ;
 
+export const MESSAGE_OPTIONS = [
+  { 
+    name: "Suggestion",
+    icon: "feather:thumbs-up",
+  result:{ title: "Thank you for your suggestion",
+   message: "I will get back to you as soon as possible."}
+},
+  { 
+    name: "The website needs more batman logos",
+    icon: "feather:thumbs-down",
+    result: { title: "BATMAN!", message: "I know, right?"}
+  },
+  { name: "Bug", icon: "feather:thumbs-down", result: {
+    title: "Thank you for your bug report",
+    message: "I will look into it."
+  }},
+  { name: "Feedback", icon: "feather:thumbs-up", result: {
+    title: "Thank you for your feedback",
+    message: " You're always welcome to leave any feedback."
+  }},
+  { name: "Business inquiry", icon: "feather:thumbs-up", result: {
+    title: "Thank you for your inquiry",
+    message: "I will get back to you as soon as possible."
+  } },
+  { name: "Other", icon: "feather:thumbs-up", result: {
+    title: "Thank you for your message",
+    message: "I will get back to you as soon as possible."
+  }},
+] as const;
+
 export const RESUME = "https://docs.google.com/document/d/1Lmc80EBvlTwp2vp5kkrLQEzGkF5WvxCQ/export?format=pdf"
 export const PATHS = [
   { name: "Blog", path: "/blog", icon: "ant-design:read-outlined" },
