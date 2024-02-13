@@ -12,7 +12,7 @@ const { showsData } = Astro.props
 ---
 <div class="w-full h-full">
 
-  <sl-carousel  pagination navigation mouse-dragging loop slides-per-page="3" class="scroll-hint" pagination style="--scroll-hint: 10%; --aspect-ratio: 9/16" slides-per-move="1"  >
+  <sl-carousel  pagination navigation mouse-dragging loop  class="scroll-hint" pagination style="--scroll-hint: 10%; --aspect-ratio: 9/16;" slides-per-page="4" >
     {
       showsData.map(({ imdbID, Poster, Title }, i) => {
         return (   
@@ -20,10 +20,9 @@ const { showsData } = Astro.props
             <div class="group relative h-fit w-full rounded-xl">
               <img
               src={Poster}
-              class="rounded-xl aspect-[9/16] object-cover min-h-60"
+              class="rounded-xl aspect-[9/16] object-cover"
               alt=""
               />
-              
               
         <div class="absolute flex left-0 top-0 h-full w-full opacity-0 group-hover:opacity-100  rounded-xl bg-gradient-to-b from-[rgba(0,0,0,0)] from-70% to-skin-accent  duration-500 " >
             <a 
@@ -40,6 +39,20 @@ const { showsData } = Astro.props
 </sl-carousel>
 </div>
 
+
+<script>
+  const carousel = document.querySelector("sl-carousel");
+  function changeSize() {
+    if (window.innerWidth < 700) {
+      carousel.slidesPerPage = 2;
+    } else {
+      carousel.slidesPerPage = 4;
+    }
+  }
+  window.addEventListener('resize', changeSize);
+  window.addEventListener('load', changeSize);
+
+</script>
 
 
 

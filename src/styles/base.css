@@ -30,6 +30,19 @@
     --color-card: 230, 230, 230;
     --color-card-muted: 205, 205, 205;
     --color-border: 216, 39, 39;
+    --sl-color-primary-50:  rgb(var(--color-accent));
+    --sl-color-primary-100: rgb(var(--color-accent));
+    --sl-color-primary-200: rgb(var(--color-accent));
+    --sl-color-primary-300: rgb(var(--color-accent));
+    --sl-color-primary-400: rgb(var(--color-accent));
+    --sl-color-primary-500: rgb(var(--color-accent));
+    --sl-color-primary-600: rgb(var(--color-accent));
+    --sl-color-primary-700: rgb(var(--color-accent));
+    --sl-color-primary-800: rgb(var(--color-accent));
+    --sl-color-primary-900: rgb(var(--color-accent));
+    --sl-color-primary-950: rgb(var(--color-accent));
+    --sl-panel-background-color: rgb(var(--color-fill));
+
   }
   html[data-theme="dark"] {
     --color-fill: 25,31,45 ;
@@ -166,3 +179,7 @@
   }
 }
 
+
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
