@@ -1,0 +1,47 @@
+---
+// @ts-ignore
+import { type Show } from "@/utils/shows";
+interface Props  {
+  showsData: Show[]
+} 
+
+const { showsData } = Astro.props
+
+
+
+---
+<div class="w-full h-full">
+
+  <sl-carousel  pagination navigation mouse-dragging loop slides-per-page="3" class="scroll-hint" pagination style="--scroll-hint: 10%; --aspect-ratio: 9/16" slides-per-move="1"  >
+    {
+      showsData.map(({ imdbID, Poster, Title }, i) => {
+        return (   
+          <sl-carousel-item class="">
+            <div class="group relative h-fit w-full rounded-xl">
+              <img
+              src={Poster}
+              class="rounded-xl aspect-[9/16] object-cover min-h-60"
+              alt=""
+              />
+              
+              
+        <div class="absolute flex left-0 top-0 h-full w-full opacity-0 group-hover:opacity-100  rounded-xl bg-gradient-to-b from-[rgba(0,0,0,0)] from-70% to-skin-accent  duration-500 " >
+            <a 
+            class="z-50 place-self-end"
+                href={`https://www.imdb.com/title/${imdbID}`}>
+                <span class="p-3 text-lg font-bold text-white duration-300 group-hover:flex text-balance">{Title}</span>
+            </a>
+            </div>
+          </div>
+
+          </sl-carousel-item>
+          )
+      })}
+</sl-carousel>
+</div>
+
+
+
+
+
+

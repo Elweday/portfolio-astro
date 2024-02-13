@@ -5,7 +5,7 @@ import {
   HOBBIES as hobbies,
   RESUME,
 } from "@config";
-import MoviesGallery from "@components/MoviesGallery";
+import MoviesGallery from "@components/MoviesGallery.astro";
 import Tooltip from "@components/StackIconTooltip";
 import getShowsData from "@utils/shows";
 import { techStackByType } from "@utils/getTechStack";
@@ -148,7 +148,7 @@ const MESSAGE_OPTIONS = [
       </section>
       <section>
         <h2>Movies and TV Suggestions</h2>
-        <MoviesGallery showsData={showsData} client:load />
+        <MoviesGallery showsData={showsData}  />
       </section>
     </div>
   </article>
