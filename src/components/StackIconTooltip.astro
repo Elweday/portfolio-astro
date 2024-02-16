@@ -8,28 +8,24 @@ interface Props {
 }
 
 const { name, url, icon, description } = Astro.props
-
 ---
 
-<li>
 <sl-tooltip placement="bottom">
-  <a href={url}>
+  <a aria-describedby={`stackTooltip:${name}`} href={url}>
     <span class="sr-only"> link to {name} </span>
     <iconify-icon class="grid text-[33px] cursor-pointer place-self-center transition-all hover:scale-[1.3] " icon={icon} />
   </a>
-    <div slot="content">
-      <a href={url} class="rounded-xl flex items-center justify-center gap-1 p-2  transition-all ">
+    <div id={`stackTooltip:${name}`}  slot="content">
+      <a tabindex="-1"  href={url} class=" cursor-pointer rounded-xl flex items-center justify-center gap-1 p-2  transition-all ">
         <div class="flex flex-col">
           <div class="flex items-center gap-1">
-            <iconify-icon  class="text-[20px]" icon={icon} /> 
-            <span class="text-[15px]">{name}</span>
+            <iconify-icon  class="text-[20px] text-skin-base" icon={icon} /> 
+            <h4 class="text-[15px]">{name}</h4>
           </div>
-          <span>{description}</span>
-  
+          <p>{description}</p>
         </div>
       </a>
     </div>
 </sl-tooltip>
-</li>
 
 

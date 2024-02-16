@@ -12,7 +12,7 @@ const { showsData } = Astro.props
 ---
 <div class="w-full h-full">
 
-  <sl-carousel  pagination navigation mouse-dragging loop  class="scroll-hint" pagination style="--scroll-hint: 10%; --aspect-ratio: 9/16;" slides-per-page="4" >
+  <sl-carousel id="movies-carousel" pagination navigation mouse-dragging loop  class="scroll-hint" pagination style="--scroll-hint: 10%; --aspect-ratio: 9/16;" slides-per-page="4" >
     {
       showsData.map(({ imdbID, Poster, Title }, i) => {
         return (   
@@ -49,8 +49,10 @@ const { showsData } = Astro.props
       carousel.slidesPerPage = 4;
     }
   }
+
   window.addEventListener('resize', changeSize);
   window.addEventListener('load', changeSize);
+  
 
 </script>
 

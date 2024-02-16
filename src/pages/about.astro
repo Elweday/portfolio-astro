@@ -25,8 +25,8 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
   <article>
     <h1 class="py-6 text-start text-2xl tracking-wider sm:text-3xl">About</h1>
     <div class="flex flex-col gap-12">
-      <section>
-        <h2>Contact Me <Socials class="scale-100 place-self-start" /></h2>
+      <section >
+        <h2 tabindex="0">Contact Me <Socials class="scale-100 place-self-start" /></h2>
         <form id="message-form" class="flex flex-col gap-3">
           <label class="relative block">
             <span class="sr-only">Sender email.</span>
@@ -78,14 +78,14 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
 
           <div class="flex gap-3">
             <button
-              class="hover:bg-red-500  transition-all hover:scale-[1.03] flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg "
+              class="hover:bg-skin-accent/80  transition-all hover:scale-[1.03] flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg "
               type="submit"
             >
               <Icon class=""  name="lucide:send" />
               <span> Send</span>
             </button>
             <a
-              class="hover:bg-red-500  transition-all hover:scale-[1.03] flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg"
+              class="hover:bg-skin-accent/80    transition-all hover:scale-[1.03] flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg"
               href={RESUME}
               download
             >
@@ -96,15 +96,15 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
         </form>
       </section>
 
-      <section id="tech-stack-section">
-        <h2>Tech Stack</h2>
+      <section  id="tech-stack-section">
+        <h2  tabindex="0">Tech Stack</h2>
         <ul class="flex flex-col gap-4">
           {
             Object.entries(techStackByType).map(([type, stack]) => {
               return (
                 <li  class="flex flex-col gap-1">
                   <div class="flex flex-col gap-2 rounded-lg  bg-skin-fill p-5">
-                    <h3 class=" font-bold">{type}</h3>
+                    <h3 aria- class=" font-bold">{type}</h3>
                     <ul class="flex gap-4 overflow-visible overflow-x-auto rounded-lg p-2">
                       {stack.map(({ name, icon, url, description }) => (
                         <li >
@@ -126,7 +126,7 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
         </ul>
       </section>
       <section>
-        <h2>Intersest And Activities</h2>
+        <h2  tabindex="0">Intersest And Activities</h2>
         <ul class="grid grid-cols-2 justify-center gap-3 sm:grid-cols-3">
           {
             hobbies.map(hobby => (
@@ -138,8 +138,8 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
           }
         </ul>
       </section>
-      <section>
-        <h2>Movies and TV Suggestions</h2>
+      <section >
+        <h2 tabindex="0">Movies and TV Suggestions</h2>
         <MoviesGallery showsData={showsData}  />
       </section>
     </div>
