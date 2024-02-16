@@ -11,8 +11,10 @@ const { name, url, icon, description } = Astro.props
 
 ---
 
+<li>
 <sl-tooltip placement="bottom">
   <a href={url}>
+    <span class="sr-only"> link to {name} </span>
     <iconify-icon class="grid text-[33px] cursor-pointer place-self-center transition-all hover:scale-[1.3] " icon={icon} />
   </a>
     <div slot="content">
@@ -28,7 +30,6 @@ const { name, url, icon, description } = Astro.props
       </a>
     </div>
 </sl-tooltip>
-
-
+</li>
 
 

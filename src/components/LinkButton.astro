@@ -19,5 +19,6 @@ const { href, className, ariaLabel, title, disabled = false } = Astro.props;
   title={title}
   aria-disabled={disabled}
 >
+  <span class="sr-only">{ariaLabel}</span>
   <slot />
 </a>

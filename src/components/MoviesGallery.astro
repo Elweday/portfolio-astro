@@ -16,7 +16,7 @@ const { showsData } = Astro.props
     {
       showsData.map(({ imdbID, Poster, Title }, i) => {
         return (   
-          <sl-carousel-item class="">
+          <sl-carousel-item tabindex="0" >
             <div class="group relative h-fit w-full rounded-xl">
               <img
               src={Poster}

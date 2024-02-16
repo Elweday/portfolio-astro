@@ -29,6 +29,8 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
         <h2>Contact Me <Socials class="scale-100 place-self-start" /></h2>
         <form id="message-form" class="flex flex-col gap-3">
           <label class="relative block">
+            <span class="sr-only">Sender email.</span>
+
             <span
               class="absolute inset-y-0 left-0 flex items-center pl-2 opacity-75"
             >
@@ -69,7 +71,8 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
             </select>
           </label>
 
-          <label class="relative block">
+          <label class="relative block">  
+            <span class="sr-only">Message content.</span>
             <textarea class="text-md block h-32 w-full justify-self-center rounded-lg border border-skin-fill border-opacity-40 bg-skin-card/30 bg-skin-fill px-[0.75rem] py-[0.32rem] placeholder:italic placeholder:text-slate-400/80 placeholder:text-opacity-75 focus:border-skin-accent focus:outline-none" placeholder="Message..." required name="message" autocomplete="off" />
           </label>
 
@@ -99,11 +102,12 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
           {
             Object.entries(techStackByType).map(([type, stack]) => {
               return (
-                <li class="flex flex-col gap-1">
+                <li  class="flex flex-col gap-1">
                   <div class="flex flex-col gap-2 rounded-lg  bg-skin-fill p-5">
                     <h3 class=" font-bold">{type}</h3>
-                    <ul class="flex  gap-4 overflow-visible overflow-x-auto rounded-lg p-2">
+                    <ul class="flex gap-4 overflow-visible overflow-x-auto rounded-lg p-2">
                       {stack.map(({ name, icon, url, description }) => (
+                        <li >
                         <Tooltip
                           delayDuration={800}
                           name={name}
@@ -111,6 +115,7 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
                           url={url}
                           description={description}
                         />
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -125,7 +130,7 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
         <ul class="grid grid-cols-2 justify-center gap-3 sm:grid-cols-3">
           {
             hobbies.map(hobby => (
-              <li class="flex gap-5 rounded-lg  bg-skin-fill px-5 py-2">
+              <li tabindex="0" class="flex gap-5 rounded-lg  bg-skin-fill px-5 py-2">
                 <Icon name={hobby.icon} class="size-9" />
                 <span class="place-self-center">{hobby.name}</span>
               </li>
@@ -149,13 +154,10 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
   h2 {
     @apply text-start text-xl tracking-wider  sm:text-2xl;
   }
-
-  .message-success {
-    @apply text-green-400;
+  .toast-title {
+    @apply text-xl text-skin-accent font-bold;
   }
-  .message-failed {
-    @apply text-red-400;
-  }
+ 
 </style>
 
 <script is:inline>
@@ -164,9 +166,9 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
     const closable = true;
     const innerHTML = `
       <div>
-        <h3>${title}</h3>
+        <h3 class="toast-title">${title}</h3>
         <sl-icon name="${icon}" slot="icon"></sl-icon>
-        <span>${message}</span>
+        <span class="toast-message">${message}</span>
       </div>
     `
     const alertEl = document.createElement('sl-alert')
@@ -191,9 +193,7 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
     form.reset();
 
     if (resBody.status == 200) {
-      notify( resBody.title, resBody.message);
+      notify(resBody.title, resBody.message);
     } 
   });
 </script>
-
-
