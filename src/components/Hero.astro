@@ -2,8 +2,6 @@
 import { SOCIALS } from "@config";
 import Icon from "astro-icon";
 import Socials from "@components/Socials.astro";
-import NasserIcon from "astro-cached-icon";
-
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
@@ -12,7 +10,6 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 	<div class="box relative">
 		<a class="absolute -right-5 mt-3" href="/rss.xml">
 			<Icon name="ph:rss-bold" class="size-8 rounded-md text-skin-accent" />
-			<NasserIcon icon="ph:rss-bold" class="size-8 rounded-md text-skin-accent" />
 		</a>
 		<div class="title">
 			<span class="block"></span>

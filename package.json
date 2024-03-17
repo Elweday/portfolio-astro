@@ -27,7 +27,6 @@
     "@types/alpinejs": "^3.13.6",
     "alpinejs": "^3.13.3",
     "astro": "^4.0.8",
-    "astro-cached-icon": "^0.0.35",
     "astro-compress": "^2.2.5",
     "astro-icon": "^0.8.2",
     "astro-iconify": "^1.2.0",
