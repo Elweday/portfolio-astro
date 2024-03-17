@@ -246,57 +246,6 @@ and render them and them all and then hide them in the client-side, which is -ag
 
     }
 
-    function updateList(q: string) {
-      const url = new URL(window.location as any) ;
-      url.searchParams.set('q', q);
-      if (!q) url.searchParams.delete("q");
-      window.history.pushState(null, '', url.toString());
-      const searchResults = q!==""?
-       entries.map((entry) => getMatch(entry, q)).filter((match) => match !== undefined) as searchResult[]: [] as searchResult[];;
-      let hiddenCount = 0;
-      const parentElement = document.getElementById("search-results") as HTMLUListElement
-      [...parentElement.children].forEach((child: any) => {
-        if (!searchResults) return;
-        const match = searchResults.find(({title}) => title === child.dataset.title) as searchResult;
-        if (match) {
-          child.classList.remove("hidden")
-          child.querySelector(`[aria-label='pre']`).innerText = match.match[0]
-          child.querySelector(`[aria-label='match']`).innerText = match.match[1]
-          child.querySelector(`[aria-label='post']`).innerText = match.match[2]
-        }
-        else {
-          child.classList.add("hidden")
-          hiddenCount += 1
-        }
-      });
-
-      const nMatches = document.getElementById("number-of-results") as HTMLParagraphElement;
-      if (hiddenCount !== entryCount)
-      {
-        nMatches.innerText = `Found ${searchResults.length} ${searchResults.length === 1 ? "result" : "results" } for "${q}"`
-      }
-      else {
-        if (q === "")
-        {
-          nMatches.innerText = `Start Typing to get results!`
-        } else {
-          nMatches.innerText = `No results found for "${q}" `
-        }
-      }
-    }
-
- 
-    const url = new URL(window.location as any) ;
-    const q = url.searchParams.get('q');
-    console.log(q)
-    if (q) {
-      (document.querySelector("#search-input") as HTMLInputElement).value = q;      
-      updateList(q)
-    };
-    addEventListener("input", (e: any) =>{ 
-      if (e.target.id !== "search-input") return;
-      updateList(e.target.value)
-    });
 
 ```
 > this might be a huge blob of code but it's not doing any magic, jsut hiding items and handling different cases.
@@ -308,6 +257,3 @@ as you might have seen this site is sarcastically? heavily-batman-themed, which 
  
 ## Glossary
 This was a great project to learn about build tools capabilities, browser APIs, type-safety, project structuring.
-
-
-
