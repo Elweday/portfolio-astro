@@ -1,12 +1,12 @@
 ---
 import { SITE, PATHS } from "@config";
 import Hr from "./Hr.astro";
+import trim from "@utils/trim";
 
 export interface Props {
   path?: string;
 }
 
-import trim from "@utils/trim";
 
 
 const currentPagePath = trim(Astro.url.pathname, "/").split("/");
@@ -82,9 +82,6 @@ const currentPagePath = trim(Astro.url.pathname, "/").split("/");
 </header>
 
 <style>
-
-
-
 
 .line {
   @apply stroke-skin-accent;

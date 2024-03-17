@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
 @media (prefers-reduced-motion: no-preference){
   img.animate  {
     scale: 0.85;

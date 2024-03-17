@@ -1,0 +1,306 @@
+---
+import { SOCIALS } from "@config";
+import Icon from "astro-icon";
+import Socials from "@components/Socials.astro";
+
+const socialCount = SOCIALS.filter(social => social.active).length;
+---
+
+<div class="hero">
+	<span class="welcome">Hi, I'm</span>
+	<div class="box relative">
+		<a class="absolute -right-5 mt-3" href="/rss.xml">
+			<Icon name="ph:rss-bold" class="size-8 rounded-md text-skin-accent" />
+		</a>
+		<div class="title">
+			<span class="block"></span>
+			<h1 class="text-skin-accent">Mohammed Nasser<span></span></h1>
+		</div>
+
+		<div class="role">
+			<div class="block"></div>
+			<p>Software Engineer</p>
+		</div>
+	</div>
+	<p id="desc" class="relative">
+		A Computer Engineering Student who is passionate about open source and web development. 
+	</p>
+	{
+		// only display if at least one social link is enabled
+		socialCount > 0 && (
+			<div class="socials mb-1 mr-2 whitespace-nowrap font-bold sm:mb-0">
+				Follow Me on: <Socials />
+			</div>
+		)
+	}
+</div>
+<div id="headshot" class="flex h-full w-full items-center justify-end">
+	<img
+		class="shadow-5xl aspect-square size-[15rem] rounded-full object-contain"
+		src="/me.png"
+		alt="Mohammed Nasser"
+	/>
+</div>
+
+<style>
+	:root {
+		--easing-spring: linear(0,0.009,0.035 2.1%,0.141 4.4%,0.723 12.9%,0.938 16.7%,1.017,1.077,1.121,1.149 24.3%,1.159,1.163,1.161,1.154 29.9%,1.129 32.8%,1.051 39.6%,1.017 43.1%,0.991,0.977 51%,0.974 53.8%,0.975 57.1%,0.997 69.8%,1.003 76.9%,1);
+	}
+	#headshot > img,
+	.welcome,
+	.socials,
+	#desc {
+		-webkit-animation: mainFadeIn 2s forwards;
+		-o-animation: mainFadeIn 2s forwards;
+		animation: mainFadeIn 2s forwards;
+		animation-delay: 0.6s;
+		opacity: 0;
+	}
+	#headshot > img {
+		background: radial-gradient(
+			rgba(var(--color-accent), 0.3) var(--gradient-position-start),
+			rgba(var(--color-accent), 0) var(--gradient-position-end)
+		);
+		-o-animation: fadeInSlide var(--easing-spring) 2.5s forwards;
+		animation: fadeInSlide var(--easing-spring) 2.5s forwards;
+		animation-delay: 1s;
+		opacity: 0;
+	}
+	
+	#desc {
+		animation-delay: 3s;
+	}
+	.socials{
+		animation-delay: 3.5s;
+	}
+
+	.box {
+		width: 300px;
+		height: 80px;
+	}
+	.box .title {
+		position: relative;
+		display: flex;
+		align-items: center;
+	}
+	.box .title .block {
+		width: 0%;
+		height: inherit;
+		background: rgba(var(--color-accent), 1);
+		position: absolute;
+		animation: mainBlock 2s cubic-bezier(0.74, 0.06, 0.4, 0.92) forwards;
+		display: flex;
+	}
+	.box .title h1 {
+		font-size: 32px;
+		-webkit-animation: mainFadeIn 2s forwards;
+		-o-animation: mainFadeIn 2s forwards;
+		animation: mainFadeIn 2s forwards;
+		animation-delay: 0.6s;
+		opacity: 0;
+		display: flex;
+		align-items: baseline;
+		position: relative;
+	}
+	.box .title h1 span {
+		width: 0px;
+		height: 0px;
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		border-radius: 50%;
+		background-color: rgba(var(--color-accent), 1);
+		-webkit-animation: load 0.6s cubic-bezier(0.74, 0.06, 0.4, 0.92) forwards;
+		animation: popIn 0.8s cubic-bezier(0.74, 0.06, 0.4, 0.92) forwards;
+		animation-delay: 2.8s;
+		margin-left: 5px;
+		margin-top: -10px;
+		position: absolute;
+		bottom: 13px;
+		right: -12px;
+	}
+	.box .role {
+		width: 100%;
+		position: relative;
+		display: flex;
+		align-items: center;
+		height: 30px;
+		margin-top: -10px;
+	}
+	.box .role .block {
+		width: 0%;
+		height: inherit;
+		background: rgba(var(--color-accent), 1);
+		position: absolute;
+		animation: secBlock 1s cubic-bezier(0.74, 0.06, 0.4, 0.92) forwards;
+		animation-delay: 2s;
+		display: flex;
+	}
+	.box .role p {
+		animation: secFadeIn 2s forwards;
+		animation-delay: 2.2s;
+		opacity: 0;
+		font-weight: 400;
+		font-family: "Lato";
+		font-size: 12px;
+		text-transform: uppercase;
+		letter-spacing: 5px;
+	}
+	a {
+		opacity: 0;
+		-webkit-animation: shake 3s forwards;
+		-o-animation: shake 3s forwards;
+		animation: shake 5s forwards;
+		animation-delay: 0s;
+        transform-origin:  bottom left;
+	}
+
+	@keyframes mainBlock {
+		0% {
+			width: 0%;
+			left: 0;
+		}
+		50% {
+			width: 100%;
+			left: 0;
+		}
+		100% {
+			width: 0;
+			left: 100%;
+		}
+	}
+	@keyframes secBlock {
+		0% {
+			width: 0%;
+			left: 0;
+		}
+		50% {
+			width: 100%;
+			left: 0;
+		}
+		100% {
+			width: 0;
+			left: 100%;
+		}
+	}
+	@keyframes mainFadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+	@property --gradient-position-start {
+  		syntax: "<percentage>";
+  		inherits: true;
+  		initial-value: 0%;
+	}
+
+	@property --gradient-position-end {
+  		syntax: "<percentage>";
+  		inherits: true;
+  		initial-value: 50%;
+	}
+	
+
+
+	@keyframes fadeInSlide {
+		0% {
+			opacity: 0;
+			transform: translateX(150px);
+		}
+		20% {
+			--gradient-position-start: 0%;
+			--gradient-position-end: 50%;
+
+		}
+		100% {
+			opacity: 1;
+			transform: translateX(0px);
+			--gradient-position-start: 50%;
+			--gradient-position-end: 70%;
+		}
+	}
+
+	@keyframes popIn {
+		0% {
+			width: 0px;
+			height: 0px;
+			background: rgba(var(--color-accent), 1);
+			border: 0px solid #ddd;
+			opacity: 0;
+		}
+		50% {
+			width: 10px;
+			height: 10px;
+			background: rgba(var(--color-accent), 1);
+			opacity: 1;
+			bottom: 45px;
+		}
+		65% {
+			width: 7px;
+			height: 7px;
+			bottom: 0px;
+			width: 15px;
+		}
+		80% {
+			width: 10px;
+			height: 10px;
+			bottom: 20px;
+		}
+		100% {
+			width: 7px;
+			height: 7px;
+			background: rgba(var(--color-accent), 1);
+			border: 0px solid #222;
+			bottom: 13px;
+		}
+	}
+	@keyframes secFadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 0.5;
+		}
+	}
+    @keyframes shake {
+        0% {
+            opacity: 0;
+        }
+        66% {
+            opacity: 0;
+            transform: rotate(-90deg);
+        }
+        100% {
+            opacity: 1;
+            transform: rotate(0);
+
+	    }
+    }
+	@keyframes top {
+		0% {
+			opacity: 0;
+			bottom: -80px;
+		}
+		100% {
+			opacity: 1;
+			bottom: 0px;
+		}
+	}
+	@keyframes icon {
+		0% {
+			opacity: 0;
+			transform: scale(0);
+		}
+		50% {
+			opacity: 1;
+			transform: scale(1.3) rotate(-2deg);
+		}
+		100% {
+			opacity: 1;
+			bottom: 0px;
+		}
+	}
+</style>

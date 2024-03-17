@@ -2,6 +2,13 @@
 export const SITE = {
   website: "https://elweday.vercel.app",
   author: "Mohammed Nasser",
+  authorDescription: `
+  Hey, I'm Mohammed Nasser. I'm a full-stack developer.
+  I love to build things for the web.
+  I'm currently learning web development.
+  I'm currently learning web development.
+  I'm currently learning web development.
+  `,
   desc: "A personal portfolio and blog.",
   title: "Nasser's Blog",
   ogImage: "assets/images/fallback.png",
@@ -41,8 +48,8 @@ export const MESSAGE_OPTIONS = [
 
 export const RESUME = "https://docs.google.com/document/d/1Lmc80EBvlTwp2vp5kkrLQEzGkF5WvxCQ/export?format=pdf"
 export const PATHS = [
-  { name: "Blog", path: "/blog", icon: "ant-design:read-outlined" },
   { name: "Projects", path: "/projects", icon: "ic:baseline-code" },
+  { name: "Blog", path: "/blog", icon: "ant-design:read-outlined" },
   { name: "About", path: "/about", icon: "mdi:about-circle-outline" },
   { name: "Search", path: "/search", icon: "ic:baseline-search" },
 ] as const;

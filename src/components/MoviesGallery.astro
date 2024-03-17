@@ -44,8 +44,10 @@ const { showsData } = Astro.props
   const carousel = document.querySelector("sl-carousel");
   function changeSize() {
     if (window.innerWidth < 700) {
+      // @ts-ignore
       carousel.slidesPerPage = 2;
     } else {
+      // @ts-ignore
       carousel.slidesPerPage = 4;
     }
   }
