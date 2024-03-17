@@ -38,6 +38,9 @@ dependencies:
   astro:
     specifier: ^4.0.8
     version: 4.0.9(@types/node@18.19.4)(typescript@5.3.3)
+  astro-cached-icon:
+    specifier: ^0.0.35
+    version: 0.0.35(astro@4.0.9)(prettier-plugin-astro@0.12.3)(prettier@3.1.1)
   astro-compress:
     specifier: ^2.2.5
     version: 2.2.5
@@ -223,6 +226,23 @@ packages:
 
   /@astrojs/check@0.2.1(prettier-plugin-astro@0.12.3)(prettier@3.1.1)(typescript@5.3.3):
     resolution: {integrity: sha512-s85uBS/qjnqsKAeM0VKNWKvNaqvR06ZJupEwr2oT5/6Bti7qB5Vd8KekWIRAu2/WqOXHMFaDJz5D+qSizFnq5g==}
+    hasBin: true
+    peerDependencies:
+      typescript: ^5.0.0
+    dependencies:
+      '@astrojs/language-server': 2.5.5(prettier-plugin-astro@0.12.3)(prettier@3.1.1)(typescript@5.3.3)
+      chokidar: 3.5.3
+      fast-glob: 3.3.2
+      kleur: 4.1.5
+      typescript: 5.3.3
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - prettier
+      - prettier-plugin-astro
+    dev: false
+
+  /@astrojs/check@0.3.4(prettier-plugin-astro@0.12.3)(prettier@3.1.1)(typescript@5.3.3):
+    resolution: {integrity: sha512-Wi4KwW38J3GCd/U6LH2UuU4uc4P/K1WYaqhoKm2o7rVoGhQfO+RWrSO26rUPRXYbmae8JugAgpCmsHC8bt5RlA==}
     hasBin: true
     peerDependencies:
       typescript: ^5.0.0
@@ -3171,6 +3191,11 @@ packages:
     resolution: {integrity: sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==}
     dev: false
 
+  /@xmldom/xmldom@0.8.10:
+    resolution: {integrity: sha512-2WALfTl4xo2SkGCYRt6rDTFfk9R1czmBvUQy12gK2KuRKIpWEhcbbzy8EZXtz/jkRqHX8bFEc6FC1HjX4TUWYw==}
+    engines: {node: '>=10.0.0'}
+    dev: false
+
   /abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
     dev: false
@@ -3325,6 +3350,20 @@ packages:
     resolution: {integrity: sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==}
     engines: {node: '>=8'}
     dev: true
+
+  /astro-cached-icon@0.0.35(astro@4.0.9)(prettier-plugin-astro@0.12.3)(prettier@3.1.1):
+    resolution: {integrity: sha512-ajgQx3fsc4UY4GSESf6WLyPR8OX4OKoyIYoJ+ypXMJRnOEiHDi8smt//9mNBv33SFmTLE4RFe8jfZ9fBEAcG6w==}
+    peerDependencies:
+      astro: ^4.0.8
+    dependencies:
+      '@astrojs/check': 0.3.4(prettier-plugin-astro@0.12.3)(prettier@3.1.1)(typescript@5.3.3)
+      '@xmldom/xmldom': 0.8.10
+      astro: 4.0.9(@types/node@18.19.4)(typescript@5.3.3)
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - prettier
+      - prettier-plugin-astro
+    dev: false
 
   /astro-compress@2.2.5:
     resolution: {integrity: sha512-2F+dR4zbVCTAAZtHKbnskkV/CUi86JIFK1ywM98Y3hFDYN7e3TZDMugbQpv6+amqoI300tP/UE/Pjm3m8QaeFg==}
