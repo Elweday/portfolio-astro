@@ -14,7 +14,8 @@ tags:
   - Responsive Web Design
   - REST
   - API
-projectURL: https://github.com/elweday/CollegeSite
+projectURL: https://helwan.vercel.app
+githubURL: https://github.com/elweday/CollegeSite
 stack:
   - svelte
   - postgres

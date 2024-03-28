@@ -3,7 +3,8 @@ dateTime: 2023-12-23T00:00:00Z
 title: Personal Blog & Portfolio
 description: Non-trivial astro personal blog and porftfolio.
 slug: this
-projectURL: https://github.com/elweday/elweday
+projectURL: https://elweday.vercel.app
+githubURL: https://github.com/elweday/elweday
 tags:
   - astro
   - SSR

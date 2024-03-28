@@ -7,7 +7,6 @@ import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
 import compress from "astro-compress";
 import preload from "astro-preload";
-import alpinejs from "@astrojs/alpinejs";
 import vercel from '@astrojs/vercel/serverless';
 
 
@@ -30,7 +29,7 @@ const markdownConfig: UserConfig["markdown"] = {
 };
 const integrations: UserConfig["integrations"] = [preload(), tailwind({
   applyBaseStyles: false
-}), react(), sitemap(), compress(), alpinejs()];
+}), react(), sitemap(), compress()];
 
 
 // https://astro.build/config

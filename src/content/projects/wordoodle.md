@@ -4,7 +4,8 @@ title: "Wordoodle: Drawing Game"
 description: draw and guess.
 slug: wordoodle
 draft: false
-projectURL: https://github.com/elweday/scribble
+projectURL: https://wordoodle.vercel.app
+githubURL: https://github.com/elweday/scribble
 tags:
   - HTML
   - websockets

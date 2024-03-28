@@ -4,7 +4,8 @@ title: "Metrospection: eg metro navigator"
 description: draw and guess.
 slug: Metrospection
 draft: false
-projectURL: https://github.com/elweday/metro-map
+projectURL: https://metrospection.vercel.app
+githubURL: https://github.com/elweday/metro-map
 tags:
   - Responsive Design
   - Geolocation API
