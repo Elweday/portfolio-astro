@@ -5,38 +5,45 @@ import Socials from "@components/Socials.astro";
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
-<div class="flex flex-col items-center place-content-center relative w-full">
+<div class="flex md:flex-row-reverse flex-col items-center justify-center place-content-center relative w-full gap-2">
 
-	<span class="welcome">Hi, I'm</span>
-	<div id="headshot" class="justify-end aspect-square size-fit">
+	<div id="headshot" class="justify-end aspect-square size-fit flex flex-col items-center ">
+
+		<span class="-mb-5 text-center md:hidden">Hi, I'm</span>
+
 		<img
-			class="shadow-5xl aspect-square size-[15rem] rounded-full object-contain"
-			src="/me.png"
+		class="shadow-5xl aspect-square size-[15rem] rounded-full object-contain"
+		src="/me.png"
 			alt="Mohammed Nasser"
 		/>
+			<div class="socials -mt-8">
+				{socialCount > 0 && (<div class="socials"><Socials /></div>)}
+			</div>
 	</div>
+	<div>
 
-	<div class="box relative">
-		<a class="absolute -right-5 mt-3" href="/rss.xml">
-			<Icon name="ph:rss-bold" class="size-8 rounded-md text-skin-accent" />
-		</a>
-		<div class="title">
+	<div class="box flex flex-col items-center md:items-start relative w-full md:text-start text-center ">
+		<span class="-mb-5 text-center hidden md:block">Hi, I'm</span>
+
+		<div class="title ">
 			<span class="block"></span>
 			<h1 class="text-skin-accent">Mohammed Nasser<span></span></h1>
+			<a class="absolute top-2 -right-9" href="/rss.xml">
+				<Icon name="ph:rss-bold" class="size-8 rounded-md text-skin-accent" />
+			</a>
 		</div>
 
-		<div class="role">
+		<div class="role text-center md:text-start">
 			<div class="block"></div>
-			<p>Software Engineer</p>
+			<p class="w-full text-center md:text-start">Software Engineer</p>
 		</div>
 	</div>
 
-	<p id="desc" class="relative text-center">
+	<p id="desc" class="relative text-center md:text-start pt-6">
 		A Computer Engineering Student who is passionate about open source and web development. 
 	</p>
-	<div class="socials">
-		{socialCount > 0 && (<div class="socials"><Socials /></div>)}
-	</div>
+
+</div>
 </div>
 
 <style>
@@ -74,10 +81,6 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 		animation-delay: 3s;
 	}
 
-	.box {
-		width: 300px;
-		height: 80px;
-	}
 	.box .title {
 		position: relative;
 		display: flex;
@@ -122,7 +125,6 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 		width: 100%;
 		position: relative;
 		display: flex;
-		align-items: center;
 		height: 30px;
 		margin-top: -10px;
 	}
@@ -143,6 +145,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 		font-family: "Lato";
 		font-size: 12px;
 		text-transform: uppercase;
+		white-space: nowrap;
 		letter-spacing: 5px;
 	}
 	a {
