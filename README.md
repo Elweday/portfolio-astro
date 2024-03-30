@@ -58,7 +58,7 @@
 <p align="center">
     <img src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=elweday&theme=transparent" />
     <img src="https://github-readme-streak-stats.herokuapp.com/?user=elweday&hide_border=true&card_width=338&theme=transparent" />
-  ![](http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=elweday&theme=default)
+    <img src="http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=elweday&theme=default" />
     <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=elweday&langs_count=10&exclude_repo=&hide=jupyter%20notebook,vim%20script,cmake,makefile,batchfile,emacs%20lisp,css,html&layout=default&card_width=699&hide_border=true&theme=transparent" />
 </p>
 
