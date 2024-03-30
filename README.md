@@ -1,4 +1,24 @@
 <h1 align="center">Hi, programmers</h1>
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+	<defs>
+		<symbol id="lineMdCogFilledLoop0">
+			<path fill="#fff" d="M11 13L15.74 5.5C16.03 5.67 16.31 5.85 16.57 6.05C16.57 6.05 19.09 5.04 19.09 5.04C19.25 4.98 19.52 5.01 19.6 5.17C19.6 5.17 21.67 8.75 21.67 8.75C21.77 8.92 21.73 9.2 21.6 9.32C21.6 9.32 19.43 11 19.43 11C19.48 11.33 19.5 11.66 19.5 12z" />
+		</symbol>
+		<mask id="lineMdCogFilledLoop1">
+			<path fill="none" stroke="#fff" stroke-width="5" d="M12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7z" opacity="0" />
+			<g transform="rotate(360 12 12)">
+				<use href="#lineMdCogFilledLoop0" />
+				<use href="#lineMdCogFilledLoop0" transform="rotate(60 12 12)" />
+				<use href="#lineMdCogFilledLoop0" transform="rotate(120 12 12)" />
+				<use href="#lineMdCogFilledLoop0" transform="rotate(180 12 12)" />
+				<use href="#lineMdCogFilledLoop0" transform="rotate(240 12 12)" />
+				<use href="#lineMdCogFilledLoop0" transform="rotate(300 12 12)" />
+			</g>
+			<circle cx="12" cy="12" r="3.5" />
+		</mask>
+	</defs>
+	<rect width="24" height="24" fill="currentColor" mask="url(#lineMdCogFilledLoop1)" />
+</svg>
   
 <p align="center">
     <b>Welcome to my GitHub!</b><br>
