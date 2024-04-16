@@ -46,7 +46,7 @@ export const MESSAGE_OPTIONS = [
   }},
 ] as const;
 
-export const RESUME = "https://docs.google.com/document/d/1Lmc80EBvlTwp2vp5kkrLQEzGkF5WvxCQ/export?format=pdf"
+export const RESUME = "https://docs.google.com/document/d/1o3wNFt8SbRok8t8kFb5dnhwkjSTf6dVXqYQYa2n9O_I/export?format=pdf"
 export const PATHS = [
   { name: "Projects", path: "/projects", icon: "ic:baseline-code" },
   { name: "Blog", path: "/blog", icon: "ant-design:read-outlined" },
