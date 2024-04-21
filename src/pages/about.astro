@@ -1,11 +1,6 @@
 ---
-export const prerender = false; 
-import {
-  MY_SHOWS,
-  HOBBIES,
-  RESUME,
-  MESSAGE_OPTIONS
-} from "@config";
+export const prerender = false;
+import { MY_SHOWS, HOBBIES, RESUME, MESSAGE_OPTIONS } from "@config";
 import MoviesGallery from "@components/MoviesGallery.astro";
 import Tooltip from "@components/StackIconTooltip.astro";
 import getShowsData from "@utils/shows";
@@ -15,18 +10,16 @@ import Layout from "@layouts/Layout.astro";
 import Socials from "@components/Socials.astro";
 
 const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
-
 ---
 
-<Layout
-  title="About"
-  description="Mohammed Nasser | About me"
->
+<Layout title="About" description="Mohammed Nasser | About me">
   <article>
-    <h1  class="py-6 text-start text-2xl tracking-wider sm:text-3xl">About</h1>
+    <h1 class="py-6 text-start text-2xl tracking-wider sm:text-3xl">About</h1>
     <div class="flex flex-col gap-12">
-      <section >
-        <h2 tabindex="0">Contact Me <Socials class="scale-100 place-self-start" /></h2>
+      <section>
+        <h2 tabindex="0">
+          Contact Me <Socials class="scale-100 place-self-start" />
+        </h2>
         <form id="message-form" class="flex flex-col gap-3">
           <label class="relative block">
             <span class="sr-only">Sender email.</span>
@@ -48,10 +41,8 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
             />
           </label>
           <label class="relative block">
-
-            
             <select
-              class="text-md block w-full justify-self-center rounded-lg border border-skin-fill border-opacity-40 bg-skin-card/30 bg-skin-fill px-[0.75rem] py-[0.32rem] invalid:text-slate-400/80 focus:border-skin-accent focus:outline-none " 
+              class="text-md block w-full justify-self-center rounded-lg border border-skin-fill border-opacity-40 bg-skin-card/30 bg-skin-fill px-[0.75rem] py-[0.32rem] invalid:text-slate-400/80 focus:border-skin-accent focus:outline-none"
               name="message-type"
               onchange=""
               required
@@ -64,28 +55,32 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
                 MESSAGE_OPTIONS.map(({ name, icon }) => (
                   <option value={name} class="text-lg font-bold">
                     {name} <Icon class="size-8 bg-red-500" name={icon} />
-                    
                   </option>
                 ))
               }
             </select>
           </label>
 
-          <label class="relative block">  
+          <label class="relative block">
             <span class="sr-only">Message content.</span>
-            <textarea class="text-md block h-32 w-full justify-self-center rounded-lg border border-skin-fill border-opacity-40 bg-skin-card/30 bg-skin-fill px-[0.75rem] py-[0.32rem] placeholder:italic placeholder:text-slate-400/80 placeholder:text-opacity-75 focus:border-skin-accent focus:outline-none" placeholder="Message..." required name="message" autocomplete="off" />
+            <textarea
+              class="text-md block h-32 w-full justify-self-center rounded-lg border border-skin-fill border-opacity-40 bg-skin-card/30 bg-skin-fill px-[0.75rem] py-[0.32rem] placeholder:italic placeholder:text-slate-400/80 placeholder:text-opacity-75 focus:border-skin-accent focus:outline-none"
+              placeholder="Message..."
+              required
+              name="message"
+              autocomplete="off"></textarea>
           </label>
 
           <div class="flex gap-3">
             <button
-              class="hover:bg-skin-accent/80  transition-all hover:scale-[1.03] flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg "
+              class="flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg transition-all hover:scale-[1.03] hover:bg-skin-accent/80"
               type="submit"
             >
-              <Icon class=""  name="lucide:send" />
+              <Icon class="" name="lucide:send" />
               <span> Send</span>
             </button>
             <a
-              class="hover:bg-skin-accent/80    transition-all hover:scale-[1.03] flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg"
+              class="flex w-full place-items-center justify-center gap-2 place-self-center rounded-lg bg-skin-accent/30 px-4 py-2 text-lg transition-all hover:scale-[1.03] hover:bg-skin-accent/80"
               href={RESUME}
               download
             >
@@ -96,25 +91,27 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
         </form>
       </section>
 
-      <section  id="tech-stack-section">
-        <h2  tabindex="0">Tech Stack</h2>
+      <section id="tech-stack-section">
+        <h2 tabindex="0">Tech Stack</h2>
         <ul class="flex flex-col gap-4">
           {
             Object.entries(techStackByType).map(([type, stack]) => {
               return (
-                <li  class="flex flex-col gap-1">
+                <li class="flex flex-col gap-1">
                   <div class="flex flex-col gap-2 rounded-lg  bg-skin-fill p-5">
-                    <h3 aria- class=" font-bold">{type}</h3>
+                    <h3 aria- class=" font-bold">
+                      {type}
+                    </h3>
                     <ul class="flex gap-4 overflow-visible overflow-x-auto rounded-lg p-2">
                       {stack.map(({ name, icon, url, description }) => (
-                        <li >
-                        <Tooltip
-                          delayDuration={800}
-                          name={name}
-                          icon={icon}
-                          url={url}
-                          description={description}
-                        />
+                        <li>
+                          <Tooltip
+                            delayDuration={800}
+                            name={name}
+                            icon={icon}
+                            url={url}
+                            description={description}
+                          />
                         </li>
                       ))}
                     </ul>
@@ -126,11 +123,14 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
         </ul>
       </section>
       <section>
-        <h2  tabindex="0">Hobbies and Interests</h2>
+        <h2 tabindex="0">Hobbies and Interests</h2>
         <ul class="grid grid-cols-2 justify-center gap-3 sm:grid-cols-3">
           {
             HOBBIES.map(hobby => (
-              <li tabindex="0" class="flex gap-5 rounded-lg  bg-skin-fill px-5 py-2">
+              <li
+                tabindex="0"
+                class="flex gap-5 rounded-lg  bg-skin-fill px-5 py-2"
+              >
                 <Icon name={hobby.icon} class="size-9" />
                 <span class="place-self-center">{hobby.name}</span>
               </li>
@@ -138,9 +138,9 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
           }
         </ul>
       </section>
-      <section >
+      <section>
         <h2 tabindex="0">Movies and TV Suggestions</h2>
-        <MoviesGallery showsData={showsData}  />
+        <MoviesGallery showsData={showsData} />
       </section>
     </div>
   </article>
@@ -155,14 +155,18 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
     @apply text-start text-xl tracking-wider  sm:text-2xl;
   }
   .toast-title {
-    @apply text-xl text-skin-accent font-bold;
+    @apply text-xl font-bold text-skin-accent;
   }
- 
 </style>
 
 <script is:inline>
-    function notify(title, message, variant = 'primary', icon = 'info-circle', duration = 8000) {
-    ;  
+  function notify(
+    title,
+    message,
+    variant = "primary",
+    icon = "info-circle",
+    duration = 8000
+  ) {
     const closable = true;
     const innerHTML = `
       <div>
@@ -170,30 +174,32 @@ const showsData = await getShowsData(import.meta.env.OMDB_API_KEY, MY_SHOWS);
         <sl-icon name="${icon}" slot="icon"></sl-icon>
         <span class="toast-message">${message}</span>
       </div>
-    `
-    const alertEl = document.createElement('sl-alert')
-    const alert =  Object.assign(alertEl, {variant,closable,duration,innerHTML});
+    `;
+    const alertEl = document.createElement("sl-alert");
+    const alert = Object.assign(alertEl, {
+      variant,
+      closable,
+      duration,
+      innerHTML,
+    });
     document.body.append(alert);
-    customElements.whenDefined('sl-alert').then(() => alert.toast());
-    
+    customElements.whenDefined("sl-alert").then(() => alert.toast());
   }
 
-
   const form = document.querySelector("#message-form");
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener("submit", async e => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const res = await fetch("/contactme", {
       method: "POST",
-      body: formData
-
-    })
+      body: formData,
+    });
     const resBody = await res.json();
     form.reset();
 
     if (resBody.status == 200) {
       notify(resBody.title, resBody.message);
-    } 
+    }
   });
 </script>
