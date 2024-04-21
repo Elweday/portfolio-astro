@@ -4,33 +4,45 @@ import react from "@astrojs/react";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
-import { SITE } from "./src/config";
+import { SITE, RESUME } from "./src/config";
 import compress from "astro-compress";
 import preload from "astro-preload";
-import vercel from '@astrojs/vercel/serverless';
-
+import vercel from "@astrojs/vercel/serverless";
 
 type UserConfig = Parameters<typeof defineConfig>[0];
 const markdownConfig: UserConfig["markdown"] = {
-  remarkPlugins: [[remarkToc, {
-    heading: "Contents",
-    tight: true,
-    maxDepth: 3
-  }], [remarkCollapse, {
-    test: "Contents",
-    content: "show contents"
-  }]
-  //[stripMarkdown, {}]
+  remarkPlugins: [
+    [
+      remarkToc,
+      {
+        heading: "Contents",
+        tight: true,
+        maxDepth: 3,
+      },
+    ],
+    [
+      remarkCollapse,
+      {
+        test: "Contents",
+        content: "show contents",
+      },
+    ],
+    //[stripMarkdown, {}]
   ],
   shikiConfig: {
-    theme: 'dracula',
-    wrap: true
-  }
+    theme: "dracula",
+    wrap: true,
+  },
 };
-const integrations: UserConfig["integrations"] = [preload(), tailwind({
-  applyBaseStyles: false
-}), react(), sitemap(), compress()];
-
+const integrations: UserConfig["integrations"] = [
+  preload(),
+  tailwind({
+    applyBaseStyles: false,
+  }),
+  react(),
+  sitemap(),
+  compress(),
+];
 
 // https://astro.build/config
 export default defineConfig({
@@ -38,11 +50,14 @@ export default defineConfig({
   integrations: integrations,
   markdown: markdownConfig,
   output: "hybrid",
+  redirects: {
+    "/resume": RESUME,
+  },
   adapter: vercel(),
   vite: {
     optimizeDeps: {
-      exclude: ["@resvg/resvg-js"]
-    }
+      exclude: ["@resvg/resvg-js"],
+    },
   },
-  scopedStyleStrategy: "where"
+  scopedStyleStrategy: "where",
 });
