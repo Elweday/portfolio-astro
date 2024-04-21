@@ -5,33 +5,15 @@
     "baseUrl": "./src",
     "jsx": "preserve",
     "paths": {
-      "@assets/*": [
-        "assets/*"
-      ],
-      "@config": [
-        "config.ts"
-      ],
-      "@_types": [
-        "types.ts"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@content/*": [
-        "content/*"
-      ],
-      "@layouts/*": [
-        "layouts/*"
-      ],
-      "@pages/*": [
-        "pages/*"
-      ],
-      "@styles/*": [
-        "styles/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ]
+      "@assets/*": ["assets/*"],
+      "@config": ["config.ts"],
+      "@_types": ["types.ts"],
+      "@components/*": ["components/*"],
+      "@content/*": ["content/*"],
+      "@layouts/*": ["layouts/*"],
+      "@pages/*": ["pages/*"],
+      "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"]
     }
   }
 }

@@ -9,46 +9,42 @@ import compress from "astro-compress";
 import preload from "astro-preload";
 import vercel from "@astrojs/vercel/serverless";
 
-type UserConfig = Parameters<typeof defineConfig>[0];
-const markdownConfig: UserConfig["markdown"] = {
-  remarkPlugins: [
-    [
-      remarkToc,
-      {
-        heading: "Contents",
-        tight: true,
-        maxDepth: 3,
-      },
-    ],
-    [
-      remarkCollapse,
-      {
-        test: "Contents",
-        content: "show contents",
-      },
-    ],
-    //[stripMarkdown, {}]
-  ],
-  shikiConfig: {
-    theme: "dracula",
-    wrap: true,
-  },
-};
-const integrations: UserConfig["integrations"] = [
-  preload(),
-  tailwind({
-    applyBaseStyles: false,
-  }),
-  react(),
-  sitemap(),
-  compress(),
-];
-
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
-  integrations: integrations,
-  markdown: markdownConfig,
+  integrations: [
+    preload(),
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    react(),
+    sitemap(),
+    compress(),
+  ],
+  markdown: {
+    remarkPlugins: [
+      [
+        remarkToc,
+        {
+          heading: "Contents",
+          tight: true,
+          maxDepth: 3,
+        },
+      ],
+      [
+        remarkCollapse,
+        {
+          test: "Contents",
+          content: "show contents",
+        },
+      ],
+      //[stripMarkdown, {}]
+    ],
+    shikiConfig: {
+      theme: "dracula",
+      wrap: true,
+    },
+  },
   output: "hybrid",
   adapter: vercel(),
   vite: {

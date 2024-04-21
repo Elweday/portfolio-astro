@@ -1,3 +1,4 @@
+export const prerender = false;
 import type { APIRoute } from "astro";
 import { RESUME } from "@config";
 
@@ -27,7 +28,7 @@ export const GET: APIRoute = async ({ redirect, clientAddress }) => {
     data
   )}`;
 
-  const res = await fetch(endPoint, {
+  await fetch(endPoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
   });
