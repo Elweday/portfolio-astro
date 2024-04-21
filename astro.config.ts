@@ -7,6 +7,7 @@ import sitemap from "@astrojs/sitemap";
 import { SITE, RESUME } from "./src/config";
 import compress from "astro-compress";
 import preload from "astro-preload";
+// @ts-expect-error
 import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
