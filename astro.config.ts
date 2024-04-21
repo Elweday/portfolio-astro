@@ -50,9 +50,6 @@ export default defineConfig({
   integrations: integrations,
   markdown: markdownConfig,
   output: "hybrid",
-  redirects: {
-    "/resume": RESUME,
-  },
   adapter: vercel(),
   vite: {
     optimizeDeps: {
