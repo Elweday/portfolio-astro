@@ -6,82 +6,117 @@ import { twMerge } from "tailwind-merge";
 import { Technologies } from "@config";
 import { Image } from "astro:assets";
 import { slugifyStr } from "@utils/slugify";
-import getSorted from "@utils/getSorted";
-type Item = Awaited<ReturnType<typeof getSorted>>
-
 
 interface Props {
   project: CollectionEntry<"projects">;
   class?: string;
 }
 
-const { project, class:className} = Astro.props;
+const { project, class: className } = Astro.props;
 const { data, slug } = project;
-const { title, cover, stack, tags, dateTime, endDate, projectURL, githubURL } = data;
+const { title, cover, stack, tags, dateTime, endDate, projectURL, githubURL } =
+  data;
 
-const strTags = tags.map((tag:string) => slugifyStr(tag)).join("/");
-
+const strTags = tags.map((tag: string) => slugifyStr(tag)).join("/");
 ---
 
-<li data-item-type="search-item" data-slug={slug} data-tags={strTags} data-title={slug} class={twMerge("text-white group ", className)}  transition:name={slug+":cover"}>
-  <div class=" relative rounded-xl  overflow-clip">
-    <Image transition:name={slug+":image"} alt="" width={600} height={400} format="avif" src={cover} class=" aspect-video"  />
-    <div class="absolute bottom-0 group-hover:opacity-0  left-0 h-full w-full bg-gradient-to-b from-transparent to-skin-accent from-50%   opacity-100 duration-1000" />
-    <span
-    class=" absolute bottom-0 left-0   w-full justify-between place-items-end h-full p-3 text-xl font-bold duration-300 transition-opacity  group-hover:opacity-0  flex"
+<li
+  data-item-type="search-item"
+  data-slug={slug}
+  data-tags={strTags}
+  data-title={slug}
+  class={twMerge("text-white group aspect-video col-span-2 ", className)}
+  transition:name={slug + ":cover"}
+>
+  <div class="relative overflow-clip rounded-xl">
+    <Image
+      transition:name={slug + ":image"}
+      alt=""
+      width={600}
+      height={400}
+      format="avif"
+      src={cover}
+      class="aspect-video"
+    />
+    <div
+      class="absolute bottom-0 left-0 h-full w-full bg-gradient-to-b from-transparent from-50% to-skin-accent opacity-100 duration-1000 group-hover:opacity-0"
     >
-  
-        <div  class="h-full justify-end  w-full  flex flex-col  gap-2 ">
-          <div class="origin-bottom-left" >
-            <Datetime datetime={dateTime} endDate={endDate} size="sm" class="my-2 inline-block text-xs font-extralight transform origin-bottom-left translate-y-2 scale-75" />
-            <h2 class="text-lg sm:text-2xl font-bold " transition:name={slug}>{title}</h2>
-          </div>
-          <div class="flex justify-between  w-full place-content-center place-items-center ">
-  
-            <div class="flex justify-stretch gap-2 ">
-              
-              {(stack as (keyof typeof Technologies)[]).map(( technology ) => {
+    </div>
+    <span
+      class="absolute bottom-0 left-0 flex h-full w-full place-items-end justify-between p-3 text-xl font-bold transition-opacity duration-300 group-hover:opacity-0"
+    >
+      <div class="flex h-full w-full flex-col justify-end gap-2">
+        <div class="origin-bottom-left">
+          <Datetime
+            datetime={dateTime}
+            endDate={endDate}
+            size="sm"
+            class="my-2 inline-block origin-bottom-left translate-y-2 scale-75 transform text-xs font-extralight"
+          />
+          <h2 class="text-lg font-bold sm:text-2xl" transition:name={slug}>
+            {title}
+          </h2>
+        </div>
+        <div
+          class="flex w-full place-content-center place-items-center justify-between"
+        >
+          <div class="flex justify-stretch gap-2">
+            {
+              (stack as (keyof typeof Technologies)[]).map(technology => {
                 const { name, icon } = Technologies[technology];
                 return (
-                  <Icon transition:name={slug+":stack:"+name} class={"sm:size-8"} name={icon} />
-                )
-              }
-              )}
-             </div>
-  
+                  <Icon
+                    transition:name={slug + ":stack:" + name}
+                    class={"sm:size-8"}
+                    name={icon}
+                  />
+                );
+              })
+            }
+          </div>
         </div>
       </div>
-        
-      </span>
-    <div class="absolute w-full h-full top-0 left-0 opacity-0  group-hover:opacity-80 *:flex *:items-center *:justify-center transition-all duration-500  flex flex-col *:cursor-pointer">
+    </span>
+    <div
+      class="absolute left-0 top-0 flex h-full w-full flex-col opacity-0 transition-all duration-500 *:pointer-events-none *:flex *:cursor-pointer *:items-center *:justify-center group-hover:opacity-80 *:group-hover:pointer-events-auto"
+    >
+      {
+        githubURL && (
+          <a
+            href={githubURL}
+            aria-label="Github"
+            class={`h-full w-full cursor-pointer   bg-[#191f2d]  opacity-0  group-hover:opacity-100`}
+          >
+            <Icon class="size-14  " name="teenyicons:github-solid" />
+          </a>
+        )
+      }
 
-          
-      { githubURL &&  (
-        <a href={githubURL} aria-label="Github" class={`h-full bg-[#191f2d] w-full   cursor-pointer  opacity-0 group-hover:opacity-100`} >
-          <Icon class="size-14  " name="teenyicons:github-solid" />
-        </a>
-      )}
-          
-      <a href={`/projects/${slug}`}   aria-label="Github" class={`h-full bg-[#2c323f]  w-full cursor-pointer  opacity-0 group-hover:opacity-100`} >
+      <a
+        href={`/projects/${slug}`}
+        aria-label="Github"
+        class={`h-full bg-[#2c323f]  w-full cursor-pointer  opacity-0 group-hover:opacity-100`}
+      >
         <Icon class="size-14" name="uil:eye" />
       </a>
 
-    { projectURL &&  ( 
-    <a href={projectURL} aria-label="Github" class={`h-full bg-[#404652] w-full cursor-pointer  opacity-0 group-hover:opacity-100 `} >
-        <Icon class="size-14  " name="mdi:web " />
-      </a>
-    )}
-      </div>
-  
-
+      {
+        projectURL && (
+          <a
+            href={projectURL}
+            aria-label="Github"
+            class={`h-full w-full cursor-pointer bg-[#404652]  opacity-0 group-hover:opacity-100 `}
+          >
+            <Icon class="size-14  " name="mdi:web " />
+          </a>
+        )
+      }
+    </div>
   </div>
-
 </li>
 
-
 <style>
-.text-smol {
-  font-size: 0.1rem;
-}
-
+  .text-smol {
+    font-size: 0.1rem;
+  }
 </style>

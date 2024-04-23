@@ -1,7 +1,6 @@
 export const prerender = false;
 import type { APIRoute } from "astro";
 import { RESUME } from "@config";
-// @ts-expect-error
 import YAML from 'yaml'
 
 const { TELEGRAM_BOT_TOKEN, MY_CHAT_ID } = import.meta.env;

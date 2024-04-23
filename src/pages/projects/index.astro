@@ -1,53 +1,54 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import ProjectCard from "@components/ProjectCard.astro";
-import slugify from "@utils/slugify";
 import ContentTags from "@components/ContentTags.astro";
 import Tag from "@components/Tag.astro";
 
 import getUniqueTags from "@utils/getUniqueTags";
 
 const allTags = await getUniqueTags("projects");
-import  {type CollectionEntry , getCollection} from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 export interface Props {
   pageNum?: number;
   tags?: string[];
 }
-const allProjects: CollectionEntry<"projects">[] = await getCollection("projects");
-
+const allProjects: CollectionEntry<"projects">[] =
+  await getCollection("projects");
 ---
 
-<Layout title="projects" description="List of some of technical projects I did.">
+<Layout
+  title="projects"
+  description="List of some of technical projects I did."
+>
   <article>
-    <h1 class="text-2xl tracking-wider sm:text-3xl text-start pt-6" >Tags</h1>
-  </div>
-
-
-  
-  <ContentTags tags={allTags} type="tag">
-    <Tag class="bg-skin-card  text-xl  px-5  text-skin-inverted py-2" name="VIEW-ALL" type="all" size="lg" />
-  </ContentTags >
-  
-    <h1 class="text-2xl tracking-wider sm:text-3xl text-start py-6">Projects</h1>
-    <ul class="grid sm:grid-cols-2 place-self-center place-items-center  gap-2">
-      {
-        allProjects.map((project) => (
-          <ProjectCard project={project} />
-          ))
-        }
-    </ul>
+    <h1 class="pt-6 text-start text-2xl tracking-wider sm:text-3xl">Tags</h1>
   </article>
+
+  <ContentTags tags={allTags} type="tag">
+    <Tag
+      class="bg-skin-card px-5 py-2 text-xl text-skin-inverted"
+      name="VIEW-ALL"
+      type="all"
+      size="lg"
+    />
+  </ContentTags>
+
+  <h1 class="py-6 text-start text-2xl tracking-wider sm:text-3xl">Projects</h1>
+  <ul class="grid place-items-center gap-2 place-self-center sm:grid-cols-2">
+    {
+      allProjects.map(project => (
+        <ProjectCard class="col-span-1" project={project} />
+      ))
+    }
+  </ul>
 </Layout>
 
-
 <style>
-
-  section{
-    @apply justify-self-start  w-full flex flex-col gap-2  
+  section {
+    @apply flex  w-full flex-col gap-2 justify-self-start;
   }
-  
-    h2 {
-      @apply text-xl tracking-wider sm:text-2xl  text-start ;
-    }
-  </style>
-  
+
+  h2 {
+    @apply text-start text-xl tracking-wider  sm:text-2xl;
+  }
+</style>

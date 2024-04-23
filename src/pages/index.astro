@@ -11,92 +11,85 @@ const projects = await getSorted("projects");
 const posts = await getSorted("blog");
 
 import Hero from "@components/Hero.astro";
-
 ---
 
 <Layout title="Home" description="Mohammed Nasser's personal blog">
-	<section class="flex justify-between pb-6 pt-8" id="hero">
-    <Hero />
-	</section>
-	<Hr />
+  <section class="flex flex-col pb-6 pt-8">
+    <div class="flex flex-col items-center justify-center gap-2">
+      <Hero />
+      <MovingLogos />
+    </div>
+  </section>
+  <Hr />
 
-	<section>
-		<h2 class="flex w-full justify-between">
-			<span>Tech Stack</span>
-			<LinkButton href="/about#tech-stack-section">
-				<span class="inline-flex scale-[60%] whitespace-nowrap">
-					Expand...
-					<svg xmlns="http://www.w3.org/2000/svg"
-						><path
-							d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-						></path>
-					</svg>
-				</span>
-			</LinkButton>
-		</h2>
-		<MovingLogos />
-	</section>
-	<Hr />
+  <Hr />
 
-	{
-		projects.length > 0 && (
-			<>
-				<section id="projects">
-					<h2 class="flex w-full justify-between  pb-2 ">
-						<span>Projects</span>
-						<LinkButton href="/projects">
-							<span class="inline-flex  scale-[60%] items-end whitespace-nowrap ">
-								View All...
-								<svg xmlns="http://www.w3.org/2000/svg">
-									<path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z" />
-								</svg>
-							</span>
-						</LinkButton>
-					</h2>
-					<ul class="grid place-items-center gap-2 place-self-center  sm:grid-cols-2">
-						{projects.slice(0, 2).map(p => (
-							<ProjectCard project={p as CollectionEntry<"projects">} />
-						))}
-					</ul>
-				</section>
+  {
+    projects.length > 0 && (
+      <>
+        <section id="projects">
+          <h2 class="flex w-full justify-between  pb-2 ">
+            <span>Projects</span>
+            <LinkButton href="/projects">
+              <span class="inline-flex  scale-[60%] items-end whitespace-nowrap ">
+                View All...
+                <svg xmlns="http://www.w3.org/2000/svg">
+                  <path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z" />
+                </svg>
+              </span>
+            </LinkButton>
+          </h2>
+          <ul class="grid place-items-center gap-10 place-self-center  sm:grid-cols-2">
+            {projects.slice(0, 2).map(p => (
+              <ProjectCard project={p as CollectionEntry<"projects">} />
+            ))}
+          </ul>
+        </section>
 
-				<Hr />
-			</>
-		)
-	}
+        <Hr />
+      </>
+    )
+  }
 
-	<section id="recent-posts">
-		<h2 class="flex w-full justify-between pb-2">
-			<span> Recent Posts</span>
-			<LinkButton href="/blog">
-				<span
-					class="inline-flex origin-right scale-[60%] items-center whitespace-nowrap"
-				>
-					Read More...
-					<svg xmlns="http://www.w3.org/2000/svg"
-						><path
-							d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-						></path>
-					</svg>
-				</span>
-			</LinkButton>
-		</h2>
-		<ul class="grid place-items-center gap-2 place-self-center sm:grid-cols-2">
-			{
-				posts
-					.slice(0, 2)
-					.map(post => <PostCard post={post as CollectionEntry<"blog">} />)
-			}
-		</ul>
-	</section>
+  <section id="recent-posts">
+    <h2 class="flex w-full justify-between pb-2">
+      <span> Recent Posts</span>
+      <LinkButton href="/blog">
+        <span
+          class="inline-flex origin-right scale-[60%] items-center whitespace-nowrap"
+        >
+          Read More...
+          <svg xmlns="http://www.w3.org/2000/svg"
+            ><path
+              d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
+            ></path>
+          </svg>
+        </span>
+      </LinkButton>
+    </h2>
+    <ul class="grid place-items-center gap-2 place-self-center sm:grid-cols-2">
+      {
+        posts
+          .slice(0, 2)
+          .map(post => <PostCard post={post as CollectionEntry<"blog">} />)
+      }
+    </ul>
+  </section>
 </Layout>
 
 <style>
-	section {
-		@apply w-full pb-6 pt-12;
-	}
-	h2 {
-		@apply text-2xl font-semibold tracking-wide;
-	}
+  section {
+    @apply h-screen w-full pb-6 pt-12;
+    scroll-snap-align: start;
+    scroll-snap-type: mandatory;
+    height: calc(100vh - 55px);
+    overflow-y: hidden;
+    scroll-snap-stop: always;
 
+    justify-content: center;
+    align-content: center;
+  }
+  h2 {
+    @apply text-2xl font-semibold tracking-wide;
+  }
 </style>
