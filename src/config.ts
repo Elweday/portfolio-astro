@@ -65,7 +65,7 @@ export const MESSAGE_OPTIONS = [
 
 export const RESUME = {
   normal:
-    "https://docs.google.com/document/d/1o3wNFt8SbRok8t8kFb5dnhwkjSTf6dVXqYQYa2n9O_I/export?format=pdf",
+    "https://docs.google.com/document/d/1o3wNFt8SbRok8t8kFb5dnhwkjSTf6dVXqYQYa2n9O_I/",
   redcated: "",
 };
 export const PATHS = [
