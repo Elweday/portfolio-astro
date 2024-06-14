@@ -65,7 +65,7 @@ export const MESSAGE_OPTIONS = [
 
 export const RESUME = {
   normal:
-    "https://docs.google.com/document/d/1o3wNFt8SbRok8t8kFb5dnhwkjSTf6dVXqYQYa2n9O_I/",
+    "https://drive.google.com/file/d/1M85CHaDLbk6O8g6I6pTcMQz7dvNN0PPA/view",
   redcated: "",
 };
 export const PATHS = [
